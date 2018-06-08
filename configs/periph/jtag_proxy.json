@@ -1,0 +1,6 @@
+{
+  "type": "dpi",
+  "module": "jtag_proxy.so",
+  "verbose": false,
+  "port": 37539
+}

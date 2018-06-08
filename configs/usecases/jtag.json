@@ -1,0 +1,62 @@
+{
+  "vp_comps": [
+    "system_tree"
+  ],
+  "system_tree": {
+    "board": {
+      "tb_comps": [
+        "jtag_proxy"
+      ],
+      "vp_bindings": [
+        [
+          "dpi->jtag0",
+          "chip->jtag0_pad"
+        ]
+      ],
+      "tb_bindings": [
+        [
+          "chip->jtag0",
+          "jtag_proxy->jtag"
+        ],
+        [
+          "chip->ctrl",
+          "jtag_proxy->ctrl"
+        ]
+      ],
+      "chip": {
+        "vp_ports": [
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
+          "jtag0_pad"
+        ],
+        "vp_bindings": [
+          [
+            "self->jtag0_pad",
+            "padframe->jtag0_pad"
+          ]
+        ],
+        "padframe": {
+          "vp_ports": [
+            "jtag0_pad"
+          ]
+        }
+      },
+      "dpi": {
+        "vp_ports": [
+          "jtag0"
+        ]
+      },
+      "jtag_proxy": {
+        "type": "dpi",
+        "module": "jtag_proxy.so",
+        "verbose": false,
+        "port": 37539,
+        "vp_ports": [
+          "jtag",
+          "ctrl"
+        ]
+      }
+    }
+  }
+}

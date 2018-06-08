@@ -1,0 +1,14 @@
+{
+  "cable": {
+    "type": "jtag-proxy",
+    "includes_eval"  : ["'cable_%s.json' % config.get('type')"],
+    "tap": 0,
+    "jtag_cable": {
+      "port": 37539
+    }
+  },
+
+  
+  "boot-mode" : "default",
+  "commands": "load ioloop reqloop start wait"
+} 
