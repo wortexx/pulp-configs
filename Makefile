@@ -1,3 +1,8 @@
+INSTALL_DIR ?= $(CURDIR)/install
+BUILD_DIR   ?= $(CURDIR)/build
+
+all: install
+	
 gen:
 	./generators/pulp_soc_gen --chip=pulp             > configs/chips/pulp/soc.json
 	./generators/pulp_soc_gen --chip=pulpissimo       > configs/chips/pulpissimo/soc.json
@@ -20,10 +25,10 @@ INSTALL_FILES += $(shell find generators -name *.py)
 
 define declareInstallFile
 
-$(PULP_SDK_WS_INSTALL)/$(1): $(1)
+$(INSTALL_DIR)/$(1): $(1)
 	install -D $(1) $$@
 
-INSTALL_HEADERS += $(PULP_SDK_WS_INSTALL)/$(1)
+INSTALL_HEADERS += $(INSTALL_DIR)/$(1)
 
 endef
 
