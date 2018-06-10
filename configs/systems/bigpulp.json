@@ -86,39 +86,37 @@
   "gdb": {
     "active": false
   },
-  "options": {
-    "rt": {
-      "version": "bench",
-      "type": "pulp-rt",
-      "mode": "rt",
-      "stack_size": 2048,
-      "cl_master_stack_size": 1024,
-      "cl_slave_stack_size": 1024,
-      "io": true,
-      "warnings": true,
-      "werror": true,
-      "assert": false,
-      "trace": false,
-      "trace_level": 0,
-      "traces": "all",
-      "libc": false,
-      "no-rt": false,
-      "no-link-script": false,
-      "no-crt0": false,
-      "cluster-start": false,
-      "openmp": true,
-      "openmp-rt": "pulp-rt",
-      "iodev": "default",
-      "user-sections": [],
-      "iodevs": {
-        "default": {
-          "value": "0"
-        },
-        "uart": {
-          "value": "1",
-          "channel": "0",
-          "baudrate": "625000"
-        }
+  "rt": {
+    "version": "bench",
+    "type": "pulp-rt",
+    "mode": "rt",
+    "stack_size": 2048,
+    "cl_master_stack_size": 1024,
+    "cl_slave_stack_size": 1024,
+    "io": true,
+    "warnings": true,
+    "werror": true,
+    "assert": false,
+    "trace": false,
+    "trace_level": 0,
+    "traces": "all",
+    "libc": false,
+    "no-rt": false,
+    "no-link-script": false,
+    "no-crt0": false,
+    "cluster-start": false,
+    "openmp": true,
+    "openmp-rt": "pulp-rt",
+    "iodev": "default",
+    "user-sections": [],
+    "iodevs": {
+      "default": {
+        "value": "0"
+      },
+      "uart": {
+        "value": "1",
+        "channel": "0",
+        "baudrate": "625000"
       }
     }
   },
