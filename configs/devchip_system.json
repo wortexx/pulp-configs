@@ -10,9 +10,11 @@
 
       "vp_comps": [ "pulp_chip/devchip" ],
 
+      "chip": {
+        "includes": ["devchip.json"]
+      },
       "pulp_chip": {
         "devchip" : {
-          "includes": ["devchip.json"]
         }
       }
     },

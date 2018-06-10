@@ -3,10 +3,12 @@
   "system_tree": {
     "board": {
       "gv_class": "pulp.pulp_board.Pulp_board",
+      "chip": {
+        "includes": ["kerbin.json"]
+      },
       "pulp_chip": {
-          "kerbin" : {
-              "includes": ["kerbin.json"]
-          }
+        "kerbin" : {
+        }
       },
       "ddr": {
         "gv_class": "mem.memory.Memory",

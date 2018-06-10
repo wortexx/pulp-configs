@@ -7,25 +7,59 @@ import json
 import argparse
 from comp_gen import *
 
-
 parser = argparse.ArgumentParser(
   description='Generate configuration for Pulp system',
   formatter_class=argparse.RawDescriptionHelpFormatter
 )
 
-parser.add_argument("--system", dest="system", default="pulp", help="Specify the chip")
+parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chip")
+parser.add_argument("--chip-file", dest="chip_file", default=None, help="Specify the chip JSON file")
+parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+
+[args, known_args] = parser.parse_known_args()
 
 args = parser.parse_args()
 
+chip_file = 'chip.json'
+
+if args.chip_file is not None:
+  chip_file = args.chip_file
 
 system = Component(
-    includes=[
-        "configs/defaults.json",
-        "configs/%s_system.json" % args.system,
-        "configs/usecases/jtag.json"
-    ]
 )
 
-config = system.get_json_config(expand=True)
+system.system_tree = Empty_Component(
+    includes=[ "../../pulp_system_common.json" ],
+    vp_class= "pulp/system"
+)
+
+
+system.system_tree.board = Component(
+    vp_class= "pulp/board"
+)
+
+
+system.system_tree.board.chip = Component(
+    includes=[ chip_file ]
+)
+
+system.system_tree.board.dpi_clock = Component(
+    vp_class= "vp/clock_domain",
+    frequency= 100000000
+)
+
+system.system_tree.board.pulp_chip = Component(
+)
+system.system_tree.board.pulp_chip.set_property(args.chip, {})
+
+
+system.system_tree.board.dpi = Component(
+    includes= [ "../../periph/dpi_wrapper.json" ]
+)
+
+system.system_tree.board.dpi_clock.out = system.system_tree.board.dpi.clock
+
+
+config = system.get_json_config(configs=args.configs)
 
 print (config)

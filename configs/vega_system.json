@@ -11,9 +11,11 @@
 
       "vp_comps": [ "pulp_chip/vega" ],
 
+      "chip": {
+        "includes": ["vega.json"]
+      },
       "pulp_chip": {
         "vega" : {
-          "includes": ["vega.json"]
         }
       }
     },

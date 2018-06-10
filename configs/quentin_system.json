@@ -10,9 +10,11 @@
 
       "vp_comps": [ "pulp_chip/quentin" ],
 
+      "chip": {
+        "includes": ["quentin.json"]
+      },
       "pulp_chip": {
         "quentin" : {
-          "includes": ["quentin.json"]
         }
       }
     },

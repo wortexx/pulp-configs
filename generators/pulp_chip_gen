@@ -1,0 +1,67 @@
+#!/usr/bin/env python3.6
+
+# Authors: Germain Haugou, ETH (germain.haugou@iis.ee.ethz.ch)
+
+ 
+import json
+import argparse
+from comp_gen import *
+
+parser = argparse.ArgumentParser(
+  description='Generate configuration for Pulp chip',
+  formatter_class=argparse.RawDescriptionHelpFormatter
+)
+
+parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chip")
+parser.add_argument("--soc-file", dest="soc_file", default=None, help="Specify the soc JSON file")
+parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+
+[args, known_args] = parser.parse_known_args()
+
+args = parser.parse_args()
+
+soc_file = 'soc.json'
+
+if args.soc_file is not None:
+  soc_file = args.soc_file
+
+
+
+chip = Component(
+  name=args.chip,
+
+  pulp_chip_family=args.chip,
+  pulp_chip_version=0,
+  boot_from_rom=False,
+  vp_class="pulp/chip",
+
+  hal_files= [ "hal/chips/%s/pulp.h" % args.chip],
+  archi_files= [ "archi/chips/%s/pulp.h" % args.chip, "archi/chips/%s/memory_map.h" % args.chip, "archi/chips/%s/properties.h" % args.chip, "archi/chips/%s/apb_soc.h" % args.chip ],
+)
+
+
+chip.padframe = Component(
+  includes= [ "padframe.json" ]
+)
+
+
+chip.soc_clock = Component(
+  vp_class="vp/clock_domain",
+  frequency=100000000
+)
+
+
+chip.soc = Component(
+  includes= [ soc_file ]
+)
+
+chip.soc.spim0 = chip.padframe.spim0
+chip.soc.uart0 = chip.padframe.uart0
+chip.padframe.jtag0 = chip.soc.jtag
+chip.soc_clock.out = chip.padframe.clock
+chip.soc_clock.out = chip.soc.clock
+
+
+config = chip.get_json_config(configs=args.configs)
+
+print (config)

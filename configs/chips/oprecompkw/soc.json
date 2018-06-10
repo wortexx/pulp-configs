@@ -23,12 +23,17 @@
     "host_injector"
   ],
   "vp_ports": [
-    "cluster_clock"
+    "cluster_clock",
+    "jtag"
   ],
   "vp_bindings": [
     [
       "self->cluster_clock",
       "cluster->clock"
+    ],
+    [
+      "self->jtag",
+      "adv_dbg_unit->jtag"
     ],
     [
       "axi_ico->cluster",
@@ -340,7 +345,8 @@
       "../../ips/adv_dbg_unit/adv_dbg_unit.json"
     ],
     "vp_ports": [
-      "io"
+      "io",
+      "jtag"
     ]
   },
   "job_fifo": {

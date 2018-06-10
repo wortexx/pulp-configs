@@ -14,9 +14,12 @@
 
       "devices": ["hyperram0", "hyperflash0"],
 
+      "chip": {
+        "includes": ["wolfe.json"]
+      },
+
       "pulp_chip": {
         "wolfe" : {
-          "includes": ["wolfe.json"]
         }
       },
       "hyperram0": {

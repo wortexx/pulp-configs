@@ -13,8 +13,9 @@ parser = argparse.ArgumentParser(
 )
 
 parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chip")
+parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
 
-args = parser.parse_args()
+[args, known_args] = parser.parse_known_args()
 
 
 has_fc = False
@@ -31,6 +32,7 @@ has_efuse = False
 
 if args.chip == 'pulp':
   has_fc = True
+  fc_core = 'ri5ky_v2_fpu'
   has_udma = True
   has_fll = True
   has_gpio = True
@@ -40,6 +42,7 @@ if args.chip == 'pulp':
 
 elif args.chip == 'vega':
   has_fc = True
+  fc_core = 'ri5ky_v2_fpu'
   has_udma = True
   has_fll = True
   has_gpio = True
@@ -54,12 +57,29 @@ elif args.chip == 'oprecompkw':
 elif args.chip == 'pulpissimo':
   has_cluster = False
   has_fc = True
+  fc_core = 'ri5ky_v2_fpu'
   has_udma = True
   has_gpio = True
   has_soc_events = True
   fc_events = { "includes": ["fc_irq.json"] }
   l2_is_partitioned = True
   has_fll = True
+
+
+if has_fc:
+  parser.add_argument("--fc-core", dest="fc_core", default=None, help="Specify FC core")
+
+
+
+
+args = parser.parse_args()
+
+
+if has_fc:
+  if args.fc_core is not None:
+    fc_core = args.fc_core
+
+
 
 if has_soc_events:
   soc_events_ids = { "includes": ["soc_events.json"] }
@@ -227,7 +247,7 @@ if has_gpio:
 
 if has_fll:
   apb_soc_mappings.update({
-    "fll0"         : { "base": "0x1A100000", "size": "0x00000010", "remove_offset": "0x1A100000" },
+    "fll"         : { "base": "0x1A100000", "size": "0x00000010", "remove_offset": "0x1A100000" },
     "fll1"         : { "base": "0x1A100010", "size": "0x00000010", "remove_offset": "0x1A100010" },
     "fll2"         : { "base": "0x1A100020", "size": "0x00000010", "remove_offset": "0x1A100020" }
   })
@@ -258,6 +278,11 @@ soc.apb_ico = Component(
 
 if has_fc:
   soc.fc = Component(
+      includes= [ "../../ips/%s.json" % fc_core ],
+      cluster_id=31,
+      core_id=0,
+      fetch_enable=True,
+      boot_addr="0x1C008000"
   )
 
 
@@ -339,7 +364,7 @@ if has_fc:
   )
 
 if has_fll:
-  soc.fll0 = Component(
+  soc.fll = Component(
       includes= ["../../ips/fll_v1.json"]
   )
 
@@ -421,7 +446,7 @@ if has_cluster:
 # APB to peripherals bindings
 soc.apb_ico.stdout = soc.stdout.input
 if has_fll:
-  soc.apb_ico.fll0 = soc.fll0.input
+  soc.apb_ico.fll = soc.fll.input
   soc.apb_ico.fll1 = soc.fll1.input
   soc.apb_ico.fll2 = soc.fll2.input
 
@@ -485,6 +510,8 @@ if has_fc:
 if has_udma:
   soc.udma.l2_itf = soc.soc_ico.udma_tx
   soc.udma.event_itf = soc.soc_eu.event_in
+  soc.udma.spim0 = soc.spim0
+  soc.udma.uart0 = soc.uart0
 
 # Soc EU
 if has_fc:
@@ -492,6 +519,7 @@ if has_fc:
 
 # Adv Dbg Unit
 soc.adv_dbg_unit.io = soc.soc_ico.debug
+soc.jtag = soc.adv_dbg_unit.jtag
 
 # Loader
 soc.plt_loader.out = soc.soc_ico.debug
@@ -519,6 +547,6 @@ if args.chip == 'oprecompkw':
     soc.axi_ico.ext = soc.host_injector.input
 
 
-config = soc.get_json_config()
+config = soc.get_json_config(configs=args.configs)
 
 print (config)

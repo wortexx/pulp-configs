@@ -3,9 +3,11 @@
   "system_tree": {
     "board": {
 
+      "chip": {
+        "includes": ["hero-zc706.json"]
+      },
       "pulp_chip": {
         "hero-zc706" : {
-          "includes": ["hero-zc706.json"]
         }
       }
     }

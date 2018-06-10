@@ -13,9 +13,11 @@
 
       "vp_comps": [ "pulp_chip/neuraghe" ],
 
+      "chip": {
+        "includes": ["neuraghe.json"]
+      },
       "pulp_chip": {
         "neuraghe" : {
-          "includes": ["neuraghe.json"]
         }
       }
     }

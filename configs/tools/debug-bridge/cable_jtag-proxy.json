@@ -1,7 +1,5 @@
 {
-  "type": "jtag-proxy",
-  "tap": 0,
-  "jtag_cable": {
+  "jtag-proxy": {
     "port": 37539
   }
 }

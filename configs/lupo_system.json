@@ -4,9 +4,11 @@
     "board": {
       "devices": ["hyperram0", "hyperflash0"],
 
+      "chip": {
+        "includes": ["lupo.json"]
+      },
       "pulp_chip": {
         "lupo" : {
-          "includes": ["lupo.json"]
         }
       },
       "hyperram0": {

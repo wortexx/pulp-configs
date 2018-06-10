@@ -4,9 +4,11 @@
     "board": {
       "devices": ["hyperram0", "hyperflash0"],
 
+      "chip": {
+        "includes": ["vivosoc3.json"]
+      },
       "pulp_chip": {
         "vivosoc3" : {
-          "includes": ["vivosoc3.json"]
         }
       },
       "hyperram0": {

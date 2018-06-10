@@ -4,22 +4,25 @@
     "board": {
       "devices": ["hyperram0", "hyperflash0"],
 
-      "pulp_chip": {
-        "wolfe" : {
-          "includes": ["wolfe.json"],
-          "soc": {
-            "soc_ico": {
-              "axi_lock": {
-                "lines": 256
-              }
-            },
-            "nb_cluster"       : 31,
-            "cluster": {
-              "pe": {
-                "includes" : ["ips/ri5ky_v2_fpu_a.json"]
-              }
+      "chip": {
+        "includes": ["wolfe.json"],
+        "soc": {
+          "soc_ico": {
+            "axi_lock": {
+              "lines": 256
+            }
+          },
+          "nb_cluster"       : 31,
+          "cluster": {
+            "pe": {
+              "includes" : ["ips/ri5ky_v2_fpu_a.json"]
             }
           }
+        }
+      },
+
+      "pulp_chip": {
+        "wolfe" : {
         }
       },
       "hyperram0": {

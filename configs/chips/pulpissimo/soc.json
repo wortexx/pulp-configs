@@ -28,7 +28,7 @@
     "fc_ico",
     "plt_loader",
     "fc_itc",
-    "fll0",
+    "fll",
     "fll1",
     "fll2",
     "fll_ctrl",
@@ -43,7 +43,16 @@
     "fc_debug",
     "adv_dbg_unit"
   ],
+  "vp_ports": [
+    "jtag",
+    "spim0",
+    "uart0"
+  ],
   "vp_bindings": [
+    [
+      "self->jtag",
+      "adv_dbg_unit->jtag"
+    ],
     [
       "axi_ico->soc",
       "soc_ico->axi_slave"
@@ -85,8 +94,8 @@
       "stdout->input"
     ],
     [
-      "apb_ico->fll0",
-      "fll0->input"
+      "apb_ico->fll",
+      "fll->input"
     ],
     [
       "apb_ico->fll1",
@@ -159,6 +168,14 @@
     [
       "udma->event_itf",
       "soc_eu->event_in"
+    ],
+    [
+      "udma->spim0",
+      "self->spim0"
+    ],
+    [
+      "udma->uart0",
+      "self->uart0"
     ],
     [
       "adv_dbg_unit->io",
@@ -475,7 +492,7 @@
         "size": "0x00001000",
         "remove_offset": "0x1A101000"
       },
-      "fll0": {
+      "fll": {
         "base": "0x1A100000",
         "size": "0x00000010",
         "remove_offset": "0x1A100000"
@@ -518,7 +535,7 @@
     },
     "vp_ports": [
       "stdout",
-      "fll0",
+      "fll",
       "fll1",
       "fll2",
       "udma",
@@ -531,6 +548,13 @@
     ]
   },
   "fc": {
+    "includes": [
+      "../../ips/ri5ky_v2_fpu.json"
+    ],
+    "cluster_id": 31,
+    "core_id": 0,
+    "fetch_enable": true,
+    "boot_addr": "0x1C008000",
     "vp_ports": [
       "fetch",
       "data",
@@ -621,7 +645,7 @@
       "soc_event"
     ]
   },
-  "fll0": {
+  "fll": {
     "includes": [
       "../../ips/fll_v1.json"
     ],
@@ -709,6 +733,8 @@
     "vp_ports": [
       "l2_itf",
       "event_itf",
+      "spim0",
+      "uart0",
       "input"
     ]
   },
@@ -723,7 +749,8 @@
       "../../ips/adv_dbg_unit/adv_dbg_unit.json"
     ],
     "vp_ports": [
-      "io"
+      "io",
+      "jtag"
     ]
   }
 }

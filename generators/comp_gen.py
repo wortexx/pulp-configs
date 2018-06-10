@@ -55,18 +55,21 @@ class Component(object):
     def get_name(self):
         return self.__dict__.get('_Component__name')
 
-    def get_json_config(self, expand=False):
+    def get_json_config(self, configs=None, expand=False):
         if not expand:
             return json.dumps(self.gen(), indent='  ')
 
 
-        config = plptree.get_config_tree_from_dict(self.gen(), path=os.path.join(os.environ.get('PULP_SDK_HOME'), 'install', 'ws'))
+        config = plptree.get_config_tree_from_dict(self.gen(), path=configs)
         return config.get_string()
 
 
     def __setattr__(self, name, value):
         if type(value) == Interface:
-            self.__dict__['_Component__master_itfs'][name] = value
+            if self.__dict__['_Component__master_itfs'].get(name) is None:
+                self.__dict__['_Component__master_itfs'][name] = []
+
+            self.__dict__['_Component__master_itfs'][name].append(value)
         else:
             self.__dict__['_Component__comps'][name] = value
             self.__dict__[name] = value
@@ -82,6 +85,11 @@ class Component(object):
 
     def get_property(self, name):
         return self.__dict__.get('_Component__properties').get(name)
+
+    def set_property(self, name, value):
+        if self.__dict__.get('_Component__properties') is None:
+            self.__dict__['_Component__properties'] = OrderedDict()
+        self.__dict__.get('_Component__properties')[name] = value
 
     def get_comp(self, name):
         comp = self.__dict__.get('_Component__vp_comps').get(name)
@@ -123,40 +131,41 @@ class Component(object):
         if len(ports) != 0:
             result['vp_ports'] = ports            
 
-        for itf_name, slave_itf in self.get_master_itfs().items():
-            slave_name = slave_itf.comp.get_name()
+        for itf_name, slave_itf_list in self.get_master_itfs().items():
+            for slave_itf in slave_itf_list:
+                slave_name = slave_itf.comp.get_name()
 
-            if self.__dict__.get('_Component__comps').get(slave_name) != slave_itf.comp:
-                continue
-            binding = [
-                "self->%s" % (itf_name),
-                "%s->%s" % (slave_name, slave_itf.name)
-            ]
-            if slave_itf.comp.__dict__.get('is_tb_comp') or self.__dict__.get('is_tb_comp'):
-                tb_bindings.append(binding)
-            else:
-                vp_bindings.append(binding)
-
-        for comp_name, comp in self.__dict__['_Component__comps'].items():
-            for itf_name, slave_itf in comp.get_master_itfs().items():
-
-                if slave_itf.comp == self:
-                    slave_name = 'self'
-                else:
-                    slave_name = slave_itf.comp.get_name()
-
-                    if self.__dict__.get('_Component__comps').get(slave_name) != slave_itf.comp:
-                        continue
-
+                if self.__dict__.get('_Component__comps').get(slave_name) != slave_itf.comp:
+                    continue
                 binding = [
-                    "%s->%s" % (comp_name, itf_name),
+                    "self->%s" % (itf_name),
                     "%s->%s" % (slave_name, slave_itf.name)
                 ]
-
                 if slave_itf.comp.__dict__.get('is_tb_comp') or self.__dict__.get('is_tb_comp'):
                     tb_bindings.append(binding)
                 else:
                     vp_bindings.append(binding)
+
+        for comp_name, comp in self.__dict__['_Component__comps'].items():
+            for itf_name, slave_itf_name in comp.get_master_itfs().items():
+                for slave_itf in slave_itf_name:
+                    if slave_itf.comp == self:
+                        slave_name = 'self'
+                    else:
+                        slave_name = slave_itf.comp.get_name()
+
+                        if self.__dict__.get('_Component__comps').get(slave_name) != slave_itf.comp:
+                            continue
+
+                    binding = [
+                        "%s->%s" % (comp_name, itf_name),
+                        "%s->%s" % (slave_name, slave_itf.name)
+                    ]
+
+                    if slave_itf.comp.__dict__.get('is_tb_comp') or self.__dict__.get('is_tb_comp'):
+                        tb_bindings.append(binding)
+                    else:
+                        vp_bindings.append(binding)
 
 
         if len(vp_bindings) != 0:

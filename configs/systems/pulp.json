@@ -35,15 +35,7 @@
       }
     }
   },
-  "platform": {
-    "default": "gvsoc",
-    "gvsoc": {},
-    "vp": {},
-    "fpga": {},
-    "board": {},
-    "rtl": {},
-    "hsa": {}
-  },
+  "platform": "gvsoc",
   "pulp_compiler": {
     "default": "gcc",
     "gcc": {},
@@ -61,6 +53,9 @@
     "default": "libgomp",
     "libgomp": {},
     "new": {}
+  },
+  "testbench": {
+    "use_dpi": false
   },
   "vsim": {
     "help": {
@@ -140,9 +135,10 @@
       "cable": {
         "type": "jtag-proxy",
         "tap": 0,
-        "jtag_cable": {
+        "jtag-proxy": {
           "port": 37539
-        }
+        },
+        "ftdi": {}
       },
       "boot-mode": "default",
       "commands": "load ioloop reqloop start wait"
@@ -483,7 +479,7 @@
             "fc_ico",
             "plt_loader",
             "fc_itc",
-            "fll0",
+            "fll",
             "fll1",
             "fll2",
             "fll_ctrl",
@@ -500,12 +496,19 @@
             "adv_dbg_unit"
           ],
           "vp_ports": [
-            "cluster_clock"
+            "cluster_clock",
+            "jtag",
+            "spim0",
+            "uart0"
           ],
           "vp_bindings": [
             [
               "self->cluster_clock",
               "cluster->clock"
+            ],
+            [
+              "self->jtag",
+              "adv_dbg_unit->jtag"
             ],
             [
               "axi_ico->cluster",
@@ -552,8 +555,8 @@
               "stdout->input"
             ],
             [
-              "apb_ico->fll0",
-              "fll0->input"
+              "apb_ico->fll",
+              "fll->input"
             ],
             [
               "apb_ico->fll1",
@@ -626,6 +629,14 @@
             [
               "udma->event_itf",
               "soc_eu->event_in"
+            ],
+            [
+              "udma->spim0",
+              "self->spim0"
+            ],
+            [
+              "udma->uart0",
+              "self->uart0"
             ],
             [
               "cluster->dma_irq",
@@ -970,7 +981,7 @@
                 "size": "0x00001000",
                 "remove_offset": "0x1A101000"
               },
-              "fll0": {
+              "fll": {
                 "base": "0x1A100000",
                 "size": "0x00000010",
                 "remove_offset": "0x1A100000"
@@ -1013,7 +1024,7 @@
             },
             "vp_ports": [
               "stdout",
-              "fll0",
+              "fll",
               "fll1",
               "fll2",
               "udma",
@@ -1026,17 +1037,19 @@
             ]
           },
           "fc": {
-            "vp_ports": [
-              "fetch",
-              "data",
-              "irq_ack",
-              "dbg_unit",
-              "irq_req"
-            ],
             "version": "ri5cyv2",
             "archi": "riscv",
             "implementation": "ri5cy",
             "gv_isa": [
+              "--pulp",
+              "--rv32m",
+              "--pulpv2",
+              "--pulp-perf-counters",
+              "--pulp-hw-loop",
+              "--itc-external-req",
+              "--fpu",
+              "--fpud",
+              "--shared-fpu",
               "--pulp",
               "--rv32m",
               "--pulpv2",
@@ -1052,9 +1065,15 @@
             "perf_counters": true,
             "features": [
               "misaligned",
+              "perf",
+              "misaligned",
               "perf"
             ],
             "hal_files": [
+              "hal/riscv/riscv_v4.h",
+              "hal/riscv/builtins_v2.h",
+              "hal/riscv/builtins_v2_emu.h",
+              "hal/riscv/types.h",
               "hal/riscv/riscv_v4.h",
               "hal/riscv/builtins_v2.h",
               "hal/riscv/builtins_v2_emu.h",
@@ -1062,9 +1081,13 @@
             ],
             "archi_files": [
               "archi/riscv/priv_1_9.h",
+              "archi/riscv/pcer_v1.h",
+              "archi/riscv/priv_1_9.h",
               "archi/riscv/pcer_v1.h"
             ],
             "defines": [
+              "ARCHI_CORE_HAS_PULPV2",
+              "CORE_PULP_BUILTINS",
               "ARCHI_CORE_HAS_PULPV2",
               "CORE_PULP_BUILTINS"
             ],
@@ -1100,7 +1123,14 @@
             "cluster_id": 31,
             "core_id": 0,
             "fetch_enable": true,
-            "boot_addr": "0x1C008000"
+            "boot_addr": "0x1C008000",
+            "vp_ports": [
+              "fetch",
+              "data",
+              "irq_ack",
+              "dbg_unit",
+              "irq_req"
+            ]
           },
           "l2": {
             "is_partitioned": true,
@@ -1191,13 +1221,15 @@
               "soc_event"
             ]
           },
-          "fll0": {
+          "fll": {
             "version": 1,
             "vp_class": "pulp/fll/fll_v1",
             "hal_files": [
+              "hal/fll/fll_v1.h",
               "hal/fll/fll_v1.h"
             ],
             "archi_files": [
+              "archi/fll/fll_v1.h",
               "archi/fll/fll_v1.h"
             ],
             "vp_ports": [
@@ -1877,6 +1909,8 @@
             "vp_ports": [
               "l2_itf",
               "event_itf",
+              "spim0",
+              "uart0",
               "input"
             ]
           },
@@ -4485,17 +4519,8 @@
           "adv_dbg_unit": {
             "vp_class": "pulp/adv_dbg_unit/adv_dbg_unit",
             "vp_ports": [
-              "io"
-            ]
-          },
-          "fll": {
-            "version": 1,
-            "vp_class": "pulp/fll/fll_v1",
-            "hal_files": [
-              "hal/fll/fll_v1.h"
-            ],
-            "archi_files": [
-              "archi/fll/fll_v1.h"
+              "io",
+              "jtag"
             ]
           }
         },
@@ -4534,6 +4559,7 @@
       ],
       "jtag_proxy": {
         "type": "dpi",
+        "active": false,
         "module": "jtag_proxy.so",
         "verbose": false,
         "port": 37539,

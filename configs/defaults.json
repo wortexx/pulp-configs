@@ -1,15 +1,7 @@
 {
   "includes": [ "gvsoc.json" ],
 
-  "platform": {
-    "default": "gvsoc",
-    "gvsoc"  : {},
-    "vp"  : {},
-    "fpga"   : {},
-    "board"  : {},
-    "rtl"    : {},
-    "hsa"    : {}
-  },
+  "platform": "gvsoc",
 
   "pulp_compiler": {
     "default": "gcc",
@@ -30,6 +22,10 @@
     "default" : "libgomp",
     "libgomp" : {},
     "new"     : {}
+  },
+
+  "testbench": {
+    "use_dpi": false
   },
 
   "vsim": {

@@ -14,9 +14,12 @@
 
       "vp_comps": [ "pulp_chip/gap" ],
 
+      "chip": {
+        "includes": ["gap.json"]
+      },
+
       "pulp_chip": {
         "gap" : {
-          "includes": ["gap.json"]
         }
       }
     }

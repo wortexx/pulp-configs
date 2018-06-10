@@ -13,6 +13,8 @@ parser = argparse.ArgumentParser(
   formatter_class=argparse.RawDescriptionHelpFormatter
 )
 
+parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+
 args = parser.parse_args()
 
 
@@ -36,7 +38,7 @@ system.system_tree.board.chip.padframe = Empty_Component(
 
 system.system_tree.board.jtag_proxy = Tb_Component(
     includes=[
-        "configs/periph/jtag_proxy.json"
+        "periph/jtag_proxy.json"
     ]
 )
 
@@ -48,6 +50,6 @@ system.system_tree.board.chip.jtag0_pad = system.system_tree.board.chip.padframe
 
 
 
-config = system.get_json_config(expand=True)
+config = system.get_json_config(configs=args.configs, expand=True)
 
 print (config)

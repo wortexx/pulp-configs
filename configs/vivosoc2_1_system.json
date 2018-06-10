@@ -10,9 +10,11 @@
     },
 
     "board": {
+      "chip": {
+        "includes": ["vivosoc2_1.json"]
+      },
       "pulp_chip": {
         "vivosoc2_1" : {
-          "includes": ["vivosoc2_1.json"]
         }
       }
     }
