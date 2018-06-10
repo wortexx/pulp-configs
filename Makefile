@@ -66,4 +66,4 @@ endef
 $(foreach file, $(INSTALL_FILES), $(eval $(call declareInstallFile,$(file))))
 
 
-install: gen $(INSTALL_HEADERS)
+install: $(INSTALL_HEADERS)
