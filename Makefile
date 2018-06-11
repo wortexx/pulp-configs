@@ -71,7 +71,7 @@ install: $(INSTALL_HEADERS)
 # This file is a dummy one that is updated as soon as one of the tools file is updated
 # This is used to trigger automatic application recompilation
 $(PULP_SDK_INSTALL)/rules/tools.mk: $(INSTALL_HEADERS)
-       @mkdir -p `dirname $@`
-       touch $@
+	@mkdir -p `dirname $@`
+	touch $@
 
 header: $(PULP_SDK_INSTALL)/rules/tools.mk
