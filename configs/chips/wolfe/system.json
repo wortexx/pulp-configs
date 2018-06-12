@@ -7,14 +7,7 @@
     "vp_comps": [
       "board"
     ],
-    "debug_bridge": {
-      "start_addr": "0x1A110000",
-      "start_value": "0",
-      "stop_addr": "0x1A110000",
-      "stop_value": "0x00010000",
-      "set_pc_addr": "0x1A112000",
-      "commands": "reset stop load ioloop start wait"
-    },
+    "debug_bridge": {},
     "board": {
       "vp_class": "pulp/board",
       "vp_comps": [
@@ -31,7 +24,7 @@
       ],
       "chip": {
         "includes": [
-          "chip-microriscy.json"
+          "chip.json"
         ]
       },
       "dpi_clock": {
@@ -42,7 +35,7 @@
         ]
       },
       "pulp_chip": {
-        "pulpissimo": {}
+        "wolfe": {}
       },
       "dpi": {
         "includes": [

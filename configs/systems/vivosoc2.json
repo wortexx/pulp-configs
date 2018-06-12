@@ -75,6 +75,9 @@
     },
     "verbose": false,
     "boot-mode": "jtag",
+    "use_tb_comps": false,
+    "use_external_tb": false,
+    "active_tb_comps": [],
     "py-stack": false,
     "boot_from_flash": false,
     "flash_type": "spi",
@@ -129,17 +132,23 @@
     }
   },
   "system_tree": {
-    "debug-bridge": {
+    "debug_bridge": {
       "cable": {
         "type": "jtag-proxy",
-        "tap": 1,
+        "tap": 0,
         "jtag-proxy": {
           "port": 37539
         },
-        "ftdi": {}
+        "ftdi": {},
+        "autorun": false
       },
       "boot-mode": "default",
       "commands": "load ioloop reqloop start wait"
+    },
+    "debug-bridge": {
+      "cable": {
+        "tap": 1
+      }
     },
     "board": {
       "chip": {

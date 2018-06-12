@@ -5,7 +5,8 @@
     "includes": [
       "cable_jtag-proxy.json",
       "cable_ftdi.json"
-    ]
+    ],
+    "autorun": false
   },
 
   

@@ -24,7 +24,7 @@ system_file = 'system.json'
 if args.system_file is not None:
   system_file = args.system_file
 
-if args.system in ["pulpissimo"]:
+if args.system in ["pulpissimo", "wolfe"]:
 
   system = Component(
       includes=[

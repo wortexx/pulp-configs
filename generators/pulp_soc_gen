@@ -28,11 +28,22 @@ has_fll = False
 has_gpio = False
 has_soc_events = False
 has_efuse = False
+has_pmu = False
 
 
 if args.chip == 'pulp':
   has_fc = True
   fc_core = 'ri5ky_v2_fpu'
+  has_udma = True
+  has_fll = True
+  has_gpio = True
+  has_soc_events = True
+  fc_events = { "includes": ["fc_irq.json"] }
+  l2_is_partitioned = True
+
+elif args.chip == 'wolfe':
+  has_fc = True
+  fc_core = 'zeroriscy'
   has_udma = True
   has_fll = True
   has_gpio = True
@@ -190,6 +201,11 @@ if has_udma:
     }
   )
 
+if has_pmu:
+  soc.pmu = Component(
+    includes=["pmu_v2.json"]
+  )
+
 soc.soc_ico.debug                  = soc.soc_ico.ll_ico.input
 soc.soc_ico.axi_slave              = soc.soc_ico.ll_ico.input
 soc.soc_ico.hb_ico.out_0           = soc.soc_ico.l2_shared_0
@@ -263,6 +279,11 @@ if has_fc:
     "fc_debug"     : { "base": "0x1A110000", "size": "0x00008000", "remove_offset": "0x1A110000" },
     "fc_timer"     : { "base": "0x1A10B000", "size": "0x00001000", "remove_offset": "0x1A10B000" },
     "fc_dbg_unit"  : { "base": "0x1a110000", "size": "0x00010000", "remove_offset": "0x1a110000" },
+  })
+
+if has_pmu:
+  apb_soc_mappings.update({
+    "pmu"       : { "base": "0x1A107000", "size": "0x00000800", "remove_offset": "0x1A107000" },
   })
 
 if has_rom:
@@ -479,6 +500,10 @@ else:
 # ROM
 if has_rom:
   soc.apb_ico.rom = soc.rom.input
+
+# PMU
+if has_pmu:
+  soc.apb_ico.pmu = soc.pmu.input
 
 # FC
 if has_fc:

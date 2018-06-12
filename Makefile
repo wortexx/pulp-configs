@@ -9,6 +9,11 @@ gen:
 	./generators/pulp_soc_gen    --configs=$(CURDIR)/configs --chip=pulp          > configs/chips/pulp/soc.json
 	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=pulp        > configs/systems/pulp.json
 
+	./generators/pulp_soc_gen     --configs=$(CURDIR)/configs --chip=wolfe   > configs/chips/wolfe/soc.json
+	./generators/pulp_chip_gen    --configs=$(CURDIR)/configs --chip=wolfe   > configs/chips/wolfe/chip.json
+	./generators/pulp_system_gen  --configs=$(CURDIR)/configs --chip=wolfe   > configs/chips/wolfe/system.json
+	./generators/pulp_top_gen     --configs=$(CURDIR)/configs --system=wolfe > configs/systems/wolfe.json
+
 	./generators/pulp_soc_gen     --configs=$(CURDIR)/configs --chip=pulpissimo   > configs/chips/pulpissimo/soc.json
 	./generators/pulp_chip_gen    --configs=$(CURDIR)/configs --chip=pulpissimo   > configs/chips/pulpissimo/chip.json
 	./generators/pulp_system_gen  --configs=$(CURDIR)/configs --chip=pulpissimo   > configs/chips/pulpissimo/system.json

@@ -1,5 +1,5 @@
 {
-  "debug-bridge": {
+  "debug_bridge": {
     "includes": [ "tools/debug-bridge/debug_bridge.json" ]
   }
 }

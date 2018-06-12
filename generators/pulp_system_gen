@@ -25,13 +25,45 @@ chip_file = 'chip.json'
 if args.chip_file is not None:
   chip_file = args.chip_file
 
+start_addr = None
+stop_addr = None
+set_pc_addr = None
+debug_bridge_commands = None
+
+if args.chip in ['pulpissimo', 'pulp']:
+    start_addr = '0x1A110000'
+    start_value = '0'
+    stop_addr = '0x1A110000'
+    stop_value = '0x00010000'
+    set_pc_addr = '0x1A112000'
+    debug_bridge_commands = 'reset stop load ioloop start wait'
+
 system = Component(
 )
+
 
 system.system_tree = Empty_Component(
     includes=[ "../../pulp_system_common.json" ],
     vp_class= "pulp/system"
 )
+
+system.system_tree.debug_bridge = Empty_Component(
+)
+
+if start_addr is not None:
+    system.system_tree.debug_bridge.set_property('start_addr', start_addr)
+    system.system_tree.debug_bridge.set_property('start_value', start_value)
+
+if stop_addr is not None:
+    system.system_tree.debug_bridge.set_property('stop_addr', stop_addr)
+    system.system_tree.debug_bridge.set_property('stop_value', stop_value)
+
+if set_pc_addr is not None:
+    system.system_tree.debug_bridge.set_property('set_pc_addr', set_pc_addr)
+
+if debug_bridge_commands is not None:
+    system.system_tree.debug_bridge.set_property('commands', debug_bridge_commands)
+
 
 
 system.system_tree.board = Component(
