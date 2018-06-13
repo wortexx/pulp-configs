@@ -141,6 +141,7 @@ class Component(object):
                     "self->%s" % (itf_name),
                     "%s->%s" % (slave_name, slave_itf.name)
                 ]
+
                 if slave_itf.comp.__dict__.get('is_tb_comp') or self.__dict__.get('is_tb_comp'):
                     tb_bindings.append(binding)
                 else:
@@ -162,7 +163,7 @@ class Component(object):
                         "%s->%s" % (slave_name, slave_itf.name)
                     ]
 
-                    if slave_itf.comp.__dict__.get('is_tb_comp') or self.__dict__.get('is_tb_comp'):
+                    if slave_itf.comp.__dict__.get('is_tb_comp') or comp.__dict__.get('is_tb_comp'):
                         tb_bindings.append(binding)
                     else:
                         vp_bindings.append(binding)

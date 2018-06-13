@@ -145,11 +145,28 @@
         "hal_files": [
           "hal/chips/vivosoc3/pulp.h"
         ],
+        "hal_analog_files": [
+          "hal/analog/control_v3.h",
+          "hal/analog/exg_v3.h",
+          "hal/analog/ppg_v3.h",
+          "hal/analog/stim_v3.h",
+          "hal/analog/bioz_v3.h",
+          "hal/analog/vivosoc3.h",
+          "hal/analog/vivosoc.h"
+        ],
         "archi_files": [
           "archi/chips/vivosoc3/pulp.h",
           "archi/chips/vivosoc3/memory_map.h",
           "archi/chips/vivosoc3/properties.h",
           "archi/chips/vivosoc3/apb_soc.h"
+        ],
+        "archi_analog_files": [
+          "archi/analog/control_v3.h",
+          "archi/analog/exg_v3.h",
+          "archi/analog/ppg_v3.h",
+          "archi/analog/stim_v3.h",
+          "archi/analog/bioz_v3.h",
+          "archi/analog/vivosoc3.h"
         ],
         "padframe": {
           "nb_alternate": 4,
@@ -3312,7 +3329,8 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
-          "jtag0_pad"
+          "jtag0_pad",
+          "cpi0"
         ],
         "vp_bindings": [
           [
@@ -3341,7 +3359,8 @@
         ]
       ],
       "tb_comps": [
-        "jtag_proxy"
+        "jtag_proxy",
+        "camera"
       ],
       "vp_bindings": [
         [
@@ -3357,6 +3376,10 @@
         [
           "chip->ctrl",
           "jtag_proxy->ctrl"
+        ],
+        [
+          "camera->cpi",
+          "chip->cpi0"
         ]
       ],
       "dpi": {
@@ -3373,6 +3396,13 @@
         "vp_ports": [
           "jtag",
           "ctrl"
+        ]
+      },
+      "camera": {
+        "type": "dpi",
+        "model": "himax",
+        "vp_ports": [
+          "cpi"
         ]
       }
     },

@@ -143,8 +143,12 @@
         "active": false,
         "autorun": false
       },
+      "adv_dbg_unit": {
+        "debug_ir": "0x4"
+      },
       "boot-mode": "default",
-      "commands": "load ioloop reqloop start wait"
+      "commands": "load ioloop reqloop start wait",
+      "gdb_commands": "load ioloop reqloop start gdb wait"
     },
     "vp_class": "pulp/system",
     "vp_comps": [
@@ -5262,14 +5266,16 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
-          "jtag0_pad"
+          "jtag0_pad",
+          "cpi0"
         ]
       },
       "pulp_chip": {
         "gap": {}
       },
       "tb_comps": [
-        "jtag_proxy"
+        "jtag_proxy",
+        "camera"
       ],
       "vp_bindings": [
         [
@@ -5285,6 +5291,10 @@
         [
           "chip->ctrl",
           "jtag_proxy->ctrl"
+        ],
+        [
+          "camera->cpi",
+          "chip->cpi0"
         ]
       ],
       "dpi": {
@@ -5301,6 +5311,13 @@
         "vp_ports": [
           "jtag",
           "ctrl"
+        ]
+      },
+      "camera": {
+        "type": "dpi",
+        "model": "himax",
+        "vp_ports": [
+          "cpi"
         ]
       }
     }
