@@ -140,6 +140,7 @@
           "port": 37539
         },
         "ftdi": {},
+        "active": false,
         "autorun": false
       },
       "boot-mode": "default",

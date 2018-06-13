@@ -405,7 +405,7 @@ if has_fll:
 
 soc.apb_soc_ctrl = Component(
     includes= ["apb_soc.json"],
-    vp_class= "pulp/chips/pulp/apb_soc"
+    vp_class= "pulp/chips/%s/apb_soc" % args.chip
 )
 
 soc.stdout = Component(

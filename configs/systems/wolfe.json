@@ -140,6 +140,7 @@
           "port": 37539
         },
         "ftdi": {},
+        "active": false,
         "autorun": false
       },
       "boot-mode": "default",
@@ -1346,7 +1347,7 @@
                 "offset": "0xDC"
               }
             },
-            "vp_class": "pulp/chips/pulp/apb_soc",
+            "vp_class": "pulp/chips/wolfe/apb_soc",
             "vp_ports": [
               "input"
             ]

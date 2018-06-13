@@ -678,7 +678,7 @@
     "includes": [
       "apb_soc.json"
     ],
-    "vp_class": "pulp/chips/pulp/apb_soc",
+    "vp_class": "pulp/chips/pulpissimo/apb_soc",
     "vp_ports": [
       "input"
     ]

@@ -6,6 +6,7 @@
       "cable_jtag-proxy.json",
       "cable_ftdi.json"
     ],
+    "active": false,
     "autorun": false
   },
 
