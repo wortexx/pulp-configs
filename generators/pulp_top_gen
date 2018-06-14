@@ -30,6 +30,7 @@ if args.system in ["pulpissimo", "wolfe"]:
       includes=[
           "defaults.json",
           "chips/%s/%s" % (args.system, system_file),
+          "chips/%s/defaults.json" % (args.system),
           "usecases/jtag.json"
       ]
   )

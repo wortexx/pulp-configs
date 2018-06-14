@@ -1,0 +1,20 @@
+{
+  "runner": {
+    "boot_from_flash": true,
+    "boot-mode": "rom"
+  },
+  
+  "loader": {
+    "boot": {
+      "mode": "rom"
+    }
+  },
+
+  "vsim": {
+    "args": [
+      "-novopt"
+    ]
+  }
+
+}
+
