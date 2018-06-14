@@ -132,6 +132,27 @@
     }
   },
   "system_tree": {
+    "debug_bridge": {
+      "cable": {
+        "type": "jtag-proxy",
+        "tap": 0,
+        "jtag-proxy": {
+          "port": 37539
+        },
+        "ftdi": {},
+        "active": false,
+        "autorun": false
+      },
+      "adv_dbg_unit": {
+        "debug_ir": "0x4"
+      },
+      "boot-mode": "default",
+      "commands": "load ioloop reqloop start wait",
+      "gdb_commands": "load ioloop reqloop start gdb wait",
+      "start_addr": "0x1A104014",
+      "start_value": "1",
+      "set_pc_addr": "0x1A104010"
+    },
     "board": {
       "devices": [
         "hyperram0",
@@ -3343,11 +3364,6 @@
         ]
       ]
     },
-    "peripherals": {},
-    "debug_bridge": {
-      "start_addr": "0x1A104014",
-      "start_value": "1",
-      "set_pc_addr": "0x1A104010"
-    }
+    "peripherals": {}
   }
 }

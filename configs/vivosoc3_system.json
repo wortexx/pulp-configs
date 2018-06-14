@@ -1,6 +1,8 @@
 {
 
   "system_tree": {
+    "includes": [ "pulp_system_common.json" ],
+    
     "board": {
       "devices": ["hyperram0", "hyperflash0"],
 
