@@ -1945,6 +1945,7 @@
       "camera": {
         "type": "dpi",
         "model": "himax",
+        "module": "camera.so",
         "vp_ports": [
           "cpi"
         ]

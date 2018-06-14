@@ -1,4 +1,5 @@
 {
   "type": "dpi",
-  "model": "himax"
+  "model": "himax",
+  "module": "camera.so"
 }
