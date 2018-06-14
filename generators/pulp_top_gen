@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--system", dest="system", default="pulp", help="Specify the chip")
 parser.add_argument("--system-file", dest="system_file", default=None, help="Specify the system JSON file")
 parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+parser.add_argument("--usecase", dest="usecases", action="append", default=[], help="Specify the JSON usecase file")
 
 args = parser.parse_args()
 
@@ -26,22 +27,24 @@ if args.system_file is not None:
 
 if args.system in ["pulpissimo", "wolfe"]:
 
-  system = Component(
-      includes=[
-          "defaults.json",
-          "chips/%s/%s" % (args.system, system_file),
-          "chips/%s/defaults.json" % (args.system),
-          "usecases/jtag.json"
-      ]
-  )
+  includes = [
+    "defaults.json",
+    "chips/%s/%s" % (args.system, system_file),
+    "chips/%s/defaults.json" % (args.system)
+  ]
+
 else:
-  system = Component(
-      includes=[
-          "defaults.json",
-          "%s_system.json" % args.system,
-          "usecases/jtag.json"
-      ]
-  )
+
+  includes=[
+    "defaults.json",
+    "%s_system.json" % args.system
+  ]
+
+includes += args.usecases
+
+system = Component(
+    includes=includes
+)
 
 config = system.get_json_config(configs=args.configs, expand=True)
 

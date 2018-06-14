@@ -159,12 +159,7 @@
       "vp_comps": [
         "chip"
       ],
-      "vp_bindings": [
-        [
-          "dpi->jtag0",
-          "chip->jtag0_pad"
-        ]
-      ],
+      "vp_bindings": [],
       "chip": {
         "name": "oprecompkw",
         "pulp_chip_family": "oprecompkw",
@@ -201,10 +196,6 @@
           [
             "soc_clock->out",
             "soc->clock"
-          ],
-          [
-            "self->jtag0_pad",
-            "padframe->jtag0_pad"
           ]
         ],
         "soc": {
@@ -3358,18 +3349,6 @@
           "size": 8192,
           "map_base": "0x1A000000",
           "map_size": "0x00010000"
-        },
-        "vp_ports": [
-          "jtag0",
-          "ctrl",
-          "jtag0_pad",
-          "jtag0_pad",
-          "cpi0"
-        ],
-        "padframe": {
-          "vp_ports": [
-            "jtag0_pad"
-          ]
         }
       },
       "pulp_chip": {
@@ -6564,52 +6543,7 @@
             "map_size": "0x00010000"
           }
         }
-      },
-      "tb_comps": [
-        "jtag_proxy",
-        "camera"
-      ],
-      "tb_bindings": [
-        [
-          "chip->jtag0",
-          "jtag_proxy->jtag"
-        ],
-        [
-          "chip->ctrl",
-          "jtag_proxy->ctrl"
-        ],
-        [
-          "camera->cpi",
-          "chip->cpi0"
-        ]
-      ],
-      "dpi": {
-        "vp_ports": [
-          "jtag0"
-        ]
-      },
-      "jtag_proxy": {
-        "type": "dpi",
-        "active": false,
-        "module": "jtag_proxy.so",
-        "verbose": false,
-        "port": 37539,
-        "vp_ports": [
-          "jtag",
-          "ctrl"
-        ]
-      },
-      "camera": {
-        "type": "dpi",
-        "model": "himax",
-        "module": "camera.so",
-        "vp_ports": [
-          "cpi"
-        ]
       }
     }
-  },
-  "vp_comps": [
-    "system_tree"
-  ]
+  }
 }

@@ -39,8 +39,8 @@ gen:
 	./generators/pulp_soc_gen --configs=$(CURDIR)/configs --chip=vega          > configs/chips/vega/soc.json
 	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=vega        > configs/systems/vega.json
 
-	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=gap         > configs/systems/gap.json
-	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=wolfe       > configs/systems/wolfe.json
+	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=gap         --usecase=usecases/jtag.json > configs/systems/gap.json
+	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=wolfe       --usecase=usecases/jtag.json > configs/systems/wolfe.json
 	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc3    > configs/systems/vivosoc3.json
 	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=bigpulp     > configs/systems/bigpulp.json
 	./generators/pulp_top_gen --configs=$(CURDIR)/configs --system=fulmine     > configs/systems/fulmine.json
