@@ -25,7 +25,7 @@ system_file = 'system.json'
 if args.system_file is not None:
   system_file = args.system_file
 
-if args.system in ["pulpissimo", "wolfe"]:
+if args.system in ["pulpissimo", "pulp", "wolfe"]:
 
   includes = [
     "defaults.json",

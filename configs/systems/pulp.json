@@ -147,8 +147,13 @@
         "debug_ir": "0x4"
       },
       "boot-mode": "default",
-      "commands": "load ioloop reqloop start wait",
-      "gdb_commands": "load ioloop reqloop start gdb wait"
+      "commands": "reset stop load ioloop start wait",
+      "gdb_commands": "load ioloop reqloop start gdb wait",
+      "start_addr": "0x1A110000",
+      "start_value": "0",
+      "stop_addr": "0x1A110000",
+      "stop_value": "0x00010000",
+      "set_pc_addr": "0x1A112000"
     },
     "vp_class": "pulp/system",
     "vp_comps": [
@@ -158,13 +163,18 @@
       "vp_class": "pulp/board",
       "vp_comps": [
         "chip",
-        "dpi",
-        "dpi_clock"
+        "dpi_clock",
+        "pulp_chip",
+        "dpi"
       ],
       "vp_bindings": [
         [
           "dpi_clock->out",
           "dpi->clock"
+        ],
+        [
+          "dpi->jtag0",
+          "chip->jtag0_pad"
         ]
       ],
       "chip": {
@@ -212,6 +222,10 @@
           [
             "soc_clock->out",
             "soc->clock"
+          ],
+          [
+            "self->jtag0_pad",
+            "padframe->jtag0_pad"
           ]
         ],
         "padframe": {
@@ -379,7 +393,10 @@
                 {}
               ]
             }
-          }
+          },
+          "vp_ports": [
+            "jtag0_pad"
+          ]
         },
         "soc_clock": {
           "vp_class": "vp/clock_domain",
@@ -4519,18 +4536,72 @@
               "jtag"
             ]
           }
-        }
+        },
+        "vp_ports": [
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
+          "jtag0_pad",
+          "cpi0"
+        ]
       },
       "dpi_clock": {
         "vp_class": "vp/clock_domain",
-        "frequency": 100000000
+        "frequency": 100000000,
+        "vp_ports": [
+          "out"
+        ]
       },
       "pulp_chip": {
         "pulp": {}
       },
       "dpi": {
-        "vp_class": "utils/dpi_wrapper"
+        "vp_class": "utils/dpi_wrapper",
+        "vp_ports": [
+          "clock",
+          "jtag0"
+        ]
+      },
+      "tb_comps": [
+        "jtag_proxy",
+        "camera"
+      ],
+      "tb_bindings": [
+        [
+          "chip->jtag0",
+          "jtag_proxy->jtag"
+        ],
+        [
+          "chip->ctrl",
+          "jtag_proxy->ctrl"
+        ],
+        [
+          "camera->cpi",
+          "chip->cpi0"
+        ]
+      ],
+      "jtag_proxy": {
+        "type": "dpi",
+        "active": false,
+        "module": "jtag_proxy.so",
+        "verbose": false,
+        "port": 37539,
+        "vp_ports": [
+          "jtag",
+          "ctrl"
+        ]
+      },
+      "camera": {
+        "type": "dpi",
+        "model": "himax",
+        "module": "camera.so",
+        "vp_ports": [
+          "cpi"
+        ]
       }
     }
-  }
+  },
+  "vp_comps": [
+    "system_tree"
+  ]
 }

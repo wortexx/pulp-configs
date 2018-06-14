@@ -5273,6 +5273,38 @@
       "pulp_chip": {
         "gap": {}
       },
+      "hyperram": {
+        "type": "hyperflash",
+        "size": "0x00800000",
+        "fs": {
+          "files": [],
+          "encrypt": false,
+          "aes_key": 0,
+          "aes_iv": 0,
+          "boot_binary": "test/test"
+        }
+      },
+      "hyperflash": {
+        "type": "hyperflash",
+        "size": "0x00800000",
+        "fs": {
+          "files": [],
+          "encrypt": false,
+          "aes_key": 0,
+          "aes_iv": 0,
+          "boot_binary": "test/test"
+        }
+      },
+      "bindings": [
+        [
+          "pulp_chip.hyper0",
+          "hyperram.hyperram"
+        ],
+        [
+          "pulp_chip.hyper0",
+          "hyperflash.hyperflash"
+        ]
+      ],
       "tb_comps": [
         "jtag_proxy",
         "camera"
