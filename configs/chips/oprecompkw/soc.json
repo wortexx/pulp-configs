@@ -247,11 +247,6 @@
         "size": "0x00001000",
         "remove_offset": "0x1A104000"
       },
-      "pmu": {
-        "base": "0x1A107000",
-        "size": "0x00000800",
-        "remove_offset": "0x1A107000"
-      },
       "rom": {
         "base": "0x1A000000",
         "size": "0x01000000",

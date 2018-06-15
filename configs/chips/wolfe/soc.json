@@ -15,6 +15,7 @@
   "vp_comps": [
     "axi_ico",
     "soc_ico",
+    "pmu",
     "apb_ico",
     "fc",
     "l2",
@@ -35,7 +36,6 @@
     "apb_soc_ctrl",
     "stdout",
     "gpio",
-    "pmu",
     "timer",
     "soc_eu",
     "udma",
@@ -138,6 +138,10 @@
     [
       "apb_ico->fc_dbg_unit",
       "fc->dbg_unit"
+    ],
+    [
+      "apb_ico->pmu",
+      "pmu->input"
     ],
     [
       "fc->fetch",
@@ -485,6 +489,14 @@
       ]
     }
   },
+  "pmu": {
+    "includes": [
+      "../../ips/pmu_v2.json"
+    ],
+    "vp_ports": [
+      "input"
+    ]
+  },
   "apb_ico": {
     "includes": [
       "../../ips/interco/router.json"
@@ -499,11 +511,6 @@
         "base": "0x1A104000",
         "size": "0x00001000",
         "remove_offset": "0x1A104000"
-      },
-      "pmu": {
-        "base": "0x1A107000",
-        "size": "0x00000800",
-        "remove_offset": "0x1A107000"
       },
       "soc_eu": {
         "base": "0x1A106000",
@@ -551,9 +558,14 @@
         "remove_offset": "0x1A10B000"
       },
       "fc_dbg_unit": {
-        "base": "0x1a110000",
-        "size": "0x00010000",
-        "remove_offset": "0x1a110000"
+        "base": "0x1A110000",
+        "size": "0x00008000",
+        "remove_offset": "0x1A110000"
+      },
+      "pmu": {
+        "base": "0x1A107000",
+        "size": "0x00000800",
+        "remove_offset": "0x1A107000"
       }
     },
     "vp_ports": [
@@ -567,6 +579,7 @@
       "fc_itc",
       "fc_timer",
       "fc_dbg_unit",
+      "pmu",
       "input"
     ]
   },
@@ -723,11 +736,6 @@
     ],
     "hal_files": [
       "hal/gpio/gpio_v2.h"
-    ]
-  },
-  "pmu": {
-    "includes": [
-      "../../ips/pmu_v2.json"
     ]
   },
   "timer": {
