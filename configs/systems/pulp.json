@@ -980,11 +980,6 @@
                 "size": "0x00001000",
                 "remove_offset": "0x1A104000"
               },
-              "pmu": {
-                "base": "0x1A107000",
-                "size": "0x00000800",
-                "remove_offset": "0x1A107000"
-              },
               "soc_eu": {
                 "base": "0x1A106000",
                 "size": "0x00001000",
@@ -1031,9 +1026,9 @@
                 "remove_offset": "0x1A10B000"
               },
               "fc_dbg_unit": {
-                "base": "0x1a110000",
-                "size": "0x00010000",
-                "remove_offset": "0x1a110000"
+                "base": "0x1A110000",
+                "size": "0x00008000",
+                "remove_offset": "0x1A110000"
               }
             },
             "vp_ports": [
