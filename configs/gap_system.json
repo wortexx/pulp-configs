@@ -23,7 +23,7 @@
         }
       },
 
-      "hyperram": {
+      "hyperflash": {
         "type": "hyperflash",
         "size": "0x00800000",
         "fs": {
@@ -35,7 +35,7 @@
         }
       },
 
-      "hyperflash": {
+      "hyperram": {
         "type": "hyperflash",
         "size": "0x00800000",
         "fs": {
@@ -50,11 +50,11 @@
       "bindings": [
         [
           "pulp_chip.hyper0",
-          "hyperram.hyperram"
+          "hyperflash.hyperflash"
         ],
         [
           "pulp_chip.hyper0",
-          "hyperflash.hyperflash"
+          "hyperram.hyperram"
         ]
       ]
 

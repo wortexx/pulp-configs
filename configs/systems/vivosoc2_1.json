@@ -141,7 +141,8 @@
         },
         "ftdi": {},
         "active": false,
-        "autorun": false
+        "autorun": false,
+        "access_timeout_us": 1000000
       },
       "adv_dbg_unit": {
         "debug_ir": "0x4"

@@ -141,7 +141,8 @@
         },
         "ftdi": {},
         "active": false,
-        "autorun": false
+        "autorun": false,
+        "access_timeout_us": 1000000
       },
       "adv_dbg_unit": {
         "debug_ir": "0x4"
@@ -5273,7 +5274,7 @@
       "pulp_chip": {
         "gap": {}
       },
-      "hyperram": {
+      "hyperflash": {
         "type": "hyperflash",
         "size": "0x00800000",
         "fs": {
@@ -5284,7 +5285,7 @@
           "boot_binary": "test/test"
         }
       },
-      "hyperflash": {
+      "hyperram": {
         "type": "hyperflash",
         "size": "0x00800000",
         "fs": {
@@ -5298,11 +5299,11 @@
       "bindings": [
         [
           "pulp_chip.hyper0",
-          "hyperram.hyperram"
+          "hyperflash.hyperflash"
         ],
         [
           "pulp_chip.hyper0",
-          "hyperflash.hyperflash"
+          "hyperram.hyperram"
         ]
       ],
       "tb_comps": [
