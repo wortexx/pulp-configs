@@ -600,7 +600,7 @@
   },
   "fc": {
     "includes": [
-      "../../ips/ri5ky_v2_fpu.json"
+      "../../ips/zeroriscy.json"
     ],
     "cluster_id": 31,
     "core_id": 0,

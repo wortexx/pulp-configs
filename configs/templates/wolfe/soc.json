@@ -11,7 +11,7 @@
     "size": "0x06000000",
 
     "fc": {
-      "core"        : "ri5ky_v2_fpu",
+      "core"        : "zeroriscy",
       "irq"         : "fc_irq.json",
       "cluster_id"  : 31,
       "core_id"     : 0,

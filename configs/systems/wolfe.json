@@ -1075,21 +1075,16 @@
             ]
           },
           "fc": {
-            "version": "ri5cyv2",
+            "vp_class": "cpu/iss/iss",
+            "version": "zeroriscy",
             "archi": "riscv",
-            "implementation": "ri5cy",
+            "implementation": "zeroriscy",
             "gv_isa": [
+              "--pulp-zeroriscy",
               "--pulp",
-              "--rv32m",
-              "--pulpv2",
-              "--pulp-perf-counters",
-              "--pulp-hw-loop",
-              "--itc-external-req",
-              "--fpu",
-              "--fpud",
-              "--shared-fpu"
+              "--rv32m"
             ],
-            "isa": "RV32IMFCXpulpv2",
+            "isa": "RV32IMC",
             "priv_version": 1.9,
             "perf_counters": true,
             "features": [
@@ -1107,10 +1102,8 @@
               "archi/riscv/pcer_v1.h"
             ],
             "defines": [
-              "ARCHI_CORE_HAS_PULPV2",
               "CORE_PULP_BUILTINS"
             ],
-            "vp_class": "cpu/iss/iss",
             "power_models": {
               "clock_gated": {
                 "type": "linear",
