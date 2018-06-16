@@ -15,6 +15,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chip")
 parser.add_argument("--soc-file", dest="soc_file", default=None, help="Specify the soc JSON file")
 parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 
 [args, known_args] = parser.parse_known_args()
 
@@ -64,4 +65,7 @@ chip.soc_clock.out = chip.soc.clock
 
 config = chip.get_json_config(configs=args.configs)
 
-print (config)
+if args.output is not None:
+  with open(args.output, 'w') as file:
+    file.write(config)
+    file.write('\n')

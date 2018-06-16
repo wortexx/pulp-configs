@@ -1,0 +1,41 @@
+#!/usr/bin/env python3.6
+
+# Authors: Germain Haugou, ETH (germain.haugou@iis.ee.ethz.ch)
+
+ 
+import json_tools as js
+import argparse
+import os
+import os.path
+
+parser = argparse.ArgumentParser(
+  description='Generate configuration for Pulp soc',
+  formatter_class=argparse.RawDescriptionHelpFormatter
+)
+
+parser.add_argument("--template", dest="template", default=None, help="Specify the soc template")
+parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+parser.add_argument("--prop", dest="props", default=[], action="append", help="Specify property")
+parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
+
+args = parser.parse_args()
+
+
+
+if args.template is None:
+  print ('The path to the template configuration must be given through option --template')
+  exit(-1)
+
+configs = args.configs
+if configs is None:
+  configs = os.environ.get('PULP_CONFIGS_PATH')
+
+
+tp = js.import_config_from_file(os.path.join(configs, args.template))
+with open('template.json', 'w') as file:
+  file.write(tp.dump_to_string())
+
+os.system('pulp_soc_gen    --configs=%s --template=template.json --output=soc.json' % configs)
+os.system('pulp_chip_gen   --configs=%s --chip=%s --output=chip.json' % (configs, tp.get_child_str('chip')))
+os.system('pulp_system_gen --configs=%s --chip=%s --output=system.json' % (configs, tp.get_child_str('chip')))
+os.system('pulp_top_gen    --configs=%s --system=%s --usecase=usecases/jtag.json --output=%s' % (configs, tp.get_child_str('chip'), args.output))

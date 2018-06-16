@@ -1,4 +1,6 @@
 {
+  "chip": "pulp",
+  
   "cluster": {
     "base": "0x10000000",
     "size": "0x00400000",

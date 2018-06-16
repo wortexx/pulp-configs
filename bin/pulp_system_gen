@@ -15,6 +15,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chip")
 parser.add_argument("--chip-file", dest="chip_file", default=None, help="Specify the chip JSON file")
 parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 
 [args, known_args] = parser.parse_known_args()
 
@@ -94,4 +95,7 @@ system.system_tree.board.dpi_clock.out = system.system_tree.board.dpi.clock
 
 config = system.get_json_config(configs=args.configs)
 
-print (config)
+if args.output is not None:
+  with open(args.output, 'w') as file:
+    file.write(config)
+    file.write('\n')

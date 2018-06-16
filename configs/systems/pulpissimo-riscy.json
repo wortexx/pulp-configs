@@ -702,7 +702,6 @@
               "apb",
               "l2_priv0",
               "l2_priv1",
-              "axi_master",
               "fc_fetch",
               "fc_data",
               "axi_slave",
@@ -753,10 +752,6 @@
               [
                 "ll_ico->l2_shared",
                 "hb_ico->input"
-              ],
-              [
-                "ll_ico->axi_master",
-                "self->axi_master"
               ],
               [
                 "hb_ico->out_0",
@@ -847,7 +842,6 @@
                 "l2_priv0_alias",
                 "l2_priv1",
                 "l2_shared",
-                "axi_master",
                 "input"
               ]
             },
@@ -1244,6 +1238,7 @@
           },
           "apb_soc_ctrl": {
             "version": 3,
+            "vp_class": "pulp/chips/pulpissimo/apb_soc",
             "hal_files": [
               "hal/apb_soc/apb_soc_v3.h"
             ],

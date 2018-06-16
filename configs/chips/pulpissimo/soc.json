@@ -235,7 +235,6 @@
       "apb",
       "l2_priv0",
       "l2_priv1",
-      "axi_master",
       "fc_fetch",
       "fc_data",
       "axi_slave",
@@ -286,10 +285,6 @@
       [
         "ll_ico->l2_shared",
         "hb_ico->input"
-      ],
-      [
-        "ll_ico->axi_master",
-        "self->axi_master"
       ],
       [
         "hb_ico->out_0",
@@ -379,7 +374,6 @@
         "l2_priv0_alias",
         "l2_priv1",
         "l2_shared",
-        "axi_master",
         "input"
       ]
     },

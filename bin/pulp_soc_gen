@@ -195,7 +195,8 @@ if l2_is_partitioned:
 else:
   soc.soc_ico.ll_ico.l2            = soc.soc_ico.l2
 
-soc.soc_ico.ll_ico.axi_master      = soc.soc_ico.axi_master
+if has_cluster:
+  soc.soc_ico.ll_ico.axi_master      = soc.soc_ico.axi_master
 
 
 

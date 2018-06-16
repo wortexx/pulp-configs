@@ -17,6 +17,7 @@ parser.add_argument("--system", dest="system", default="pulp", help="Specify the
 parser.add_argument("--system-file", dest="system_file", default=None, help="Specify the system JSON file")
 parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
 parser.add_argument("--usecase", dest="usecases", action="append", default=[], help="Specify the JSON usecase file")
+parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 
 args = parser.parse_args()
 
@@ -48,4 +49,7 @@ system = Component(
 
 config = system.get_json_config(configs=args.configs, expand=True)
 
-print (config)
+if args.output is not None:
+  with open(args.output, 'w') as file:
+    file.write(config)
+    file.write('\n')
