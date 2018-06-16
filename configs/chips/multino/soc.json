@@ -3,18 +3,21 @@
 
   "cluster": {
     "includes": ["../../ips/cluster_v5.json"],
+    "pe": {
+      "includes" : ["../../ips/ri5ky_v2_a.json"]
+    },
     "l1": {
-      "size" : 262144,
+      "size" : 65536,
       "alias_base": "0x1b000000"
     },
-    "nb_pe": 2
+    "nb_pe": 4
   },
 
   "soc_ico": {
 
     "gv_class": "pulp.Soc_Ico_v1.Soc_Ico",
 
-    "nb_l2_shared_banks": 4,
+    "nb_l2_shared_banks": 1,
 
     "apb": {
       "base"  : "0x1A100000",
@@ -23,7 +26,7 @@
 
     "l2": {
       "base"  : "0x1C000000",
-      "size"  : "0x00080000"
+      "size"  : "0x00020000"
     },
 
     "peripherals_base"  : "0x1A100000",
@@ -31,12 +34,12 @@
     "peripherals": {
 
       "stdout": {
-        "offset": "0x0000f000",
+        "offset": "0x00002000",
         "size"  : "0x00001000"
       },
 
       "apb_soc_ctrl": {
-        "offset": "0x00004000",
+        "offset": "0x00000000",
         "size"  : "0x00001000"
       }
 
@@ -44,14 +47,14 @@
   },
 
   "l2": {
-    "size": 262144,
+    "size": 131072,
     "map_base": "0x1C000000",
-    "map_size": "0x00080000"
+    "map_size": "0x00020000"
   },
 
   "l2_shared": {
-    "nb_banks": 4,
-    "size": 262144,
+    "nb_banks": 1,
+    "size": 131072,
     "map_base": "0x1C000000",
     "map_size": "0x01000000"
   },
