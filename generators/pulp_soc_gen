@@ -4,6 +4,7 @@
 
  
 import json
+import json_tools as js
 import argparse
 from comp_gen import *
 
@@ -12,83 +13,46 @@ parser = argparse.ArgumentParser(
   formatter_class=argparse.RawDescriptionHelpFormatter
 )
 
-parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chip")
+parser.add_argument("--template", dest="template", default=None, help="Specify the soc template")
 parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
-
-[args, known_args] = parser.parse_known_args()
-
-
-has_fc = False
-has_udma = False
-fc_events = {}
-l2_is_partitioned = False
-has_rom = False
-has_cluster = True
-has_fll = False
-has_gpio = False
-has_soc_events = False
-has_efuse = False
-has_pmu = False
-
-
-if args.chip == 'pulp':
-  has_fc = True
-  fc_core = 'ri5ky_v2_fpu'
-  has_udma = True
-  has_fll = True
-  has_gpio = True
-  has_soc_events = True
-  fc_events = { "includes": ["fc_irq.json"] }
-  l2_is_partitioned = True
-
-elif args.chip == 'wolfe':
-  has_fc = True
-  fc_core = 'zeroriscy'
-  has_udma = True
-  has_fll = True
-  has_gpio = True
-  has_soc_events = True
-  fc_events = { "includes": ["fc_irq.json"] }
-  l2_is_partitioned = True
-
-elif args.chip == 'vega':
-  has_fc = True
-  fc_core = 'ri5ky_v2_fpu'
-  has_udma = True
-  has_fll = True
-  has_gpio = True
-  has_soc_events = True
-  fc_events = { "includes": ["fc_irq.json"] }
-  l2_is_partitioned = True
-  has_efuse = True
-
-elif args.chip == 'oprecompkw':
-  has_rom = True
-
-elif args.chip == 'pulpissimo':
-  has_cluster = False
-  has_fc = True
-  fc_core = 'ri5ky_v2_fpu'
-  has_udma = True
-  has_gpio = True
-  has_soc_events = True
-  fc_events = { "includes": ["fc_irq.json"] }
-  l2_is_partitioned = True
-  has_fll = True
-
-
-if has_fc:
-  parser.add_argument("--fc-core", dest="fc_core", default=None, help="Specify FC core")
-
-
-
+parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 
 args = parser.parse_args()
 
 
-if has_fc:
-  if args.fc_core is not None:
-    fc_core = args.fc_core
+
+if args.configs is None:
+  print ('The path to the configurations must be given through option --configs')
+  exit(-1)
+
+if args.template is None:
+  print ('The path to the template configuration must be given through option --template')
+  exit(-1)
+
+
+tp = js.import_config_from_file(args.template)
+
+
+
+chip              = tp.get_child_str('chip')
+has_cluster       = tp.get_child_bool('has_cluster')
+has_fc            = tp.get_child_bool('has_fc')
+fc_core           = tp.get_child_str('fc_core')
+has_udma          = tp.get_child_bool('has_udma')
+has_gpio          = tp.get_child_bool('has_gpio')
+has_soc_events    = tp.get_child_bool('has_soc_events')
+fc_events         = tp.get_child_str('fc_events')
+l2_is_partitioned = tp.get_child_bool('l2_is_partitioned')
+has_fll           = tp.get_child_bool('has_fll')
+has_rom           = tp.get_child_bool('has_rom')
+has_efuse         = tp.get_child_bool('has_efuse')
+has_pmu           = tp.get_child_bool('has_pmu')
+
+
+if fc_events is not None:
+  fc_events_dict = { "includes": [ fc_events ] }
+else:
+  fc_events_dict = { }
 
 
 
@@ -100,18 +64,18 @@ else:
 soc = Component(
     nb_cluster=1 if has_cluster else 0,
     vp_class="pulp/soc",
-    peripherals_base= "0x1A100000",
+    peripherals_base= tp.get_child_str("soc/peripherals/base"),
     soc_events_ids=soc_events_ids,
-    fc_events=fc_events
+    fc_events=fc_events_dict
 )
 
 axi_ico_mappings = {
-  "soc": { "base"  : "0x1A000000", "size"  : "0x06000000" }
+  "soc": get_mapping(tp.get_child_dict("soc"))
 }
 
 if has_cluster:
   axi_ico_mappings.update({
-    "cluster": { "base": "0x10000000", "size"  : "0x00400000" },
+    "cluster": get_mapping(tp.get_child_dict("cluster"))
   })
 
 soc.axi_ico = Component(
@@ -128,21 +92,25 @@ soc.soc_ico = Component(
 )
 
 ll_ico_mappings = {
-  "rom"           : { "base": "0x1A000000", "size": "0x00100000" },
-  "apb"           : { "base": "0x1A100000", "size": "0x00100000" },
-  "axi_master"    : { "base": "0x10000000", "size": "0x0A000000" }  
+  "rom"           : get_mapping(tp.get_child_dict("soc/rom")),
+  "apb"           : get_mapping(tp.get_child_dict("soc/peripherals"))
 }
+
+if has_cluster:
+  ll_ico_mappings.update({
+    "axi_master"    : get_mapping(tp.get_child_dict("cluster"))
+  })
 
 if l2_is_partitioned:
   ll_ico_mappings.update({
-    "l2_priv0"      : { "base": "0x1C000000", "size": "0x00008000", "remove_offset": "0x1C000000" },
-    "l2_priv0_alias": { "base": "0x00000000", "size": "0x00008000" },
-    "l2_priv1"      : { "base": "0x1C008000", "size": "0x00008000", "remove_offset": "0x1C008000" },
-    "l2_shared"     : { "base": "0x1C010000", "size": "0x00070000" },
+    "l2_priv0"      : get_mapping(tp.get_child_dict("soc/l2/priv0"), True),
+    "l2_priv0_alias": get_mapping(tp.get_child_dict("soc/l2/priv0_alias")),
+    "l2_priv1"      : get_mapping(tp.get_child_dict("soc/l2/priv1"), True),
+    "l2_shared"     : get_mapping(tp.get_child_dict("soc/l2/shared")),
   })
 else:
   ll_ico_mappings.update({
-    "l2"         : { "base": "0x1C000000", "size": "0x00080000", "remove_offset": "0x1C000000" },
+    "l2"         : get_mapping(tp.get_child_dict("soc/l2"), True),
   })
 
 soc.soc_ico.ll_ico = Component(
@@ -155,14 +123,14 @@ soc.soc_ico.hb_ico = Component(
   nb_slaves= 4,
   interleaving_bits= 2,
   stage_bits= 2,
-  remove_offset= "0x1c010000"
+  remove_offset= tp.get_child_str("soc/l2/shared/base")
 )
 
 if has_fc:
   soc.soc_ico.fc_fetch_ico = Component(
     includes= [ "../../ips/interco/router.json" ],
     mappings= {
-      "l2_shared": { "base": "0x1C010000", "size"  : "0x00070000" },
+      "l2_shared": get_mapping(tp.get_child_dict("soc/l2/shared")),
       "ll_ico": {}
     }
   )
@@ -246,49 +214,48 @@ soc.soc_ico.ll_ico.axi_master      = soc.soc_ico.axi_master
 
 
 apb_soc_mappings = {
-  "stdout"       : { "base": "0x1A10F000", "size": "0x00001000", "remove_offset": "0x1A10F000" },
-  "apb_soc_ctrl" : { "base": "0x1A104000", "size": "0x00001000", "remove_offset": "0x1A104000" },
-  "pmu"          : { "base": "0x1A107000", "size": "0x00000800", "remove_offset": "0x1A107000" },
+  "stdout"       : get_mapping(tp.get_child_dict("soc/peripherals/stdout"), True),
+  "apb_soc_ctrl" : get_mapping(tp.get_child_dict("soc/peripherals/apb_soc_ctrl"), True),
 }
 
 if has_soc_events:
   apb_soc_mappings.update({
-    "soc_eu"       : { "base": "0x1A106000", "size": "0x00001000", "remove_offset": "0x1A106000" },
+    "soc_eu"       : get_mapping(tp.get_child_dict("soc/peripherals/soc_eu"), True),
   })
 
 if has_gpio:
   apb_soc_mappings.update({
-    "gpio"         : { "base": "0x1A101000", "size": "0x00001000", "remove_offset": "0x1A101000" }
+    "gpio"         : get_mapping(tp.get_child_dict("soc/peripherals/gpio"), True)
   })
 
 if has_fll:
   apb_soc_mappings.update({
-    "fll"         : { "base": "0x1A100000", "size": "0x00000010", "remove_offset": "0x1A100000" },
-    "fll1"         : { "base": "0x1A100010", "size": "0x00000010", "remove_offset": "0x1A100010" },
-    "fll2"         : { "base": "0x1A100020", "size": "0x00000010", "remove_offset": "0x1A100020" }
+    "fll"          : get_mapping(tp.get_child_dict("soc/peripherals/fll"), True),
+    "fll1"         : get_mapping(tp.get_child_dict("soc/peripherals/fll1"), True),
+    "fll2"         : get_mapping(tp.get_child_dict("soc/peripherals/fll2"), True)
   })
 
 if has_udma:
   apb_soc_mappings.update({
-    "udma"         : { "base": "0x1A102000", "size": "0x00002000", "remove_offset": "0x1A102000" },
+    "udma"         : get_mapping(tp.get_child_dict("soc/peripherals/udma"), True),
   })
 
 if has_fc:
   apb_soc_mappings.update({
-    "fc_itc"       : { "base": "0x1A109800", "size": "0x00000800", "remove_offset": "0x1A109800" },
-    "fc_debug"     : { "base": "0x1A110000", "size": "0x00008000", "remove_offset": "0x1A110000" },
-    "fc_timer"     : { "base": "0x1A10B000", "size": "0x00001000", "remove_offset": "0x1A10B000" },
-    "fc_dbg_unit"  : { "base": "0x1a110000", "size": "0x00010000", "remove_offset": "0x1a110000" },
+    "fc_itc"       : get_mapping(tp.get_child_dict("soc/peripherals/fc_itc"), True),
+    "fc_debug"     : get_mapping(tp.get_child_dict("soc/peripherals/fc_dbg_unit"), True),
+    "fc_timer"     : get_mapping(tp.get_child_dict("soc/peripherals/fc_timer"), True),
+    "fc_dbg_unit"  : get_mapping(tp.get_child_dict("soc/peripherals/fc_dbg_unit"), True),
   })
 
 if has_pmu:
   apb_soc_mappings.update({
-    "pmu"       : { "base": "0x1A107000", "size": "0x00000800", "remove_offset": "0x1A107000" },
+    "pmu"       : get_mapping(tp.get_child_dict("soc/peripherals/pmu"), True),
   })
 
 if has_rom:
   apb_soc_mappings.update({
-    "rom"       : { "base": "0x1A000000", "size": "0x01000000", "remove_offset": "0x1A000000" },
+    "rom"       : get_mapping(tp.get_child_dict("soc/peripherals/rom"), True),
   })
 
 
@@ -405,7 +372,7 @@ if has_fll:
 
 soc.apb_soc_ctrl = Component(
     includes= ["apb_soc.json"],
-    vp_class= "pulp/chips/%s/apb_soc" % args.chip
+    vp_class= "pulp/chips/%s/apb_soc" % chip
 )
 
 soc.stdout = Component(
@@ -550,7 +517,7 @@ soc.jtag = soc.adv_dbg_unit.jtag
 soc.plt_loader.out = soc.soc_ico.debug
 
 
-if args.chip == 'oprecompkw':
+if chip == 'oprecompkw':
     soc.job_fifo = Component(
         includes= ["job_fifo.json"]
     )
@@ -574,4 +541,7 @@ if args.chip == 'oprecompkw':
 
 config = soc.get_json_config(configs=args.configs)
 
-print (config)
+if args.output is not None:
+  with open(args.output, 'w') as file:
+    file.write(config)
+    file.write('\n')

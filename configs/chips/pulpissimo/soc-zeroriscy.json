@@ -345,10 +345,6 @@
           "base": "0x1A100000",
           "size": "0x00100000"
         },
-        "axi_master": {
-          "base": "0x10000000",
-          "size": "0x0A000000"
-        },
         "l2_priv0": {
           "base": "0x1C000000",
           "size": "0x00008000",
@@ -385,7 +381,7 @@
       "nb_slaves": 4,
       "interleaving_bits": 2,
       "stage_bits": 2,
-      "remove_offset": "0x1c010000",
+      "remove_offset": "0x1C010000",
       "vp_ports": [
         "out_0",
         "out_1",

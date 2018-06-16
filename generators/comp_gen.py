@@ -193,3 +193,15 @@ class Empty_Component(Component):
         super(Empty_Component, self).__init__(**kwargs)
 
         self.__dict__['is_empty'] = True
+
+
+
+def get_mapping(mapping, remove_base=False):
+    result = OrderedDict()
+
+    result['base'] = mapping.get('base')
+    result['size'] = mapping.get('size')
+
+    if remove_base:
+        result['remove_offset'] = result.get('base')
+    return result

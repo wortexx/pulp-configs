@@ -1,0 +1,109 @@
+{
+  "chip"              : "pulpissimo",
+  "has_fc"            : true,
+  "fc_core"           : "zeroriscy",
+  "has_udma"          : true,
+  "has_fll"           : true,
+  "has_gpio"          : true,
+  "has_soc_events"    : true,
+  "fc_events"         : "fc_irq.json",
+  "l2_is_partitioned" : true,
+
+  "soc": {
+    
+    "base": "0x1A000000",
+    "size": "0x06000000",
+
+    "rom": {
+      "base": "0x1A000000",
+      "size": "0x00100000"
+    },
+
+    "l2": {
+      "base": "0x1C000000",
+      "size": "0x00080000",
+
+      "priv0": {
+        "base"         : "0x1C000000",
+        "size"         : "0x00008000"
+      },
+
+      "priv0_alias": {
+        "base"         : "0x00000000",
+        "size"         : "0x00008000"
+      },
+
+      "priv1": {
+        "base"         : "0x1C008000",
+        "size"         : "0x00008000"
+      },
+
+      "shared": {
+        "base"         : "0x1C010000",
+        "size"         : "0x00070000"
+      }
+    },
+
+    "peripherals": {
+
+      "base": "0x1A100000",
+      "size": "0x00100000",
+
+      "fll": {
+        "base"         : "0x1A100000",
+        "size"         : "0x00000010"
+      },
+
+      "fll1": {
+        "base"         : "0x1A100010",
+        "size"         : "0x00000010"
+      },
+
+      "fll2": {
+        "base"         : "0x1A100020",
+        "size"         : "0x00000010"
+      },
+
+      "gpio": {
+        "base"         : "0x1A101000",
+        "size"         : "0x00001000"
+      },
+
+      "udma": {
+        "base"         : "0x1A102000",
+        "size"         : "0x00002000"
+      },
+
+      "apb_soc_ctrl": {
+        "base"         : "0x1A104000",
+        "size"         : "0x00001000"
+      },
+
+      "soc_eu": {
+        "base"         : "0x1A106000",
+        "size"         : "0x00001000"
+      },
+
+      "fc_itc": {
+        "base"         : "0x1A109800",
+        "size"         : "0x00000800"
+      },
+
+      "fc_timer": {
+        "base"         : "0x1A10B000",
+        "size"         : "0x00001000"
+      },
+
+      "stdout": {
+        "base"         : "0x1A10F000",
+        "size"         : "0x00001000"
+      },
+
+      "fc_dbg_unit": {
+        "base"         : "0x1A110000",
+        "size"         : "0x00008000"
+      }
+
+    }
+  }
+}

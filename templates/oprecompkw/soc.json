@@ -1,0 +1,53 @@
+{
+  "chip"              : "oprecompkw",
+  "has_cluster"       : true,
+  "has_rom"           : true,
+
+  "cluster": {
+    "base": "0x10000000",
+    "size": "0x00400000"
+  },
+
+  "soc": {
+
+    "base": "0x1A000000",
+    "size": "0x06000000",
+
+    "rom": {
+      "base": "0x1A000000",
+      "size": "0x00100000"
+    },
+
+    "l2": {
+      "base": "0x1C000000",
+      "size": "0x00080000",
+
+      "shared": {
+        "base"         : "0x1C000000",
+        "size"         : "0x00080000"
+      }
+    },
+
+    "peripherals": {
+
+      "base": "0x1A100000",
+      "size": "0x00100000",
+
+      "rom": {
+        "base"         : "0x1A000000",
+        "size"         : "0x01000000"
+      },
+
+      "apb_soc_ctrl": {
+        "base"         : "0x1A104000",
+        "size"         : "0x00001000"
+      },
+
+      "stdout": {
+        "base"         : "0x1A10F000",
+        "size"         : "0x00001000"
+      }
+
+    }
+  }
+}

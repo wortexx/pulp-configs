@@ -406,7 +406,7 @@
                 },
                 "axi_master": {
                   "base": "0x10000000",
-                  "size": "0x0A000000"
+                  "size": "0x00400000"
                 },
                 "l2": {
                   "base": "0x1C000000",
@@ -428,7 +428,7 @@
               "nb_masters": 0,
               "interleaving_bits": 2,
               "stage_bits": 2,
-              "remove_offset": "0x1c010000",
+              "remove_offset": "0x1C000000",
               "vp_ports": [
                 "out_0",
                 "out_1",
@@ -456,11 +456,6 @@
                 "base": "0x1A104000",
                 "size": "0x00001000",
                 "remove_offset": "0x1A104000"
-              },
-              "pmu": {
-                "base": "0x1A107000",
-                "size": "0x00000800",
-                "remove_offset": "0x1A107000"
               },
               "rom": {
                 "base": "0x1A000000",
@@ -3598,7 +3593,7 @@
                   },
                   "axi_master": {
                     "base": "0x10000000",
-                    "size": "0x0A000000"
+                    "size": "0x00400000"
                   },
                   "l2": {
                     "base": "0x1C000000",
@@ -3620,7 +3615,7 @@
                 "nb_masters": 0,
                 "interleaving_bits": 2,
                 "stage_bits": 2,
-                "remove_offset": "0x1c010000",
+                "remove_offset": "0x1C000000",
                 "vp_ports": [
                   "out_0",
                   "out_1",
@@ -3648,11 +3643,6 @@
                   "base": "0x1A104000",
                   "size": "0x00001000",
                   "remove_offset": "0x1A104000"
-                },
-                "pmu": {
-                  "base": "0x1A107000",
-                  "size": "0x00000800",
-                  "remove_offset": "0x1A107000"
                 },
                 "rom": {
                   "base": "0x1A000000",
