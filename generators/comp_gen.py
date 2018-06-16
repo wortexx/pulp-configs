@@ -63,6 +63,10 @@ class Component(object):
         config = plptree.get_config_tree_from_dict(self.gen(), path=configs)
         return config.get_string()
 
+    def add_component(self, name, comp):
+        self.__dict__['_Component__comps'][name] = comp
+        self.__dict__[name] = comp
+        comp.set_name(name)
 
     def __setattr__(self, name, value):
         if type(value) == Interface:
@@ -71,9 +75,7 @@ class Component(object):
 
             self.__dict__['_Component__master_itfs'][name].append(value)
         else:
-            self.__dict__['_Component__comps'][name] = value
-            self.__dict__[name] = value
-            value.set_name(name)
+            self.add_component(name, value)
 
     def __getattr__(self, name):
         if self.__dict__.get(name) is None:

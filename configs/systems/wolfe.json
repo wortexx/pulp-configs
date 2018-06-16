@@ -487,6 +487,7 @@
             "l2_shared_2",
             "l2_shared_3",
             "fc_ico",
+            "rom",
             "plt_loader",
             "fc_itc",
             "fll",
@@ -602,6 +603,10 @@
             [
               "apb_ico->fc_dbg_unit",
               "fc->dbg_unit"
+            ],
+            [
+              "apb_ico->rom",
+              "rom->input"
             ],
             [
               "apb_ico->pmu",
@@ -755,6 +760,10 @@
                 "self->apb"
               ],
               [
+                "ll_ico->rom",
+                "self->apb"
+              ],
+              [
                 "ll_ico->l2_priv0",
                 "self->l2_priv0"
               ],
@@ -831,7 +840,7 @@
               "mappings": {
                 "rom": {
                   "base": "0x1A000000",
-                  "size": "0x00100000"
+                  "size": "0x00002000"
                 },
                 "apb": {
                   "base": "0x1A100000",
@@ -862,6 +871,7 @@
               },
               "vp_ports": [
                 "apb",
+                "rom",
                 "l2_priv0",
                 "l2_priv0_alias",
                 "l2_priv1",
@@ -875,7 +885,7 @@
               "nb_slaves": 4,
               "nb_masters": 0,
               "interleaving_bits": 2,
-              "stage_bits": 2,
+              "stage_bits": 0,
               "remove_offset": "0x1C010000",
               "vp_ports": [
                 "out_0",
@@ -1041,6 +1051,11 @@
                 "base": "0x1A107000",
                 "size": "0x00000800",
                 "remove_offset": "0x1A107000"
+              },
+              "rom": {
+                "base": "0x1A000000",
+                "size": "0x00002000",
+                "remove_offset": "0x1A000000"
               }
             },
             "vp_ports": [
@@ -1054,21 +1069,27 @@
               "fc_itc",
               "fc_timer",
               "fc_dbg_unit",
+              "rom",
               "pmu",
               "input"
             ]
           },
           "fc": {
-            "vp_class": "cpu/iss/iss",
-            "version": "zeroriscy",
+            "version": "ri5cyv2",
             "archi": "riscv",
-            "implementation": "zeroriscy",
+            "implementation": "ri5cy",
             "gv_isa": [
-              "--pulp-zeroriscy",
               "--pulp",
-              "--rv32m"
+              "--rv32m",
+              "--pulpv2",
+              "--pulp-perf-counters",
+              "--pulp-hw-loop",
+              "--itc-external-req",
+              "--fpu",
+              "--fpud",
+              "--shared-fpu"
             ],
-            "isa": "RV32IMC",
+            "isa": "RV32IMFCXpulpv2",
             "priv_version": 1.9,
             "perf_counters": true,
             "features": [
@@ -1086,8 +1107,10 @@
               "archi/riscv/pcer_v1.h"
             ],
             "defines": [
+              "ARCHI_CORE_HAS_PULPV2",
               "CORE_PULP_BUILTINS"
             ],
+            "vp_class": "cpu/iss/iss",
             "power_models": {
               "clock_gated": {
                 "type": "linear",
@@ -1156,7 +1179,7 @@
             "nb_banks": 4,
             "size": 458752,
             "map_base": "0x1C010000",
-            "map_size": "0x00FF0000"
+            "map_size": "0x00070000"
           },
           "l2_shared_0": {
             "size": 114688,
@@ -1188,6 +1211,19 @@
           },
           "fc_ico": {
             "l2_alias": true
+          },
+          "rom": {
+            "version": 2,
+            "hal_files": [
+              "hal/rom/rom_v2.h"
+            ],
+            "size": 8192,
+            "map_base": "0x1A000000",
+            "map_size": "0x00002000",
+            "vp_class": "memory/memory",
+            "vp_ports": [
+              "input"
+            ]
           },
           "plt_loader": {
             "vp_class": "utils/loader",
@@ -1257,7 +1293,7 @@
             ]
           },
           "fll_ctrl": {
-            "version": 3,
+            "version": null,
             "vp_class": "pulp/fll/fll_ctrl",
             "gv_class": "pulp.Fll_ctrl.fll_ctrl"
           },
@@ -1373,7 +1409,6 @@
                 "offset": "0xDC"
               }
             },
-            "vp_class": "pulp/chips/wolfe/apb_soc",
             "vp_ports": [
               "input"
             ]

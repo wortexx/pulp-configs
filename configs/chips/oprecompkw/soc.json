@@ -13,8 +13,6 @@
     "plt_loader",
     "apb_soc_ctrl",
     "stdout",
-    "pmu",
-    "timer",
     "uart",
     "cluster",
     "adv_dbg_unit",
@@ -192,7 +190,7 @@
       "mappings": {
         "rom": {
           "base": "0x1A000000",
-          "size": "0x00100000"
+          "size": "0x00002000"
         },
         "apb": {
           "base": "0x1A100000",
@@ -222,7 +220,6 @@
       ],
       "nb_slaves": 4,
       "interleaving_bits": 2,
-      "stage_bits": 2,
       "remove_offset": "0x1C000000",
       "vp_ports": [
         "out_0",
@@ -249,7 +246,7 @@
       },
       "rom": {
         "base": "0x1A000000",
-        "size": "0x01000000",
+        "size": "0x00002000",
         "remove_offset": "0x1A000000"
       },
       "job_fifo": {
@@ -281,7 +278,7 @@
     ],
     "size": 8192,
     "map_base": "0x1A000000",
-    "map_size": "0x00010000",
+    "map_size": "0x00002000",
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
@@ -299,7 +296,6 @@
     "includes": [
       "apb_soc.json"
     ],
-    "vp_class": "pulp/chips/oprecompkw/apb_soc",
     "vp_ports": [
       "input"
     ]
@@ -310,16 +306,6 @@
     ],
     "vp_ports": [
       "input"
-    ]
-  },
-  "pmu": {
-    "includes": [
-      "../../ips/pmu_v2.json"
-    ]
-  },
-  "timer": {
-    "includes": [
-      "../../ips/timer_v2.json"
     ]
   },
   "uart": {

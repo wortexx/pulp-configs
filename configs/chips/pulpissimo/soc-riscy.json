@@ -26,6 +26,7 @@
     "l2_shared_2",
     "l2_shared_3",
     "fc_ico",
+    "rom",
     "plt_loader",
     "fc_itc",
     "fll",
@@ -35,7 +36,6 @@
     "apb_soc_ctrl",
     "stdout",
     "gpio",
-    "pmu",
     "timer",
     "soc_eu",
     "udma",
@@ -128,6 +128,10 @@
     [
       "apb_ico->fc_dbg_unit",
       "fc->dbg_unit"
+    ],
+    [
+      "apb_ico->rom",
+      "rom->input"
     ],
     [
       "fc->fetch",
@@ -264,6 +268,10 @@
         "self->apb"
       ],
       [
+        "ll_ico->rom",
+        "self->apb"
+      ],
+      [
         "ll_ico->l2_priv0",
         "self->l2_priv0"
       ],
@@ -339,7 +347,7 @@
       "mappings": {
         "rom": {
           "base": "0x1A000000",
-          "size": "0x00100000"
+          "size": "0x00002000"
         },
         "apb": {
           "base": "0x1A100000",
@@ -366,6 +374,7 @@
       },
       "vp_ports": [
         "apb",
+        "rom",
         "l2_priv0",
         "l2_priv0_alias",
         "l2_priv1",
@@ -380,7 +389,6 @@
       ],
       "nb_slaves": 4,
       "interleaving_bits": 2,
-      "stage_bits": 2,
       "remove_offset": "0x1C010000",
       "vp_ports": [
         "out_0",
@@ -522,6 +530,11 @@
         "base": "0x1A110000",
         "size": "0x00008000",
         "remove_offset": "0x1A110000"
+      },
+      "rom": {
+        "base": "0x1A000000",
+        "size": "0x00002000",
+        "remove_offset": "0x1A000000"
       }
     },
     "vp_ports": [
@@ -535,6 +548,7 @@
       "fc_itc",
       "fc_timer",
       "fc_dbg_unit",
+      "rom",
       "input"
     ]
   },
@@ -582,7 +596,7 @@
     "nb_banks": 4,
     "size": 458752,
     "map_base": "0x1C010000",
-    "map_size": "0x00FF0000"
+    "map_size": "0x00070000"
   },
   "l2_shared_0": {
     "size": 114688,
@@ -614,6 +628,18 @@
   },
   "fc_ico": {
     "l2_alias": true
+  },
+  "rom": {
+    "includes": [
+      "../../ips/rom_v2.json"
+    ],
+    "size": 8192,
+    "map_base": "0x1A000000",
+    "map_size": "0x00002000",
+    "vp_class": "memory/memory",
+    "vp_ports": [
+      "input"
+    ]
   },
   "plt_loader": {
     "includes": [
@@ -669,7 +695,6 @@
     "includes": [
       "apb_soc.json"
     ],
-    "vp_class": "pulp/chips/pulpissimo/apb_soc",
     "vp_ports": [
       "input"
     ]
@@ -683,18 +708,8 @@
     ]
   },
   "gpio": {
-    "version": 2,
-    "nb_gpio": 32,
-    "archi_files": [
-      "archi/gpio/gpio_v2.h"
-    ],
-    "hal_files": [
-      "hal/gpio/gpio_v2.h"
-    ]
-  },
-  "pmu": {
     "includes": [
-      "../../ips/pmu_v2.json"
+      "../../ips/gpio_v2.json"
     ]
   },
   "timer": {

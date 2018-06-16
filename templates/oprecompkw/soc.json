@@ -1,21 +1,23 @@
 {
-  "chip"              : "oprecompkw",
-  "has_cluster"       : true,
-  "has_rom"           : true,
-
   "cluster": {
     "base": "0x10000000",
-    "size": "0x00400000"
+    "size": "0x00400000",
+    "version": "cluster_v5_fpu"
   },
 
   "soc": {
+
+    "job_fifo": {
+
+    },
 
     "base": "0x1A000000",
     "size": "0x06000000",
 
     "rom": {
+      "version": 2,
       "base": "0x1A000000",
-      "size": "0x00100000"
+      "size": "0x00002000"
     },
 
     "l2": {
@@ -23,6 +25,8 @@
       "size": "0x00080000",
 
       "shared": {
+        "nb_banks"     : 4,
+        "interleaving_bits" : 2,
         "base"         : "0x1C000000",
         "size"         : "0x00080000"
       }
@@ -33,17 +37,13 @@
       "base": "0x1A100000",
       "size": "0x00100000",
 
-      "rom": {
-        "base"         : "0x1A000000",
-        "size"         : "0x01000000"
-      },
-
       "apb_soc_ctrl": {
         "base"         : "0x1A104000",
         "size"         : "0x00001000"
       },
 
       "stdout": {
+        "version"      : 3,
         "base"         : "0x1A10F000",
         "size"         : "0x00001000"
       }

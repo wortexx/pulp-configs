@@ -34,19 +34,17 @@ tp = js.import_config_from_file(args.template)
 
 
 
-chip              = tp.get_child_str('chip')
-has_cluster       = tp.get_child_bool('has_cluster')
-has_fc            = tp.get_child_bool('has_fc')
-fc_core           = tp.get_child_str('fc_core')
-has_udma          = tp.get_child_bool('has_udma')
-has_gpio          = tp.get_child_bool('has_gpio')
-has_soc_events    = tp.get_child_bool('has_soc_events')
-fc_events         = tp.get_child_str('fc_events')
-l2_is_partitioned = tp.get_child_bool('l2_is_partitioned')
-has_fll           = tp.get_child_bool('has_fll')
-has_rom           = tp.get_child_bool('has_rom')
-has_efuse         = tp.get_child_bool('has_efuse')
-has_pmu           = tp.get_child_bool('has_pmu')
+has_cluster       = tp.get('cluster') is not None
+has_fc            = tp.get('soc/fc') is not None
+has_udma          = tp.get('soc/peripherals/udma') is not None
+has_gpio          = tp.get('soc/peripherals/gpio') is not None
+has_soc_events    = tp.get('soc/peripherals/soc_eu') is not None
+fc_events         = tp.get_child_str('soc/fc/irq')
+l2_is_partitioned = tp.get_child_bool('soc/l2/is_partitioned')
+has_fll           = tp.get('soc/peripherals/fll') is not None
+has_rom           = tp.get('soc/rom') is not None
+has_efuse         = tp.get('soc/peripherals/efuse') is not None
+has_pmu           = tp.get('soc/peripherals/pmu') is not None
 
 
 if fc_events is not None:
@@ -86,7 +84,7 @@ soc.axi_ico = Component(
 
 
 soc.soc_ico = Component(
-    nb_l2_shared_banks= 4,
+    nb_l2_shared_banks= tp.get_child_int("soc/l2/shared/nb_banks"),
     gv_class= "pulp.Soc_Ico_v2.Soc_Ico",
     vp_class=None
 )
@@ -120,9 +118,8 @@ soc.soc_ico.ll_ico = Component(
 
 soc.soc_ico.hb_ico = Component(
   includes= [ "../../ips/interco/interleaver.json" ],
-  nb_slaves= 4,
-  interleaving_bits= 2,
-  stage_bits= 2,
+  nb_slaves= tp.get_child_int("soc/l2/shared/nb_banks") ,
+  interleaving_bits= tp.get_child_int("soc/l2/shared/interleaving_bits"),
   remove_offset= tp.get_child_str("soc/l2/shared/base")
 )
 
@@ -138,10 +135,7 @@ if has_fc:
   soc.soc_ico.fc_data_ico = Component(
     includes= [ "../../ips/interco/router.json" ],
     mappings= {
-      "l2_shared": {
-        "base": "0x1C010000",
-        "size"  : "0x00070000"
-      },
+      "l2_shared": get_mapping(tp.get_child_dict("soc/l2/shared")),
       "ll_ico": {}
     }
   )
@@ -150,10 +144,7 @@ if has_udma:
   soc.soc_ico.udma_rx_ico = Component(
     includes= [ "../../ips/interco/router.json" ],
     mappings= {
-      "l2_shared": {
-        "base": "0x1C010000",
-        "size"  : "0x00070000"
-      },
+      "l2_shared": get_mapping(tp.get_child_dict("soc/l2/shared")),
       "ll_ico": {}
     }
   )
@@ -161,17 +152,14 @@ if has_udma:
   soc.soc_ico.udma_tx_ico = Component(
     includes= [ "../../ips/interco/router.json" ],
     mappings= {
-      "l2_shared": {
-        "base": "0x1C010000",
-        "size"  : "0x00070000"
-      },
+      "l2_shared": get_mapping(tp.get_child_dict("soc/l2/shared")),
       "ll_ico": {}
     }
   )
 
 if has_pmu:
   soc.pmu = Component(
-    includes=["pmu_v2.json"]
+    includes=["pmu_v%d.json" % tp.get_child_str('soc/peripherals/pmu/version')]
   )
 
 soc.soc_ico.debug                  = soc.soc_ico.ll_ico.input
@@ -255,7 +243,7 @@ if has_pmu:
 
 if has_rom:
   apb_soc_mappings.update({
-    "rom"       : get_mapping(tp.get_child_dict("soc/peripherals/rom"), True),
+    "rom"       : get_mapping(tp.get_child_dict("soc/rom"), True),
   })
 
 
@@ -266,65 +254,60 @@ soc.apb_ico = Component(
 
 if has_fc:
   soc.fc = Component(
-      includes= [ "../../ips/%s.json" % fc_core ],
-      cluster_id=31,
-      core_id=0,
-      fetch_enable=True,
-      boot_addr="0x1C008000"
+      includes= [ "../../ips/%s.json" % tp.get_child_str('soc/fc/core') ],
+      cluster_id=tp.get_child_int("soc/fc/cluster_id"),
+      core_id=tp.get_child_int("soc/fc/core_id"),
+      fetch_enable=tp.get_child_bool("soc/fc/fetch_enable"),
+      boot_addr=tp.get_child_str("soc/fc/boot_addr")
   )
 
 
 if l2_is_partitioned:
+
   soc.l2 = Component(
       is_partitioned= True,
-      nb_shared_banks= 4,
-      map_base= "0x1C000000",
-      map_size= "0x00080000"
+      nb_shared_banks= tp.get_child_int("soc/l2/shared/nb_banks"),
+      map_base= tp.get_child_str("soc/l2/base"),
+      map_size= tp.get_child_str("soc/l2/size")
   )
 
   soc.l2_priv0 = Component(
-      size= 32768,
-      map_base= "0x1C000000",
-      map_size= "0x00008000",
+      size= tp.get_child_int("soc/l2/priv0/size"),
+      map_base= tp.get_child_str("soc/l2/priv0/base"),
+      map_size= tp.get_child_str("soc/l2/priv0/size"),
       vp_class= "memory/memory"
   )
 
   soc.l2_priv1 = Component(
-      size= 32768,
-      map_base= "0x1C008000",
-      map_size= "0x00008000",
+      size= tp.get_child_int("soc/l2/priv1/size"),
+      map_base= tp.get_child_str("soc/l2/priv1/base"),
+      map_size= tp.get_child_str("soc/l2/priv1/size"),
       vp_class= "memory/memory")
 
   soc.l2_shared = Component(
-      nb_banks= 4,
-      size= 458752,
-      map_base= "0x1C010000",
-      map_size= "0x00FF0000"
+      nb_banks= tp.get_child_int("soc/l2/shared/nb_banks"),
+      size= tp.get_child_int("soc/l2/shared/size"),
+      map_base= tp.get_child_str("soc/l2/shared/base"),
+      map_size= tp.get_child_str("soc/l2/shared/size")
   )
 
-  soc.l2_shared_0 = Component(
-      size= 114688,
-      vp_class= "memory/memory")
+  l2_shared_size = tp.get_child_int("soc/l2/shared/size")
+  l2_shared_nb_banks = tp.get_child_int("soc/l2/shared/nb_banks")
+  for i in range(0, l2_shared_nb_banks):
+    soc.add_component(
+      'l2_shared_%d' % i,
+      Component(
+        size= int(l2_shared_size / l2_shared_nb_banks),
+        vp_class= "memory/memory"
+      )
+    )
 
-  soc.l2_shared_1 = Component(
-      size= 114688,
-      vp_class= "memory/memory"
-  )
-
-  soc.l2_shared_2 = Component(
-      size= 114688,
-      vp_class= "memory/memory"
-  )
-
-  soc.l2_shared_3 = Component(
-      size= 114688,
-      vp_class= "memory/memory"
-  )
 else:
+
   soc.l2 = Component(
-      size= 524288,
-      map_base= "0x1C000000",
-      map_size= "0x00080000",
+      size= tp.get_child_int("soc/l2/size"),
+      map_base= tp.get_child_str("soc/l2/base"),
+      map_size= tp.get_child_str("soc/l2/size"),
       vp_class= "memory/memory"
   )
 
@@ -335,10 +318,10 @@ if has_fc:
 
 if has_rom:
   soc.rom = Component(
-      includes  = ["../../ips/rom_v2.json"],
-      size      = 8192,
-      map_base  = "0x1A000000",
-      map_size  = "0x00010000",
+      includes  = ["../../ips/rom_v%d.json" % tp.get_child_int("soc/rom/version")],
+      size      = tp.get_child_int("soc/rom/size"),
+      map_base= tp.get_child_str("soc/rom/base"),
+      map_size= tp.get_child_str("soc/rom/size"),
       vp_class  = "memory/memory"
   )
 
@@ -348,56 +331,54 @@ soc.plt_loader = Component(
 
 if has_fc:
   soc.fc_itc = Component(
-      includes= ["../../ips/itc_v1.json"]
+      includes= ["../../ips/itc_v%d.json" % (tp.get_child_int("soc/peripherals/fc_itc/version"))]
   )
 
 if has_fll:
   soc.fll = Component(
-      includes= ["../../ips/fll_v1.json"]
+      includes= ["../../ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
   )
 
   soc.fll1 = Component(
-      includes= ["../../ips/fll_v1.json"]
+      includes= ["../../ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
   )
 
   soc.fll2 = Component(
-      includes= ["../../ips/fll_v1.json"]
+      includes= ["../../ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
   )
 
   soc.fll_ctrl = Component(
-      version= 3,
+      version= tp.get_child_int("soc/peripherals/fll_ctrl/version"),
       vp_class= "pulp/fll/fll_ctrl",
       gv_class= "pulp.Fll_ctrl.fll_ctrl"
   )
 
 soc.apb_soc_ctrl = Component(
-    includes= ["apb_soc.json"],
-    vp_class= "pulp/chips/%s/apb_soc" % chip
+    includes= ["apb_soc.json"]
 )
 
 soc.stdout = Component(
-    includes= ["../../ips/stdout_v3.json"]
+    includes= ["../../ips/stdout_v%d.json" % tp.get_child_int("soc/peripherals/stdout/version")]
 )
 
 if has_gpio:
   soc.gpio = Component(
-      version   = 2,
-      nb_gpio   = 32,
-      archi_files= [ "archi/gpio/gpio_v2.h" ],
-      hal_files= [ "hal/gpio/gpio_v2.h" ]
+    includes= ["../../ips/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")]
   )
 
-soc.pmu = Component(
-    includes= ["../../ips/pmu_v2.json"]
-)
+if has_pmu:
+  soc.pmu = Component(
+      includes= ["../../ips/pmu_v%d.json" % tp.get_child_int("soc/peripherals/pmu/version")]
+  )
 
-soc.timer = Component(
-    includes= ["../../ips/timer_v2.json"]
-)
+if has_fc:
+  soc.timer = Component(
+      includes= ["../../ips/timer_v%d.json" % tp.get_child_int("soc/peripherals/fc_timer/version")]
+  )
 
 if has_soc_events:
   soc.soc_eu = Component(
-      includes= ["../../ips/soc_eu_v1.json"]
+      includes= ["../../ips/soc_eu_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")]
   )
 
 if has_udma:
@@ -407,7 +388,7 @@ if has_udma:
 
 if has_efuse:
   soc.efuse = Component(
-      includes= ["../../ips/efuse_v1.json"]
+      includes= ["../../ips/efuse_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")]
   )
 
 soc.uart = Component(
@@ -416,12 +397,12 @@ soc.uart = Component(
 
 if has_fc:
   soc.fc_debug = Component(
-      version= 1
+      version= tp.get_child_int("soc/peripherals/fc_dbg_unit/version")
   )
 
 if has_cluster:
   soc.cluster = Component(
-      includes=["../../ips/cluster_v5_fpu.json"]
+      includes=["../../ips/%s.json" %  tp.get_child_str("cluster/version")]
   )
 
 soc.adv_dbg_unit = Component(
@@ -517,7 +498,7 @@ soc.jtag = soc.adv_dbg_unit.jtag
 soc.plt_loader.out = soc.soc_ico.debug
 
 
-if chip == 'oprecompkw':
+if tp.get('soc/job_fifo') is not None:
     soc.job_fifo = Component(
         includes= ["job_fifo.json"]
     )

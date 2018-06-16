@@ -214,8 +214,6 @@
             "plt_loader",
             "apb_soc_ctrl",
             "stdout",
-            "pmu",
-            "timer",
             "uart",
             "cluster",
             "adv_dbg_unit",
@@ -398,7 +396,7 @@
               "mappings": {
                 "rom": {
                   "base": "0x1A000000",
-                  "size": "0x00100000"
+                  "size": "0x00002000"
                 },
                 "apb": {
                   "base": "0x1A100000",
@@ -427,7 +425,7 @@
               "nb_slaves": 4,
               "nb_masters": 0,
               "interleaving_bits": 2,
-              "stage_bits": 2,
+              "stage_bits": 0,
               "remove_offset": "0x1C000000",
               "vp_ports": [
                 "out_0",
@@ -459,7 +457,7 @@
               },
               "rom": {
                 "base": "0x1A000000",
-                "size": "0x01000000",
+                "size": "0x00002000",
                 "remove_offset": "0x1A000000"
               },
               "job_fifo": {
@@ -492,7 +490,7 @@
             ],
             "size": 8192,
             "map_base": "0x1A000000",
-            "map_size": "0x00010000",
+            "map_size": "0x00002000",
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
@@ -617,7 +615,6 @@
                 "offset": "0xDC"
               }
             },
-            "vp_class": "pulp/chips/oprecompkw/apb_soc",
             "vp_ports": [
               "input"
             ]
@@ -632,27 +629,6 @@
             "max_core_per_cluster": 16,
             "vp_ports": [
               "input"
-            ]
-          },
-          "pmu": {
-            "version": 2,
-            "nb_domains": 2,
-            "hal_files": [
-              "hal/maestro/pmu_v2.h"
-            ],
-            "archi_files": [
-              "archi/maestro/maestro_v2.h"
-            ],
-            "gv_class": "power.pmu.Pmu"
-          },
-          "timer": {
-            "version": 2,
-            "vp_class": "pulp/timer/timer_v2",
-            "hal_files": [
-              "hal/timer/timer_v2.h"
-            ],
-            "archi_files": [
-              "archi/timer/timer_v2.h"
             ]
           },
           "uart": {
@@ -3401,8 +3377,6 @@
               "plt_loader",
               "apb_soc_ctrl",
               "stdout",
-              "pmu",
-              "timer",
               "uart",
               "cluster",
               "adv_dbg_unit",
@@ -3585,7 +3559,7 @@
                 "mappings": {
                   "rom": {
                     "base": "0x1A000000",
-                    "size": "0x00100000"
+                    "size": "0x00002000"
                   },
                   "apb": {
                     "base": "0x1A100000",
@@ -3614,7 +3588,7 @@
                 "nb_slaves": 4,
                 "nb_masters": 0,
                 "interleaving_bits": 2,
-                "stage_bits": 2,
+                "stage_bits": 0,
                 "remove_offset": "0x1C000000",
                 "vp_ports": [
                   "out_0",
@@ -3646,7 +3620,7 @@
                 },
                 "rom": {
                   "base": "0x1A000000",
-                  "size": "0x01000000",
+                  "size": "0x00002000",
                   "remove_offset": "0x1A000000"
                 },
                 "job_fifo": {
@@ -3679,7 +3653,7 @@
               ],
               "size": 8192,
               "map_base": "0x1A000000",
-              "map_size": "0x00010000",
+              "map_size": "0x00002000",
               "vp_class": "memory/memory",
               "vp_ports": [
                 "input"
@@ -3804,7 +3778,6 @@
                   "offset": "0xDC"
                 }
               },
-              "vp_class": "pulp/chips/oprecompkw/apb_soc",
               "vp_ports": [
                 "input"
               ]
@@ -3819,27 +3792,6 @@
               "max_core_per_cluster": 16,
               "vp_ports": [
                 "input"
-              ]
-            },
-            "pmu": {
-              "version": 2,
-              "nb_domains": 2,
-              "hal_files": [
-                "hal/maestro/pmu_v2.h"
-              ],
-              "archi_files": [
-                "archi/maestro/maestro_v2.h"
-              ],
-              "gv_class": "power.pmu.Pmu"
-            },
-            "timer": {
-              "version": 2,
-              "vp_class": "pulp/timer/timer_v2",
-              "hal_files": [
-                "hal/timer/timer_v2.h"
-              ],
-              "archi_files": [
-                "archi/timer/timer_v2.h"
               ]
             },
             "uart": {
