@@ -14,28 +14,60 @@ parser = argparse.ArgumentParser(
 )
 
 parser.add_argument("--template", dest="template", default=None, help="Specify the soc template")
-parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--prop", dest="props", default=[], action="append", help="Specify property")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
+parser.add_argument("--output-dir", dest="output_dir", default='', help="Specify directory for temporary files")
 
 args = parser.parse_args()
-
 
 
 if args.template is None:
   print ('The path to the template configuration must be given through option --template')
   exit(-1)
 
-configs = args.configs
-if configs is None:
-  configs = os.environ.get('PULP_CONFIGS_PATH')
+
+def find_config(config):
+  for path in os.environ['PULP_CONFIGS_PATH'].split(':'):
+    full_path = os.path.join(path, config)
+    if os.path.exists(full_path):
+      return full_path
+
+  return None
+
+configs = args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':')
+
+os.environ['PULP_CONFIGS_PATH'] = ':'.join(configs)
 
 
-tp = js.import_config_from_file(os.path.join(configs, args.template))
-with open('template.json', 'w') as file:
-  file.write(tp.dump_to_string())
 
-os.system('pulp_soc_gen    --configs=%s --template=template.json --output=soc.json' % configs)
-os.system('pulp_chip_gen   --configs=%s --chip=%s --output=chip.json' % (configs, tp.get_child_str('chip')))
-os.system('pulp_system_gen --configs=%s --chip=%s --output=system.json' % (configs, tp.get_child_str('chip')))
-os.system('pulp_top_gen    --configs=%s --system=%s --usecase=usecases/jtag.json --output=%s' % (configs, tp.get_child_str('chip'), args.output))
+tp = js.import_config_from_file(find_config(args.template))
+
+full_output_dir = args.output_dir
+if full_output_dir is None:
+  full_output_dir = os.getcwd()
+
+template_file = args.template
+if len(args.props) != 0:
+  template_file = '%s/template.json' % full_output_dir
+
+  for prop in args.props:
+    key, value = prop.split('=')
+    tp.set(key, value)
+
+  with open(template_file, 'w') as file:
+    file.write(tp.dump_to_string())
+
+if os.system('pulp_soc_gen    --template=%s --output=%s/soc.json' % (template_file, full_output_dir)) != 0:
+  exit(-1)
+
+print ('pulp_chip_gen   --chip=%s --output=%s/chip.json' % (tp.get_child_str('chip'), full_output_dir))
+if os.system('pulp_chip_gen   --chip=%s --output=%s/chip.json' % (tp.get_child_str('chip'), full_output_dir)) != 0:
+  exit(-1)
+
+if os.system('pulp_system_gen --chip=%s --output=%s/system.json' % (tp.get_child_str('chip'), full_output_dir)) != 0:
+  exit(-1)
+
+cmd = 'pulp_top_gen    --system=%s --system-file=%s/system.json --usecase=usecases/jtag.json --output=%s' % (tp.get_child_str('chip'), full_output_dir, args.output)
+if os.system(cmd) != 0:
+  exit(-1)

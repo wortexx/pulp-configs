@@ -4,12 +4,12 @@
   "peripherals_base": "0x1A100000",
   "soc_events_ids": {
     "includes": [
-      "soc_events.json"
+      "chips/wolfe/soc_events.json"
     ]
   },
   "fc_events": {
     "includes": [
-      "fc_irq.json"
+      "chips/wolfe/fc_irq.json"
     ]
   },
   "vp_comps": [
@@ -211,7 +211,7 @@
   ],
   "axi_ico": {
     "includes": [
-      "../../ips/interco/router.json"
+      "ips/interco/router.json"
     ],
     "latency": 9,
     "mappings": {
@@ -221,7 +221,7 @@
       },
       "cluster": {
         "base": "0x10000000",
-        "size": "0x00400000"
+        "size": "0x400000"
       }
     },
     "vp_ports": [
@@ -370,7 +370,7 @@
     ],
     "ll_ico": {
       "includes": [
-        "../../ips/interco/router.json"
+        "ips/interco/router.json"
       ],
       "mappings": {
         "rom": {
@@ -383,7 +383,7 @@
         },
         "axi_master": {
           "base": "0x10000000",
-          "size": "0x00400000"
+          "size": "0x400000"
         },
         "l2_priv0": {
           "base": "0x1C000000",
@@ -417,7 +417,7 @@
     },
     "hb_ico": {
       "includes": [
-        "../../ips/interco/interleaver.json"
+        "ips/interco/interleaver.json"
       ],
       "nb_slaves": 4,
       "interleaving_bits": 2,
@@ -432,7 +432,7 @@
     },
     "fc_fetch_ico": {
       "includes": [
-        "../../ips/interco/router.json"
+        "ips/interco/router.json"
       ],
       "mappings": {
         "l2_shared": {
@@ -449,7 +449,7 @@
     },
     "fc_data_ico": {
       "includes": [
-        "../../ips/interco/router.json"
+        "ips/interco/router.json"
       ],
       "mappings": {
         "l2_shared": {
@@ -466,7 +466,7 @@
     },
     "udma_rx_ico": {
       "includes": [
-        "../../ips/interco/router.json"
+        "ips/interco/router.json"
       ],
       "mappings": {
         "l2_shared": {
@@ -482,7 +482,7 @@
     },
     "udma_tx_ico": {
       "includes": [
-        "../../ips/interco/router.json"
+        "ips/interco/router.json"
       ],
       "mappings": {
         "l2_shared": {
@@ -500,7 +500,7 @@
   },
   "pmu": {
     "includes": [
-      "../../ips/pmu_v2.json"
+      "ips/pmu_v2.json"
     ],
     "vp_ports": [
       "input"
@@ -508,7 +508,7 @@
   },
   "apb_ico": {
     "includes": [
-      "../../ips/interco/router.json"
+      "ips/interco/router.json"
     ],
     "mappings": {
       "stdout": {
@@ -600,7 +600,7 @@
   },
   "fc": {
     "includes": [
-      "../../ips/zeroriscy.json"
+      "ips/zeroriscy.json"
     ],
     "cluster_id": 31,
     "core_id": 0,
@@ -677,7 +677,7 @@
   },
   "rom": {
     "includes": [
-      "../../ips/rom_v2.json"
+      "ips/rom_v2.json"
     ],
     "size": 8192,
     "map_base": "0x1A000000",
@@ -689,7 +689,7 @@
   },
   "plt_loader": {
     "includes": [
-      "../../tools/plt_loader/plt_loader.json"
+      "tools/plt_loader/plt_loader.json"
     ],
     "vp_ports": [
       "out"
@@ -697,7 +697,7 @@
   },
   "fc_itc": {
     "includes": [
-      "../../ips/itc_v1.json"
+      "ips/itc_v1.json"
     ],
     "vp_ports": [
       "irq_req",
@@ -711,7 +711,7 @@
   },
   "fll": {
     "includes": [
-      "../../ips/fll_v1.json"
+      "ips/fll_v1.json"
     ],
     "vp_ports": [
       "input"
@@ -719,7 +719,7 @@
   },
   "fll1": {
     "includes": [
-      "../../ips/fll_v1.json"
+      "ips/fll_v1.json"
     ],
     "vp_ports": [
       "input"
@@ -727,7 +727,7 @@
   },
   "fll2": {
     "includes": [
-      "../../ips/fll_v1.json"
+      "ips/fll_v1.json"
     ],
     "vp_ports": [
       "input"
@@ -740,7 +740,7 @@
   },
   "apb_soc_ctrl": {
     "includes": [
-      "apb_soc.json"
+      "chips/wolfe/apb_soc.json"
     ],
     "vp_ports": [
       "input"
@@ -748,7 +748,7 @@
   },
   "stdout": {
     "includes": [
-      "../../ips/stdout_v3.json"
+      "ips/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -756,12 +756,12 @@
   },
   "gpio": {
     "includes": [
-      "../../ips/gpio_v2.json"
+      "ips/gpio_v2.json"
     ]
   },
   "timer": {
     "includes": [
-      "../../ips/timer_v2.json"
+      "ips/timer_v2.json"
     ],
     "vp_ports": [
       "irq_itf_0",
@@ -771,7 +771,7 @@
   },
   "soc_eu": {
     "includes": [
-      "../../ips/soc_eu_v1.json"
+      "ips/soc_eu_v1.json"
     ],
     "vp_ports": [
       "fc_event_itf",
@@ -781,7 +781,7 @@
   },
   "udma": {
     "includes": [
-      "udma.json"
+      "chips/wolfe/udma.json"
     ],
     "vp_ports": [
       "l2_itf",
@@ -799,7 +799,7 @@
   },
   "cluster": {
     "includes": [
-      "../../ips/cluster_v5_fpu.json"
+      "ips/cluster_v5_fpu.json"
     ],
     "vp_ports": [
       "dma_irq",
@@ -810,7 +810,7 @@
   },
   "adv_dbg_unit": {
     "includes": [
-      "../../ips/adv_dbg_unit/adv_dbg_unit.json"
+      "ips/adv_dbg_unit/adv_dbg_unit.json"
     ],
     "vp_ports": [
       "io",

@@ -1,12 +1,14 @@
 {
+  "chip": "pulpissimo",
+    
   "soc": {
     
     "base": "0x1A000000",
     "size": "0x06000000",
 
     "fc": {
-      "core"        : "zeroriscy",
-      "irq"         : "fc_irq.json",
+      "core"        : "microriscy",
+      "irq"         : "chips/pulpissimo-microriscy/fc_irq.json",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,

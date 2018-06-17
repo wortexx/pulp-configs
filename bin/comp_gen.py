@@ -63,10 +63,19 @@ class Component(object):
         config = plptree.get_config_tree_from_dict(self.gen(), path=configs)
         return config.get_string()
 
+    def get_component(self, name):
+        return self.__dict__['_Component__comps'][name]
+
     def add_component(self, name, comp):
         self.__dict__['_Component__comps'][name] = comp
         self.__dict__[name] = comp
         comp.set_name(name)
+
+    def get(self, name):
+        return self.__dict__[name]
+
+    def set(self, name, value):
+        self.__setattr__(name, value)
 
     def __setattr__(self, name, value):
         if type(value) == Interface:

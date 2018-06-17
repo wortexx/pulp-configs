@@ -92,7 +92,7 @@
   ],
   "axi_ico": {
     "includes": [
-      "../../ips/interco/router.json"
+      "ips/interco/router.json"
     ],
     "latency": 9,
     "mappings": {
@@ -102,7 +102,7 @@
       },
       "cluster": {
         "base": "0x10000000",
-        "size": "0x00400000"
+        "size": "0x400000"
       },
       "ext": {
         "base": "0x1000000000000",
@@ -185,7 +185,7 @@
     ],
     "ll_ico": {
       "includes": [
-        "../../ips/interco/router.json"
+        "ips/interco/router.json"
       ],
       "mappings": {
         "rom": {
@@ -198,7 +198,7 @@
         },
         "axi_master": {
           "base": "0x10000000",
-          "size": "0x00400000"
+          "size": "0x400000"
         },
         "l2": {
           "base": "0x1C000000",
@@ -216,7 +216,7 @@
     },
     "hb_ico": {
       "includes": [
-        "../../ips/interco/interleaver.json"
+        "ips/interco/interleaver.json"
       ],
       "nb_slaves": 4,
       "interleaving_bits": 2,
@@ -231,7 +231,7 @@
   },
   "apb_ico": {
     "includes": [
-      "../../ips/interco/router.json"
+      "ips/interco/router.json"
     ],
     "mappings": {
       "stdout": {
@@ -274,7 +274,7 @@
   },
   "rom": {
     "includes": [
-      "../../ips/rom_v2.json"
+      "ips/rom_v2.json"
     ],
     "size": 8192,
     "map_base": "0x1A000000",
@@ -286,7 +286,7 @@
   },
   "plt_loader": {
     "includes": [
-      "../../tools/plt_loader/plt_loader.json"
+      "tools/plt_loader/plt_loader.json"
     ],
     "vp_ports": [
       "out"
@@ -294,7 +294,7 @@
   },
   "apb_soc_ctrl": {
     "includes": [
-      "apb_soc.json"
+      "chips/oprecompkw/apb_soc.json"
     ],
     "vp_ports": [
       "input"
@@ -302,7 +302,7 @@
   },
   "stdout": {
     "includes": [
-      "../../ips/stdout_v3.json"
+      "ips/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -313,7 +313,7 @@
   },
   "cluster": {
     "includes": [
-      "../../ips/cluster_v5_fpu.json"
+      "ips/cluster_v5_fpu.json"
     ],
     "vp_ports": [
       "soc",
@@ -323,7 +323,7 @@
   },
   "adv_dbg_unit": {
     "includes": [
-      "../../ips/adv_dbg_unit/adv_dbg_unit.json"
+      "ips/adv_dbg_unit/adv_dbg_unit.json"
     ],
     "vp_ports": [
       "io",
@@ -341,7 +341,7 @@
   },
   "job_fifo_injector": {
     "includes": [
-      "../../tools/vp/injector.json"
+      "tools/vp/injector.json"
     ],
     "vp_ports": [
       "output"
@@ -349,7 +349,7 @@
   },
   "host_injector": {
     "includes": [
-      "../../tools/vp/injector.json"
+      "tools/vp/injector.json"
     ],
     "vp_ports": [
       "input"

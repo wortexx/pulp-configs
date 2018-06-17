@@ -42,7 +42,7 @@
   ],
   "padframe": {
     "includes": [
-      "padframe.json"
+      "chips/wolfe/padframe.json"
     ],
     "vp_ports": [
       "jtag0",

@@ -14,27 +14,38 @@ parser = argparse.ArgumentParser(
 )
 
 parser.add_argument("--template", dest="template", default=None, help="Specify the soc template")
-parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 
 args = parser.parse_args()
 
 
 
-if args.configs is None:
-  print ('The path to the configurations must be given through option --configs')
-  exit(-1)
-
 if args.template is None:
   print ('The path to the template configuration must be given through option --template')
   exit(-1)
 
 
-tp = js.import_config_from_file(args.template)
+def find_config(config):
+  for path in os.environ['PULP_CONFIGS_PATH'].split(':'):
+    full_path = os.path.join(path, config)
+    if os.path.exists(full_path):
+      return full_path
+
+  return None
+
+configs = args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':')
+
+os.environ['PULP_CONFIGS_PATH'] = ':'.join(configs)
 
 
+tp = js.import_config_from_file(find_config(args.template))
 
+
+chip              = tp.get_child_str('chip')
 has_cluster       = tp.get('cluster') is not None
+nb_cluster        = tp.get_child_int('cluster/nb_cluster')
+nb_pe             = tp.get_child_int('cluster/nb_pe')
 has_fc            = tp.get('soc/fc') is not None
 has_udma          = tp.get('soc/peripherals/udma') is not None
 has_gpio          = tp.get('soc/peripherals/gpio') is not None
@@ -55,12 +66,18 @@ else:
 
 
 if has_soc_events:
-  soc_events_ids = { "includes": ["soc_events.json"] }
+  soc_events_ids = { "includes": ["chips/%s/soc_events.json" % chip] }
 else:
   soc_events_ids = {}
 
+def get_cluster_name(cid):
+  if cid == 0:
+    return 'cluster'
+  else:
+    return 'cluster_%d' % (cid)
+
 soc = Component(
-    nb_cluster=1 if has_cluster else 0,
+    nb_cluster=nb_cluster,
     vp_class="pulp/soc",
     peripherals_base= tp.get_child_str("soc/peripherals/base"),
     soc_events_ids=soc_events_ids,
@@ -72,12 +89,19 @@ axi_ico_mappings = {
 }
 
 if has_cluster:
-  axi_ico_mappings.update({
-    "cluster": get_mapping(tp.get_child_dict("cluster"))
+  for cid in range(0, nb_cluster):
+    cluster_name = get_cluster_name(cid)
+    base = tp.get_child_int("cluster/base")
+    size = tp.get_child_int("cluster/size")
+    axi_ico_mappings.update({
+      cluster_name: {
+        "base": "0x%x" % (base + size * cid),
+        "size": "0x%x" % (size)
+      }
   })
 
 soc.axi_ico = Component(
-    includes=["../../ips/interco/router.json"],
+    includes=["ips/interco/router.json"],
     latency=9,
     mappings=axi_ico_mappings
 )
@@ -96,7 +120,10 @@ ll_ico_mappings = {
 
 if has_cluster:
   ll_ico_mappings.update({
-    "axi_master"    : get_mapping(tp.get_child_dict("cluster"))
+    "axi_master": {
+      "base": tp.get_child_str("cluster/base"),
+      "size": "0x%x" % (tp.get_child_int("cluster/size") * nb_cluster)
+    }
   })
 
 if l2_is_partitioned:
@@ -112,12 +139,12 @@ else:
   })
 
 soc.soc_ico.ll_ico = Component(
-  includes= [ "../../ips/interco/router.json" ],
+  includes= [ "ips/interco/router.json" ],
   mappings= ll_ico_mappings
 )
 
 soc.soc_ico.hb_ico = Component(
-  includes= [ "../../ips/interco/interleaver.json" ],
+  includes= [ "ips/interco/interleaver.json" ],
   nb_slaves= tp.get_child_int("soc/l2/shared/nb_banks") ,
   interleaving_bits= tp.get_child_int("soc/l2/shared/interleaving_bits"),
   remove_offset= tp.get_child_str("soc/l2/shared/base")
@@ -125,7 +152,7 @@ soc.soc_ico.hb_ico = Component(
 
 if has_fc:
   soc.soc_ico.fc_fetch_ico = Component(
-    includes= [ "../../ips/interco/router.json" ],
+    includes= [ "ips/interco/router.json" ],
     mappings= {
       "l2_shared": get_mapping(tp.get_child_dict("soc/l2/shared")),
       "ll_ico": {}
@@ -133,7 +160,7 @@ if has_fc:
   )
 
   soc.soc_ico.fc_data_ico = Component(
-    includes= [ "../../ips/interco/router.json" ],
+    includes= [ "ips/interco/router.json" ],
     mappings= {
       "l2_shared": get_mapping(tp.get_child_dict("soc/l2/shared")),
       "ll_ico": {}
@@ -142,7 +169,7 @@ if has_fc:
 
 if has_udma:
   soc.soc_ico.udma_rx_ico = Component(
-    includes= [ "../../ips/interco/router.json" ],
+    includes= [ "ips/interco/router.json" ],
     mappings= {
       "l2_shared": get_mapping(tp.get_child_dict("soc/l2/shared")),
       "ll_ico": {}
@@ -150,7 +177,7 @@ if has_udma:
   )
 
   soc.soc_ico.udma_tx_ico = Component(
-    includes= [ "../../ips/interco/router.json" ],
+    includes= [ "ips/interco/router.json" ],
     mappings= {
       "l2_shared": get_mapping(tp.get_child_dict("soc/l2/shared")),
       "ll_ico": {}
@@ -249,13 +276,13 @@ if has_rom:
 
 
 soc.apb_ico = Component(
-    includes= [ "../../ips/interco/router.json" ],
+    includes= [ "ips/interco/router.json" ],
     mappings = apb_soc_mappings
 )
 
 if has_fc:
   soc.fc = Component(
-      includes= [ "../../ips/%s.json" % tp.get_child_str('soc/fc/core') ],
+      includes= [ "ips/%s.json" % tp.get_child_str('soc/fc/core') ],
       cluster_id=tp.get_child_int("soc/fc/cluster_id"),
       core_id=tp.get_child_int("soc/fc/core_id"),
       fetch_enable=tp.get_child_bool("soc/fc/fetch_enable"),
@@ -319,7 +346,7 @@ if has_fc:
 
 if has_rom:
   soc.rom = Component(
-      includes  = ["../../ips/rom_v%d.json" % tp.get_child_int("soc/rom/version")],
+      includes  = ["ips/rom_v%d.json" % tp.get_child_int("soc/rom/version")],
       size      = tp.get_child_int("soc/rom/size"),
       map_base= tp.get_child_str("soc/rom/base"),
       map_size= tp.get_child_str("soc/rom/size"),
@@ -327,25 +354,25 @@ if has_rom:
   )
 
 soc.plt_loader = Component(
-    includes=["../../tools/plt_loader/plt_loader.json"]
+    includes=["tools/plt_loader/plt_loader.json"]
 )
 
 if has_fc:
   soc.fc_itc = Component(
-      includes= ["../../ips/itc_v%d.json" % (tp.get_child_int("soc/peripherals/fc_itc/version"))]
+      includes= ["ips/itc_v%d.json" % (tp.get_child_int("soc/peripherals/fc_itc/version"))]
   )
 
 if has_fll:
   soc.fll = Component(
-      includes= ["../../ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
+      includes= ["ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
   )
 
   soc.fll1 = Component(
-      includes= ["../../ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
+      includes= ["ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
   )
 
   soc.fll2 = Component(
-      includes= ["../../ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
+      includes= ["ips/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
   )
 
   soc.fll_ctrl = Component(
@@ -355,41 +382,41 @@ if has_fll:
   )
 
 soc.apb_soc_ctrl = Component(
-    includes= ["apb_soc.json"]
+    includes= ["chips/%s/apb_soc.json" % chip]
 )
 
 soc.stdout = Component(
-    includes= ["../../ips/stdout_v%d.json" % tp.get_child_int("soc/peripherals/stdout/version")]
+    includes= ["ips/stdout_v%d.json" % tp.get_child_int("soc/peripherals/stdout/version")]
 )
 
 if has_gpio:
   soc.gpio = Component(
-    includes= ["../../ips/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")]
+    includes= ["ips/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")]
   )
 
 if has_pmu:
   soc.pmu = Component(
-      includes= ["../../ips/pmu_v%d.json" % tp.get_child_int("soc/peripherals/pmu/version")]
+      includes= ["ips/pmu_v%d.json" % tp.get_child_int("soc/peripherals/pmu/version")]
   )
 
 if has_fc:
   soc.timer = Component(
-      includes= ["../../ips/timer_v%d.json" % tp.get_child_int("soc/peripherals/fc_timer/version")]
+      includes= ["ips/timer_v%d.json" % tp.get_child_int("soc/peripherals/fc_timer/version")]
   )
 
 if has_soc_events:
   soc.soc_eu = Component(
-      includes= ["../../ips/soc_eu_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")]
+      includes= ["ips/soc_eu_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")]
   )
 
 if has_udma:
   soc.udma = Component(
-      includes= ["udma.json"]
+      includes= ["chips/%s/udma.json" % chip]
   )
 
 if has_efuse:
   soc.efuse = Component(
-      includes= ["../../ips/efuse_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")]
+      includes= ["ips/efuse_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")]
   )
 
 soc.uart = Component(
@@ -402,16 +429,29 @@ if has_fc:
   )
 
 if has_cluster:
-  soc.cluster = Component(
-      includes=["../../ips/%s.json" %  tp.get_child_str("cluster/version")]
-  )
+  for cid in range(0, nb_cluster):
+    soc.add_component(
+      get_cluster_name(cid),
+      Component(
+        includes=["ips/%s.json" %  tp.get_child_str("cluster/version")]
+      )
+    )
+    for core_id in range(0, nb_pe):
+      soc.get(get_cluster_name(cid)).add_component(
+        'pe%d' % core_id,
+        Empty_Component(
+          cluster_id= cid
+        )
+      )
+
 
 soc.adv_dbg_unit = Component(
-    includes=["../../ips/adv_dbg_unit/adv_dbg_unit.json"]
+    includes=["ips/adv_dbg_unit/adv_dbg_unit.json"]
 )
 
 if has_cluster:
-  soc.cluster_clock = soc.cluster.clock
+  for cid in range(0, nb_cluster):
+    soc.cluster_clock = soc.get(get_cluster_name(cid)).clock
 
 # APB to peripherals bindings
 soc.apb_ico.stdout = soc.stdout.input
@@ -462,7 +502,9 @@ if has_fc:
 
 # AXI
 if has_cluster:
-  soc.axi_ico.cluster = soc.cluster.input
+  for cid in range(0, nb_cluster):
+    cluster_name = get_cluster_name(cid)
+    soc.axi_ico.set(cluster_name, soc.get(cluster_name).input)
 soc.axi_ico.soc = soc.soc_ico.axi_slave
 
 # FC ITC
@@ -471,9 +513,11 @@ if has_fc:
 
 # Cluster
 if has_cluster:
-  if has_fc:
-    soc.cluster.dma_irq = soc.fc_itc.in_event_8
-  soc.cluster.soc = soc.axi_ico.input
+  for cid in range(0, nb_cluster):
+    cluster_name = get_cluster_name(cid)
+    if has_fc:
+        soc.get(cluster_name).dma_irq = soc.fc_itc.in_event_8
+    soc.get(cluster_name).soc = soc.axi_ico.input
 
 # Timer
 if has_fc:
@@ -504,11 +548,11 @@ if tp.get('soc/job_fifo') is not None:
         includes= ["job_fifo.json"]
     )
     soc.job_fifo_injector = Component(
-        includes= ["../../tools/vp/injector.json"]
+        includes= ["tools/vp/injector.json"]
     )
 
     soc.host_injector = Component(
-        includes= ["../../tools/vp/injector.json"]
+        includes= ["tools/vp/injector.json"]
     )
 
     soc.apb_ico.get_property('mappings')["job_fifo"] = { "base": "0x1A120000", "size": "0x00001000", "remove_offset": "0x1A120000" }
@@ -521,9 +565,10 @@ if tp.get('soc/job_fifo') is not None:
     soc.axi_ico.ext = soc.host_injector.input
 
 
-config = soc.get_json_config(configs=args.configs)
+config = soc.get_json_config()
 
 if args.output is not None:
   with open(args.output, 'w') as file:
     file.write(config)
     file.write('\n')
+

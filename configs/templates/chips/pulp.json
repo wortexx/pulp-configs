@@ -4,7 +4,9 @@
   "cluster": {
     "base": "0x10000000",
     "size": "0x00400000",
-    "version": "cluster_v5_fpu"
+    "version": "cluster_v5_fpu",
+    "nb_cluster": 1,
+    "nb_pe": 8
   },
 
   "soc": {
@@ -14,7 +16,7 @@
 
     "fc": {
       "core"        : "ri5ky_v2_fpu",
-      "irq"         : "fc_irq.json",
+      "irq"         : "chips/pulp/fc_irq.json",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,

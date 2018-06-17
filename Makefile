@@ -4,48 +4,32 @@ BUILD_DIR   ?= $(CURDIR)/build
 all: install
 
 gen.usecases:
-	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs                     > configs/usecases/jtag.json
+	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --output=configs/usecases/jtag.json
 
 gen.pulp:
-	./bin/pulp_soc_gen    --configs=$(CURDIR)/configs --template=configs/templates/pulp/soc.json --output=configs/chips/pulp/soc.json
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=pulp --usecase=usecases/jtag.json --output=configs/systems/pulp.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulp.json --output-dir=$(CURDIR)/configs/chips/pulp --output=configs/systems/pulp.json
 
 gen.pulpissimo:
-	./bin/pulp_soc_gen     --configs=$(CURDIR)/configs --template=configs/templates/pulpissimo/soc.json --output=configs/chips/pulpissimo/soc.json
-	./bin/pulp_chip_gen    --configs=$(CURDIR)/configs --chip=pulpissimo --output=configs/chips/pulpissimo/chip.json
-	./bin/pulp_system_gen  --configs=$(CURDIR)/configs --chip=pulpissimo --output=configs/chips/pulpissimo/system.json
-	./bin/pulp_top_gen     --configs=$(CURDIR)/configs --system=pulpissimo --usecase=usecases/jtag.json --output=configs/systems/pulpissimo.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo.json --output-dir=$(CURDIR)/configs/chips/pulpissimo --output=configs/systems/pulpissimo.json
 
 gen.pulpissimo.zeroriscy:
-	./bin/pulp_soc_gen     --configs=$(CURDIR)/configs --template=configs/templates/pulpissimo/soc-zeroriscy.json --output=configs/chips/pulpissimo/soc-zeroriscy.json
-	./bin/pulp_chip_gen    --configs=$(CURDIR)/configs --chip=pulpissimo --soc-file=soc-zeroriscy.json --output=configs/chips/pulpissimo/chip-zeroriscy.json
-	./bin/pulp_system_gen  --configs=$(CURDIR)/configs --chip=pulpissimo --chip-file=chip-zeroriscy.json --output=configs/chips/pulpissimo/system-zeroriscy.json
-	./bin/pulp_top_gen     --configs=$(CURDIR)/configs --system=pulpissimo --usecase=usecases/jtag.json --system-file=system-zeroriscy.json --output=configs/systems/pulpissimo-zeroriscy.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-zeroriscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-zeroriscy --output=configs/systems/pulpissimo-zeroriscy.json
 
 gen.pulpissimo.microriscy:
-	./bin/pulp_soc_gen     --configs=$(CURDIR)/configs --template=configs/templates/pulpissimo/soc-microriscy.json --output=configs/chips/pulpissimo/soc-microriscy.json
-	./bin/pulp_chip_gen    --configs=$(CURDIR)/configs --chip=pulpissimo --soc-file=soc-microriscy.json --output=configs/chips/pulpissimo/chip-microriscy.json
-	./bin/pulp_system_gen  --configs=$(CURDIR)/configs --chip=pulpissimo --chip-file=chip-microriscy.json --output=configs/chips/pulpissimo/system-microriscy.json
-	./bin/pulp_top_gen     --configs=$(CURDIR)/configs --system=pulpissimo --usecase=usecases/jtag.json --system-file=system-microriscy.json --output=configs/systems/pulpissimo-microriscy.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-microriscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-microriscy --output=configs/systems/pulpissimo-microriscy.json
 
 gen.pulpissimo.riscy:
-	./bin/pulp_soc_gen     --configs=$(CURDIR)/configs --template=configs/templates/pulpissimo/soc-riscy.json --output=configs/chips/pulpissimo/soc-riscy.json
-	./bin/pulp_chip_gen    --configs=$(CURDIR)/configs --chip=pulpissimo --soc-file=soc-riscy.json --output=configs/chips/pulpissimo/chip-riscy.json
-	./bin/pulp_system_gen  --configs=$(CURDIR)/configs --chip=pulpissimo --chip-file=chip-riscy.json --output=configs/chips/pulpissimo/system-riscy.json
-	./bin/pulp_top_gen     --configs=$(CURDIR)/configs --system=pulpissimo --usecase=usecases/jtag.json --system-file=system-riscy.json --output=configs/systems/pulpissimo-riscy.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-riscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-riscy --output=configs/systems/pulpissimo-riscy.json
 
 gen.wolfe:
-	./bin/pulp_soc_gen     --configs=$(CURDIR)/configs --template=configs/templates/wolfe/soc.json --output=configs/chips/wolfe/soc.json
-	./bin/pulp_chip_gen    --configs=$(CURDIR)/configs --chip=wolfe --output=configs/chips/wolfe/chip.json
-	./bin/pulp_system_gen  --configs=$(CURDIR)/configs --chip=wolfe --output=configs/chips/wolfe/system.json
-	./bin/pulp_top_gen     --configs=$(CURDIR)/configs --system=wolfe --usecase=usecases/jtag.json --output=configs/systems/wolfe.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/wolfe.json --output-dir=$(CURDIR)/configs/chips/wolfe --output=configs/systems/wolfe.json
 
 gen.oprecompkw:
-	./bin/pulp_soc_gen --configs=$(CURDIR)/configs --template=configs/templates/oprecompkw/soc.json --output=configs/chips/oprecompkw/soc.json
+	./bin/pulp_soc_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw.json --output=configs/chips/oprecompkw/soc.json
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=oprecompkw --output=configs/systems/oprecompkw.json
 
 gen.vega:
-	./bin/pulp_soc_gen --configs=$(CURDIR)/configs --template=configs/templates/vega/soc.json --output=configs/chips/vega/soc.json
+	./bin/pulp_soc_gen --configs=$(CURDIR)/configs --template=templates/chips/vega.json --output=configs/chips/vega/soc.json
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vega --output=configs/systems/vega.json
 
 gen.gap:

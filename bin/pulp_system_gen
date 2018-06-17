@@ -44,7 +44,7 @@ system = Component(
 
 
 system.system_tree = Empty_Component(
-    includes=[ "../../pulp_system_common.json" ],
+    includes=[ "pulp_system_common.json" ],
     vp_class= "pulp/system"
 )
 
@@ -87,7 +87,7 @@ system.system_tree.board.pulp_chip.set_property(args.chip, {})
 
 
 system.system_tree.board.dpi = Component(
-    includes= [ "../../periph/dpi_wrapper.json" ]
+    includes= [ "periph/dpi_wrapper.json" ]
 )
 
 system.system_tree.board.dpi_clock.out = system.system_tree.board.dpi.clock

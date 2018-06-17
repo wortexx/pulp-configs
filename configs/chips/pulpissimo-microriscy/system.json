@@ -1,7 +1,7 @@
 {
   "system_tree": {
     "includes": [
-      "../../pulp_system_common.json"
+      "pulp_system_common.json"
     ],
     "vp_class": "pulp/system",
     "vp_comps": [
@@ -31,7 +31,7 @@
       ],
       "chip": {
         "includes": [
-          "chip-microriscy.json"
+          "chip.json"
         ]
       },
       "dpi_clock": {
@@ -46,7 +46,7 @@
       },
       "dpi": {
         "includes": [
-          "../../periph/dpi_wrapper.json"
+          "periph/dpi_wrapper.json"
         ],
         "vp_ports": [
           "clock"

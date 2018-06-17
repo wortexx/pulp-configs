@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chip")
 parser.add_argument("--soc-file", dest="soc_file", default=None, help="Specify the soc JSON file")
-parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 
 [args, known_args] = parser.parse_known_args()
@@ -25,6 +25,20 @@ soc_file = 'soc.json'
 
 if args.soc_file is not None:
   soc_file = args.soc_file
+
+
+def find_config(config):
+  for path in os.environ['PULP_CONFIGS_PATH'].split(':'):
+    full_path = os.path.join(path, config)
+    if os.path.exists(full_path):
+      return full_path
+
+  return None
+
+configs = args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':')
+
+os.environ['PULP_CONFIGS_PATH'] = ':'.join(configs)
+
 
 
 
@@ -42,7 +56,7 @@ chip = Component(
 
 
 chip.padframe = Component(
-  includes= [ "padframe.json" ]
+  includes= [ "chips/%s/padframe.json" % args.chip ]
 )
 
 
@@ -63,7 +77,7 @@ chip.soc_clock.out = chip.padframe.clock
 chip.soc_clock.out = chip.soc.clock
 
 
-config = chip.get_json_config(configs=args.configs)
+config = chip.get_json_config()
 
 if args.output is not None:
   with open(args.output, 'w') as file:

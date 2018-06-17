@@ -1,4 +1,6 @@
 {
+  "chip": "pulpissimo",
+    
   "soc": {
     
     "base": "0x1A000000",
@@ -6,7 +8,7 @@
 
     "fc": {
       "core"        : "ri5ky_v2",
-      "irq"         : "fc_irq.json",
+      "irq"         : "chips/pulpissimo-riscy/fc_irq.json",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,
