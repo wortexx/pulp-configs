@@ -58,7 +58,7 @@ cmd = 'pulp_chip_gen   --chip=%s --output=%s/chip.json' % (tp.get_child_str('chi
 if os.system(cmd) != 0:
   exit(-1)
 
-cmd = 'pulp_system_gen --chip=%s --output=%s/system.json' % (tp.get_child_str('chip'), full_output_dir)
+cmd = 'pulp_system_gen --template=%s --chip=%s --output=%s/system.json' % (template_file, tp.get_child_str('chip'), full_output_dir)
 #print (cmd)
 if os.system(cmd) != 0:
   exit(-1)

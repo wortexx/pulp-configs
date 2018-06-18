@@ -4,6 +4,7 @@
 
  
 import json
+import json_tools as js
 import argparse
 from comp_gen import *
 
@@ -12,14 +13,25 @@ parser = argparse.ArgumentParser(
   formatter_class=argparse.RawDescriptionHelpFormatter
 )
 
+parser.add_argument("--template", dest="template", default=None, help="Specify the soc template")
 parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chip")
 parser.add_argument("--chip-file", dest="chip_file", default=None, help="Specify the chip JSON file")
-parser.add_argument("--configs", dest="configs", default=None, help="Specify path to configurations")
+parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 
 [args, known_args] = parser.parse_known_args()
 
 args = parser.parse_args()
+
+if args.template is None:
+  print ('The path to the template configuration must be given through option --template')
+  exit(-1)
+
+
+os.environ['PULP_CONFIGS_PATH'] = ':'.join(args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':'))
+
+tp = js.import_config_from_file(args.template, find=True)
+
 
 chip_file = 'chip.json'
 
@@ -32,11 +44,11 @@ set_pc_addr = None
 debug_bridge_commands = None
 
 if args.chip in ['pulpissimo', 'pulp']:
-    start_addr = '0x1A110000'
+    start_addr = '0x%X' % (tp.get_child_int("soc/peripherals/fc_dbg_unit/base") + 0x0000)
     start_value = '0'
-    stop_addr = '0x1A110000'
+    stop_addr = '0x%X' % (tp.get_child_int("soc/peripherals/fc_dbg_unit/base") + 0x0000)
     stop_value = '0x00010000'
-    set_pc_addr = '0x1A112000'
+    set_pc_addr = '0x%X' % (tp.get_child_int("soc/peripherals/fc_dbg_unit/base") + 0x2000)
     debug_bridge_commands = 'reset stop load ioloop start wait'
 
 system = Component(
