@@ -17,7 +17,7 @@
 # Authors: Germain Haugou, ETH (germain.haugou@iis.ee.ethz.ch)
 
 import json
-import plptree
+import json_tools as js
 import os
 from collections import OrderedDict
 
@@ -60,7 +60,8 @@ class Component(object):
             return json.dumps(self.gen(), indent='  ')
 
 
-        config = plptree.get_config_tree_from_dict(self.gen(), path=configs)
+        config = js.import_config(self.gen(), interpret=True)
+        
         return config.get_string()
 
     def get_component(self, name):

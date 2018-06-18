@@ -58,16 +58,22 @@ if len(args.props) != 0:
   with open(template_file, 'w') as file:
     file.write(tp.dump_to_string())
 
-if os.system('pulp_soc_gen    --template=%s --output=%s/soc.json' % (template_file, full_output_dir)) != 0:
+cmd = 'pulp_soc_gen    --template=%s --output=%s/soc.json' % (template_file, full_output_dir)
+#print (cmd)
+if os.system(cmd) != 0:
   exit(-1)
 
-print ('pulp_chip_gen   --chip=%s --output=%s/chip.json' % (tp.get_child_str('chip'), full_output_dir))
-if os.system('pulp_chip_gen   --chip=%s --output=%s/chip.json' % (tp.get_child_str('chip'), full_output_dir)) != 0:
+cmd = 'pulp_chip_gen   --chip=%s --output=%s/chip.json' % (tp.get_child_str('chip'), full_output_dir)
+#print (cmd)
+if os.system(cmd) != 0:
   exit(-1)
 
-if os.system('pulp_system_gen --chip=%s --output=%s/system.json' % (tp.get_child_str('chip'), full_output_dir)) != 0:
+cmd = 'pulp_system_gen --chip=%s --output=%s/system.json' % (tp.get_child_str('chip'), full_output_dir)
+#print (cmd)
+if os.system(cmd) != 0:
   exit(-1)
 
 cmd = 'pulp_top_gen    --system=%s --system-file=%s/system.json --usecase=usecases/jtag.json --output=%s' % (tp.get_child_str('chip'), full_output_dir, args.output)
+#print (cmd)
 if os.system(cmd) != 0:
   exit(-1)
