@@ -19,17 +19,7 @@ parser.add_argument("--output", dest="output", default=None, help="Specify path 
 args = parser.parse_args()
 
 
-def find_config(config):
-  for path in os.environ['PULP_CONFIGS_PATH'].split(':'):
-    full_path = os.path.join(path, config)
-    if os.path.exists(full_path):
-      return full_path
-
-  return None
-
-configs = args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':')
-
-os.environ['PULP_CONFIGS_PATH'] = ':'.join(configs)
+os.environ['PULP_CONFIGS_PATH'] = ':'.join(args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':'))
 
 
 

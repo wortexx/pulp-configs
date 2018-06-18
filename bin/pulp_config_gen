@@ -27,21 +27,11 @@ if args.template is None:
   exit(-1)
 
 
-def find_config(config):
-  for path in os.environ['PULP_CONFIGS_PATH'].split(':'):
-    full_path = os.path.join(path, config)
-    if os.path.exists(full_path):
-      return full_path
-
-  return None
-
-configs = args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':')
-
-os.environ['PULP_CONFIGS_PATH'] = ':'.join(configs)
+os.environ['PULP_CONFIGS_PATH'] = ':'.join(args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':'))
 
 
 
-tp = js.import_config_from_file(find_config(args.template))
+tp = js.import_config_from_file(args.template, find=True)
 
 full_output_dir = args.output_dir
 if full_output_dir is None:
