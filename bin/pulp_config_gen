@@ -17,7 +17,7 @@ parser.add_argument("--template", dest="template", default=None, help="Specify t
 parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--prop", dest="props", default=[], action="append", help="Specify property")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
-parser.add_argument("--output-dir", dest="output_dir", default='', help="Specify directory for temporary files")
+parser.add_argument("--output-dir", dest="output_dir", default=None, help="Specify directory for temporary files")
 
 args = parser.parse_args()
 

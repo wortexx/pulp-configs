@@ -5,7 +5,8 @@
     "base": "0x10000000",
     "size": "0x00400000",
     "version": "cluster_v5_fpu",
-    "nb_cluster": 1
+    "nb_cluster": 1,
+    "nb_pe": 8
   },
 
   "soc": {

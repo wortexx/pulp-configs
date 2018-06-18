@@ -436,13 +436,13 @@ if has_cluster:
         includes=["ips/%s.json" %  tp.get_child_str("cluster/version")]
       )
     )
-    for core_id in range(0, nb_pe):
-      soc.get(get_cluster_name(cid)).add_component(
-        'pe%d' % core_id,
-        Empty_Component(
-          cluster_id= cid
-        )
-      )
+    #for core_id in range(0, nb_pe):
+    #  soc.get(get_cluster_name(cid)).add_component(
+    #    'pe%d' % core_id,
+    #    Empty_Component(
+    #      cluster_id= cid
+    #    )
+    #  )
 
 
 soc.adv_dbg_unit = Component(
