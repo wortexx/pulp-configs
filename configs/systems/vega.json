@@ -2342,7 +2342,7 @@
                 "vp_class": "pulp/cluster/l1_interleaver",
                 "nb_slaves": 16,
                 "nb_masters": 12,
-                "stage_bits": 4,
+                "stage_bits": 0,
                 "interleaving_bits": 2
               },
               "ext2loc": {

@@ -8,7 +8,7 @@
 
     "fc": {
       "core"        : "microriscy",
-      "irq"         : "chips/pulpissimo-microriscy/fc_irq.json",
+      "irq_file"    : "chips/pulpissimo-microriscy/fc_irq.json",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,

@@ -743,8 +743,7 @@
       "includes": [ "interco/l1_interleaver.json" ],
       "nb_slaves": 16,
       "nb_masters": 12,
-      "interleaving_bits": 2,
-      "stage_bits": 4
+      "interleaving_bits": 2
     },
 
     "ext2loc": {

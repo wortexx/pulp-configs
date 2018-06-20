@@ -33,7 +33,6 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
-          "jtag0_pad",
           "cpi0"
         ],
         "vp_bindings": [

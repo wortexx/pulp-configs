@@ -48,6 +48,12 @@ if len(args.props) != 0:
   with open(template_file, 'w') as file:
     file.write(tp.dump_to_string())
 
+if tp.get('cluster') is not None:
+  cmd = 'pulp_cluster_gen --template=%s --output=%s/cluster.json' % (template_file, full_output_dir)
+  #print (cmd)
+  if os.system(cmd) != 0:
+    exit(-1)
+
 cmd = 'pulp_soc_gen    --template=%s --output=%s/soc.json' % (template_file, full_output_dir)
 #print (cmd)
 if os.system(cmd) != 0:

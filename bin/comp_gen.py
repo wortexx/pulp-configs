@@ -78,6 +78,11 @@ class Component(object):
     def set(self, name, value):
         self.__setattr__(name, value)
 
+    def new_itf(self, name):
+        itf = Interface(self, name)
+        self.__dict__['_Component__slave_itfs'][name] = itf
+        return itf
+
     def __setattr__(self, name, value):
         if type(value) == Interface:
             if self.__dict__['_Component__master_itfs'].get(name) is None:
@@ -139,7 +144,10 @@ class Component(object):
         vp_bindings = []
         tb_bindings = []
 
-        ports = list(self.get_master_itfs().keys()) + list(self.get_slave_itfs().keys())
+        ports = []
+        for port in list(self.get_master_itfs().keys()) + list(self.get_slave_itfs().keys()):
+            if not port in ports:
+                ports.append(port)
         if len(ports) != 0:
             result['vp_ports'] = ports            
 
@@ -208,7 +216,7 @@ class Empty_Component(Component):
 
 
 
-def get_mapping(mapping, remove_base=False):
+def get_mapping(mapping, remove_base=False, add_offset=None):
     result = OrderedDict()
 
     result['base'] = mapping.get('base')
@@ -216,4 +224,8 @@ def get_mapping(mapping, remove_base=False):
 
     if remove_base:
         result['remove_offset'] = result.get('base')
+
+    if add_offset is not None:
+        result['add_offset'] = add_offset
+
     return result

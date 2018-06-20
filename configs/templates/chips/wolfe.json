@@ -4,9 +4,87 @@
   "cluster": {
     "base": "0x10000000",
     "size": "0x00400000",
-    "version": "cluster_v5_fpu",
+    "core": "ri5ky_v2",
+    "version": 5,
+    "json_file": "cluster_v5_fpu",
     "nb_cluster": 1,
-    "nb_pe": 8
+    "nb_pe": 8,
+    
+    "pe": {
+      "irq": [
+        null       , null       , null         , null,
+        null       , null       , null         , null,
+        "dma_0"    , "dma_1"    , "timer_0"    , "timer_1",
+        "acc_0"    , "acc_1"    , "acc_2"      , "acc_3",
+        "eu_bar"   , "eu_mutex" , "eu_dispatch", null,
+        null       , null       , "dma_ext"    , null,
+        null       , null       , null         , null,
+        "mpu_error", null       , "soc_event"  , "soc_fifo"
+      ]
+    },
+
+    "l1": {
+      "base": "0x10000000",
+      "size": "0x00010000",
+      "banking_factor": 2
+    },
+
+    "peripherals": {
+
+      "base": "0x10200000",
+      "size": "0x00200000",
+
+      "alias": {
+        "base": "0x00200000",
+        "size": "0x00200000"
+      },
+
+      "cluster_ctrl": {
+        "base": "0x10200000",
+        "size": "0x00000400"
+      },
+
+      "timer": {
+        "base": "0x10200400",
+        "size": "0x00000400"
+      },
+
+      "event_unit": {
+        "base": "0x10200800",
+        "size": "0x00000800"
+      },
+
+      "icache_ctrl": {
+        "base": "0x10201400",
+        "size": "0x00000400"
+      },
+
+      "dma": {
+        "base": "0x10201800",
+        "size": "0x00000400"
+      },
+
+      "dbg_unit": {
+        "base": "0x10300000",
+        "size"  : "0x00008000"
+      },
+
+      "cluster_ico": {}
+    },
+
+    "demux_peripherals":
+    {
+      "base": "0x10204000",
+
+      "event_unit": {
+        "base": "0x10204000",
+        "size": "0x00000400"
+      },
+      "dma": {
+        "base": "0x10204400",
+        "size": "0x00000400"
+      }
+    }
   },
 
   "soc": {
@@ -16,7 +94,7 @@
 
     "fc": {
       "core"        : "zeroriscy",
-      "irq"         : "chips/wolfe/fc_irq.json",
+      "irq_file"    : "chips/wolfe/fc_irq.json",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,

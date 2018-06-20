@@ -39,7 +39,7 @@ has_fc            = tp.get('soc/fc') is not None
 has_udma          = tp.get('soc/peripherals/udma') is not None
 has_gpio          = tp.get('soc/peripherals/gpio') is not None
 has_soc_events    = tp.get('soc/peripherals/soc_eu') is not None
-fc_events         = tp.get_child_str('soc/fc/irq')
+fc_events         = tp.get_child_str('soc/fc/irq_file')
 l2_is_partitioned = tp.get_child_bool('soc/l2/is_partitioned')
 has_fll           = tp.get('soc/peripherals/fll') is not None
 has_rom           = tp.get('soc/rom') is not None
@@ -422,7 +422,7 @@ if has_cluster:
     soc.add_component(
       get_cluster_name(cid),
       Component(
-        includes=["ips/%s.json" %  tp.get_child_str("cluster/version")]
+        includes=["ips/%s.json" %  tp.get_child_str("cluster/json_file")]
       )
     )
     #for core_id in range(0, nb_pe):
