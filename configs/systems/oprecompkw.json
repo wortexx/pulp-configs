@@ -160,7 +160,12 @@
       "vp_comps": [
         "chip"
       ],
-      "vp_bindings": [],
+      "vp_bindings": [
+        [
+          "dpi->jtag0",
+          "chip->jtag0_pad"
+        ]
+      ],
       "chip": {
         "name": "oprecompkw",
         "pulp_chip_family": "oprecompkw",
@@ -197,6 +202,10 @@
           [
             "soc_clock->out",
             "soc->clock"
+          ],
+          [
+            "self->jtag0_pad",
+            "padframe->jtag0_pad"
           ]
         ],
         "soc": {
@@ -389,13 +398,13 @@
               "latency": 0,
               "id": 0,
               "mappings": {
-                "rom": {
-                  "base": "0x1A000000",
-                  "size": "0x00002000"
-                },
                 "apb": {
                   "base": "0x1A100000",
                   "size": "0x00100000"
+                },
+                "rom": {
+                  "base": "0x1A000000",
+                  "size": "0x00002000"
                 },
                 "axi_master": {
                   "base": "0x10000000",
@@ -3824,17 +3833,12 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
+                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--pulpv2",
-                "--pulp-perf-counters",
-                "--pulp-hw-loop",
-                "--itc-external-req",
-                "--fpu",
-                "--fpud",
-                "--shared-fpu"
+                "--itc-external-req"
               ],
-              "isa": "RV32IMFCXpulpv2",
+              "isa": "RV32IMCXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -3856,6 +3860,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
+              "fetch_enable": false,
+              "boot_addr": "0x1C000000",
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3883,7 +3889,9 @@
                     }
                   }
                 }
-              }
+              },
+              "cluster_id": 0,
+              "core_id": 0
             },
             "pe0": {
               "version": "ri5cyv2",
@@ -3998,8 +4006,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -4079,8 +4087,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -4160,8 +4168,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -4241,8 +4249,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -4322,8 +4330,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -4403,8 +4411,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -4484,8 +4492,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -4593,6 +4601,17 @@
           "size": 8192,
           "map_base": "0x1A000000",
           "map_size": "0x00010000"
+        },
+        "vp_ports": [
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
+          "cpi0"
+        ],
+        "padframe": {
+          "vp_ports": [
+            "jtag0_pad"
+          ]
         }
       },
       "pulp_chip": {
@@ -4824,13 +4843,13 @@
                 "latency": 0,
                 "id": 0,
                 "mappings": {
-                  "rom": {
-                    "base": "0x1A000000",
-                    "size": "0x00002000"
-                  },
                   "apb": {
                     "base": "0x1A100000",
                     "size": "0x00100000"
+                  },
+                  "rom": {
+                    "base": "0x1A000000",
+                    "size": "0x00002000"
                   },
                   "axi_master": {
                     "base": "0x10000000",
@@ -8259,17 +8278,12 @@
                 "archi": "riscv",
                 "implementation": "ri5cy",
                 "gv_isa": [
+                  "--pulpv2",
                   "--pulp",
                   "--rv32m",
-                  "--pulpv2",
-                  "--pulp-perf-counters",
-                  "--pulp-hw-loop",
-                  "--itc-external-req",
-                  "--fpu",
-                  "--fpud",
-                  "--shared-fpu"
+                  "--itc-external-req"
                 ],
-                "isa": "RV32IMFCXpulpv2",
+                "isa": "RV32IMCXpulpv2",
                 "priv_version": 1.9,
                 "perf_counters": true,
                 "features": [
@@ -8291,6 +8305,8 @@
                   "CORE_PULP_BUILTINS"
                 ],
                 "vp_class": "cpu/iss/iss",
+                "fetch_enable": false,
+                "boot_addr": "0x1C000000",
                 "power_models": {
                   "clock_gated": {
                     "type": "linear",
@@ -8318,7 +8334,9 @@
                       }
                     }
                   }
-                }
+                },
+                "cluster_id": 0,
+                "core_id": 0
               },
               "pe0": {
                 "version": "ri5cyv2",
@@ -8433,8 +8451,8 @@
                   "CORE_PULP_BUILTINS"
                 ],
                 "vp_class": "cpu/iss/iss",
-                "fetch_enable": false,
-                "boot_addr": "0x1C000000",
+                "fetch_enable": null,
+                "boot_addr": null,
                 "power_models": {
                   "clock_gated": {
                     "type": "linear",
@@ -8514,8 +8532,8 @@
                   "CORE_PULP_BUILTINS"
                 ],
                 "vp_class": "cpu/iss/iss",
-                "fetch_enable": false,
-                "boot_addr": "0x1C000000",
+                "fetch_enable": null,
+                "boot_addr": null,
                 "power_models": {
                   "clock_gated": {
                     "type": "linear",
@@ -8595,8 +8613,8 @@
                   "CORE_PULP_BUILTINS"
                 ],
                 "vp_class": "cpu/iss/iss",
-                "fetch_enable": false,
-                "boot_addr": "0x1C000000",
+                "fetch_enable": null,
+                "boot_addr": null,
                 "power_models": {
                   "clock_gated": {
                     "type": "linear",
@@ -8676,8 +8694,8 @@
                   "CORE_PULP_BUILTINS"
                 ],
                 "vp_class": "cpu/iss/iss",
-                "fetch_enable": false,
-                "boot_addr": "0x1C000000",
+                "fetch_enable": null,
+                "boot_addr": null,
                 "power_models": {
                   "clock_gated": {
                     "type": "linear",
@@ -8757,8 +8775,8 @@
                   "CORE_PULP_BUILTINS"
                 ],
                 "vp_class": "cpu/iss/iss",
-                "fetch_enable": false,
-                "boot_addr": "0x1C000000",
+                "fetch_enable": null,
+                "boot_addr": null,
                 "power_models": {
                   "clock_gated": {
                     "type": "linear",
@@ -8838,8 +8856,8 @@
                   "CORE_PULP_BUILTINS"
                 ],
                 "vp_class": "cpu/iss/iss",
-                "fetch_enable": false,
-                "boot_addr": "0x1C000000",
+                "fetch_enable": null,
+                "boot_addr": null,
                 "power_models": {
                   "clock_gated": {
                     "type": "linear",
@@ -8919,8 +8937,8 @@
                   "CORE_PULP_BUILTINS"
                 ],
                 "vp_class": "cpu/iss/iss",
-                "fetch_enable": false,
-                "boot_addr": "0x1C000000",
+                "fetch_enable": null,
+                "boot_addr": null,
                 "power_models": {
                   "clock_gated": {
                     "type": "linear",
@@ -9030,7 +9048,52 @@
             "map_size": "0x00010000"
           }
         }
+      },
+      "tb_comps": [
+        "jtag_proxy",
+        "camera"
+      ],
+      "tb_bindings": [
+        [
+          "chip->jtag0",
+          "jtag_proxy->jtag"
+        ],
+        [
+          "chip->ctrl",
+          "jtag_proxy->ctrl"
+        ],
+        [
+          "camera->cpi",
+          "chip->cpi0"
+        ]
+      ],
+      "dpi": {
+        "vp_ports": [
+          "jtag0"
+        ]
+      },
+      "jtag_proxy": {
+        "type": "dpi",
+        "active": false,
+        "module": "jtag_proxy.so",
+        "verbose": false,
+        "port": 37539,
+        "vp_ports": [
+          "jtag",
+          "ctrl"
+        ]
+      },
+      "camera": {
+        "type": "dpi",
+        "model": "himax",
+        "module": "camera.so",
+        "vp_ports": [
+          "cpi"
+        ]
       }
     }
-  }
+  },
+  "vp_comps": [
+    "system_tree"
+  ]
 }

@@ -20,8 +20,11 @@ import json
 import json_tools as js
 import os
 from collections import OrderedDict
-import pyyed
-import xml.dom.minidom as minidom
+try:
+    import pyyed
+    import xml.dom.minidom as minidom
+except:
+    pass
 
 
 

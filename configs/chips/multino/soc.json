@@ -20,6 +20,7 @@
     "apb_soc_ctrl",
     "stdout",
     "gpio",
+    "spi_master",
     "uart",
     "cluster",
     "cluster_1",
@@ -377,6 +378,11 @@
   "gpio": {
     "includes": [
       "ips/gpio_v2.json"
+    ]
+  },
+  "spi_master": {
+    "includes": [
+      "ips/spi_master_v1.json"
     ]
   },
   "uart": {

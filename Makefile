@@ -28,8 +28,7 @@ gen.wolfe:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/wolfe.json --output-dir=$(CURDIR)/configs/chips/wolfe --output=configs/systems/wolfe.json
 
 gen.oprecompkw:
-	./bin/pulp_soc_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw.json --output=configs/chips/oprecompkw/soc.json
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=oprecompkw --output=configs/systems/oprecompkw.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw.json --output-dir=$(CURDIR)/configs/chips/oprecompkw --output=configs/systems/oprecompkw.json
 
 gen.vega:
 	./bin/pulp_soc_gen --configs=$(CURDIR)/configs --template=templates/chips/vega.json --output=configs/chips/vega/soc.json
