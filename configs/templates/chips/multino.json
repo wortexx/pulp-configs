@@ -1,16 +1,21 @@
 {
-  "chip": "wolfe",
-    
+  "chip": "multino",
+
+  "cluster0": {
+    "pe0": {
+      "boot_addr": "0x1c008000"
+    }
+  },
+  
   "cluster": {
     "base": "0x10000000",
-    "alias": "0x00000000",
+    "alias": "0x1B000000",
     "size": "0x00400000",
     "core": "ri5ky_v2",
     "version": 5,
-    "json_file": "cluster_v5_fpu",
-    "nb_cluster": 1,
-    "nb_pe": 8,
-    
+    "nb_cluster": 2,
+    "nb_pe": 4,
+
     "pe": {
       "irq": [
         null       , null       , null         , null,
@@ -36,7 +41,7 @@
       "size": "0x00200000",
 
       "alias": {
-        "base": "0x00200000",
+        "base": "0x1B200000",
         "size": "0x00200000"
       },
 
@@ -89,24 +94,9 @@
   },
 
   "soc": {
-    
+
     "base": "0x1A000000",
     "size": "0x06000000",
-
-    "fc": {
-      "core"        : "zeroriscy",
-      "irq_file"    : "chips/wolfe/fc_irq.json",
-      "cluster_id"  : 31,
-      "core_id"     : 0,
-      "fetch_enable": true,
-      "boot_addr"   : "0x1C008000"
-    },
-
-    "rom": {
-      "version": 2,
-      "base": "0x1A000000",
-      "size": "0x00002000"
-    },
 
     "l2": {
       "base": "0x1C000000",
@@ -129,10 +119,10 @@
       },
 
       "shared": {
-        "nb_banks"     : 4,
+        "nb_banks"          : 4,
         "interleaving_bits" : 2,
-        "base"         : "0x1C010000",
-        "size"         : "0x00070000"
+        "base"              : "0x1C010000",
+        "size"              : "0x00070000"
       }
     },
 
@@ -141,34 +131,10 @@
       "base": "0x1A100000",
       "size": "0x00100000",
 
-      "fll": {
-        "version"      : 1,
-        "base"         : "0x1A100000",
-        "size"         : "0x00000010"
-      },
-
-      "fll1": {
-        "version"      : 1,
-        "base"         : "0x1A100010",
-        "size"         : "0x00000010"
-      },
-
-      "fll2": {
-        "version"      : 1,
-        "base"         : "0x1A100020",
-        "size"         : "0x00000010"
-      },
-
       "gpio": {
         "version"      : 2,
         "base"         : "0x1A101000",
         "size"         : "0x00001000"
-      },
-
-      "udma": {
-        "version"      : 2,
-        "base"         : "0x1A102000",
-        "size"         : "0x00002000"
       },
 
       "apb_soc_ctrl": {
@@ -176,40 +142,10 @@
         "size"         : "0x00001000"
       },
 
-      "soc_eu": {
-        "version"      : 1,
-        "base"         : "0x1A106000",
-        "size"         : "0x00001000"
-      },
-
-      "pmu": {
-        "version"      : 2,
-        "base"         : "0x1A107000",
-        "size"         : "0x00000800"
-      },
-
-      "fc_itc": {
-        "version"      : 1,
-        "base"         : "0x1A109800",
-        "size"         : "0x00000800"
-      },
-
-      "fc_timer": {
-        "version"      : 2,
-        "base"         : "0x1A10B000",
-        "size"         : "0x00001000"
-      },
-
       "stdout": {
         "version"      : 3,
         "base"         : "0x1A10F000",
         "size"         : "0x00001000"
-      },
-
-      "fc_dbg_unit": {
-        "version"      : 1,
-        "base"         : "0x1A110000",
-        "size"         : "0x00008000"
       }
 
     }

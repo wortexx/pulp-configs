@@ -9,6 +9,9 @@ gen.usecases:
 gen.pulp:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulp.json --output-dir=$(CURDIR)/configs/chips/pulp --output=configs/systems/pulp.json
 
+gen.multino:
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/multino.json --output-dir=$(CURDIR)/configs/chips/multino --output=configs/systems/multino.json
+
 gen.pulpissimo:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo.json --output-dir=$(CURDIR)/configs/chips/pulpissimo --output=configs/systems/pulpissimo.json
 
@@ -49,9 +52,6 @@ gen.hero-zc706:
 
 gen.honey:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=honey      --output=configs/systems/honey.json
-
-gen.multino:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=multino    --output=configs/systems/multino.json
 
 gen.neuraghe:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=neuraghe   --output=configs/systems/neuraghe.json

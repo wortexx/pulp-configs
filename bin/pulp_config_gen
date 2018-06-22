@@ -17,6 +17,7 @@ parser.add_argument("--template", dest="template", default=None, help="Specify t
 parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--prop", dest="props", default=[], action="append", help="Specify property")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
+parser.add_argument("--graph", dest="graph", default=None, help="Specify path to output graph")
 parser.add_argument("--output-dir", dest="output_dir", default=None, help="Specify directory for temporary files")
 
 args = parser.parse_args()
@@ -49,10 +50,11 @@ if len(args.props) != 0:
     file.write(tp.dump_to_string())
 
 if tp.get('cluster') is not None:
-  cmd = 'pulp_cluster_gen --template=%s --output=%s/cluster.json' % (template_file, full_output_dir)
-  #print (cmd)
-  if os.system(cmd) != 0:
-    exit(-1)
+  for cid in range(0, tp.get_child_int('cluster/nb_cluster')):
+    cmd = 'pulp_cluster_gen --template=%s --output=%s/cluster_%d.json --cluster-id=%d' % (template_file, full_output_dir, cid, cid)
+    #print (cmd)
+    if os.system(cmd) != 0:
+      exit(-1)
 
 cmd = 'pulp_soc_gen    --template=%s --output=%s/soc.json' % (template_file, full_output_dir)
 #print (cmd)
@@ -69,7 +71,10 @@ cmd = 'pulp_system_gen --template=%s --chip=%s --output=%s/system.json' % (templ
 if os.system(cmd) != 0:
   exit(-1)
 
-cmd = 'pulp_top_gen    --system=%s --system-file=%s/system.json --usecase=usecases/jtag.json --output=%s' % (tp.get_child_str('chip'), full_output_dir, args.output)
+top_gen_opt = ''
+if args.graph is not None:
+  top_gen_opt += ' --graph=%s' % args.graph
+cmd = 'pulp_top_gen    --system=%s --system-file=%s/system.json --usecase=usecases/jtag.json --output=%s %s' % (tp.get_child_str('chip'), full_output_dir, args.output, top_gen_opt)
 #print (cmd)
 if os.system(cmd) != 0:
   exit(-1)

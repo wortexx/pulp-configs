@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--template", dest="template", default=None, help="Specify the soc template")
 parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
+parser.add_argument("--graph", dest="graph", default=None, help="Specify path to output graph")
 
 args = parser.parse_args()
 
@@ -103,9 +104,13 @@ soc.soc_ico = Component(
 )
 
 ll_ico_mappings = {
-  "rom"           : get_mapping(tp.get_child_dict("soc/rom")),
   "apb"           : get_mapping(tp.get_child_dict("soc/peripherals"))
 }
+
+if has_rom:
+  ll_ico_mappings.update({
+    "rom"           : get_mapping(tp.get_child_dict("soc/rom"))
+  })
 
 if has_cluster:
   ll_ico_mappings.update({
@@ -422,7 +427,7 @@ if has_cluster:
     soc.add_component(
       get_cluster_name(cid),
       Component(
-        includes=["ips/%s.json" %  tp.get_child_str("cluster/json_file")]
+        includes=["chips/%s/cluster_%d.json" % (chip, cid)]
       )
     )
     #for core_id in range(0, nb_pe):
@@ -561,3 +566,8 @@ if args.output is not None:
     file.write(config)
     file.write('\n')
 
+
+if args.graph is not None:
+  with open(args.graph, 'w') as file:
+    file.write(soc.get_graph())
+    file.write('\n')

@@ -823,13 +823,13 @@
               "latency": 0,
               "id": 0,
               "mappings": {
-                "rom": {
-                  "base": "0x1A000000",
-                  "size": "0x00002000"
-                },
                 "apb": {
                   "base": "0x1A100000",
                   "size": "0x00100000"
+                },
+                "rom": {
+                  "base": "0x1A000000",
+                  "size": "0x00002000"
                 },
                 "axi_master": {
                   "base": "0x10000000",
@@ -5067,17 +5067,12 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
+                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--pulpv2",
-                "--pulp-perf-counters",
-                "--pulp-hw-loop",
-                "--itc-external-req",
-                "--fpu",
-                "--fpud",
-                "--shared-fpu"
+                "--itc-external-req"
               ],
-              "isa": "RV32IMFCXpulpv2",
+              "isa": "RV32IMCXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5099,6 +5094,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
+              "fetch_enable": false,
+              "boot_addr": "0x1C000000",
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -5126,7 +5123,9 @@
                     }
                   }
                 }
-              }
+              },
+              "cluster_id": 0,
+              "core_id": 0
             },
             "pe0": {
               "version": "ri5cyv2",
@@ -5160,8 +5159,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -5241,8 +5240,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -5322,8 +5321,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -5403,8 +5402,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -5484,8 +5483,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -5565,8 +5564,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -5646,8 +5645,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -5727,8 +5726,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",

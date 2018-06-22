@@ -20,6 +20,9 @@ import json
 import json_tools as js
 import os
 from collections import OrderedDict
+import pyyed
+import xml.dom.minidom as minidom
+
 
 
 class Interface(object):
@@ -28,6 +31,8 @@ class Interface(object):
         self.__dict__['name'] = name
         self.__dict__['comp'] = comp
 
+    def get_slave(self):
+        return self.comp.get_slave(self.name)
 
 
 class Component(object):
@@ -52,8 +57,14 @@ class Component(object):
     def set_name(self, name):
         self.__dict__['_Component__name'] = name
 
+    def set_full_name(self, name):
+        self.__dict__['_Component__fullname'] = name
+
     def get_name(self):
         return self.__dict__.get('_Component__name')
+
+    def get_full_name(self):
+        return self.__dict__.get('_Component__fullname')
 
     def get_json_config(self, configs=None, expand=False):
         if not expand:
@@ -64,13 +75,52 @@ class Component(object):
         
         return config.get_string()
 
+    def dump_to_graph(self, g, gg):
+        if len(self.__dict__.get('_Component__comps').values()) == 0:
+            gg.add_node(self.get_full_name(), label=self.get_name())
+        else:
+            name = self.get_full_name()
+            if name is None:
+                name = 'top'
+            ggg = gg.add_group(name, label=self.get_name())
+            for comp in self.__dict__.get('_Component__comps').values():
+                comp.dump_to_graph(g, ggg)
+
+    def dump_edges_to_graph(self, g):
+        if len(self.__dict__.get('_Component__comps').values()) == 0:
+            for itf_name, slave_itf_list in self.get_master_itfs().items():
+                for slave_itf in slave_itf_list:
+                    slave = slave_itf.get_slave()
+                    if slave is not None:
+                        g.add_edge(self.get_full_name(), slave.get_full_name())
+
+        else:
+            for comp in self.__dict__.get('_Component__comps').values():
+                comp.dump_edges_to_graph(g)
+
+    def get_graph(self):
+        g = pyyed.Graph()
+
+        self.dump_to_graph(g, g)
+
+        self.dump_edges_to_graph(g)
+
+        graph = g.get_graph()
+        return minidom.parseString(graph).toprettyxml(indent="  ")
+
     def get_component(self, name):
         return self.__dict__['_Component__comps'][name]
 
     def add_component(self, name, comp):
         self.__dict__['_Component__comps'][name] = comp
         self.__dict__[name] = comp
+
         comp.set_name(name)
+
+        if self.get_full_name() is None:
+            comp.set_full_name(name)
+        else:
+            comp.set_full_name(self.get_full_name() + '::' + name)
 
     def get(self, name):
         return self.__dict__[name]
@@ -200,6 +250,16 @@ class Component(object):
 
         return result
 
+    def get_slave(self, name):
+        if len(self.__dict__.get('_Component__comps').values()) == 0:
+            return self
+        else:
+            if self.__dict__['_Component__master_itfs'].get(name) is not None:
+                for itf in self.__dict__['_Component__master_itfs'][name]:
+                    itf_name = itf.get_slave()
+                    if itf_name is not None:
+                        return itf_name
+            return None
 
 
 class Tb_Component(Component):
@@ -227,5 +287,24 @@ def get_mapping(mapping, remove_base=False, add_offset=None):
 
     if add_offset is not None:
         result['add_offset'] = add_offset
+
+    return result
+
+def get_area(base, size, index):
+    return '0x%x' % (int(base, 0)+index*size)
+
+
+
+def get_mapping_area(mapping, size, index, remove_base=False, add_offset=None):
+    result = OrderedDict()
+
+    result['base'] = '0x%x' % (int(mapping.get('base'), 0)+index*size)
+    result['size'] = mapping.get('size')
+
+    if remove_base:
+        result['remove_offset'] = result.get('base')
+
+    if add_offset is not None:
+        result['add_offset'] = '0x%x' % (int(add_offset, 0)+index*size)
 
     return result

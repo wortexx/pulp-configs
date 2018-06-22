@@ -183,13 +183,13 @@
         "ips/interco/router.json"
       ],
       "mappings": {
-        "rom": {
-          "base": "0x1A000000",
-          "size": "0x00002000"
-        },
         "apb": {
           "base": "0x1A100000",
           "size": "0x00100000"
+        },
+        "rom": {
+          "base": "0x1A000000",
+          "size": "0x00002000"
         },
         "axi_master": {
           "base": "0x10000000",
@@ -308,7 +308,7 @@
   },
   "cluster": {
     "includes": [
-      "ips/cluster_v5_fpu.json"
+      "chips/oprecompkw/cluster_0.json"
     ],
     "vp_ports": [
       "soc",

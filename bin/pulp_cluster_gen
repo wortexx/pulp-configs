@@ -15,7 +15,9 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument("--template", dest="template", default=None, help="Specify the cluster template")
 parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
+parser.add_argument("--cluster-id", dest="cluster_id", default=0, type=int, help="Specify cluster ID")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
+parser.add_argument("--graph", dest="graph", default=None, help="Specify path to output graph")
 
 args = parser.parse_args()
 
@@ -30,17 +32,21 @@ os.environ['PULP_CONFIGS_PATH'] = ':'.join(args.configs + os.environ.get('PULP_C
 
 tp = js.import_config_from_file(args.template, find=True)
 
-
+cluster_id        = args.cluster_id
+cluster_size      = tp.get_child_int("cluster/size")
 nb_pe             = tp.get_child_int('cluster/nb_pe')
 l1_banking_factor = tp.get_child_int('cluster/l1/banking_factor')
 cluster_core      = tp.get_child_str('cluster/core')
 cluster_version   = tp.get_child_int('cluster/version')
-cluster_id        = 0
 dma_irq_0         = tp.get('cluster/pe/irq').get_dict().index('dma_0')
 dma_irq_1         = tp.get('cluster/pe/irq').get_dict().index('dma_1')
 dma_irq_ext       = tp.get('cluster/pe/irq').get_dict().index('dma_ext')
 timer_irq_0       = tp.get('cluster/pe/irq').get_dict().index('timer_0')
 timer_irq_1       = tp.get('cluster/pe/irq').get_dict().index('timer_1')
+#if tp.get('cluster/alias') is not None:
+#  alias = tp.get_child_str('cluster/alias')
+#else:
+#  alias = "0x00000000"
 
 nb_l1_banks = nb_pe * l1_banking_factor
 l1_bank_size = int(tp.get_child_int('cluster/l1/size') / nb_l1_banks)
@@ -62,9 +68,9 @@ cluster.cluster_ico = Component(
     includes=["ips/interco/router.json"],
     latency=2,
     mappings={
-      "l1": get_mapping(tp.get_child_dict("cluster/l1"), True),
-      "periph_ico": get_mapping(tp.get_child_dict("cluster/peripherals")),
-      "periph_ico_alias": get_mapping(tp.get_child_dict("cluster/peripherals/alias"), add_offset=tp.get_child_str("cluster/base")),
+      "l1": get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True),
+      "periph_ico": get_mapping_area(tp.get_child_dict("cluster/peripherals"), cluster_size, cluster_id),
+      "periph_ico_alias": get_mapping(tp.get_child_dict("cluster/peripherals/alias"), add_offset=get_area('0x%x' % ((tp.get_child_int("cluster/peripherals/base") - tp.get_child_int("cluster/peripherals/alias/base")) & 0xFFFFFFFF), cluster_size, cluster_id)),
       "soc": {}
     }
 )
@@ -82,7 +88,7 @@ periph_ico_mappings = {}
 
 for i in range(0, nb_pe):
   size = tp.get_child_int("cluster/peripherals/dbg_unit/size")
-  base = tp.get_child_int("cluster/peripherals/dbg_unit/base") + size * i
+  base = tp.get_child_int("cluster/peripherals/dbg_unit/base") + cluster_id*cluster_size + size * i
   periph_ico_mappings['dbg_unit_%d' % i] = {
     "base": '0x%x' % base,
     "size": '0x%x' % size,
@@ -90,11 +96,11 @@ for i in range(0, nb_pe):
   }
 
 periph_ico_mappings.update({
-  "cluster_ctrl": get_mapping(tp.get_child_dict("cluster/peripherals/cluster_ctrl"), True),
-  "timer": get_mapping(tp.get_child_dict("cluster/peripherals/timer"), True),
-  "event_unit": get_mapping(tp.get_child_dict("cluster/peripherals/event_unit"), True),
-  "icache_ctrl": get_mapping(tp.get_child_dict("cluster/peripherals/icache_ctrl"), True),
-  "dma": get_mapping(tp.get_child_dict("cluster/peripherals/dma"), True),
+  "cluster_ctrl": get_mapping_area(tp.get_child_dict("cluster/peripherals/cluster_ctrl"), cluster_size, cluster_id, True),
+  "timer": get_mapping_area(tp.get_child_dict("cluster/peripherals/timer"), cluster_size, cluster_id, True),
+  "event_unit": get_mapping_area(tp.get_child_dict("cluster/peripherals/event_unit"), cluster_size, cluster_id, True),
+  "icache_ctrl": get_mapping_area(tp.get_child_dict("cluster/peripherals/icache_ctrl"), cluster_size, cluster_id, True),
+  "dma": get_mapping_area(tp.get_child_dict("cluster/peripherals/dma"), cluster_size, cluster_id, True),
   "cluster_ico": {}
 })
 
@@ -108,38 +114,38 @@ cluster.l1_ico = Component(
 )
 
 for i in range(0, nb_pe):
-  l1_mapping = get_mapping(tp.get_child_dict("cluster/l1"), True)
+  l1_mapping = get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True)
   l1_mapping['id'] = 0
 
-  l1_ts_mapping = get_mapping(tp.get_child_dict("cluster/l1"), True)
+  l1_ts_mapping = get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True)
   l1_ts_mapping['base'] = '0x%x' % (int(l1_ts_mapping['base'], 0) + (1<<20))
   l1_ts_mapping['remove_offset'] = l1_ts_mapping['base']
   l1_ts_mapping['id'] = 0
 
   l1_alias_mapping = get_mapping(tp.get_child_dict("cluster/l1"), True)
-  l1_alias_mapping['base'] = '0x%x' % (int(l1_alias_mapping['base'], 0) - tp.get_child_int("cluster/base"))
-  l1_alias_mapping['remove_offset'] = '0x%x' % (int(l1_alias_mapping['remove_offset'], 0) - tp.get_child_int("cluster/base"))
+  l1_alias_mapping['base'] = '0x%x' % (int(l1_alias_mapping['base'], 0) - tp.get_child_int("cluster/base") + tp.get_child_int("cluster/alias"))
+  l1_alias_mapping['remove_offset'] = '0x%x' % (int(l1_alias_mapping['remove_offset'], 0) - tp.get_child_int("cluster/base") + tp.get_child_int("cluster/alias"))
   l1_alias_mapping['id'] = 0
 
-  l1_ts_alias_mapping = get_mapping(tp.get_child_dict("cluster/l1"), True)
-  l1_ts_alias_mapping['base'] = '0x%x' % (int(l1_ts_alias_mapping['base'], 0) - tp.get_child_int("cluster/base") + (1<<20))
-  l1_ts_alias_mapping['remove_offset'] = '0x%x' % (int(l1_ts_alias_mapping['remove_offset'], 0) - tp.get_child_int("cluster/base") + (1<<20))
+  l1_ts_alias_mapping = get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True)
+  l1_ts_alias_mapping['base'] = '0x%x' % (int(l1_ts_alias_mapping['base'], 0) - tp.get_child_int("cluster/base") + (1<<20) + tp.get_child_int("cluster/alias"))
+  l1_ts_alias_mapping['remove_offset'] = '0x%x' % (int(l1_ts_alias_mapping['remove_offset'], 0) - tp.get_child_int("cluster/base") + (1<<20) + tp.get_child_int("cluster/alias"))
   l1_ts_alias_mapping['id'] = 0
 
-  eu_mapping = get_mapping(tp.get_child_dict("cluster/demux_peripherals/event_unit"), True)
+  eu_mapping = get_mapping_area(tp.get_child_dict("cluster/demux_peripherals/event_unit"), cluster_size, cluster_id, True)
   eu_mapping['id'] = 1
 
   eu_alias_mapping = get_mapping(tp.get_child_dict("cluster/demux_peripherals/event_unit"), True)
-  eu_alias_mapping['base'] = '0x%x' % (int(eu_alias_mapping['base'], 0) - tp.get_child_int("cluster/base"))
-  eu_alias_mapping['remove_offset'] = '0x%x' % (int(eu_alias_mapping['remove_offset'], 0) - tp.get_child_int("cluster/base"))
+  eu_alias_mapping['base'] = '0x%x' % (int(eu_alias_mapping['base'], 0) - tp.get_child_int("cluster/base") + tp.get_child_int("cluster/alias"))
+  eu_alias_mapping['remove_offset'] = '0x%x' % (int(eu_alias_mapping['remove_offset'], 0) - tp.get_child_int("cluster/base") + tp.get_child_int("cluster/alias"))
   eu_alias_mapping['id'] = 1
 
-  dma_mapping = get_mapping(tp.get_child_dict("cluster/demux_peripherals/dma"), True)
+  dma_mapping = get_mapping_area(tp.get_child_dict("cluster/demux_peripherals/dma"), cluster_size, cluster_id, True)
   dma_mapping['id'] = 1
 
   dma_alias_mapping = get_mapping(tp.get_child_dict("cluster/demux_peripherals/dma"), True)
-  dma_alias_mapping['base'] = '0x%x' % (int(dma_alias_mapping['base'], 0) - tp.get_child_int("cluster/base"))
-  dma_alias_mapping['remove_offset'] = '0x%x' % (int(dma_alias_mapping['remove_offset'], 0) - tp.get_child_int("cluster/base"))
+  dma_alias_mapping['base'] = '0x%x' % (int(dma_alias_mapping['base'], 0) - tp.get_child_int("cluster/base") + tp.get_child_int("cluster/alias"))
+  dma_alias_mapping['remove_offset'] = '0x%x' % (int(dma_alias_mapping['remove_offset'], 0) - tp.get_child_int("cluster/base") + tp.get_child_int("cluster/alias"))
   dma_alias_mapping['id'] = 1
 
   cluster.l1_ico.add_component(
@@ -162,14 +168,14 @@ for i in range(0, nb_pe):
 
 
 cluster.l1_ico.interleaver = Component(
-  includes=["interco/l1_interleaver.json"],
+  includes=["ips/interco/l1_interleaver.json"],
   nb_slaves= nb_l1_banks,
   nb_masters= nb_pe + 4,
   interleaving_bits= 2
 )
 
 cluster.l1_ico.ext2loc = Component(
-  includes=["interco/converter.json"],
+  includes=["ips/interco/converter.json"],
   output_width=4,
   output_align=4
 )
@@ -179,7 +185,7 @@ cluster.l1 = Component(
   size=tp.get_child_int("cluster/l1/size"),
   alias=True,
   has_l1_alias=True,
-  alias_base="0x00000000",
+  alias_base=tp.get_child_str("cluster/alias"),
   map_base=tp.get_child_str("cluster/l1/base"),
   nb_banks=nb_l1_banks,
 )
@@ -233,9 +239,20 @@ for i in range(0, nb_pe):
   cluster.add_component(
     'pe%d' % i,
     Component(
-      includes=["%s.json" % cluster_core],
+      includes=["ips/%s.json" % cluster_core],
       cluster_id=cluster_id,
       core_id=i,
+      fetch_enable=tp.get_child_bool("cluster%d/pe%d/fetch_enable" % (cluster_id, i)),
+      boot_addr=tp.get_child_str("cluster%d/pe%d/boot_addr" % (cluster_id, i))
+    )
+  )
+
+  cluster.add_component(
+    'pe',
+    Empty_Component(
+      includes=["ips/%s.json" % cluster_core],
+      cluster_id=cluster_id,
+      core_id=0,
       boot_addr="0x1C000000"
     )
   )
@@ -390,5 +407,10 @@ config = cluster.get_json_config()
 if args.output is not None:
   with open(args.output, 'w') as file:
     file.write(config)
+    file.write('\n')
+
+if args.graph is not None:
+  with open(args.graph, 'w') as file:
+    file.write(cluster.get_graph())
     file.write('\n')
 
