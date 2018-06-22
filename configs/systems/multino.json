@@ -131,6 +131,7 @@
       "mode": "jtag"
     },
     "set_pc_addr": "0x10200040",
+    "set_pc_offset": -80,
     "start_addr": "0x10200008",
     "start_value": "0x1"
   },
@@ -421,6 +422,7 @@
             "l2_shared_1",
             "l2_shared_2",
             "l2_shared_3",
+            "rom",
             "plt_loader",
             "apb_soc_ctrl",
             "stdout",
@@ -505,6 +507,10 @@
               "apb_soc_ctrl->input"
             ],
             [
+              "apb_ico->rom",
+              "rom->input"
+            ],
+            [
               "plt_loader->out",
               "soc_ico->debug"
             ],
@@ -581,6 +587,10 @@
                 "self->apb"
               ],
               [
+                "ll_ico->rom",
+                "self->apb"
+              ],
+              [
                 "ll_ico->l2_priv0",
                 "self->l2_priv0"
               ],
@@ -627,6 +637,10 @@
                   "base": "0x1A100000",
                   "size": "0x00100000"
                 },
+                "rom": {
+                  "base": "0x1A000000",
+                  "size": "0x00000800"
+                },
                 "axi_master": {
                   "base": "0x10000000",
                   "size": "0x800000"
@@ -652,6 +666,7 @@
               },
               "vp_ports": [
                 "apb",
+                "rom",
                 "l2_priv0",
                 "l2_priv0_alias",
                 "l2_priv1",
@@ -696,11 +711,17 @@
                 "base": "0x1A101000",
                 "size": "0x00001000",
                 "remove_offset": "0x1A101000"
+              },
+              "rom": {
+                "base": "0x1A000000",
+                "size": "0x00000800",
+                "remove_offset": "0x1A000000"
               }
             },
             "vp_ports": [
               "stdout",
               "apb_soc_ctrl",
+              "rom",
               "input"
             ]
           },
@@ -757,6 +778,19 @@
           },
           "l2_shared_3": {
             "size": 114688,
+            "vp_class": "memory/memory",
+            "vp_ports": [
+              "input"
+            ]
+          },
+          "rom": {
+            "version": 2,
+            "hal_files": [
+              "hal/rom/rom_v2.h"
+            ],
+            "size": 2048,
+            "map_base": "0x1A000000",
+            "map_size": "0x00000800",
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
