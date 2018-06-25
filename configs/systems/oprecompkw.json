@@ -3718,11 +3718,15 @@
                 "dispatch": {
                   "size": 8
                 },
+                "mutex": {
+                  "nb_mutexes": 1
+                },
                 "barriers": {
                   "nb_barriers": 8
                 },
                 "events": {
                   "barrier": 16,
+                  "mutex": 17,
                   "dispatch": 18
                 }
               },
@@ -8152,11 +8156,15 @@
                   "dispatch": {
                     "size": 8
                   },
+                  "mutex": {
+                    "nb_mutexes": 1
+                  },
                   "barriers": {
                     "nb_barriers": 8
                   },
                   "events": {
                     "barrier": 16,
+                    "mutex": 17,
                     "dispatch": 18
                   }
                 },

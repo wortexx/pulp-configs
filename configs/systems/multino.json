@@ -689,9 +689,9 @@
             "id": 0,
             "mappings": {
               "stdout": {
-                "base": "0x1A10F000",
+                "base": "0x1A106000",
                 "size": "0x00001000",
-                "remove_offset": "0x1A10F000"
+                "remove_offset": "0x1A106000"
               },
               "apb_soc_ctrl": {
                 "base": "0x1A104000",
@@ -2797,11 +2797,15 @@
                 "dispatch": {
                   "size": 8
                 },
+                "mutex": {
+                  "nb_mutexes": 1
+                },
                 "barriers": {
                   "nb_barriers": 8
                 },
                 "events": {
                   "barrier": 16,
+                  "mutex": 17,
                   "dispatch": 18
                 }
               },
@@ -5108,11 +5112,15 @@
                 "dispatch": {
                   "size": 8
                 },
+                "mutex": {
+                  "nb_mutexes": 1
+                },
                 "barriers": {
                   "nb_barriers": 8
                 },
                 "events": {
                   "barrier": 16,
+                  "mutex": 17,
                   "dispatch": 18
                 }
               },
