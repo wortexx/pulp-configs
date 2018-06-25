@@ -218,7 +218,10 @@
             "timer2": {},
             "timer3": {},
             "xtal": {}
-          }
+          },
+          "vp_ports": [
+            "jtag0_pad"
+          ]
         },
         "pads": {
           "spim0": {
@@ -4621,7 +4624,19 @@
               ]
             }
           }
-        }
+        },
+        "vp_ports": [
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
+          "cpi0"
+        ],
+        "vp_bindings": [
+          [
+            "self->jtag0_pad",
+            "padframe->jtag0_pad"
+          ]
+        ]
       },
       "pulp_chip": {
         "vivosoc3": {}
@@ -4641,8 +4656,59 @@
           "pulp_chip.hyper0",
           "hyperflash0"
         ]
-      ]
+      ],
+      "tb_comps": [
+        "jtag_proxy",
+        "camera"
+      ],
+      "vp_bindings": [
+        [
+          "dpi->jtag0",
+          "chip->jtag0_pad"
+        ]
+      ],
+      "tb_bindings": [
+        [
+          "chip->jtag0",
+          "jtag_proxy->jtag"
+        ],
+        [
+          "chip->ctrl",
+          "jtag_proxy->ctrl"
+        ],
+        [
+          "camera->cpi",
+          "chip->cpi0"
+        ]
+      ],
+      "dpi": {
+        "vp_ports": [
+          "jtag0"
+        ]
+      },
+      "jtag_proxy": {
+        "type": "dpi",
+        "active": false,
+        "module": "jtag_proxy.so",
+        "verbose": false,
+        "port": 37539,
+        "vp_ports": [
+          "jtag",
+          "ctrl"
+        ]
+      },
+      "camera": {
+        "type": "dpi",
+        "model": "himax",
+        "module": "camera.so",
+        "vp_ports": [
+          "cpi"
+        ]
+      }
     },
     "peripherals": {}
-  }
+  },
+  "vp_comps": [
+    "system_tree"
+  ]
 }

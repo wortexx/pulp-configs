@@ -188,6 +188,10 @@
           [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
+          ],
+          [
+            "self->jtag0_pad",
+            "padframe->jtag0_pad"
           ]
         ],
         "padframe": {
@@ -1733,6 +1737,7 @@
             }
           },
           "vp_ports": [
+            "jtag0_pad",
             "jtag0_pad"
           ]
         },
@@ -6544,6 +6549,10 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
+          "cpi0",
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
           "cpi0"
         ]
       },
@@ -6584,9 +6593,15 @@
       ],
       "tb_comps": [
         "jtag_proxy",
+        "camera",
+        "jtag_proxy",
         "camera"
       ],
       "vp_bindings": [
+        [
+          "dpi->jtag0",
+          "chip->jtag0_pad"
+        ],
         [
           "dpi->jtag0",
           "chip->jtag0_pad"
@@ -6604,10 +6619,23 @@
         [
           "camera->cpi",
           "chip->cpi0"
+        ],
+        [
+          "chip->jtag0",
+          "jtag_proxy->jtag"
+        ],
+        [
+          "chip->ctrl",
+          "jtag_proxy->ctrl"
+        ],
+        [
+          "camera->cpi",
+          "chip->cpi0"
         ]
       ],
       "dpi": {
         "vp_ports": [
+          "jtag0",
           "jtag0"
         ]
       },
@@ -6619,6 +6647,8 @@
         "port": 37539,
         "vp_ports": [
           "jtag",
+          "ctrl",
+          "jtag",
           "ctrl"
         ]
       },
@@ -6627,12 +6657,14 @@
         "model": "himax",
         "module": "camera.so",
         "vp_ports": [
+          "cpi",
           "cpi"
         ]
       }
     }
   },
   "vp_comps": [
+    "system_tree",
     "system_tree"
   ]
 }

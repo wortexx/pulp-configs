@@ -42,7 +42,7 @@
   ],
   "padframe": {
     "includes": [
-      "chips/pulpissimo/padframe.json"
+      "chips/pulpissimo-zeroriscy/padframe.json"
     ],
     "vp_ports": [
       "jtag0",

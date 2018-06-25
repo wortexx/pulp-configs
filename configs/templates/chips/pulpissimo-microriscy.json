@@ -1,6 +1,8 @@
 {
   "chip": "pulpissimo",
     
+  "padframe": "chips/pulpissimo-microriscy/padframe.json",
+
   "soc": {
     
     "base": "0x1A000000",

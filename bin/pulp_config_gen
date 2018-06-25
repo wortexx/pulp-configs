@@ -19,6 +19,7 @@ parser.add_argument("--prop", dest="props", default=[], action="append", help="S
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 parser.add_argument("--graph", dest="graph", default=None, help="Specify path to output graph")
 parser.add_argument("--output-dir", dest="output_dir", default=None, help="Specify directory for temporary files")
+parser.add_argument("--usecase", dest="usecases", action="append", default=[], help="Specify the JSON usecase file")
 
 args = parser.parse_args()
 
@@ -61,7 +62,7 @@ cmd = 'pulp_soc_gen    --template=%s --output=%s/soc.json' % (template_file, ful
 if os.system(cmd) != 0:
   exit(-1)
 
-cmd = 'pulp_chip_gen   --chip=%s --output=%s/chip.json' % (tp.get_child_str('chip'), full_output_dir)
+cmd = 'pulp_chip_gen --template=%s --chip=%s --output=%s/chip.json' % (template_file, tp.get_child_str('chip'), full_output_dir)
 #print (cmd)
 if os.system(cmd) != 0:
   exit(-1)
@@ -74,7 +75,12 @@ if os.system(cmd) != 0:
 top_gen_opt = ''
 if args.graph is not None:
   top_gen_opt += ' --graph=%s' % args.graph
-cmd = 'pulp_top_gen    --system=%s --system-file=%s/system.json --usecase=usecases/jtag.json --output=%s %s' % (tp.get_child_str('chip'), full_output_dir, args.output, top_gen_opt)
+
+usecase_opt = ''
+for usecase in args.usecases:
+  usecase_opt += ' --usecase=%s' % usecase
+
+cmd = 'pulp_top_gen    --system=%s --system-file=%s/system.json%s --output=%s %s' % (tp.get_child_str('chip'), full_output_dir, usecase_opt, args.output, top_gen_opt)
 #print (cmd)
 if os.system(cmd) != 0:
   exit(-1)

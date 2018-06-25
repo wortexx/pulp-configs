@@ -1,6 +1,8 @@
 {
   "chip": "multino",
 
+  "padframe": "chips/multino/padframe.json",
+
   "cluster0": {
     "pe0": {
       "boot_addr": "0x1c008000"

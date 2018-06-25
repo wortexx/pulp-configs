@@ -16,10 +16,16 @@ parser.add_argument("--chip", dest="chip", default="pulp", help="Specify the chi
 parser.add_argument("--soc-file", dest="soc_file", default=None, help="Specify the soc JSON file")
 parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
+parser.add_argument("--template", dest="template", default=None, help="Specify the soc template")
 
 [args, known_args] = parser.parse_known_args()
 
 args = parser.parse_args()
+
+if args.template is None:
+  print ('The path to the template configuration must be given through option --template')
+  exit(-1)
+
 
 soc_file = 'soc.json'
 
@@ -29,6 +35,11 @@ if args.soc_file is not None:
 
 os.environ['PULP_CONFIGS_PATH'] = ':'.join(args.configs + os.environ.get('PULP_CONFIGS_PATH').split(':'))
 
+
+tp = js.import_config_from_file(args.template, find=True)
+
+
+padframe              = tp.get_child_str('padframe')
 
 
 chip = Component(
@@ -44,9 +55,10 @@ chip = Component(
 )
 
 
-chip.padframe = Component(
-  includes= [ "chips/%s/padframe.json" % args.chip ]
-)
+if padframe is not None:
+  chip.padframe = Component(
+    includes= [ "%s" % padframe ]
+  )
 
 
 chip.soc_clock = Component(
@@ -59,10 +71,12 @@ chip.soc = Component(
   includes= [ soc_file ]
 )
 
-chip.soc.spim0 = chip.padframe.spim0
-chip.soc.uart0 = chip.padframe.uart0
-chip.padframe.jtag0 = chip.soc.jtag
-chip.soc_clock.out = chip.padframe.clock
+if padframe is not None:
+  chip.soc.spim0 = chip.padframe.spim0
+  chip.soc.uart0 = chip.padframe.uart0
+  chip.padframe.jtag0 = chip.soc.jtag
+  chip.soc_clock.out = chip.padframe.clock
+  
 chip.soc_clock.out = chip.soc.clock
 
 
