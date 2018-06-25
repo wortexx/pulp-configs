@@ -79,7 +79,7 @@
     "use_external_tb": false,
     "active_tb_comps": [],
     "py-stack": false,
-    "boot_from_flash": false,
+    "boot_from_flash": true,
     "flash_type": "spi",
     "flash_slm_file": "slm_files/flash_stim.slm",
     "rtl_simulator": "vsim",

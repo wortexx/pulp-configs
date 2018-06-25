@@ -1,6 +1,8 @@
 {
   "chip": "pulp",
   
+  "padframe": "chips/pulp/padframe.json",
+
   "cluster": {
     "base": "0x10000000",
     "alias": "0x00000000",

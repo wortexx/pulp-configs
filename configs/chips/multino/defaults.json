@@ -1,6 +1,6 @@
 {
   "runner": {
-    "boot_from_flash": false,
+    "boot_from_flash": true,
     "boot-mode": "jtag"
   },
   
