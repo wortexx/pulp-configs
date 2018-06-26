@@ -4702,9 +4702,12 @@
         ]
       },
       "camera": {
-        "type": "dpi",
         "model": "himax",
-        "module": "camera.so",
+        "width": 320,
+        "height": 240,
+        "image": [],
+        "frequency": 1000000,
+        "activeDelay": -1,
         "vp_ports": [
           "cpi"
         ]

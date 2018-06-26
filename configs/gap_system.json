@@ -32,7 +32,7 @@
           "aes_key": 0,
           "aes_iv": 0,
           "boot_binary": "test/test"
-        }
+        } 
       },
 
       "hyperram": {
@@ -47,6 +47,10 @@
         }
       },
 
+      "camera": {
+        "includes": [ "periphs/himax.json" ]
+      },
+
       "bindings": [
         [
           "pulp_chip.hyper0",
@@ -55,6 +59,14 @@
         [
           "pulp_chip.hyper0",
           "hyperram.hyperram"
+        ],          
+        [
+          "pulp_chip.cpi0",
+          "self.camera"
+        ],
+        [
+          "pulp_chip.i2c0",
+          "self.camera"
         ]
       ]
 

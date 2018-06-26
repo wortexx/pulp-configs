@@ -6553,11 +6553,9 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
-          "cpi0",
           "jtag0",
           "ctrl",
-          "jtag0_pad",
-          "cpi0"
+          "jtag0_pad"
         ]
       },
       "pulp_chip": {
@@ -6585,6 +6583,14 @@
           "boot_binary": "test/test"
         }
       },
+      "camera": {
+        "model": "himax",
+        "width": 320,
+        "height": 240,
+        "image": [],
+        "frequency": 1000000,
+        "activeDelay": -1
+      },
       "bindings": [
         [
           "pulp_chip.hyper0",
@@ -6593,6 +6599,14 @@
         [
           "pulp_chip.hyper0",
           "hyperram.hyperram"
+        ],
+        [
+          "pulp_chip.cpi0",
+          "self.camera"
+        ],
+        [
+          "pulp_chip.i2c0",
+          "self.camera"
         ]
       ],
       "tb_comps": [
@@ -6621,20 +6635,12 @@
           "jtag_proxy->ctrl"
         ],
         [
-          "camera->cpi",
-          "chip->cpi0"
-        ],
-        [
           "chip->jtag0",
           "jtag_proxy->jtag"
         ],
         [
           "chip->ctrl",
           "jtag_proxy->ctrl"
-        ],
-        [
-          "camera->cpi",
-          "chip->cpi0"
         ]
       ],
       "dpi": {
@@ -6654,15 +6660,6 @@
           "ctrl",
           "jtag",
           "ctrl"
-        ]
-      },
-      "camera": {
-        "type": "dpi",
-        "model": "himax",
-        "module": "camera.so",
-        "vp_ports": [
-          "cpi",
-          "cpi"
         ]
       }
     }
