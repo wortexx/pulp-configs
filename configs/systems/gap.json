@@ -6553,11 +6553,9 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
-          "cpi0",
           "jtag0",
           "ctrl",
-          "jtag0_pad",
-          "cpi0"
+          "jtag0_pad"
         ]
       },
       "pulp_chip": {
@@ -6591,13 +6589,7 @@
         "height": 240,
         "image": [],
         "frequency": 1000000,
-        "activeDelay": -1,
-        "type": "dpi",
-        "module": "camera.so",
-        "vp_ports": [
-          "cpi",
-          "cpi"
-        ]
+        "activeDelay": -1
       },
       "bindings": [
         [
@@ -6643,20 +6635,12 @@
           "jtag_proxy->ctrl"
         ],
         [
-          "camera->cpi",
-          "chip->cpi0"
-        ],
-        [
           "chip->jtag0",
           "jtag_proxy->jtag"
         ],
         [
           "chip->ctrl",
           "jtag_proxy->ctrl"
-        ],
-        [
-          "camera->cpi",
-          "chip->cpi0"
         ]
       ],
       "dpi": {
