@@ -3471,8 +3471,7 @@
         "vp_ports": [
           "jtag0",
           "ctrl",
-          "jtag0_pad",
-          "cpi0"
+          "jtag0_pad"
         ]
       },
       "pulp_chip": {
@@ -3496,10 +3495,6 @@
         [
           "chip->ctrl",
           "jtag_proxy->ctrl"
-        ],
-        [
-          "camera->cpi",
-          "chip->cpi0"
         ]
       ],
       "dpi": {
@@ -3524,10 +3519,7 @@
         "height": 240,
         "image": [],
         "frequency": 1000000,
-        "activeDelay": -1,
-        "vp_ports": [
-          "cpi"
-        ]
+        "activeDelay": -1
       }
     },
     "peripherals": {}

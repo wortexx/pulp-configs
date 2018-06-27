@@ -35,7 +35,7 @@ gen.vega:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vega --output=configs/systems/vega.json --usecase=usecases/jtag.json
 
 gen.gap:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=gap --usecase=usecases/jtag.json --output=configs/systems/gap.json --usecase=usecases/jtag.json
+	#./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=gap --usecase=usecases/jtag.json --output=configs/systems/gap.json --usecase=usecases/jtag.json
 
 gen.vivosoc3:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc3   --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
