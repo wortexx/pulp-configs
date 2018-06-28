@@ -3471,7 +3471,8 @@
         "vp_ports": [
           "jtag0",
           "ctrl",
-          "jtag0_pad"
+          "jtag0_pad",
+          "cpi0"
         ]
       },
       "pulp_chip": {
@@ -3495,6 +3496,10 @@
         [
           "chip->ctrl",
           "jtag_proxy->ctrl"
+        ],
+        [
+          "camera->cpi",
+          "chip->cpi0"
         ]
       ],
       "dpi": {
@@ -3514,12 +3519,12 @@
         ]
       },
       "camera": {
+        "type": "dpi",
         "model": "himax",
-        "width": 320,
-        "height": 240,
-        "image": [],
-        "frequency": 1000000,
-        "activeDelay": -1
+        "module": "camera.so",
+        "vp_ports": [
+          "cpi"
+        ]
       }
     },
     "peripherals": {}

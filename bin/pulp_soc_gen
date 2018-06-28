@@ -47,6 +47,7 @@ has_fll           = tp.get('soc/peripherals/fll') is not None
 has_rom           = tp.get('soc/rom') is not None
 has_efuse         = tp.get('soc/peripherals/efuse') is not None
 has_pmu           = tp.get('soc/peripherals/pmu') is not None
+has_hwme          = tp.get('soc/peripherals/hwme') is not None
 
 
 if fc_events is not None:
@@ -397,6 +398,11 @@ if has_pmu:
 if has_fc:
   soc.timer = Component(
       includes= ["ips/timer_v%d.json" % tp.get_child_int("soc/peripherals/fc_timer/version")]
+  )
+
+if has_hwme:
+  soc.hwme = Component(
+      includes= ["ips/hwme_v%d.json" % tp.get_child_int("soc/peripherals/hwme/version")]
   )
 
 if has_soc_events:

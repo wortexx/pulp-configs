@@ -37,6 +37,7 @@
     "stdout",
     "gpio",
     "timer",
+    "hwme",
     "soc_eu",
     "udma",
     "uart",
@@ -702,6 +703,11 @@
       "irq_itf_0",
       "irq_itf_1",
       "input"
+    ]
+  },
+  "hwme": {
+    "includes": [
+      "ips/hwme_v1.json"
     ]
   },
   "soc_eu": {

@@ -123,6 +123,10 @@
         "version"      : 1,
         "base"         : "0x1A110000",
         "size"         : "0x00008000"
+      },
+
+      "hwme": {
+        "version"      : 1
       }
 
     }
