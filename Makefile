@@ -25,7 +25,7 @@ gen.pulpissimo.riscy:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-riscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-riscy --output=configs/systems/pulpissimo-riscy.json --usecase=usecases/jtag.json
 
 gen.wolfe:
-	#./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/wolfe.json --output-dir=$(CURDIR)/configs/chips/wolfe --output=configs/systems/wolfe.json --usecase=usecases/jtag.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/wolfe.json --output-dir=$(CURDIR)/configs/chips/wolfe --output=configs/systems/wolfe.json --usecase=usecases/jtag.json
 
 gen.oprecompkw:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw.json --output-dir=$(CURDIR)/configs/chips/oprecompkw --output=configs/systems/oprecompkw.json
