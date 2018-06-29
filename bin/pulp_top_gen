@@ -20,6 +20,7 @@ parser.add_argument("--configs", dest="configs", default=None, help="Specify pat
 parser.add_argument("--usecase", dest="usecases", action="append", default=[], help="Specify the JSON usecase file")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 parser.add_argument("--graph", dest="graph", default=None, help="Specify path to output graph")
+parser.add_argument("--template", dest="template", default=None, help="Specify the soc template")
 
 args = parser.parse_args()
 
