@@ -70,7 +70,6 @@
   "gdb": {
     "active": false
   },
-  "options": {
     "rt": {
       "mode":"rt",
       "version": "bench",
@@ -105,7 +104,6 @@
         }
       },
       "start-all": "false"
-    }
   },
   "loader": {
     "bridge": "none",
