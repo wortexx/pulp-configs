@@ -40,6 +40,8 @@ tp = js.import_config_from_file(args.template, find=True)
 
 
 padframe              = tp.get_child_str('padframe')
+has_ddr = tp.get('ddr') is not None
+
 
 
 chip = Component(
@@ -78,6 +80,10 @@ if padframe is not None:
   chip.soc_clock.out = chip.padframe.clock
   
 chip.soc_clock.out = chip.soc.clock
+
+if has_ddr:
+
+  chip.soc.ddr = chip.ddr
 
 
 config = chip.get_json_config()

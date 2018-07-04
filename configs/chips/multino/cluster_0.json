@@ -1443,6 +1443,7 @@
       "ips/mchan_v6.json"
     ],
     "nb_channels": 5,
+    "is_64": false,
     "vp_ports": [
       "ext_irq_itf",
       "event_itf_0",

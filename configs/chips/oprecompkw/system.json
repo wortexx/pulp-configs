@@ -14,17 +14,30 @@
         "chip",
         "dpi_clock",
         "pulp_chip",
-        "dpi"
+        "dpi",
+        "ddr_clock",
+        "ddr"
       ],
       "vp_bindings": [
         [
+          "chip->ddr",
+          "ddr->input"
+        ],
+        [
           "dpi_clock->out",
           "dpi->clock"
+        ],
+        [
+          "ddr_clock->out",
+          "ddr->clock"
         ]
       ],
       "chip": {
         "includes": [
           "chip.json"
+        ],
+        "vp_ports": [
+          "ddr"
         ]
       },
       "dpi_clock": {
@@ -42,6 +55,23 @@
           "periph/dpi_wrapper.json"
         ],
         "vp_ports": [
+          "clock"
+        ]
+      },
+      "ddr_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": null,
+        "vp_ports": [
+          "out"
+        ]
+      },
+      "ddr": {
+        "includes": [
+          "ips/memory/ddr.json"
+        ],
+        "size": "0x10000000",
+        "vp_ports": [
+          "input",
           "clock"
         ]
       }

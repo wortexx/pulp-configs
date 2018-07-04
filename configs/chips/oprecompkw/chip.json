@@ -17,10 +17,17 @@
     "soc_clock",
     "soc"
   ],
+  "vp_ports": [
+    "ddr"
+  ],
   "vp_bindings": [
     [
       "soc_clock->out",
       "soc->clock"
+    ],
+    [
+      "soc->ddr",
+      "self->ddr"
     ]
   ],
   "soc_clock": {
@@ -35,6 +42,7 @@
       "soc.json"
     ],
     "vp_ports": [
+      "ddr",
       "clock"
     ]
   }

@@ -22,13 +22,18 @@
         [
           "chip->ctrl",
           "jtag_proxy->ctrl"
+        ],
+        [
+          "camera->cpi",
+          "chip->cpi0"
         ]
       ],
       "chip": {
         "vp_ports": [
           "jtag0",
           "ctrl",
-          "jtag0_pad"
+          "jtag0_pad",
+          "cpi0"
         ],
         "vp_bindings": [
           [
@@ -61,7 +66,10 @@
       "camera": {
         "type": "dpi",
         "model": "himax",
-        "module": "camera.so"
+        "module": "camera.so",
+        "vp_ports": [
+          "cpi"
+        ]
       }
     }
   }

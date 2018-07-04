@@ -43,6 +43,10 @@ dma_irq_1         = tp.get('cluster/pe/irq').get_dict().index('dma_1')
 dma_irq_ext       = tp.get('cluster/pe/irq').get_dict().index('dma_ext')
 timer_irq_0       = tp.get('cluster/pe/irq').get_dict().index('timer_0')
 timer_irq_1       = tp.get('cluster/pe/irq').get_dict().index('timer_1')
+try:
+  job_fifo_irq    = tp.get('cluster/pe/irq').get_dict().index('job_fifo')
+except:
+  job_fifo_irq    = None
 #if tp.get('cluster/alias') is not None:
 #  alias = tp.get_child_str('cluster/alias')
 #else:
@@ -211,7 +215,8 @@ cluster.icache = Empty_Component(
 
 cluster.dma = Component(
   includes=["ips/mchan_v6.json"],
-  nb_channels=nb_pe+1
+  nb_channels=nb_pe+1,
+  is_64=tp.get_child_bool('cluster/peripherals/dma/is_64') == True
 )
 
 cluster.cluster_ctrl = Component(
@@ -399,6 +404,10 @@ for i in range(0, nb_pe):
 
 cluster.l1_ico.ext2loc.out = cluster.l1_ico.interleaver.new_itf('in_%d'%nb_pe)
 
+
+if job_fifo_irq is not None:
+  for i in range(0, nb_pe):
+    cluster.job_fifo_irq = cluster.event_unit.new_itf('in_event_%d_pe_%d' % (job_fifo_irq, i))
 
 
 

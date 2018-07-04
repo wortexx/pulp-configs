@@ -1,6 +1,10 @@
 {
   "chip": "oprecompkw",
     
+  "ddr": {
+    "size"  : "0x10000000"
+  },
+
   "cluster": {
     "base": "0x10000000",
     "alias": "0x00000000",
@@ -18,7 +22,7 @@
         "acc_0"    , "acc_1"    , "acc_2"      , "acc_3",
         "eu_bar"   , "eu_mutex" , "eu_dispatch", null,
         null       , null       , "dma_ext"    , null,
-        null       , null       , null         , null,
+        "job_fifo" , null       , null         , null,
         "mpu_error", null       , "soc_event"  , "soc_fifo"
       ]
     },
@@ -61,7 +65,8 @@
 
       "dma": {
         "base": "0x10201800",
-        "size": "0x00000400"
+        "size": "0x00000400",
+        "is_64": true
       },
 
       "dbg_unit": {
@@ -95,6 +100,11 @@
 
     "base": "0x1A000000",
     "size": "0x06000000",
+
+    "ddr": {
+      "base"  : "0x800000000000",
+      "size"  : "0x100000000000"
+    },
 
     "rom": {
       "version": 2,

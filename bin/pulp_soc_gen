@@ -37,6 +37,7 @@ has_cluster       = tp.get('cluster') is not None
 nb_cluster        = tp.get_child_int('cluster/nb_cluster')
 nb_pe             = tp.get_child_int('cluster/nb_pe')
 has_fc            = tp.get('soc/fc') is not None
+has_ddr           = tp.get('soc/ddr') is not None
 has_udma          = tp.get('soc/peripherals/udma') is not None
 has_spi_master    = tp.get('soc/peripherals/spi_master') is not None
 has_gpio          = tp.get('soc/peripherals/gpio') is not None
@@ -90,6 +91,11 @@ if has_cluster:
         "base": "0x%x" % (base + size * cid),
         "size": "0x%x" % (size)
       }
+  })
+
+if has_ddr:
+  axi_ico_mappings.update({
+    "ddr": get_mapping(tp.get_child_dict('soc/ddr'), True)
   })
 
 soc.axi_ico = Component(
@@ -513,6 +519,9 @@ if has_cluster:
     soc.axi_ico.set(cluster_name, soc.get(cluster_name).input)
 soc.axi_ico.soc = soc.soc_ico.axi_slave
 
+if has_ddr:
+  soc.axi_ico.ddr = soc.ddr
+
 # FC ITC
 if has_fc:
   soc.fc_itc.irq_req = soc.fc.irq_req
@@ -569,6 +578,9 @@ if tp.get('soc/job_fifo') is not None:
       "base": "0x1000000000000", "size": "0x1000000000000", "remove_offset": "0x1000000000000"
     }
     soc.axi_ico.ext = soc.host_injector.input
+
+    for cid in range(0, nb_cluster):
+      soc.job_fifo.irq = soc.get(get_cluster_name(cid)).job_fifo_irq
 
 
 config = soc.get_json_config()

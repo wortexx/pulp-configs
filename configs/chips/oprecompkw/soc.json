@@ -22,7 +22,8 @@
   ],
   "vp_ports": [
     "cluster_clock",
-    "jtag"
+    "jtag",
+    "ddr"
   ],
   "vp_bindings": [
     [
@@ -40,6 +41,10 @@
     [
       "axi_ico->soc",
       "soc_ico->axi_slave"
+    ],
+    [
+      "axi_ico->ddr",
+      "self->ddr"
     ],
     [
       "axi_ico->ext",
@@ -86,6 +91,10 @@
       "soc_ico->debug"
     ],
     [
+      "job_fifo->irq",
+      "cluster->job_fifo_irq"
+    ],
+    [
       "job_fifo_injector->output",
       "job_fifo->fifo"
     ]
@@ -104,6 +113,11 @@
         "base": "0x10000000",
         "size": "0x400000"
       },
+      "ddr": {
+        "base": "0x800000000000",
+        "size": "0x100000000000",
+        "remove_offset": "0x800000000000"
+      },
       "ext": {
         "base": "0x1000000000000",
         "size": "0x1000000000000",
@@ -113,6 +127,7 @@
     "vp_ports": [
       "cluster",
       "soc",
+      "ddr",
       "ext",
       "input"
     ]
@@ -313,7 +328,8 @@
     "vp_ports": [
       "soc",
       "clock",
-      "input"
+      "input",
+      "job_fifo_irq"
     ]
   },
   "adv_dbg_unit": {
@@ -330,6 +346,7 @@
       "job_fifo.json"
     ],
     "vp_ports": [
+      "irq",
       "input",
       "fifo"
     ]

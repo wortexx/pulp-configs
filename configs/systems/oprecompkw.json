@@ -83,6 +83,7 @@
     "flash_type": "spi",
     "flash_slm_file": "slm_files/flash_stim.slm",
     "rtl_simulator": "vsim",
+    "simulator": null,
     "aes_key": "12345678275689075642768987654345",
     "aes_iv": "0987654323456789"
   },
@@ -129,7 +130,11 @@
     "binaries": [],
     "boot": {
       "mode": "jtag"
-    }
+    },
+    "set_pc_addr": "0x10200040",
+    "set_pc_offset": "-128",
+    "start_addr": "0x10200008",
+    "start_value": "0x1"
   },
   "system_tree": {
     "debug_bridge": {
@@ -158,14 +163,33 @@
     "board": {
       "vp_class": "pulp/board",
       "vp_comps": [
-        "chip"
+        "chip",
+        "dpi_clock",
+        "pulp_chip",
+        "dpi",
+        "ddr_clock",
+        "ddr"
       ],
-      "vp_bindings": [],
+      "vp_bindings": [
+        [
+          "chip->ddr",
+          "ddr->input"
+        ],
+        [
+          "dpi_clock->out",
+          "dpi->clock"
+        ],
+        [
+          "ddr_clock->out",
+          "ddr->clock"
+        ]
+      ],
       "chip": {
         "name": "oprecompkw",
         "pulp_chip_family": "oprecompkw",
         "pulp_chip_version": 0,
-        "boot_from_rom": true,
+        "boot_from_rom": false,
+        "vp_class": "pulp/chip",
         "hal_files": [
           "hal/chips/oprecompkw/pulp.h"
         ],
@@ -175,30 +199,31 @@
           "archi/chips/oprecompkw/properties.h",
           "archi/chips/oprecompkw/apb_soc.h"
         ],
-        "vp_class": "pulp/chip",
         "vp_comps": [
-          "soc",
           "soc_clock",
-          "cluster_clock"
+          "soc"
         ],
-        "soc_clock": {
-          "vp_class": "vp/clock_domain",
-          "frequency": 100000000
-        },
-        "cluster_clock": {
-          "vp_class": "vp/clock_domain",
-          "frequency": 100000000
-        },
+        "vp_ports": [
+          "ddr",
+          "ddr"
+        ],
         "vp_bindings": [
-          [
-            "cluster_clock->out",
-            "soc->cluster_clock"
-          ],
           [
             "soc_clock->out",
             "soc->clock"
+          ],
+          [
+            "soc->ddr",
+            "self->ddr"
           ]
         ],
+        "soc_clock": {
+          "vp_class": "vp/clock_domain",
+          "frequency": 100000000,
+          "vp_ports": [
+            "out"
+          ]
+        },
         "soc": {
           "nb_cluster": 1,
           "vp_class": "pulp/soc",
@@ -223,7 +248,10 @@
           ],
           "vp_ports": [
             "cluster_clock",
-            "jtag"
+            "jtag",
+            "ddr",
+            "ddr",
+            "clock"
           ],
           "vp_bindings": [
             [
@@ -241,6 +269,10 @@
             [
               "axi_ico->soc",
               "soc_ico->axi_slave"
+            ],
+            [
+              "axi_ico->ddr",
+              "self->ddr"
             ],
             [
               "axi_ico->ext",
@@ -287,12 +319,12 @@
               "soc_ico->debug"
             ],
             [
-              "job_fifo_injector->output",
-              "job_fifo->fifo"
-            ],
-            [
               "job_fifo->irq",
               "cluster->job_fifo_irq"
+            ],
+            [
+              "job_fifo_injector->output",
+              "job_fifo->fifo"
             ]
           ],
           "axi_ico": {
@@ -309,6 +341,11 @@
                 "base": "0x10000000",
                 "size": "0x400000"
               },
+              "ddr": {
+                "base": "0x800000000000",
+                "size": "0x100000000000",
+                "remove_offset": "0x800000000000"
+              },
               "ext": {
                 "base": "0x1000000000000",
                 "size": "0x1000000000000",
@@ -318,6 +355,7 @@
             "vp_ports": [
               "cluster",
               "soc",
+              "ddr",
               "ext",
               "input"
             ]
@@ -428,10 +466,6 @@
                 "out_2",
                 "out_3"
               ]
-            },
-            "rom": {
-              "base": "0x1A000000",
-              "size": "0x00010000"
             }
           },
           "apb_ico": {
@@ -655,6 +689,7 @@
             ],
             "vp_ports": [
               "input",
+              "job_fifo_irq",
               "dma_irq",
               "soc",
               "soc",
@@ -666,6 +701,38 @@
               [
                 "self->input",
                 "cluster_ico->input"
+              ],
+              [
+                "self->job_fifo_irq",
+                "event_unit->in_event_24_pe_0"
+              ],
+              [
+                "self->job_fifo_irq",
+                "event_unit->in_event_24_pe_1"
+              ],
+              [
+                "self->job_fifo_irq",
+                "event_unit->in_event_24_pe_2"
+              ],
+              [
+                "self->job_fifo_irq",
+                "event_unit->in_event_24_pe_3"
+              ],
+              [
+                "self->job_fifo_irq",
+                "event_unit->in_event_24_pe_4"
+              ],
+              [
+                "self->job_fifo_irq",
+                "event_unit->in_event_24_pe_5"
+              ],
+              [
+                "self->job_fifo_irq",
+                "event_unit->in_event_24_pe_6"
+              ],
+              [
+                "self->job_fifo_irq",
+                "event_unit->in_event_24_pe_7"
               ],
               [
                 "cluster_ico->soc",
@@ -1534,38 +1601,6 @@
               [
                 "pe7->ext_counter[15]",
                 "l1_ico->ext_counter_7[15]"
-              ],
-              [
-                "self->job_fifo_irq",
-                "event_unit->in_event_24_pe_0"
-              ],
-              [
-                "self->job_fifo_irq",
-                "event_unit->in_event_24_pe_1"
-              ],
-              [
-                "self->job_fifo_irq",
-                "event_unit->in_event_24_pe_2"
-              ],
-              [
-                "self->job_fifo_irq",
-                "event_unit->in_event_24_pe_3"
-              ],
-              [
-                "self->job_fifo_irq",
-                "event_unit->in_event_24_pe_4"
-              ],
-              [
-                "self->job_fifo_irq",
-                "event_unit->in_event_24_pe_5"
-              ],
-              [
-                "self->job_fifo_irq",
-                "event_unit->in_event_24_pe_6"
-              ],
-              [
-                "self->job_fifo_irq",
-                "event_unit->in_event_24_pe_7"
               ]
             ],
             "cluster_ico": {
@@ -3795,7 +3830,15 @@
                 "irq_ack_4",
                 "irq_ack_5",
                 "irq_ack_6",
-                "irq_ack_7"
+                "irq_ack_7",
+                "in_event_24_pe_0",
+                "in_event_24_pe_1",
+                "in_event_24_pe_2",
+                "in_event_24_pe_3",
+                "in_event_24_pe_4",
+                "in_event_24_pe_5",
+                "in_event_24_pe_6",
+                "in_event_24_pe_7"
               ]
             },
             "timer": {
@@ -3920,7 +3963,7 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": true,
+              "fetch_enable": false,
               "boot_addr": "0x1A000000",
               "power_models": {
                 "clock_gated": {
@@ -4553,6 +4596,7 @@
               "snd_fd": -1
             },
             "vp_ports": [
+              "irq",
               "input",
               "fifo"
             ]
@@ -4572,35 +4616,40 @@
             "vp_ports": [
               "input"
             ]
-          },
-          "gv_comps": {
-            "job_fifo": 1
-          },
-          "injector": {
-            "vp_class": "utils/injector",
-            "rcv_fd": -1,
-            "snd_fd": -1
-          },
-          "bindings": [
-            [
-              "job_fifo.irq",
-              "cluster.irq_24"
-            ]
-          ]
-        },
-        "rom": {
-          "version": 2,
-          "hal_files": [
-            "hal/rom/rom_v2.h"
-          ],
-          "size": 8192,
-          "map_base": "0x1A000000",
-          "map_size": "0x00010000"
+          }
         }
       },
+      "dpi_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 100000000,
+        "vp_ports": [
+          "out"
+        ]
+      },
       "pulp_chip": {
-        "oprecompkw": {
-        }
+        "oprecompkw": {}
+      },
+      "dpi": {
+        "vp_class": "utils/dpi_wrapper",
+        "vp_ports": [
+          "clock"
+        ]
+      },
+      "ddr_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": null,
+        "vp_ports": [
+          "out"
+        ]
+      },
+      "ddr": {
+        "size": "0x10000000",
+        "vp_class": "memory/ddr",
+        "frequency": 100000000,
+        "vp_ports": [
+          "input",
+          "clock"
+        ]
       }
     }
   }

@@ -104,6 +104,24 @@ system.system_tree.board.dpi = Component(
 
 system.system_tree.board.dpi_clock.out = system.system_tree.board.dpi.clock
 
+has_ddr = tp.get('ddr') is not None
+
+if has_ddr:
+
+  system.system_tree.board.ddr_clock = Component(
+    vp_class="vp/clock_domain",
+    frequency=tp.get_child_str("ddr/frequency")
+  )
+
+  system.system_tree.board.ddr = Component(
+      includes= [ "ips/memory/ddr.json" ],
+      size= tp.get_child_str("ddr/size")
+  )
+
+  system.system_tree.board.chip.ddr = system.system_tree.board.ddr.input
+  system.system_tree.board.ddr_clock.out = system.system_tree.board.ddr.clock
+
+
 
 config = system.get_json_config(configs=args.configs)
 

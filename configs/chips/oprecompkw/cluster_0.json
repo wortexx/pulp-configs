@@ -24,6 +24,7 @@
   ],
   "vp_ports": [
     "input",
+    "job_fifo_irq",
     "dma_irq",
     "soc"
   ],
@@ -31,6 +32,38 @@
     [
       "self->input",
       "cluster_ico->input"
+    ],
+    [
+      "self->job_fifo_irq",
+      "event_unit->in_event_24_pe_0"
+    ],
+    [
+      "self->job_fifo_irq",
+      "event_unit->in_event_24_pe_1"
+    ],
+    [
+      "self->job_fifo_irq",
+      "event_unit->in_event_24_pe_2"
+    ],
+    [
+      "self->job_fifo_irq",
+      "event_unit->in_event_24_pe_3"
+    ],
+    [
+      "self->job_fifo_irq",
+      "event_unit->in_event_24_pe_4"
+    ],
+    [
+      "self->job_fifo_irq",
+      "event_unit->in_event_24_pe_5"
+    ],
+    [
+      "self->job_fifo_irq",
+      "event_unit->in_event_24_pe_6"
+    ],
+    [
+      "self->job_fifo_irq",
+      "event_unit->in_event_24_pe_7"
     ],
     [
       "cluster_ico->soc",
@@ -2615,6 +2648,7 @@
       "ips/mchan_v6.json"
     ],
     "nb_channels": 9,
+    "is_64": true,
     "vp_ports": [
       "ext_irq_itf",
       "event_itf_0",
@@ -2760,7 +2794,15 @@
       "irq_ack_4",
       "irq_ack_5",
       "irq_ack_6",
-      "irq_ack_7"
+      "irq_ack_7",
+      "in_event_24_pe_0",
+      "in_event_24_pe_1",
+      "in_event_24_pe_2",
+      "in_event_24_pe_3",
+      "in_event_24_pe_4",
+      "in_event_24_pe_5",
+      "in_event_24_pe_6",
+      "in_event_24_pe_7"
     ]
   },
   "timer": {
