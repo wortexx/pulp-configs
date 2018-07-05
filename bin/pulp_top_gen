@@ -35,7 +35,7 @@ else:
 
 
 
-if args.system in ["pulpissimo", "pulp", "wolfe", "multino", "oprecompkw", "oprecompkw-dram"]:
+if args.system in ["pulpissimo", "pulp", "wolfe", "multino", "oprecompkw", "oprecompkw-dram", "oprecompkw_sa"]:
 
   includes = [
     "defaults.json",
