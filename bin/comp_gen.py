@@ -296,6 +296,9 @@ def get_mapping(mapping, remove_base=False, add_offset=None):
 def get_area(base, size, index):
     return '0x%x' % (int(base, 0)+index*size)
 
+def get_area_int(base, size, index):
+    return '%d' % (int(base, 0)+index*size)
+
 
 
 def get_mapping_area(mapping, size, index, remove_base=False, add_offset=None):

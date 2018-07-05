@@ -534,6 +534,7 @@
           },
           "apb_soc_ctrl": {
             "version": 3,
+            "vp_class": "pulp/chips/pulp/apb_soc",
             "hal_files": [
               "hal/apb_soc/apb_soc_v3.h"
             ],
@@ -1621,7 +1622,7 @@
                 "periph_ico_alias": {
                   "base": "0x00200000",
                   "size": "0x00200000",
-                  "add_offset": "0x10000000"
+                  "add_offset": "268435456"
                 },
                 "soc": {}
               },

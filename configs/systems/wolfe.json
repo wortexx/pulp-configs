@@ -2844,7 +2844,7 @@
                 "periph_ico_alias": {
                   "base": "0x00200000",
                   "size": "0x00200000",
-                  "add_offset": "0x10000000"
+                  "add_offset": "268435456"
                 },
                 "soc": {}
               },
