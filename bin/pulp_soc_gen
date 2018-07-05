@@ -575,7 +575,7 @@ if tp.get('soc/job_fifo') is not None:
     soc.job_fifo_injector.output = soc.job_fifo.fifo
 
     soc.axi_ico.get_property('mappings')["ext"] = {
-      "base": "0x1000000000000", "size": "0x1000000000000", "remove_offset": "0x1000000000000"
+      "base": "0x1000000000000", "size": "0x1000000000000"
     }
     soc.axi_ico.ext = soc.host_injector.input
 
