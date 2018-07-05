@@ -44,6 +44,9 @@ gen.gap:
 gen.vivosoc3:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc3   --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
 
+gen.bigpulp-z-7045:
+	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=bigpulp    --output=configs/systems/bigpulp-z-7045.json
+
 gen.bigpulp:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=bigpulp    --output=configs/systems/bigpulp.json
 
@@ -69,7 +72,7 @@ gen.vivosoc2:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc2   --output=configs/systems/vivosoc2.json
 
 gen: gen.usecases gen.pulp gen.pulpissimo gen.pulpissimo.zeroriscy gen.pulpissimo.microriscy \
-  gen.pulpissimo.riscy gen.wolfe gen.oprecompkw gen.vega gen.gap gen.vivosoc3 gen.bigpulp \
+  gen.pulpissimo.riscy gen.wolfe gen.oprecompkw gen.vega gen.gap gen.vivosoc3 gen.bigpulp-z-7045 gen.bigpulp \
   gen.fulmine gen.hero-zc706 gen.honey gen.multino gen.neuraghe \
   gen.quentin gen.vivosoc2_1 gen.vivosoc2
 
