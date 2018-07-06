@@ -83,6 +83,7 @@
     "flash_type": "spi",
     "flash_slm_file": "slm_files/flash_stim.slm",
     "rtl_simulator": "vsim",
+    "simulator": null,
     "aes_key": "12345678275689075642768987654345",
     "aes_iv": "0987654323456789"
   },
@@ -147,7 +148,7 @@
       "adv_dbg_unit": {
         "debug_ir": "0x4"
       },
-      "boot-mode": "default",
+      "boot-mode": "jtag",
       "commands": "load ioloop reqloop start wait",
       "gdb_commands": "load ioloop reqloop start gdb wait"
     },
@@ -184,10 +185,6 @@
           [
             "soc_clock->out",
             "soc->clock"
-          ],
-          [
-            "self->jtag0_pad",
-            "padframe->jtag0_pad"
           ],
           [
             "self->jtag0_pad",
@@ -1737,7 +1734,6 @@
             }
           },
           "vp_ports": [
-            "jtag0_pad",
             "jtag0_pad"
           ]
         },
@@ -6553,9 +6549,7 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
-          "jtag0",
-          "ctrl",
-          "jtag0_pad"
+          "cpi0"
         ]
       },
       "pulp_chip": {
@@ -6589,7 +6583,12 @@
         "height": 240,
         "image": [],
         "frequency": 1000000,
-        "activeDelay": -1
+        "activeDelay": -1,
+        "type": "dpi",
+        "module": "camera.so",
+        "vp_ports": [
+          "cpi"
+        ]
       },
       "bindings": [
         [
@@ -6611,15 +6610,9 @@
       ],
       "tb_comps": [
         "jtag_proxy",
-        "camera",
-        "jtag_proxy",
         "camera"
       ],
       "vp_bindings": [
-        [
-          "dpi->jtag0",
-          "chip->jtag0_pad"
-        ],
         [
           "dpi->jtag0",
           "chip->jtag0_pad"
@@ -6635,17 +6628,12 @@
           "jtag_proxy->ctrl"
         ],
         [
-          "chip->jtag0",
-          "jtag_proxy->jtag"
-        ],
-        [
-          "chip->ctrl",
-          "jtag_proxy->ctrl"
+          "camera->cpi",
+          "chip->cpi0"
         ]
       ],
       "dpi": {
         "vp_ports": [
-          "jtag0",
           "jtag0"
         ]
       },
@@ -6657,15 +6645,12 @@
         "port": 37539,
         "vp_ports": [
           "jtag",
-          "ctrl",
-          "jtag",
           "ctrl"
         ]
       }
     }
   },
   "vp_comps": [
-    "system_tree",
     "system_tree"
   ]
 }

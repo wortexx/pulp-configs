@@ -71,7 +71,11 @@
       ]
 
 
+    },
+    "debug_bridge": {
+      "boot-mode": "jtag"
     }
+
   },
 
   "runner": {
@@ -84,6 +88,5 @@
       "mode": "rom"
     }
   }
-
 }
 
