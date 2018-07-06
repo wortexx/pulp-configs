@@ -1,7 +1,7 @@
 {
   "version": 3,
 
-  "vp_class":  "pulp/chips/pulp/apb_soc",
+  "vp_class":  "pulp/chips/oprecompkw_sa/apb_soc",
   
   "hal_files" : [ "hal/apb_soc/apb_soc_v3.h" ],
 
