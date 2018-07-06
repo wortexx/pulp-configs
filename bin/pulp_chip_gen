@@ -40,20 +40,23 @@ tp = js.import_config_from_file(args.template, find=True)
 
 
 padframe              = tp.get_child_str('padframe')
+chip_family           = tp.get_child_str('chip_family')
 has_ddr = tp.get('ddr') is not None
+if chip_family is None:
+  chip_family = args.chip
 
 
 
 chip = Component(
   name=args.chip,
 
-  pulp_chip_family=args.chip,
+  pulp_chip_family=chip_family,
   pulp_chip_version=0,
   boot_from_rom=False,
   vp_class="pulp/chip",
 
-  hal_files= [ "hal/chips/%s/pulp.h" % args.chip],
-  archi_files= [ "archi/chips/%s/pulp.h" % args.chip, "archi/chips/%s/memory_map.h" % args.chip, "archi/chips/%s/properties.h" % args.chip, "archi/chips/%s/apb_soc.h" % args.chip ],
+  hal_files= [ "hal/chips/%s/pulp.h" % chip_family.replace('-', '_')],
+  archi_files= [ "archi/chips/%s/pulp.h" % chip_family, "archi/chips/%s/memory_map.h" % chip_family, "archi/chips/%s/properties.h" % chip_family, "archi/chips/%s/apb_soc.h" % chip_family ],
 )
 
 
