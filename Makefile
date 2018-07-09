@@ -46,8 +46,8 @@ gen.bigpulp:
 gen.fulmine:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=fulmine    --output=configs/systems/fulmine.json
 
-gen.hero-zc706:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=hero-zc706 --output=configs/systems/hero-zc706.json
+gen.hero-z-7045:
+	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=hero-z-7045 --output=configs/systems/hero-z-7045.json
 
 gen.honey:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=honey      --output=configs/systems/honey.json
@@ -66,7 +66,7 @@ gen.vivosoc2:
 
 gen: gen.usecases gen.pulp gen.pulpissimo gen.pulpissimo.zeroriscy gen.pulpissimo.microriscy \
   gen.pulpissimo.riscy gen.wolfe gen.oprecompkw gen.vega gen.gap gen.vivosoc3 gen.bigpulp \
-  gen.fulmine gen.hero-zc706 gen.honey gen.multino gen.neuraghe \
+  gen.fulmine gen.hero-z-7045 gen.honey gen.multino gen.neuraghe \
   gen.quentin gen.vivosoc2_1 gen.vivosoc2
 
 INSTALL_FILES += $(shell find configs -name "*.json")

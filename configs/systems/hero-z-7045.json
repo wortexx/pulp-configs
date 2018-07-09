@@ -134,7 +134,7 @@
   "system_tree": {
     "board": {
       "chip": {
-        "name": "hero-zc706",
+        "name": "hero-z-7045",
         "pulp_chip_family": "bigpulp",
         "pulp_chip_version": 0,
         "hal_files": [
@@ -4195,7 +4195,7 @@
         }
       },
       "pulp_chip": {
-        "hero-zc706": {}
+        "hero-z-7045": {}
       }
     }
   }
