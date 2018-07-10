@@ -4,10 +4,10 @@
     "board": {
 
       "chip": {
-        "includes": ["hero-zc706.json"]
+        "includes": ["hero-z-7045.json"]
       },
       "pulp_chip": {
-        "hero-zc706" : {
+        "hero-z-7045" : {
         }
       }
     }
