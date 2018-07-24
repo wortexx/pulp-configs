@@ -11,7 +11,7 @@ gen.pulp:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulp.json --output-dir=$(CURDIR)/configs/chips/pulp --output=configs/systems/pulp.json --usecase=usecases/jtag-cam.json
 
 gen.multino:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/multino.json --output-dir=$(CURDIR)/configs/chips/multino --output=configs/systems/multino.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/multino.json --output-dir=$(CURDIR)/configs/chips/multino --output=configs/systems/multino.json --usecase=usecases/jtag.json
 
 gen.pulpissimo:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo.json --output-dir=$(CURDIR)/configs/chips/pulpissimo --output=configs/systems/pulpissimo.json --usecase=usecases/jtag-cam.json

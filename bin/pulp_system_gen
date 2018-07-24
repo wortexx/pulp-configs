@@ -41,6 +41,7 @@ if args.chip_file is not None:
 start_addr = None
 stop_addr = None
 set_pc_addr = None
+set_pc_offset = None
 debug_bridge_commands = None
 
 if args.chip in ['pulpissimo', 'pulp']:
@@ -49,6 +50,15 @@ if args.chip in ['pulpissimo', 'pulp']:
     stop_addr = '0x%X' % (tp.get_child_int("soc/peripherals/fc_dbg_unit/base") + 0x0000)
     stop_value = '0x00010000'
     set_pc_addr = '0x%X' % (tp.get_child_int("soc/peripherals/fc_dbg_unit/base") + 0x2000)
+    debug_bridge_commands = 'reset stop load ioloop start wait'
+
+if args.chip in ['multino']:
+    start_addr = '0x%X' % (tp.get_child_int("cluster/peripherals/cluster_ctrl/base") + 0x0008)
+    start_value = '1'
+    stop_addr = '0x%X' % (tp.get_child_int("cluster/peripherals/cluster_ctrl/base") + 0x0008)
+    stop_value = '0x00010000'
+    set_pc_addr = '0x%X' % (tp.get_child_int("cluster/peripherals/cluster_ctrl/base") + 0x0040)
+    set_pc_offset = "-128"
     debug_bridge_commands = 'reset stop load ioloop start wait'
 
 system = Component(
@@ -73,6 +83,9 @@ if stop_addr is not None:
 
 if set_pc_addr is not None:
     system.system_tree.debug_bridge.set_property('set_pc_addr', set_pc_addr)
+
+if set_pc_offset is not None:
+    system.system_tree.debug_bridge.set_property('set_pc_offset', set_pc_offset)
 
 if debug_bridge_commands is not None:
     system.system_tree.debug_bridge.set_property('commands', debug_bridge_commands)
