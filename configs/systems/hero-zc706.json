@@ -143,7 +143,7 @@
         ],
         "archi_files": [
           "archi/chips/bigpulp/pulp.h",
-          "archi/chips/bigpulp/mailbox.h",
+          "archi/mailbox/mailbox_v0.h",
           "archi/chips/bigpulp/memory_map.h",
           "archi/chips/bigpulp/properties.h",
           "archi/chips/bigpulp/apb_soc.h"
