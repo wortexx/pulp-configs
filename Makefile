@@ -32,7 +32,7 @@ gen.oprecompkw:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw.json --output-dir=$(CURDIR)/configs/chips/oprecompkw --output=configs/systems/oprecompkw.json
 
 gen.oprecompkw_sa:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sa.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sa --output=configs/systems/oprecompkw_sa.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sa.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sa --output=configs/systems/oprecompkw_sa.json --usecase=usecases/jtag.json
 
 gen.oprecompkw-dram:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw-dram.json --output-dir=$(CURDIR)/configs/chips/oprecompkw-dram --output=configs/systems/oprecompkw-dram.json
@@ -48,10 +48,10 @@ gen.vivosoc3:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc3   --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
 
 gen.bigpulp-z-7045:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-z-7045.json --output-dir=$(CURDIR)/configs/chips/bigpulp-z-7045 --output=configs/systems/bigpulp-z-7045.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-z-7045.json --output-dir=$(CURDIR)/configs/chips/bigpulp-z-7045 --output=configs/systems/bigpulp-z-7045.json --usecase=usecases/jtag.json
 
 gen.bigpulp:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp.json --output-dir=$(CURDIR)/configs/chips/bigpulp --output=configs/systems/bigpulp.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp.json --output-dir=$(CURDIR)/configs/chips/bigpulp --output=configs/systems/bigpulp.json --usecase=usecases/jtag.json
 
 gen.fulmine:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=fulmine    --output=configs/systems/fulmine.json

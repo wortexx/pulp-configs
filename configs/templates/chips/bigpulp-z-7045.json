@@ -2,6 +2,8 @@
   "chip": "bigpulp-z-7045",
   "chip_family": "bigpulp",
 
+  "padframe": "chips/bigpulp-z-7045/padframe.json",
+
   "cluster0": {
     "pe0": {
       "boot_addr": "0x1c008000"

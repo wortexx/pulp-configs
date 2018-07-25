@@ -7,7 +7,15 @@
     "vp_comps": [
       "board"
     ],
-    "debug_bridge": {},
+    "debug_bridge": {
+      "start_addr": "0x10200008",
+      "start_value": "1",
+      "stop_addr": "0x10200008",
+      "stop_value": "0x00010000",
+      "set_pc_addr": "0x10200040",
+      "set_pc_offset": "-128",
+      "commands": "reset stop load ioloop start wait"
+    },
     "board": {
       "vp_class": "pulp/board",
       "vp_comps": [

@@ -52,7 +52,7 @@ if args.chip in ['pulpissimo', 'pulp']:
     set_pc_addr = '0x%X' % (tp.get_child_int("soc/peripherals/fc_dbg_unit/base") + 0x2000)
     debug_bridge_commands = 'reset stop load ioloop start wait'
 
-if args.chip in ['multino']:
+if args.chip in ['multino', 'bigpulp', 'bigpulp-z-7045', 'oprecompkw_sa']:
     start_addr = '0x%X' % (tp.get_child_int("cluster/peripherals/cluster_ctrl/base") + 0x0008)
     start_value = '1'
     stop_addr = '0x%X' % (tp.get_child_int("cluster/peripherals/cluster_ctrl/base") + 0x0008)

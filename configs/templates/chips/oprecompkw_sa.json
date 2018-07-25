@@ -1,6 +1,8 @@
 {
   "chip": "oprecompkw_sa",
     
+  "padframe": "chips/oprecompkw_sa/padframe.json",
+
   "ddr": {
     "size"  : "0x10000000"
   },
