@@ -649,7 +649,7 @@
   },
   "soc_eu": {
     "includes": [
-      "ips/soc_eu_v1.json"
+      "ips/soc_eu_v2.json"
     ],
     "vp_ports": [
       "fc_event_itf",
