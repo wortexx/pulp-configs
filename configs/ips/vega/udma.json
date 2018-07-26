@@ -1,10 +1,11 @@
 {
-  "includes" : [ "../udma/udma_v3.json" ],
+  "includes": [ "../../ips/udma/udma_v3.json"],
 
-  "hal_files": [ "hal/udma/udma_v3.h", "hal/udma/udma_periph_v3.h", "hal/udma/udma_periph_hyper_v1.h", "hal/udma/udma_periph_i2s_v1.h" ],
-  "archi_files": [ "archi/udma/udma_v3.h", "archi/udma/udma_periph_v3.h", "archi/udma/hyper.h" ],
-  
-  "nb_channels": 8,
+  "nb_periphs": 7,
+
+  "properties": {
+    "l2_read_fifo_size": 8
+  },
 
   "interfaces" : ["spim", "i2c", "i2s", "uart", "cam", "hyper"],
 
