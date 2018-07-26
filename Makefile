@@ -41,8 +41,7 @@ gen.oprecompkw-dram:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw-dram.json --output-dir=$(CURDIR)/configs/chips/oprecompkw-dram --output=configs/systems/oprecompkw-dram.json
 
 gen.vega:
-	./bin/pulp_soc_gen --configs=$(CURDIR)/configs --template=templates/chips/vega.json --output=configs/chips/vega/soc.json
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vega --output=configs/systems/vega.json --usecase=usecases/jtag-cam.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/vega.json --output-dir=$(CURDIR)/configs/chips/vega --output=configs/systems/vega.json --usecase=usecases/jtag-cam.json
 
 gen.gap:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=gap --usecase=usecases/jtag-cam.json --output=configs/systems/gap.json

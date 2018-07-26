@@ -1,7 +1,7 @@
 {
   "chip": "vega",
     
-  "padframe": "chips/vegan/padframe.json",
+  "padframe": "chips/vega/padframe.json",
 
   "cluster": {
     "base": "0x10000000",
