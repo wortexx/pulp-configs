@@ -172,7 +172,7 @@
       },
 
       "udma": {
-        "version"      : 2,
+        "version"      : 3,
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
