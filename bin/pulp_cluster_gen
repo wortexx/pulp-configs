@@ -38,6 +38,7 @@ nb_pe             = tp.get_child_int('cluster/nb_pe')
 l1_banking_factor = tp.get_child_int('cluster/l1/banking_factor')
 cluster_core      = tp.get_child_str('cluster/core')
 cluster_version   = tp.get_child_int('cluster/version')
+has_hwce          = tp.get('cluster/peripherals/hwce') is not None
 dma_irq_0         = tp.get('cluster/pe/irq').get_dict().index('dma_0')
 dma_irq_1         = tp.get('cluster/pe/irq').get_dict().index('dma_1')
 dma_irq_ext       = tp.get('cluster/pe/irq').get_dict().index('dma_ext')
@@ -107,6 +108,11 @@ periph_ico_mappings.update({
   "dma": get_mapping_area(tp.get_child_dict("cluster/peripherals/dma"), cluster_size, cluster_id, True),
   "cluster_ico": {}
 })
+
+if has_hwce:
+  periph_ico_mappings.update({
+    "hwce": get_mapping_area(tp.get_child_dict("cluster/peripherals/hwce"), cluster_size, cluster_id, True)
+  })
 
 cluster.periph_ico = Component(
     includes=["ips/interco/router.json"],
@@ -232,6 +238,11 @@ cluster.event_unit = Component(
 cluster.timer = Component(
   includes=["ips/timer_v2.json"]
 )
+
+if has_hwce:
+  cluster.hwce = Component(
+    includes=["ips/hwce_v%d.json" % tp.get_child_int('cluster/peripherals/hwce/version')]
+  )
 
 cluster.icache_ctrl = Component(
   includes=["ips/icache_ctrl_v2.json"]

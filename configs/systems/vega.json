@@ -1808,6 +1808,7 @@
               "cluster_ctrl",
               "event_unit",
               "timer",
+              "hwce",
               "icache_ctrl",
               "pe0",
               "pe1",
@@ -2814,7 +2815,12 @@
                   "size": "0x00000400",
                   "remove_offset": "0x10201800"
                 },
-                "cluster_ico": {}
+                "cluster_ico": {},
+                "hwce": {
+                  "base": "0x10201000",
+                  "size": "0x00000400",
+                  "remove_offset": "0x10201000"
+                }
               },
               "vp_ports": [
                 "icache_ctrl",
@@ -4944,6 +4950,15 @@
                 "irq_itf_0",
                 "irq_itf_1",
                 "input"
+              ]
+            },
+            "hwce": {
+              "version": 5,
+              "hal_files": [
+                "hal/hwce/hwce_v5.h"
+              ],
+              "archi_files": [
+                "archi/hwce/hwce_v5.h"
               ]
             },
             "icache_ctrl": {
