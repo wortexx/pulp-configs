@@ -4418,14 +4418,14 @@
               "enabled": true
             },
             "dma": {
-              "version": 6,
+              "version": 7,
               "hal_files": [
-                "hal/dma/mchan_v6.h"
+                "hal/dma/mchan_v7.h"
               ],
               "archi_files": [
-                "archi/dma/mchan_v6.h"
+                "archi/dma/mchan_v7.h"
               ],
-              "vp_class": "pulp/mchan/mchan_v6",
+              "vp_class": "pulp/mchan/mchan_v7",
               "nb_channels": 9,
               "core_queue_depth": 2,
               "global_queue_depth": 8,

@@ -214,7 +214,7 @@ cluster.icache = Empty_Component(
 )
 
 cluster.dma = Component(
-  includes=["ips/mchan_v6.json"],
+  includes=["ips/mchan_v%d.json" % tp.get_child_int('cluster/peripherals/dma/version')],
   nb_channels=nb_pe+1,
   is_64=tp.get_child_bool('cluster/peripherals/dma/is_64') == True
 )

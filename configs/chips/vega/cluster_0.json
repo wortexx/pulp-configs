@@ -2612,7 +2612,7 @@
   },
   "dma": {
     "includes": [
-      "ips/mchan_v6.json"
+      "ips/mchan_v7.json"
     ],
     "nb_channels": 9,
     "is_64": false,
