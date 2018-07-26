@@ -150,7 +150,7 @@
       "adv_dbg_unit": {
         "debug_ir": "0x4"
       },
-      "boot-mode": "default",
+      "boot-mode": "jtag",
       "commands": "load ioloop reqloop start wait",
       "gdb_commands": "load ioloop reqloop start gdb wait"
     },
