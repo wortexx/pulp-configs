@@ -191,13 +191,15 @@
         "boot_from_rom": false,
         "vp_class": "pulp/chip",
         "hal_files": [
-          "hal/chips/bigpulp/pulp.h"
+          "hal/chips/bigpulp/pulp.h",
+          "hal/mailbox/mailbox_v0.h"
         ],
         "archi_files": [
           "archi/chips/bigpulp/pulp.h",
           "archi/chips/bigpulp/memory_map.h",
           "archi/chips/bigpulp/properties.h",
-          "archi/chips/bigpulp/apb_soc.h"
+          "archi/chips/bigpulp/apb_soc.h",
+          "archi/mailbox/mailbox_v0.h"
         ],
         "vp_comps": [
           "padframe",

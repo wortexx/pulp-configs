@@ -139,14 +139,15 @@
         "pulp_chip_family": "bigpulp",
         "pulp_chip_version": 0,
         "hal_files": [
-          "hal/chips/bigpulp/pulp.h"
+          "hal/chips/bigpulp/pulp.h",
+          "hal/mailbox/mailbox_v0.h"
         ],
         "archi_files": [
           "archi/chips/bigpulp/pulp.h",
-          "archi/mailbox/mailbox_v0.h",
           "archi/chips/bigpulp/memory_map.h",
           "archi/chips/bigpulp/properties.h",
-          "archi/chips/bigpulp/apb_soc.h"
+          "archi/chips/bigpulp/apb_soc.h",
+          "archi/mailbox/mailbox_v0.h"
         ],
         "soc": {
           "nb_cluster": 1,
@@ -1061,7 +1062,7 @@
               "mappings": {
                 "l1": {
                   "base": "0x10000000",
-                  "size": "0x00010000",
+                  "size": "0x00040000",
                   "remove_offset": "0x10000000"
                 },
                 "periph_ico": {
@@ -1069,7 +1070,7 @@
                   "size": "0x00200000"
                 },
                 "periph_ico_alias": {
-                  "base": "0x00200000",
+                  "base": "0x1B200000",
                   "size": "0x00200000",
                   "add_offset": "0x10000000"
                 },
@@ -1905,27 +1906,27 @@
                     "id": 1
                   },
                   "l1_alias": {
-                    "base": "0x0",
-                    "size": "0x00010000",
-                    "remove_offset": "0x0",
+                    "base": "0x1b000000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b000000",
                     "id": 0
                   },
                   "l1_ts_alias": {
-                    "base": "0x100000",
-                    "size": "0x00010000",
-                    "remove_offset": "0x100000",
+                    "base": "0x1b100000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b100000",
                     "id": 0
                   },
                   "event_unit_alias": {
-                    "base": "0x204000",
+                    "base": "0x1b204000",
                     "size": "0x00000400",
-                    "remove_offset": "0x204000",
+                    "remove_offset": "0x1b204000",
                     "id": 1
                   },
                   "dma_alias": {
-                    "base": "0x204400",
+                    "base": "0x1b204400",
                     "size": "0x00000400",
-                    "remove_offset": "0x204400",
+                    "remove_offset": "0x1b204400",
                     "id": 1
                   },
                   "cluster_ico": {
@@ -1981,27 +1982,27 @@
                     "id": 1
                   },
                   "l1_alias": {
-                    "base": "0x0",
-                    "size": "0x00010000",
-                    "remove_offset": "0x0",
+                    "base": "0x1b000000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b000000",
                     "id": 0
                   },
                   "l1_ts_alias": {
-                    "base": "0x100000",
-                    "size": "0x00010000",
-                    "remove_offset": "0x100000",
+                    "base": "0x1b100000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b100000",
                     "id": 0
                   },
                   "event_unit_alias": {
-                    "base": "0x204000",
+                    "base": "0x1b204000",
                     "size": "0x00000400",
-                    "remove_offset": "0x204000",
+                    "remove_offset": "0x1b204000",
                     "id": 1
                   },
                   "dma_alias": {
-                    "base": "0x204400",
+                    "base": "0x1b204400",
                     "size": "0x00000400",
-                    "remove_offset": "0x204400",
+                    "remove_offset": "0x1b204400",
                     "id": 1
                   },
                   "cluster_ico": {
@@ -2034,13 +2035,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -2057,27 +2058,27 @@
                     "id": 1
                   },
                   "l1_alias": {
-                    "base": "0x0",
-                    "size": "0x00010000",
-                    "remove_offset": "0x0",
+                    "base": "0x1b000000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b000000",
                     "id": 0
                   },
                   "l1_ts_alias": {
-                    "base": "0x100000",
-                    "size": "0x00010000",
-                    "remove_offset": "0x100000",
+                    "base": "0x1b100000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b100000",
                     "id": 0
                   },
                   "event_unit_alias": {
-                    "base": "0x204000",
+                    "base": "0x1b204000",
                     "size": "0x00000400",
-                    "remove_offset": "0x204000",
+                    "remove_offset": "0x1b204000",
                     "id": 1
                   },
                   "dma_alias": {
-                    "base": "0x204400",
+                    "base": "0x1b204400",
                     "size": "0x00000400",
-                    "remove_offset": "0x204400",
+                    "remove_offset": "0x1b204400",
                     "id": 1
                   },
                   "cluster_ico": {
@@ -2110,13 +2111,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -2133,27 +2134,27 @@
                     "id": 1
                   },
                   "l1_alias": {
-                    "base": "0x0",
-                    "size": "0x00010000",
-                    "remove_offset": "0x0",
+                    "base": "0x1b000000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b000000",
                     "id": 0
                   },
                   "l1_ts_alias": {
-                    "base": "0x100000",
-                    "size": "0x00010000",
-                    "remove_offset": "0x100000",
+                    "base": "0x1b100000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b100000",
                     "id": 0
                   },
                   "event_unit_alias": {
-                    "base": "0x204000",
+                    "base": "0x1b204000",
                     "size": "0x00000400",
-                    "remove_offset": "0x204000",
+                    "remove_offset": "0x1b204000",
                     "id": 1
                   },
                   "dma_alias": {
-                    "base": "0x204400",
+                    "base": "0x1b204400",
                     "size": "0x00000400",
-                    "remove_offset": "0x204400",
+                    "remove_offset": "0x1b204400",
                     "id": 1
                   },
                   "cluster_ico": {
@@ -2186,13 +2187,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -2209,27 +2210,27 @@
                     "id": 1
                   },
                   "l1_alias": {
-                    "base": "0x0",
-                    "size": "0x00010000",
-                    "remove_offset": "0x0",
+                    "base": "0x1b000000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b000000",
                     "id": 0
                   },
                   "l1_ts_alias": {
-                    "base": "0x100000",
-                    "size": "0x00010000",
-                    "remove_offset": "0x100000",
+                    "base": "0x1b100000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b100000",
                     "id": 0
                   },
                   "event_unit_alias": {
-                    "base": "0x204000",
+                    "base": "0x1b204000",
                     "size": "0x00000400",
-                    "remove_offset": "0x204000",
+                    "remove_offset": "0x1b204000",
                     "id": 1
                   },
                   "dma_alias": {
-                    "base": "0x204400",
+                    "base": "0x1b204400",
                     "size": "0x00000400",
-                    "remove_offset": "0x204400",
+                    "remove_offset": "0x1b204400",
                     "id": 1
                   },
                   "cluster_ico": {
@@ -2262,13 +2263,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -2285,27 +2286,27 @@
                     "id": 1
                   },
                   "l1_alias": {
-                    "base": "0x0",
-                    "size": "0x00010000",
-                    "remove_offset": "0x0",
+                    "base": "0x1b000000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b000000",
                     "id": 0
                   },
                   "l1_ts_alias": {
-                    "base": "0x100000",
-                    "size": "0x00010000",
-                    "remove_offset": "0x100000",
+                    "base": "0x1b100000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b100000",
                     "id": 0
                   },
                   "event_unit_alias": {
-                    "base": "0x204000",
+                    "base": "0x1b204000",
                     "size": "0x00000400",
-                    "remove_offset": "0x204000",
+                    "remove_offset": "0x1b204000",
                     "id": 1
                   },
                   "dma_alias": {
-                    "base": "0x204400",
+                    "base": "0x1b204400",
                     "size": "0x00000400",
-                    "remove_offset": "0x204400",
+                    "remove_offset": "0x1b204400",
                     "id": 1
                   },
                   "cluster_ico": {
@@ -2338,13 +2339,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -2361,27 +2362,27 @@
                     "id": 1
                   },
                   "l1_alias": {
-                    "base": "0x0",
-                    "size": "0x00010000",
-                    "remove_offset": "0x0",
+                    "base": "0x1b000000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b000000",
                     "id": 0
                   },
                   "l1_ts_alias": {
-                    "base": "0x100000",
-                    "size": "0x00010000",
-                    "remove_offset": "0x100000",
+                    "base": "0x1b100000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b100000",
                     "id": 0
                   },
                   "event_unit_alias": {
-                    "base": "0x204000",
+                    "base": "0x1b204000",
                     "size": "0x00000400",
-                    "remove_offset": "0x204000",
+                    "remove_offset": "0x1b204000",
                     "id": 1
                   },
                   "dma_alias": {
-                    "base": "0x204400",
+                    "base": "0x1b204400",
                     "size": "0x00000400",
-                    "remove_offset": "0x204400",
+                    "remove_offset": "0x1b204400",
                     "id": 1
                   },
                   "cluster_ico": {
@@ -2414,13 +2415,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -2437,27 +2438,27 @@
                     "id": 1
                   },
                   "l1_alias": {
-                    "base": "0x0",
-                    "size": "0x00010000",
-                    "remove_offset": "0x0",
+                    "base": "0x1b000000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b000000",
                     "id": 0
                   },
                   "l1_ts_alias": {
-                    "base": "0x100000",
-                    "size": "0x00010000",
-                    "remove_offset": "0x100000",
+                    "base": "0x1b100000",
+                    "size": "0x00040000",
+                    "remove_offset": "0x1b100000",
                     "id": 0
                   },
                   "event_unit_alias": {
-                    "base": "0x204000",
+                    "base": "0x1b204000",
                     "size": "0x00000400",
-                    "remove_offset": "0x204000",
+                    "remove_offset": "0x1b204000",
                     "id": 1
                   },
                   "dma_alias": {
-                    "base": "0x204400",
+                    "base": "0x1b204400",
                     "size": "0x00000400",
-                    "remove_offset": "0x204400",
+                    "remove_offset": "0x1b204400",
                     "id": 1
                   },
                   "cluster_ico": {
@@ -2542,7 +2543,7 @@
               "size": 262144,
               "alias": true,
               "has_l1_alias": true,
-              "alias_base": "0x1b000000",
+              "alias_base": "0x1B000000",
               "map_base": "0x10000000",
               "nb_banks": 16,
               "vp_comps": [
@@ -2648,112 +2649,112 @@
                 ]
               ],
               "bank0": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank1": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank2": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank3": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank4": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank5": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank6": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank7": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank8": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank9": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank10": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank11": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank12": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank13": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank14": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
                 ]
               },
               "bank15": {
-                "size": 4096,
+                "size": 16384,
                 "vp_class": "memory/memory",
                 "vp_ports": [
                   "input"
