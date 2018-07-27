@@ -61,9 +61,6 @@ gen.fulmine:
 gen.hero-z-7045:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=hero-z-7045 --output=configs/systems/hero-z-7045.json
 
-gen.hero-z-7045:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=hero-z-7045 --output=configs/systems/hero-z-7045.json
-
 gen.honey:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=honey      --output=configs/systems/honey.json
 
