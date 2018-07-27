@@ -504,6 +504,10 @@ if l2_is_partitioned:
 else:
   soc.soc_ico.l2 = soc.l2.input
 
+# APB SOC
+if has_fc:
+  soc.apb_soc_ctrl.bootaddr = soc.fc.bootaddr
+
 # ROM
 if has_rom:
   soc.apb_ico.rom = soc.rom.input

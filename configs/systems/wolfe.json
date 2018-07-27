@@ -634,6 +634,10 @@
               "fc->irq_req"
             ],
             [
+              "apb_soc_ctrl->bootaddr",
+              "fc->bootaddr"
+            ],
+            [
               "timer->irq_itf_0",
               "fc_itc->in_event_10"
             ],
@@ -1129,6 +1133,7 @@
               "data",
               "irq_ack",
               "dbg_unit",
+              "bootaddr",
               "irq_req"
             ]
           },
@@ -1391,6 +1396,7 @@
               }
             },
             "vp_ports": [
+              "bootaddr",
               "input"
             ]
           },

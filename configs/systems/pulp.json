@@ -149,7 +149,7 @@
         "debug_ir": "0x4"
       },
       "boot-mode": "default",
-      "commands": "reset stop load ioloop start wait",
+      "commands": "reset stop load ioloop reqloop start wait",
       "gdb_commands": "load ioloop reqloop start gdb wait",
       "start_addr": "0x1A110000",
       "start_value": "0",
@@ -630,6 +630,10 @@
             [
               "fc_itc->irq_req",
               "fc->irq_req"
+            ],
+            [
+              "apb_soc_ctrl->bootaddr",
+              "fc->bootaddr"
             ],
             [
               "timer->irq_itf_0",
@@ -1114,6 +1118,7 @@
               "data",
               "irq_ack",
               "dbg_unit",
+              "bootaddr",
               "irq_req"
             ]
           },
@@ -1377,6 +1382,7 @@
               }
             },
             "vp_ports": [
+              "bootaddr",
               "input"
             ]
           },
