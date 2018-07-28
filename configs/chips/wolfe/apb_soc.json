@@ -1,6 +1,8 @@
 {
   "version": 3,
 
+  "vp_class":  "pulp/chips/wolfe/apb_soc",
+  
   "hal_files" : [ "hal/apb_soc/apb_soc_v3.h" ],
 
   "regmap": {

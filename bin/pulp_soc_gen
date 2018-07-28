@@ -43,7 +43,7 @@ has_spi_master    = tp.get('soc/peripherals/spi_master') is not None
 has_uart          = tp.get('soc/peripherals/uart') is not None
 has_gpio          = tp.get('soc/peripherals/gpio') is not None
 has_soc_events    = tp.get('soc/peripherals/soc_eu') is not None
-fc_events         = tp.get_child_str('soc/fc/irq_file')
+fc_events         = tp.get('soc/peripherals/fc_itc/irq')
 l2_is_partitioned = tp.get_child_bool('soc/l2/is_partitioned')
 has_fll           = tp.get('soc/peripherals/fll') is not None
 has_rom           = tp.get('soc/rom') is not None
@@ -53,14 +53,14 @@ has_hwme          = tp.get('soc/peripherals/hwme') is not None
 
 
 if fc_events is not None:
-  fc_events_dict = { "includes": [ fc_events ] }
+  fc_events_dict = fc_events.get_dict()
 else:
   fc_events_dict = { }
 
 
 
 if has_soc_events:
-  soc_events_ids = { "includes": ["chips/%s/soc_events.json" % chip] }
+  soc_events_ids = tp.get('soc_events').get_dict()
 else:
   soc_events_ids = {}
 
@@ -384,8 +384,15 @@ if has_fll:
       gv_class= "pulp.Fll_ctrl.fll_ctrl"
   )
 
+apb_soc_params = {}
+
+if has_cluster and has_pmu:
+  apb_soc_params['cluster_power_event'] = tp.get_child_int('soc_events/soc_evt_cluster_pok')
+  apb_soc_params['cluster_clock_gate_event'] = tp.get_child_int('soc_events/soc_evt_cluster_cg_ok')
+
 soc.apb_soc_ctrl = Component(
-    includes= ["chips/%s/apb_soc.json" % chip]
+    includes= ["chips/%s/apb_soc.json" % chip],
+    **apb_soc_params
 )
 
 soc.stdout = Component(
@@ -507,6 +514,11 @@ else:
 # APB SOC
 if has_fc:
   soc.apb_soc_ctrl.bootaddr = soc.fc.bootaddr
+if has_udma:
+  soc.apb_soc_ctrl.event = soc.soc_eu.event_in
+if has_pmu and has_fc:
+  soc.apb_soc_ctrl.cluster_power_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_pok'))
+  soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_cg_ok'))
 
 # ROM
 if has_rom:

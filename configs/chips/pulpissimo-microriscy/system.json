@@ -13,7 +13,7 @@
       "stop_addr": "0x1A110000",
       "stop_value": "0x00010000",
       "set_pc_addr": "0x1A112000",
-      "commands": "reset stop load ioloop start wait"
+      "commands": "reset stop load ioloop reqloop start wait"
     },
     "board": {
       "vp_class": "pulp/board",

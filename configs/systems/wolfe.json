@@ -638,6 +638,18 @@
               "fc->bootaddr"
             ],
             [
+              "apb_soc_ctrl->event",
+              "soc_eu->event_in"
+            ],
+            [
+              "apb_soc_ctrl->cluster_power_irq",
+              "fc_itc->in_event_22"
+            ],
+            [
+              "apb_soc_ctrl->cluster_clock_gate_irq",
+              "fc_itc->in_event_23"
+            ],
+            [
               "timer->irq_itf_0",
               "fc_itc->in_event_10"
             ],
@@ -960,13 +972,13 @@
             }
           },
           "pmu": {
-            "version": 2,
+            "version": 1,
             "nb_domains": 2,
             "hal_files": [
-              "hal/maestro/pmu_v2.h"
+              "hal/maestro/pmu_v1.h"
             ],
             "archi_files": [
-              "archi/maestro/maestro_v2.h"
+              "archi/maestro/maestro_v1.h"
             ],
             "gv_class": "power.pmu.Pmu",
             "vp_ports": [
@@ -1232,6 +1244,8 @@
             "vp_ports": [
               "irq_req",
               "input",
+              "in_event_22",
+              "in_event_23",
               "irq_ack",
               "in_event_8",
               "in_event_10",
@@ -1285,6 +1299,7 @@
           },
           "apb_soc_ctrl": {
             "version": 3,
+            "vp_class": "pulp/chips/wolfe/apb_soc",
             "hal_files": [
               "hal/apb_soc/apb_soc_v3.h"
             ],
@@ -1395,8 +1410,13 @@
                 "offset": "0xDC"
               }
             },
+            "cluster_power_event": 31,
+            "cluster_clock_gate_event": 35,
             "vp_ports": [
               "bootaddr",
+              "event",
+              "cluster_power_irq",
+              "cluster_clock_gate_irq",
               "input"
             ]
           },

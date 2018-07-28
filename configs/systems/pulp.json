@@ -636,6 +636,10 @@
               "fc->bootaddr"
             ],
             [
+              "apb_soc_ctrl->event",
+              "soc_eu->event_in"
+            ],
+            [
               "timer->irq_itf_0",
               "fc_itc->in_event_10"
             ],
@@ -1383,6 +1387,7 @@
             },
             "vp_ports": [
               "bootaddr",
+              "event",
               "input"
             ]
           },
