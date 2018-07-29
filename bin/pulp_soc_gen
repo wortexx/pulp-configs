@@ -37,13 +37,17 @@ has_cluster       = tp.get('cluster') is not None
 nb_cluster        = tp.get_child_int('cluster/nb_cluster')
 nb_pe             = tp.get_child_int('cluster/nb_pe')
 has_fc            = tp.get('soc/fc') is not None
+has_fc_eu         = tp.get('soc/peripherals/fc_eu') is not None
 has_ddr           = tp.get('soc/ddr') is not None
 has_udma          = tp.get('soc/peripherals/udma') is not None
 has_spi_master    = tp.get('soc/peripherals/spi_master') is not None
 has_uart          = tp.get('soc/peripherals/uart') is not None
 has_gpio          = tp.get('soc/peripherals/gpio') is not None
 has_soc_events    = tp.get('soc/peripherals/soc_eu') is not None
-fc_events         = tp.get('soc/peripherals/fc_itc/irq')
+if has_fc_eu:
+  fc_events         = tp.get('soc/peripherals/fc_eu/irq')
+else:
+  fc_events         = tp.get('soc/peripherals/fc_itc/irq')
 l2_is_partitioned = tp.get_child_bool('soc/l2/is_partitioned')
 has_fll           = tp.get('soc/peripherals/fll') is not None
 has_rom           = tp.get('soc/rom') is not None
@@ -57,6 +61,8 @@ if fc_events is not None:
 else:
   fc_events_dict = { }
 
+
+fc_itc_name = 'fc_eu' if has_fc_eu else 'fc_itc'
 
 
 if has_soc_events:
@@ -261,7 +267,9 @@ if has_udma:
 
 if has_fc:
   apb_soc_mappings.update({
-    "fc_itc"       : get_mapping(tp.get_child_dict("soc/peripherals/fc_itc"), True),
+    "fc_itc"       : get_mapping(tp.get_child_dict("soc/peripherals/%s" % fc_itc_name), True)
+  })
+  apb_soc_mappings.update({
     "fc_debug"     : get_mapping(tp.get_child_dict("soc/peripherals/fc_dbg_unit"), True),
     "fc_timer"     : get_mapping(tp.get_child_dict("soc/peripherals/fc_timer"), True),
     "fc_dbg_unit"  : get_mapping(tp.get_child_dict("soc/peripherals/fc_dbg_unit"), True),
@@ -362,7 +370,7 @@ soc.plt_loader = Component(
 
 if has_fc:
   soc.fc_itc = Component(
-      includes= ["ips/itc_v%d.json" % (tp.get_child_int("soc/peripherals/fc_itc/version"))]
+      includes= ["ips/itc_v%d.json" % (tp.get_child_int("soc/peripherals/%s/version" % fc_itc_name))]
   )
 
 if has_fll:

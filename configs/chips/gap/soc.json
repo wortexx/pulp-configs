@@ -75,13 +75,6 @@
     "apb_ico",
     "fc",
     "l2",
-    "l2_priv0",
-    "l2_priv1",
-    "l2_shared",
-    "l2_shared_0",
-    "l2_shared_1",
-    "l2_shared_2",
-    "l2_shared_3",
     "fc_ico",
     "rom",
     "plt_loader",
@@ -96,6 +89,7 @@
     "timer",
     "soc_eu",
     "udma",
+    "efuse",
     "uart",
     "fc_debug",
     "cluster",
@@ -133,28 +127,8 @@
       "axi_ico->input"
     ],
     [
-      "soc_ico->l2_shared_0",
-      "l2_shared_0->input"
-    ],
-    [
-      "soc_ico->l2_shared_1",
-      "l2_shared_1->input"
-    ],
-    [
-      "soc_ico->l2_shared_2",
-      "l2_shared_2->input"
-    ],
-    [
-      "soc_ico->l2_shared_3",
-      "l2_shared_3->input"
-    ],
-    [
-      "soc_ico->l2_priv0",
-      "l2_priv0->input"
-    ],
-    [
-      "soc_ico->l2_priv1",
-      "l2_priv1->input"
+      "soc_ico->l2",
+      "l2->input"
     ],
     [
       "apb_ico->stdout",
@@ -322,12 +296,11 @@
       "udma_tx",
       "apb",
       "axi_master",
+      "l2",
       "l2_shared_0",
       "l2_shared_1",
       "l2_shared_2",
-      "l2_shared_3",
-      "l2_priv0",
-      "l2_priv1"
+      "l2_shared_3"
     ],
     "vp_bindings": [
       [
@@ -359,20 +332,8 @@
         "self->apb"
       ],
       [
-        "ll_ico->l2_priv0",
-        "self->l2_priv0"
-      ],
-      [
-        "ll_ico->l2_priv0_alias",
-        "self->l2_priv0"
-      ],
-      [
-        "ll_ico->l2_priv1",
-        "self->l2_priv1"
-      ],
-      [
-        "ll_ico->l2_shared",
-        "hb_ico->input"
+        "ll_ico->l2",
+        "self->l2"
       ],
       [
         "ll_ico->axi_master",
@@ -444,32 +405,16 @@
           "base": "0x10000000",
           "size": "0x400000"
         },
-        "l2_priv0": {
+        "l2": {
           "base": "0x1C000000",
-          "size": "0x00008000",
+          "size": "0x00080000",
           "remove_offset": "0x1C000000"
-        },
-        "l2_priv0_alias": {
-          "base": "0x00000000",
-          "size": "0x00008000"
-        },
-        "l2_priv1": {
-          "base": "0x1C008000",
-          "size": "0x00008000",
-          "remove_offset": "0x1C008000"
-        },
-        "l2_shared": {
-          "base": "0x1C010000",
-          "size": "0x00070000"
         }
       },
       "vp_ports": [
         "apb",
         "rom",
-        "l2_priv0",
-        "l2_priv0_alias",
-        "l2_priv1",
-        "l2_shared",
+        "l2",
         "axi_master",
         "input"
       ]
@@ -480,7 +425,7 @@
       ],
       "nb_slaves": 4,
       "interleaving_bits": 2,
-      "remove_offset": "0x1C010000",
+      "remove_offset": "0x1C000000",
       "vp_ports": [
         "out_0",
         "out_1",
@@ -495,8 +440,8 @@
       ],
       "mappings": {
         "l2_shared": {
-          "base": "0x1C010000",
-          "size": "0x00070000"
+          "base": "0x1C000000",
+          "size": "0x00000000"
         },
         "ll_ico": {}
       },
@@ -512,8 +457,8 @@
       ],
       "mappings": {
         "l2_shared": {
-          "base": "0x1C010000",
-          "size": "0x00070000"
+          "base": "0x1C000000",
+          "size": "0x00000000"
         },
         "ll_ico": {}
       },
@@ -529,8 +474,8 @@
       ],
       "mappings": {
         "l2_shared": {
-          "base": "0x1C010000",
-          "size": "0x00070000"
+          "base": "0x1C000000",
+          "size": "0x00000000"
         },
         "ll_ico": {}
       },
@@ -545,8 +490,8 @@
       ],
       "mappings": {
         "l2_shared": {
-          "base": "0x1C010000",
-          "size": "0x00070000"
+          "base": "0x1C000000",
+          "size": "0x00000000"
         },
         "ll_ico": {}
       },
@@ -559,7 +504,7 @@
   },
   "pmu": {
     "includes": [
-      "ips/pmu_v2.json"
+      "ips/pmu_v1.json"
     ],
     "vp_ports": [
       "input"
@@ -571,9 +516,9 @@
     ],
     "mappings": {
       "stdout": {
-        "base": "0x1A10F000",
-        "size": "0x00001000",
-        "remove_offset": "0x1A10F000"
+        "base": "0x1A110000",
+        "size": "0x00002000",
+        "remove_offset": "0x1A110000"
       },
       "apb_soc_ctrl": {
         "base": "0x1A104000",
@@ -611,24 +556,24 @@
         "remove_offset": "0x1A102000"
       },
       "fc_itc": {
-        "base": "0x1A109800",
+        "base": "0x1B200800",
         "size": "0x00000800",
-        "remove_offset": "0x1A109800"
+        "remove_offset": "0x1B200800"
       },
       "fc_debug": {
-        "base": "0x1A110000",
+        "base": "0x00300000",
         "size": "0x00008000",
-        "remove_offset": "0x1A110000"
+        "remove_offset": "0x00300000"
       },
       "fc_timer": {
-        "base": "0x1A10B000",
+        "base": "0x1B200400",
         "size": "0x00001000",
-        "remove_offset": "0x1A10B000"
+        "remove_offset": "0x1B200400"
       },
       "fc_dbg_unit": {
-        "base": "0x1A110000",
+        "base": "0x00300000",
         "size": "0x00008000",
-        "remove_offset": "0x1A110000"
+        "remove_offset": "0x00300000"
       },
       "pmu": {
         "base": "0x1A107000",
@@ -659,12 +604,12 @@
   },
   "fc": {
     "includes": [
-      "ips/ri5ky_v2_fpu_sec.json"
+      "ips/ri5ky_v2.json"
     ],
-    "cluster_id": 31,
+    "cluster_id": 32,
     "core_id": 0,
     "fetch_enable": true,
-    "boot_addr": "0x1C008000",
+    "boot_addr": "0x1C000000",
     "vp_ports": [
       "fetch",
       "data",
@@ -675,58 +620,9 @@
     ]
   },
   "l2": {
-    "is_partitioned": true,
-    "nb_shared_banks": 4,
+    "size": 524288,
     "map_base": "0x1C000000",
-    "map_size": "0x00080000"
-  },
-  "l2_priv0": {
-    "size": 32768,
-    "map_base": "0x1C000000",
-    "map_size": "0x00008000",
-    "vp_class": "memory/memory",
-    "vp_ports": [
-      "input"
-    ]
-  },
-  "l2_priv1": {
-    "size": 32768,
-    "map_base": "0x1C008000",
-    "map_size": "0x00008000",
-    "vp_class": "memory/memory",
-    "vp_ports": [
-      "input"
-    ]
-  },
-  "l2_shared": {
-    "nb_banks": 4,
-    "size": 458752,
-    "map_base": "0x1C010000",
-    "map_size": "0x00070000"
-  },
-  "l2_shared_0": {
-    "size": 114688,
-    "vp_class": "memory/memory",
-    "vp_ports": [
-      "input"
-    ]
-  },
-  "l2_shared_1": {
-    "size": 114688,
-    "vp_class": "memory/memory",
-    "vp_ports": [
-      "input"
-    ]
-  },
-  "l2_shared_2": {
-    "size": 114688,
-    "vp_class": "memory/memory",
-    "vp_ports": [
-      "input"
-    ]
-  },
-  "l2_shared_3": {
-    "size": 114688,
+    "map_size": "0x00080000",
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
@@ -796,13 +692,13 @@
     ]
   },
   "fll_ctrl": {
-    "version": 3,
+    "version": null,
     "vp_class": "pulp/fll/fll_ctrl",
     "gv_class": "pulp.Fll_ctrl.fll_ctrl"
   },
   "apb_soc_ctrl": {
     "includes": [
-      "chips/vega/apb_soc.json"
+      "chips/gap/apb_soc.json"
     ],
     "cluster_power_event": 31,
     "cluster_clock_gate_event": 35,
@@ -839,7 +735,7 @@
   },
   "soc_eu": {
     "includes": [
-      "ips/soc_eu_v2.json"
+      "ips/soc_eu_v1.json"
     ],
     "vp_ports": [
       "fc_event_itf",
@@ -849,7 +745,7 @@
   },
   "udma": {
     "includes": [
-      "chips/vega/udma.json"
+      "chips/gap/udma.json"
     ],
     "vp_ports": [
       "l2_itf",
@@ -857,6 +753,11 @@
       "spim0",
       "uart0",
       "input"
+    ]
+  },
+  "efuse": {
+    "includes": [
+      "ips/efuse_v1.json"
     ]
   },
   "uart": {
@@ -867,7 +768,7 @@
   },
   "cluster": {
     "includes": [
-      "chips/vega/cluster_0.json"
+      "chips/gap/cluster_0.json"
     ],
     "vp_ports": [
       "dma_irq",

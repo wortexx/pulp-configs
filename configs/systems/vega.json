@@ -1110,7 +1110,10 @@
             ],
             "defines": [
               "ARCHI_CORE_HAS_PULPV2",
-              "CORE_PULP_BUILTINS"
+              "CORE_PULP_BUILTINS",
+              "ARCHI_CORE_HAS_PULPV2",
+              "ARCHI_CORE_HAS_CPLX",
+              "ARCHI_CORE_HAS_SECURITY"
             ],
             "vp_class": "cpu/iss/iss",
             "power_models": {

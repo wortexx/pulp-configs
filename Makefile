@@ -44,7 +44,7 @@ gen.vega:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/vega.json --output-dir=$(CURDIR)/configs/chips/vega --output=configs/systems/vega.json --usecase=usecases/jtag-cam.json
 
 gen.gap:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=gap --usecase=usecases/jtag-cam.json --output=configs/systems/gap.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap.json --output-dir=$(CURDIR)/configs/chips/gap --output=configs/systems/gap.json --usecase=usecases/jtag-cam.json
 
 gen.vivosoc3:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc3   --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
