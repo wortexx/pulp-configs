@@ -186,18 +186,18 @@
       ],
       "chip": {
         "name": "oprecompkw_sfloat",
-        "pulp_chip_family": "oprecompkw_sfloat",
+        "pulp_chip_family": "oprecompkw",
         "pulp_chip_version": 0,
         "boot_from_rom": false,
         "vp_class": "pulp/chip",
         "hal_files": [
-          "hal/chips/oprecompkw_sfloat/pulp.h"
+          "hal/chips/oprecompkw/pulp.h"
         ],
         "archi_files": [
-          "archi/chips/oprecompkw_sfloat/pulp.h",
-          "archi/chips/oprecompkw_sfloat/memory_map.h",
-          "archi/chips/oprecompkw_sfloat/properties.h",
-          "archi/chips/oprecompkw_sfloat/apb_soc.h"
+          "archi/chips/oprecompkw/pulp.h",
+          "archi/chips/oprecompkw/memory_map.h",
+          "archi/chips/oprecompkw/properties.h",
+          "archi/chips/oprecompkw/apb_soc.h"
         ],
         "vp_comps": [
           "soc_clock",

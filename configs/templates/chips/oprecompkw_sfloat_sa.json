@@ -1,5 +1,6 @@
 {
   "chip": "oprecompkw_sfloat_sa",
+  "chip_family": "oprecompkw",
     
   "padframe": "chips/oprecompkw_sfloat_sa/padframe.json",
 

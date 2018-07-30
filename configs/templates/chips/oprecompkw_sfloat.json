@@ -1,5 +1,6 @@
 {
   "chip": "oprecompkw_sfloat",
+  "chip_family": "oprecompkw",
     
   "ddr": {
     "size"  : "0x10000000"

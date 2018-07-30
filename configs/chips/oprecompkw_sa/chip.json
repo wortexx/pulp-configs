@@ -1,17 +1,17 @@
 {
   "name": "oprecompkw_sa",
-  "pulp_chip_family": "oprecompkw_sa",
+  "pulp_chip_family": "oprecompkw",
   "pulp_chip_version": 0,
   "boot_from_rom": false,
   "vp_class": "pulp/chip",
   "hal_files": [
-    "hal/chips/oprecompkw_sa/pulp.h"
+    "hal/chips/oprecompkw/pulp.h"
   ],
   "archi_files": [
-    "archi/chips/oprecompkw_sa/pulp.h",
-    "archi/chips/oprecompkw_sa/memory_map.h",
-    "archi/chips/oprecompkw_sa/properties.h",
-    "archi/chips/oprecompkw_sa/apb_soc.h"
+    "archi/chips/oprecompkw/pulp.h",
+    "archi/chips/oprecompkw/memory_map.h",
+    "archi/chips/oprecompkw/properties.h",
+    "archi/chips/oprecompkw/apb_soc.h"
   ],
   "vp_comps": [
     "padframe",
