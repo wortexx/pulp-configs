@@ -133,24 +133,443 @@
     }
   },
   "system_tree": {
+    "debug_bridge": {
+      "cable": {
+        "type": "jtag-proxy",
+        "tap": 0,
+        "jtag-proxy": {
+          "port": 37539
+        },
+        "ftdi": {},
+        "active": false,
+        "autorun": false,
+        "access_timeout_us": 1000000
+      },
+      "adv_dbg_unit": {
+        "debug_ir": "0x4"
+      },
+      "boot-mode": "default",
+      "commands": "load ioloop reqloop start wait",
+      "gdb_commands": "load ioloop reqloop start gdb wait"
+    },
+    "vp_class": "pulp/system",
+    "vp_comps": [
+      "board"
+    ],
     "board": {
+      "vp_class": "pulp/board",
+      "vp_comps": [
+        "chip",
+        "dpi_clock",
+        "pulp_chip",
+        "dpi"
+      ],
+      "vp_bindings": [
+        [
+          "dpi_clock->out",
+          "dpi->clock"
+        ]
+      ],
       "chip": {
         "name": "hero-z-7045",
         "pulp_chip_family": "bigpulp",
         "pulp_chip_version": 0,
+        "boot_from_rom": false,
+        "vp_class": "pulp/chip",
         "hal_files": [
-          "hal/chips/bigpulp/pulp.h",
-          "hal/mailbox/mailbox_v0.h"
+          "hal/chips/bigpulp/pulp.h"
         ],
         "archi_files": [
           "archi/chips/bigpulp/pulp.h",
           "archi/chips/bigpulp/memory_map.h",
           "archi/chips/bigpulp/properties.h",
-          "archi/chips/bigpulp/apb_soc.h",
-          "archi/mailbox/mailbox_v0.h"
+          "archi/chips/bigpulp/apb_soc.h"
         ],
+        "vp_comps": [
+          "soc_clock",
+          "soc"
+        ],
+        "vp_bindings": [
+          [
+            "soc_clock->out",
+            "soc->clock"
+          ]
+        ],
+        "soc_clock": {
+          "vp_class": "vp/clock_domain",
+          "frequency": 100000000,
+          "vp_ports": [
+            "out"
+          ]
+        },
         "soc": {
           "nb_cluster": 1,
+          "vp_class": "pulp/soc",
+          "peripherals_base": "0x1A100000",
+          "soc_events_ids": {},
+          "fc_events": {},
+          "vp_comps": [
+            "axi_ico",
+            "soc_ico",
+            "apb_ico",
+            "l2",
+            "plt_loader",
+            "apb_soc_ctrl",
+            "stdout",
+            "apb_uart",
+            "uart",
+            "cluster",
+            "adv_dbg_unit"
+          ],
+          "vp_ports": [
+            "cluster_clock",
+            "jtag",
+            "clock"
+          ],
+          "vp_bindings": [
+            [
+              "self->cluster_clock",
+              "cluster->clock"
+            ],
+            [
+              "self->jtag",
+              "adv_dbg_unit->jtag"
+            ],
+            [
+              "axi_ico->cluster",
+              "cluster->input"
+            ],
+            [
+              "axi_ico->soc",
+              "soc_ico->axi_slave"
+            ],
+            [
+              "soc_ico->apb",
+              "apb_ico->input"
+            ],
+            [
+              "soc_ico->axi_master",
+              "axi_ico->input"
+            ],
+            [
+              "soc_ico->l2",
+              "l2->input"
+            ],
+            [
+              "apb_ico->stdout",
+              "stdout->input"
+            ],
+            [
+              "apb_ico->apb_soc_ctrl",
+              "apb_soc_ctrl->input"
+            ],
+            [
+              "plt_loader->out",
+              "soc_ico->debug"
+            ],
+            [
+              "cluster->soc",
+              "axi_ico->input"
+            ],
+            [
+              "adv_dbg_unit->io",
+              "soc_ico->debug"
+            ]
+          ],
+          "axi_ico": {
+            "vp_class": "interco/router",
+            "bandwidth": 4,
+            "latency": 9,
+            "id": 0,
+            "mappings": {
+              "soc": {
+                "base": "0x1A000000",
+                "size": "0x06000000"
+              },
+              "cluster": {
+                "base": "0x10000000",
+                "size": "0x400000"
+              }
+            },
+            "vp_ports": [
+              "cluster",
+              "soc",
+              "input"
+            ]
+          },
+          "soc_ico": {
+            "nb_l2_shared_banks": 4,
+            "gv_class": "pulp.Soc_Ico_v2.Soc_Ico",
+            "vp_class": null,
+            "vp_comps": [
+              "ll_ico",
+              "hb_ico"
+            ],
+            "vp_ports": [
+              "debug",
+              "axi_slave",
+              "apb",
+              "axi_master",
+              "l2",
+              "l2_shared_0",
+              "l2_shared_1",
+              "l2_shared_2",
+              "l2_shared_3"
+            ],
+            "vp_bindings": [
+              [
+                "self->debug",
+                "ll_ico->input"
+              ],
+              [
+                "self->axi_slave",
+                "ll_ico->input"
+              ],
+              [
+                "ll_ico->apb",
+                "self->apb"
+              ],
+              [
+                "ll_ico->l2",
+                "self->l2"
+              ],
+              [
+                "ll_ico->axi_master",
+                "self->axi_master"
+              ],
+              [
+                "hb_ico->out_0",
+                "self->l2_shared_0"
+              ],
+              [
+                "hb_ico->out_1",
+                "self->l2_shared_1"
+              ],
+              [
+                "hb_ico->out_2",
+                "self->l2_shared_2"
+              ],
+              [
+                "hb_ico->out_3",
+                "self->l2_shared_3"
+              ]
+            ],
+            "ll_ico": {
+              "vp_class": "interco/router",
+              "bandwidth": 4,
+              "latency": 0,
+              "id": 0,
+              "mappings": {
+                "apb": {
+                  "base": "0x1A100000",
+                  "size": "0x00100000"
+                },
+                "axi_master": {
+                  "base": "0x10000000",
+                  "size": "0x400000"
+                },
+                "l2": {
+                  "base": "0x1C000000",
+                  "size": "0x00080000",
+                  "remove_offset": "0x1C000000"
+                }
+              },
+              "vp_ports": [
+                "apb",
+                "l2",
+                "axi_master",
+                "input"
+              ]
+            },
+            "hb_ico": {
+              "vp_class": "interco/interleaver",
+              "nb_slaves": 4,
+              "nb_masters": 0,
+              "interleaving_bits": 2,
+              "stage_bits": 0,
+              "remove_offset": "0x1C000000",
+              "vp_ports": [
+                "out_0",
+                "out_1",
+                "out_2",
+                "out_3"
+              ]
+            }
+          },
+          "apb_ico": {
+            "vp_class": "interco/router",
+            "bandwidth": 4,
+            "latency": 0,
+            "id": 0,
+            "mappings": {
+              "stdout": {
+                "base": "0x1A10F000",
+                "size": "0x00001000",
+                "remove_offset": "0x1A10F000"
+              },
+              "apb_soc_ctrl": {
+                "base": "0x1A104000",
+                "size": "0x00001000",
+                "remove_offset": "0x1A104000"
+              }
+            },
+            "vp_ports": [
+              "stdout",
+              "apb_soc_ctrl",
+              "input"
+            ]
+          },
+          "l2": {
+            "size": 524288,
+            "map_base": "0x1C000000",
+            "map_size": "0x00080000",
+            "vp_class": "memory/memory",
+            "vp_ports": [
+              "input"
+            ]
+          },
+          "plt_loader": {
+            "vp_class": "utils/loader",
+            "binaries": [],
+            "vp_ports": [
+              "out"
+            ]
+          },
+          "apb_soc_ctrl": {
+            "version": 3,
+            "vp_class": "pulp/chips/bigpulp/apb_soc",
+            "hal_files": [
+              "hal/apb_soc/apb_soc_v3.h"
+            ],
+            "regmap": {
+              "info": {
+                "offset": "0x000"
+              },
+              "fcboot": {
+                "offset": "0x004"
+              },
+              "fcfetch": {
+                "offset": "0x008"
+              },
+              "clusiso": {
+                "offset": "0x000C"
+              },
+              "padfun0": {
+                "offset": "0x010"
+              },
+              "padfun1": {
+                "offset": "0x014"
+              },
+              "padfun2": {
+                "offset": "0x018"
+              },
+              "padfun3": {
+                "offset": "0x01C"
+              },
+              "padcfg0": {
+                "offset": "0x020"
+              },
+              "padcfg1": {
+                "offset": "0x024"
+              },
+              "padcfg2": {
+                "offset": "0x028"
+              },
+              "padcfg3": {
+                "offset": "0x02C"
+              },
+              "padcfg4": {
+                "offset": "0x030"
+              },
+              "padcfg5": {
+                "offset": "0x034"
+              },
+              "padcfg6": {
+                "offset": "0x038"
+              },
+              "padcfg7": {
+                "offset": "0x03C"
+              },
+              "padcfg8": {
+                "offset": "0x040"
+              },
+              "padcfg9": {
+                "offset": "0x044"
+              },
+              "padcfg10": {
+                "offset": "0x048"
+              },
+              "padcfg11": {
+                "offset": "0x04C"
+              },
+              "padcfg12": {
+                "offset": "0x050"
+              },
+              "padcfg13": {
+                "offset": "0x054"
+              },
+              "padcfg14": {
+                "offset": "0x058"
+              },
+              "padcfg15": {
+                "offset": "0x05C"
+              },
+              "clusbusy": {
+                "offset": "0x6C"
+              },
+              "jtagreg": {
+                "offset": "0x74"
+              },
+              "l2_sleep": {
+                "offset": "0x78"
+              },
+              "sleep_ctrl": {
+                "offset": "0x7C"
+              },
+              "corestatus": {
+                "offset": "0xA0"
+              },
+              "cs_ro": {
+                "offset": "0xC0"
+              },
+              "bootsel": {
+                "offset": "0xC4"
+              },
+              "clk_sel": {
+                "offset": "0xD0"
+              },
+              "clk_div_soc": {
+                "offset": "0xD4"
+              },
+              "clk_div_clu": {
+                "offset": "0xD8"
+              },
+              "clk_div_per": {
+                "offset": "0xDC"
+              }
+            },
+            "vp_ports": [
+              "input"
+            ]
+          },
+          "stdout": {
+            "version": 3,
+            "vp_class": "pulp/stdout/stdout_v3",
+            "archi_files": [
+              "archi/stdout/stdout_v3.h"
+            ],
+            "max_cluster": 33,
+            "max_core_per_cluster": 16,
+            "vp_ports": [
+              "input"
+            ]
+          },
+          "apb_uart": {
+            "version": 0
+          },
+          "uart": {
+            "version": 1
+          },
           "cluster": {
             "version": 5,
             "nb_pe": 8,
@@ -178,7 +597,10 @@
             "vp_ports": [
               "input",
               "dma_irq",
-              "soc"
+              "soc",
+              "soc",
+              "clock",
+              "input"
             ],
             "vp_bindings": [
               [
@@ -1072,7 +1494,7 @@
                 "periph_ico_alias": {
                   "base": "0x1B200000",
                   "size": "0x00200000",
-                  "add_offset": "0x10000000"
+                  "add_offset": "-184549376"
                 },
                 "soc": {}
               },
@@ -1883,13 +2305,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -1959,13 +2381,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00040000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -3342,7 +3764,7 @@
               ],
               "vp_class": "cpu/iss/iss",
               "fetch_enable": false,
-              "boot_addr": "0x00000000",
+              "boot_addr": "0x1C000000",
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3370,7 +3792,9 @@
                     }
                   }
                 }
-              }
+              },
+              "cluster_id": 0,
+              "core_id": 0
             },
             "pe0": {
               "version": "ri5cyv2",
@@ -3404,8 +3828,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": "0x1c008000",
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3485,8 +3909,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3566,8 +3990,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3647,8 +4071,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3728,8 +4152,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3809,8 +4233,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3890,8 +4314,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -3971,8 +4395,8 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
+              "fetch_enable": null,
+              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -4021,183 +4445,39 @@
               ]
             }
           },
-          "soc_ico": {
-            "gv_class": "pulp.Soc_Ico_v1.Soc_Ico",
-            "nb_l2_shared_banks": 4,
-            "apb": {
-              "base": "0x1A100000",
-              "size": "0x00100000"
-            },
-            "l2": {
-              "base": "0x1C000000",
-              "size": "0x00080000"
-            },
-            "peripherals_base": "0x1A100000",
-            "peripherals": {
-              "stdout": {
-                "offset": "0x0000f000",
-                "size": "0x00001000"
-              },
-              "apb_soc_ctrl": {
-                "offset": "0x00004000",
-                "size": "0x00001000"
-              }
-            }
+          "adv_dbg_unit": {
+            "vp_class": "pulp/adv_dbg_unit/adv_dbg_unit",
+            "vp_ports": [
+              "io",
+              "jtag"
+            ]
           },
-          "l2": {
-            "size": 262144,
-            "map_base": "0x1C000000",
-            "map_size": "0x00080000"
-          },
-          "l2_shared": {
-            "nb_banks": 4,
-            "size": 262144,
-            "map_base": "0x1C000000",
-            "map_size": "0x01000000"
-          },
-          "apb_uart": {
-            "version": 0
-          },
-          "peripherals_base": "0x1A100000",
-          "stdout": {
-            "version": 3,
-            "vp_class": "pulp/stdout/stdout_v3",
-            "archi_files": [
-              "archi/stdout/stdout_v3.h"
-            ],
-            "max_cluster": 33,
-            "max_core_per_cluster": 16
-          },
-          "apb_soc_ctrl": {
-            "version": 3,
+          "mailbox": {
+            "version": 0,
             "hal_files": [
-              "hal/apb_soc/apb_soc_v3.h"
+              "hal/mailbox/mailbox_v0.h"
             ],
-            "regmap": {
-              "power": {
-                "bypass": {
-                  "offset": "0x70",
-                  "content": {
-                    "dbg1": {
-                      "bit": 14
-                    }
-                  }
-                }
-              },
-              "info": {
-                "offset": "0x000"
-              },
-              "fcboot": {
-                "offset": "0x004"
-              },
-              "fcfetch": {
-                "offset": "0x008"
-              },
-              "clusiso": {
-                "offset": "0x000C"
-              },
-              "padfun0": {
-                "offset": "0x010"
-              },
-              "padfun1": {
-                "offset": "0x014"
-              },
-              "padfun2": {
-                "offset": "0x018"
-              },
-              "padfun3": {
-                "offset": "0x01C"
-              },
-              "padcfg0": {
-                "offset": "0x020"
-              },
-              "padcfg1": {
-                "offset": "0x024"
-              },
-              "padcfg2": {
-                "offset": "0x028"
-              },
-              "padcfg3": {
-                "offset": "0x02C"
-              },
-              "padcfg4": {
-                "offset": "0x030"
-              },
-              "padcfg5": {
-                "offset": "0x034"
-              },
-              "padcfg6": {
-                "offset": "0x038"
-              },
-              "padcfg7": {
-                "offset": "0x03C"
-              },
-              "padcfg8": {
-                "offset": "0x040"
-              },
-              "padcfg9": {
-                "offset": "0x044"
-              },
-              "padcfg10": {
-                "offset": "0x048"
-              },
-              "padcfg11": {
-                "offset": "0x04C"
-              },
-              "padcfg12": {
-                "offset": "0x050"
-              },
-              "padcfg13": {
-                "offset": "0x054"
-              },
-              "padcfg14": {
-                "offset": "0x058"
-              },
-              "padcfg15": {
-                "offset": "0x05C"
-              },
-              "clusbusy": {
-                "offset": "0x6C"
-              },
-              "cluster_byp": {
-                "offset": "0x70"
-              },
-              "jtagreg": {
-                "offset": "0x74"
-              },
-              "l2_sleep": {
-                "offset": "0x78"
-              },
-              "sleep_ctrl": {
-                "offset": "0x7C"
-              },
-              "corestatus": {
-                "offset": "0xA0"
-              },
-              "cs_ro": {
-                "offset": "0xC0"
-              },
-              "bootsel": {
-                "offset": "0xC4"
-              },
-              "clk_sel": {
-                "offset": "0xD0"
-              },
-              "clk_div_soc": {
-                "offset": "0xD4"
-              },
-              "clk_div_clu": {
-                "offset": "0xD8"
-              },
-              "clk_div_per": {
-                "offset": "0xDC"
-              }
-            }
+            "archi_files": [
+              "archi/mailbox/mailbox_v0.h"
+            ]
           }
         }
       },
+      "dpi_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 100000000,
+        "vp_ports": [
+          "out"
+        ]
+      },
       "pulp_chip": {
         "hero-z-7045": {}
+      },
+      "dpi": {
+        "vp_class": "utils/dpi_wrapper",
+        "vp_ports": [
+          "clock"
+        ]
       }
     }
   }

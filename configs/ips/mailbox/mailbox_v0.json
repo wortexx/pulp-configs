@@ -1,0 +1,12 @@
+{        
+
+  "version": 0,
+
+  "hal_files": [
+    "hal/mailbox/mailbox_v0.h"
+  ],
+
+  "archi_files" : [
+    "archi/mailbox/mailbox_v0.h"
+  ]
+}

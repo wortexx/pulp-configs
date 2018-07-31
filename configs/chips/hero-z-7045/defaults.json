@@ -1,0 +1,14 @@
+{
+  "system_tree": {
+    "board": {
+      "chip": {
+        "soc": {
+          "mailbox": {
+            "includes": [ "../../ips/mailbox/mailbox_v0.json"]
+          }
+        }
+      }
+    }
+  }
+}
+
