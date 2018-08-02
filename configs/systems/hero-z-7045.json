@@ -4443,6 +4443,15 @@
                 "halt",
                 "irq_req"
               ]
+            },
+            "tryx": {
+              "version": 1,
+              "hal_files": [
+                "hal/tryx/tryx_v1.h"
+              ],
+              "hal_src_files": [
+                "hal/tryx/tryx_v1.c"
+              ]
             }
           },
           "adv_dbg_unit": {
@@ -4462,17 +4471,6 @@
             ],
             "archi_files": [
               "archi/mailbox/mailbox_v0.h"
-            ]
-          }
-        },
-        "cluster": {
-          "tryx": {
-            "version": 1,
-            "hal_files": [
-              "hal/tryx/tryx_v1.h"
-            ],
-            "hal_src_files": [
-              "hal/tryx/tryx_v1.c"
             ]
           }
         }
