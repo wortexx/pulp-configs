@@ -4684,6 +4684,35 @@
             "archi_files": [
               "archi/mailbox/mailbox_v0.h"
             ]
+          },
+          "rab": {
+            "version": 1,
+            "hal_files": [
+              "hal/rab/rab_v1.h"
+            ],
+            "hal_src_files": [
+              "hal/rab/rab_v1.c"
+            ],
+            "archi_files": [
+              "archi/rab/rab_v1.h"
+            ]
+          },
+          "archi_host": {
+            "version": 1,
+            "archi_host_files": [
+              "archi-host/pgtable_hwdef.h",
+              "archi-host/phys_addr.h",
+              "archi-host/virt_addr.h",
+              "archi-host/arm/phys_addr.h",
+              "archi-host/arm/pgtable_hwdef.h",
+              "archi-host/arm64/phys_addr.h",
+              "archi-host/arm64/pgtable_dbg.h",
+              "archi-host/arm64/pgtable_hwdef.h"
+            ],
+            "archi_host_src_files": [
+              "src/phys_addr.c",
+              "src/virt_addr.c"
+            ]
           }
         },
         "vp_ports": [
