@@ -20,6 +20,11 @@
         "soc": {
           "mailbox": {
             "includes": [ "../../ips/mailbox/mailbox_v0.json"]
+          },
+          "cluster": {
+            "tryx": {
+              "includes": [ "../../ips/tryx/tryx_v1.json"]
+            }
           }
         }
       }
