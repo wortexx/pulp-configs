@@ -148,7 +148,8 @@
         "access_timeout_us": 1000000
       },
       "adv_dbg_unit": {
-        "debug_ir": "0x4"
+        "debug_ir": "0x4",
+        "retry_count": 10
       },
       "boot-mode": "jtag",
       "commands": "load ioloop reqloop start wait",
