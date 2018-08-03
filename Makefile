@@ -1,3 +1,4 @@
+INSTALL ?= install
 INSTALL_DIR ?= $(CURDIR)/install
 BUILD_DIR   ?= $(CURDIR)/build
 
@@ -92,7 +93,7 @@ INSTALL_FILES += $(shell find bin -name "*.py")
 define declareInstallFile
 
 $(INSTALL_DIR)/$(1): $(1)
-	install -D $(1) $$@
+	$(INSTALL) -D $(1) $$@
 
 INSTALL_HEADERS += $(INSTALL_DIR)/$(1)
 
