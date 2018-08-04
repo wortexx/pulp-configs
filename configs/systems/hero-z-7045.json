@@ -408,9 +408,9 @@
                 "remove_offset": "0x1A10F000"
               },
               "apb_soc_ctrl": {
-                "base": "0x1A104000",
+                "base": "0x1A103000",
                 "size": "0x00001000",
-                "remove_offset": "0x1A104000"
+                "remove_offset": "0x1A103000"
               }
             },
             "vp_ports": [
