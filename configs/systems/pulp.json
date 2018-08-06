@@ -177,6 +177,10 @@
           "dpi->clock"
         ],
         [
+          "chip->uart0",
+          "dpi->uart0"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ]
@@ -225,6 +229,10 @@
           [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
+          ],
+          [
+            "padframe->uart0_pad",
+            "self->uart0"
           ]
         ],
         "padframe": {
@@ -398,6 +406,7 @@
             "spim0",
             "uart0",
             "clock",
+            "uart0_pad",
             "jtag0_pad"
           ]
         },
@@ -5803,6 +5812,7 @@
           }
         },
         "vp_ports": [
+          "uart0",
           "jtag0",
           "ctrl",
           "jtag0_pad",
@@ -5823,14 +5833,20 @@
         "vp_class": "utils/dpi_wrapper",
         "vp_ports": [
           "clock",
-          "jtag0"
+          "jtag0",
+          "uart0"
         ]
       },
       "tb_comps": [
         "jtag_proxy",
+        "uart",
         "camera"
       ],
       "tb_bindings": [
+        [
+          "chip->uart0",
+          "uart->uart"
+        ],
         [
           "chip->jtag0",
           "jtag_proxy->jtag"
@@ -5853,6 +5869,18 @@
         "vp_ports": [
           "jtag",
           "ctrl"
+        ]
+      },
+      "uart": {
+        "type": "dpi",
+        "module": "uart.so",
+        "verbose": false,
+        "baudrate": 625000,
+        "loopback": false,
+        "stdout": false,
+        "tx_file": "tx_uart.log",
+        "vp_ports": [
+          "uart"
         ]
       },
       "camera": {

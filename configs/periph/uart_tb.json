@@ -3,7 +3,7 @@
   "module": "uart.so",
   "verbose": false,
   "baudrate": 625000,
-  "loopback": true,
+  "loopback": false,
   "stdout": false,
   "tx_file": "tx_uart.log"
 }
