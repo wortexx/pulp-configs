@@ -559,7 +559,7 @@
   },
   "pmu": {
     "includes": [
-      "ips/pmu_v1.json"
+      "ips/pmu_v2.json"
     ],
     "vp_ports": [
       "input"
