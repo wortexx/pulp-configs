@@ -1,17 +1,17 @@
 {
-  "name": "pulp",
-  "pulp_chip_family": "pulp",
+  "name": "arnold",
+  "pulp_chip_family": "arnold",
   "pulp_chip_version": 0,
   "boot_from_rom": false,
   "vp_class": "pulp/chip",
   "hal_files": [
-    "hal/chips/pulp/pulp.h"
+    "hal/chips/arnold/pulp.h"
   ],
   "archi_files": [
-    "archi/chips/pulp/pulp.h",
-    "archi/chips/pulp/memory_map.h",
-    "archi/chips/pulp/properties.h",
-    "archi/chips/pulp/apb_soc.h"
+    "archi/chips/arnold/pulp.h",
+    "archi/chips/arnold/memory_map.h",
+    "archi/chips/arnold/properties.h",
+    "archi/chips/arnold/apb_soc.h"
   ],
   "vp_comps": [
     "padframe",
@@ -42,7 +42,7 @@
   ],
   "padframe": {
     "includes": [
-      "chips/pulp/padframe.json"
+      "chips/arnold/padframe.json"
     ],
     "vp_ports": [
       "jtag0",

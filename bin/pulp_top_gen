@@ -33,7 +33,7 @@ else:
   tp = None
 
 
-if args.system in ["pulpissimo", "pulp", "wolfe", "vega", "multino", "oprecompkw", "oprecompkw-dram", "oprecompkw_sa", "oprecompkw_sfloat", "oprecompkw_sfloat_sa", "bigpulp", "bigpulp-z-7045", "hero-z-7045"]:
+if args.system in ["arnold", "pulpissimo", "pulp", "wolfe", "vega", "multino", "oprecompkw", "oprecompkw-dram", "oprecompkw_sa", "oprecompkw_sfloat", "oprecompkw_sfloat_sa", "bigpulp", "bigpulp-z-7045", "hero-z-7045"]:
 
   includes = [
     "defaults.json",

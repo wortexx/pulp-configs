@@ -68,7 +68,7 @@ if padframe is not None:
 
 chip.soc_clock = Component(
   vp_class="vp/clock_domain",
-  frequency=100000000
+  frequency=50000000
 )
 
 
