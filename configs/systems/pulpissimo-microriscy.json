@@ -146,7 +146,9 @@
         "access_timeout_us": 1000000
       },
       "adv_dbg_unit": {
-        "debug_ir": "0x4"
+        "debug_ir": "0x4",
+        "retry_count": 10,
+        "check_errors": true
       },
       "boot-mode": "default",
       "commands": "reset stop load ioloop reqloop start wait",
