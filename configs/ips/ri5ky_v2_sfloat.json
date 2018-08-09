@@ -3,7 +3,7 @@
   "archi"         : "riscv",
   "implementation": "ri5cy",
   "gv_isa"        : ["--pulp", "--rv32m", "--pulpv2", "--pulp-perf-counters", "--pulp-hw-loop", "--itc-external-req", "--fpu", "--fpud", "--shared-fpu"],
-  "isa"           : "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+  "isa"           : "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
   "march"         : "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
   "priv_version"  : 1.9,
   "perf_counters" : true,

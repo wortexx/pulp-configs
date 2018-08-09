@@ -1074,7 +1074,8 @@
               "--fpud",
               "--shared-fpu"
             ],
-            "isa": "RV32IMFCXpulpv2",
+            "isa": "rv32imfcXpulpv2",
+            "march": "imfcXpulpv2",
             "priv_version": 1.9,
             "perf_counters": true,
             "features": [
@@ -5099,7 +5100,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5164,7 +5166,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5245,7 +5248,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5326,7 +5330,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5407,7 +5412,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5488,7 +5494,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5569,7 +5576,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5650,7 +5658,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5731,7 +5740,8 @@
                 "--rv32m",
                 "--itc-external-req"
               ],
-              "isa": "RV32IMCXpulpv2",
+              "march": "imcXpulpv2",
+              "isa": "rv32imcXpulpv2",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [

@@ -14,7 +14,7 @@
       "stop_value": "0x00010000",
       "set_pc_addr": "0x10200040",
       "set_pc_offset": "-128",
-      "commands": "reset stop load ioloop start wait"
+      "commands": "reset stop load ioloop reqloop start wait"
     },
     "board": {
       "vp_class": "pulp/board",
@@ -37,7 +37,7 @@
       },
       "dpi_clock": {
         "vp_class": "vp/clock_domain",
-        "frequency": 100000000,
+        "frequency": 50000000,
         "vp_ports": [
           "out"
         ]

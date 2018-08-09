@@ -184,6 +184,10 @@
           "ddr->clock"
         ],
         [
+          "chip->uart0",
+          "dpi->uart0"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ]
@@ -211,6 +215,7 @@
         "vp_ports": [
           "ddr",
           "ddr",
+          "uart0",
           "jtag0",
           "ctrl",
           "jtag0_pad"
@@ -243,6 +248,10 @@
           [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
+          ],
+          [
+            "padframe->uart0_pad",
+            "self->uart0"
           ]
         ],
         "padframe": {
@@ -416,12 +425,13 @@
             "spim0",
             "uart0",
             "clock",
+            "uart0_pad",
             "jtag0_pad"
           ]
         },
         "soc_clock": {
           "vp_class": "vp/clock_domain",
-          "frequency": 100000000,
+          "frequency": 50000000,
           "vp_ports": [
             "out"
           ]
@@ -4086,7 +4096,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4156,7 +4166,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4243,7 +4253,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4330,7 +4340,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4417,7 +4427,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4504,7 +4514,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4591,7 +4601,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4678,7 +4688,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4765,7 +4775,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4879,7 +4889,7 @@
       },
       "dpi_clock": {
         "vp_class": "vp/clock_domain",
-        "frequency": 100000000,
+        "frequency": 50000000,
         "vp_ports": [
           "out"
         ]
@@ -4891,7 +4901,8 @@
         "vp_class": "utils/dpi_wrapper",
         "vp_ports": [
           "clock",
-          "jtag0"
+          "jtag0",
+          "uart0"
         ]
       },
       "ddr_clock": {
@@ -4912,9 +4923,14 @@
       },
       "tb_comps": [
         "jtag_proxy",
+        "uart",
         "camera"
       ],
       "tb_bindings": [
+        [
+          "chip->uart0",
+          "uart->uart"
+        ],
         [
           "chip->jtag0",
           "jtag_proxy->jtag"
@@ -4933,6 +4949,18 @@
         "vp_ports": [
           "jtag",
           "ctrl"
+        ]
+      },
+      "uart": {
+        "type": "dpi",
+        "module": "uart.so",
+        "verbose": false,
+        "baudrate": 625000,
+        "loopback": true,
+        "stdout": false,
+        "tx_file": "tx_uart.log",
+        "vp_ports": [
+          "uart"
         ]
       },
       "camera": {

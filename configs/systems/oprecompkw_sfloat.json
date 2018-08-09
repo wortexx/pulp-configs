@@ -219,7 +219,7 @@
         ],
         "soc_clock": {
           "vp_class": "vp/clock_domain",
-          "frequency": 100000000,
+          "frequency": 50000000,
           "vp_ports": [
             "out"
           ]
@@ -3881,7 +3881,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -3951,7 +3951,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4038,7 +4038,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4125,7 +4125,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4212,7 +4212,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4299,7 +4299,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4386,7 +4386,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4473,7 +4473,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4560,7 +4560,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "RV32IMFXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
@@ -4674,7 +4674,7 @@
       },
       "dpi_clock": {
         "vp_class": "vp/clock_domain",
-        "frequency": 100000000,
+        "frequency": 50000000,
         "vp_ports": [
           "out"
         ]
