@@ -192,7 +192,8 @@
                 "--pulp",
                 "--rv32m"
               ],
-              "isa": "RV32IMC",
+              "isa": "rv32imcXpulpslim",
+              "march": "imcXpulpslim",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [

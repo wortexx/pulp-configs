@@ -2369,7 +2369,8 @@
               "--fpud",
               "--shared-fpu"
             ],
-            "isa": "RV32IMFCXpulpv2",
+            "isa": "rv32imfcXpulpv2",
+            "march": "imfcXpulpv2",
             "priv_version": 1.9,
             "perf_counters": true,
             "features": [
