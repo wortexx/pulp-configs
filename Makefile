@@ -41,6 +41,9 @@ gen.oprecompkw_sfloat:
 gen.oprecompkw_sfloat_sa:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sfloat_sa.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sfloat_sa --output=configs/systems/oprecompkw_sfloat_sa.json --usecase=usecases/jtag.json
 
+gen.oprecompkw_sfloat_sa_dual_regfile:
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sfloat_sa_dual_regfile.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sfloat_sa_dual_regfile --output=configs/systems/oprecompkw_sfloat_sa_dual_regfile.json --usecase=usecases/jtag.json
+
 gen.oprecompkw_sa:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sa.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sa --output=configs/systems/oprecompkw_sa.json --usecase=usecases/jtag.json
 

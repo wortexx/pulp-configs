@@ -5187,6 +5187,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 0,
               "boot_addr": "0x1C000000"
@@ -5257,6 +5258,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 0,
               "fetch_enable": null,
@@ -5344,6 +5346,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 1,
               "fetch_enable": null,
@@ -5431,6 +5434,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 2,
               "fetch_enable": null,
@@ -5518,6 +5522,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 3,
               "fetch_enable": null,
@@ -5605,6 +5610,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 4,
               "fetch_enable": null,
@@ -5692,6 +5698,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 5,
               "fetch_enable": null,
@@ -5779,6 +5786,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 6,
               "fetch_enable": null,
@@ -5866,6 +5874,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 7,
               "fetch_enable": null,
