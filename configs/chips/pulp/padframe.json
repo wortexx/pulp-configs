@@ -16,7 +16,8 @@
   "groups": {
     "spim0": { "type": "qspim" },
     "uart0": { "type": "uart" },
-    "jtag0": { "type": "jtag" }
+    "jtag0": { "type": "jtag" },
+    "cpi0": { "type": "cpi" }
   },
 
 

@@ -183,6 +183,10 @@
         [
           "dpi->jtag0",
           "chip->jtag0_pad"
+        ],
+        [
+          "dpi->cpi0",
+          "chip->cpi0_pad"
         ]
       ],
       "chip": {
@@ -211,6 +215,10 @@
             "soc->jtag"
           ],
           [
+            "padframe->cpi0",
+            "soc->cpi0"
+          ],
+          [
             "soc_clock->out",
             "padframe->clock"
           ],
@@ -229,6 +237,10 @@
           [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
+          ],
+          [
+            "self->cpi0_pad",
+            "padframe->cpi0_pad"
           ],
           [
             "padframe->uart0_pad",
@@ -262,6 +274,9 @@
             },
             "jtag0": {
               "type": "jtag"
+            },
+            "cpi0": {
+              "type": "cpi"
             }
           },
           "pads": {
@@ -403,11 +418,13 @@
           },
           "vp_ports": [
             "jtag0",
+            "cpi0",
             "spim0",
             "uart0",
             "clock",
             "uart0_pad",
-            "jtag0_pad"
+            "jtag0_pad",
+            "cpi0_pad"
           ]
         },
         "soc_clock": {
@@ -521,18 +538,24 @@
           ],
           "vp_ports": [
             "cluster_clock",
+            "cpi0",
             "jtag",
             "spim0",
             "uart0",
             "spim0",
             "uart0",
             "jtag",
+            "cpi0",
             "clock"
           ],
           "vp_bindings": [
             [
               "self->cluster_clock",
               "cluster->clock"
+            ],
+            [
+              "self->cpi0",
+              "udma->cpi0"
             ],
             [
               "self->jtag",
@@ -1919,7 +1942,8 @@
               "event_itf",
               "spim0",
               "uart0",
-              "input"
+              "input",
+              "cpi0"
             ]
           },
           "uart": {
@@ -5153,7 +5177,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 0
             },
@@ -5220,7 +5243,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 0,
               "vp_ports": [
@@ -5303,7 +5325,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 1,
               "vp_ports": [
@@ -5386,7 +5407,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 2,
               "vp_ports": [
@@ -5469,7 +5489,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 3,
               "vp_ports": [
@@ -5552,7 +5571,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 4,
               "vp_ports": [
@@ -5635,7 +5653,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 5,
               "vp_ports": [
@@ -5718,7 +5735,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 6,
               "vp_ports": [
@@ -5801,7 +5817,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 7,
               "vp_ports": [
@@ -5835,6 +5850,7 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
+          "cpi0_pad",
           "cpi0"
         ]
       },
@@ -5853,6 +5869,7 @@
         "vp_ports": [
           "clock",
           "jtag0",
+          "cpi0",
           "uart0"
         ]
       },

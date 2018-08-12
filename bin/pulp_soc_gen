@@ -575,6 +575,7 @@ if has_udma:
   soc.udma.event_itf = soc.soc_eu.event_in
   soc.udma.spim0 = soc.spim0
   soc.udma.uart0 = soc.uart0
+  soc.cpi0 = soc.udma.cpi0
 
 # Soc EU
 if has_fc:

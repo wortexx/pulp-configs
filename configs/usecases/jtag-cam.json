@@ -17,6 +17,10 @@
         [
           "dpi->jtag0",
           "chip->jtag0_pad"
+        ],
+        [
+          "dpi->cpi0",
+          "chip->cpi0_pad"
         ]
       ],
       "tb_bindings": [
@@ -43,12 +47,17 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
+          "cpi0_pad",
           "cpi0"
         ],
         "vp_bindings": [
           [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
+          ],
+          [
+            "self->cpi0_pad",
+            "padframe->cpi0_pad"
           ],
           [
             "padframe->uart0_pad",
@@ -58,13 +67,15 @@
         "padframe": {
           "vp_ports": [
             "uart0_pad",
-            "jtag0_pad"
+            "jtag0_pad",
+            "cpi0_pad"
           ]
         }
       },
       "dpi": {
         "vp_ports": [
           "jtag0",
+          "cpi0",
           "uart0"
         ]
       },

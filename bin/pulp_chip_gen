@@ -80,6 +80,7 @@ if padframe is not None:
   chip.soc.spim0 = chip.padframe.spim0
   chip.soc.uart0 = chip.padframe.uart0
   chip.padframe.jtag0 = chip.soc.jtag
+  chip.padframe.cpi0 = chip.soc.cpi0
   chip.soc_clock.out = chip.padframe.clock
   
 chip.soc_clock.out = chip.soc.clock

@@ -73,7 +73,8 @@ system.system_tree.board.chip.uart0 = system.system_tree.board.dpi.uart0
 
 if args.cam:
   system.system_tree.board.camera.cpi = system.system_tree.board.chip.cpi0
-
+  system.system_tree.board.dpi.cpi0 = system.system_tree.board.chip.cpi0_pad
+  system.system_tree.board.chip.cpi0_pad = system.system_tree.board.chip.padframe.cpi0_pad
 
 config = system.get_json_config(expand=True)
 
