@@ -41,6 +41,7 @@ tp = js.import_config_from_file(args.template, find=True)
 
 padframe              = tp.get_child_str('padframe')
 chip_family           = tp.get_child_str('chip_family')
+has_udma          = tp.get('soc/peripherals/udma') is not None
 has_ddr = tp.get('ddr') is not None
 if chip_family is None:
   chip_family = args.chip
@@ -80,7 +81,8 @@ if padframe is not None:
   chip.soc.spim0 = chip.padframe.spim0
   chip.soc.uart0 = chip.padframe.uart0
   chip.padframe.jtag0 = chip.soc.jtag
-  chip.padframe.cpi0 = chip.soc.cpi0
+  if has_udma:
+    chip.padframe.cpi0 = chip.soc.cpi0
   chip.soc_clock.out = chip.padframe.clock
   
 chip.soc_clock.out = chip.soc.clock

@@ -249,6 +249,7 @@
           "first_alternate": 8,
           "version": 1,
           "default_profile": "default",
+          "vp_class": "pulp/padframe/padframe_v1",
           "profiles": {
             "default": {
               "alternates": [
@@ -389,16 +390,25 @@
           },
           "groups": {
             "rf": {},
-            "spim0": {},
+            "spim0": {
+              "type": "qspim"
+            },
             "spim1": {},
+            "uart0": {
+              "type": "uart"
+            },
             "i2c0": {},
             "i2c1": {},
             "i2s0": {},
             "i2s1": {},
             "spis": {},
-            "cpi": {},
+            "cpi0": {
+              "type": "cpi"
+            },
             "reset": {},
-            "jtag": {},
+            "jtag0": {
+              "type": "jtag"
+            },
             "hyper": {},
             "timer0": {},
             "timer1": {},
@@ -774,7 +784,7 @@
                 {
                   "name": "cam_pclk",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -799,7 +809,7 @@
                 {
                   "name": "cam_hsync",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -824,7 +834,7 @@
                 {
                   "name": "cam_data0",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -849,7 +859,7 @@
                 {
                   "name": "cam_data1",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -874,7 +884,7 @@
                 {
                   "name": "cam_data2",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -899,7 +909,7 @@
                 {
                   "name": "cam_data3",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -924,7 +934,7 @@
                 {
                   "name": "cam_data4",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -949,7 +959,7 @@
                 {
                   "name": "cam_data5",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -974,7 +984,7 @@
                 {
                   "name": "cam_data6",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -999,7 +1009,7 @@
                 {
                   "name": "cam_data7",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -1024,7 +1034,7 @@
                 {
                   "name": "cam_vsync",
                   "groups": [
-                    "cpi"
+                    "cpi0"
                   ]
                 },
                 {
@@ -1284,7 +1294,7 @@
                 {
                   "name": "uart_rx",
                   "groups": [
-                    "uart"
+                    "uart0"
                   ]
                 },
                 {
@@ -1304,7 +1314,7 @@
                 {
                   "name": "uart_tx",
                   "groups": [
-                    "uart"
+                    "uart0"
                   ]
                 },
                 {
@@ -1717,7 +1727,7 @@
                 {
                   "name": "jtag_tck",
                   "groups": [
-                    "jtag"
+                    "jtag0"
                   ]
                 },
                 {},
@@ -1732,7 +1742,7 @@
                 {
                   "name": "jtag_tdi",
                   "groups": [
-                    "jtag"
+                    "jtag0"
                   ]
                 },
                 {},
@@ -1747,7 +1757,7 @@
                 {
                   "name": "jtag_tdo",
                   "groups": [
-                    "jtag"
+                    "jtag0"
                   ]
                 },
                 {},
@@ -1762,7 +1772,7 @@
                 {
                   "name": "jtag_tms",
                   "groups": [
-                    "jtag"
+                    "jtag0"
                   ]
                 },
                 {},
@@ -1777,7 +1787,7 @@
                 {
                   "name": "jtag_trst",
                   "groups": [
-                    "jtag"
+                    "jtag0"
                   ]
                 },
                 {},

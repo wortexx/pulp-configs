@@ -7,6 +7,8 @@
 
   "default_profile": "default",
 
+  "includes": [ "../../ips/padframe/padframe_v1.json"],
+
   "profiles": {
     "default": {
       "alternates": [ 0, 0, 0, 0, 0, 0, 0, 0,
@@ -32,16 +34,17 @@
 
   "groups": {
     "rf": {},
-    "spim0": {},
+    "spim0": { "type": "qspim" },
     "spim1": {},
+    "uart0": { "type": "uart" },
     "i2c0": {},
     "i2c1": {},
     "i2s0": {},
     "i2s1": {},
     "spis": {},
-    "cpi": {},
+    "cpi0": { "type": "cpi" },
     "reset": {},
-    "jtag": {},
+    "jtag0": { "type": "jtag" },
     "hyper": {},
     "timer0": {},
     "timer1": {},
@@ -237,7 +240,7 @@
       "id": 18,
       "position": "A43",
       "alternates": [
-        { "name": "cam_pclk"   , "groups": [ "cpi"    ] },
+        { "name": "cam_pclk"   , "groups": [ "cpi0"   ] },
         { "name": "gpioA4"     , "groups": [ "gpio4"  ] },
         { "name": "timer1_ch0" , "groups": [ "timer1" ] },
         {}
@@ -247,7 +250,7 @@
       "id": 19,
       "position": "A37",
       "alternates": [
-        { "name": "cam_hsync"  , "groups": [ "cpi"   ] },
+        { "name": "cam_hsync"  , "groups": [ "cpi0"  ] },
         { "name": "gpioA5"     , "groups": [ "gpio5" ] },
         { "name": "timer1_ch1" , "groups": [ "timer1"] },
         {}
@@ -257,7 +260,7 @@
       "id": 20,
       "position": "B39",
       "alternates": [
-        { "name": "cam_data0"  , "groups": [ "cpi"   ] },
+        { "name": "cam_data0"  , "groups": [ "cpi0"  ] },
         { "name": "gpioA6"     , "groups": [ "gpio6" ] },
         { "name": "timer1_ch2" , "groups": [ "timer1"] },
         {}
@@ -267,7 +270,7 @@
       "id": 21,
       "position": "A42",
       "alternates": [
-        { "name": "cam_data1"  , "groups": [ "cpi"   ] },
+        { "name": "cam_data1"  , "groups": [ "cpi0"  ] },
         { "name": "gpioA7"     , "groups": [ "gpio7" ] },
         { "name": "timer1_ch3" , "groups": [ "timer1"] },
         {}
@@ -277,7 +280,7 @@
       "id": 22,
       "position": "B38",
       "alternates": [
-        { "name": "cam_data2"  , "groups": [ "cpi"   ] },
+        { "name": "cam_data2"  , "groups": [ "cpi0"  ] },
         { "name": "gpioA8"     , "groups": [ "gpio8" ] },
         { "name": "timer2_ch0" , "groups": [ "timer2"] },
         {}
@@ -287,7 +290,7 @@
       "id": 23,
       "position": "A41",
       "alternates": [
-        { "name": "cam_data3"  , "groups": [ "cpi"   ] },
+        { "name": "cam_data3"  , "groups": [ "cpi0"  ] },
         { "name": "gpioA9"     , "groups": [ "gpio9" ] },
         { "name": "timer2_ch1" , "groups": [ "timer2"] },
         {}
@@ -297,7 +300,7 @@
       "id": 24,
       "position": "B37",
       "alternates": [
-        { "name": "cam_data4"  , "groups": [ "cpi"    ] },
+        { "name": "cam_data4"  , "groups": [ "cpi0"   ] },
         { "name": "gpioA10"    , "groups": [ "gpio10" ] },
         { "name": "timer2_ch2" , "groups": [ "timer2" ] },
         {}
@@ -307,7 +310,7 @@
       "id": 25,
       "position": "A40",
       "alternates": [
-        { "name": "cam_data5"  , "groups": [ "cpi"    ] },
+        { "name": "cam_data5"  , "groups": [ "cpi0"   ] },
         { "name": "gpioA11"    , "groups": [ "gpio11" ] },
         { "name": "timer2_ch3" , "groups": [ "timer2" ] },
         {}
@@ -317,7 +320,7 @@
       "id": 26,
       "position": "B36",
       "alternates": [ 
-        { "name": "cam_data6"  , "groups": [ "cpi"    ] },
+        { "name": "cam_data6"  , "groups": [ "cpi0"   ] },
         { "name": "gpioA12"    , "groups": [ "gpio12" ] },
         { "name": "timer3_ch0" , "groups": [ "timer3" ] },
         {}
@@ -327,7 +330,7 @@
       "id": 27,
       "position": "A38",
       "alternates": [ 
-        { "name": "cam_data7"  , "groups": [ "cpi"    ] },
+        { "name": "cam_data7"  , "groups": [ "cpi0"   ] },
         { "name": "gpioA13"    , "groups": [ "gpio13" ] },
         { "name": "timer3_ch1" , "groups": [ "timer3" ] },
         {}
@@ -337,7 +340,7 @@
       "id": 28,
       "position": "A36",
       "alternates": [ 
-        { "name": "cam_vsync"  , "groups": [ "cpi"    ] },
+        { "name": "cam_vsync"  , "groups": [ "cpi0"   ] },
         { "name": "gpioA14"    , "groups": [ "gpio14" ] },
         { "name": "timer3_ch2" , "groups": [ "timer3" ] },
         {}
@@ -437,7 +440,7 @@
       "id": 38,
       "position": "B6",
       "alternates": [ 
-        { "name": "uart_rx" , "groups": [ "uart"   ] },
+        { "name": "uart_rx" , "groups": [ "uart0"  ] },
         { "name": "gpioA24" , "groups": [ "gpio24" ] },
         {},
         {}
@@ -447,7 +450,7 @@
       "id": 39,
       "position": "A7",
       "alternates": [ 
-        { "name": "uart_tx"     , "groups": [ "uart"   ] },
+        { "name": "uart_tx"     , "groups": [ "uart0"  ] },
         { "name": "gpioA25"     , "groups": [ "gpio25" ] },
         {},
         {}
@@ -647,7 +650,7 @@
       "id": 59,
       "position": "B25",
       "alternates": [ 
-        { "name": "jtag_tck" , "groups": [ "jtag" ] },
+        { "name": "jtag_tck" , "groups": [ "jtag0" ] },
         {},
         {},
         {}
@@ -657,7 +660,7 @@
       "id": 60,
       "position": "A28",
       "alternates": [ 
-        { "name": "jtag_tdi" , "groups": [ "jtag" ] },
+        { "name": "jtag_tdi" , "groups": [ "jtag0" ] },
         {},
         {},
         {}
@@ -667,7 +670,7 @@
       "id": 61,
       "position": "B26",
       "alternates": [ 
-        { "name": "jtag_tdo" , "groups": [ "jtag" ] },
+        { "name": "jtag_tdo" , "groups": [ "jtag0" ] },
         {},
         {},
         {}
@@ -677,7 +680,7 @@
       "id": 62,
       "position": "A29",
       "alternates": [
-        { "name": "jtag_tms" , "groups": [ "jtag" ] },
+        { "name": "jtag_tms" , "groups": [ "jtag0" ] },
         {},
         {},
         {}
@@ -687,7 +690,7 @@
       "id": 63,
       "position": "B27",
       "alternates": [ 
-        { "name": "jtag_trst" , "groups": [ "jtag" ] },
+        { "name": "jtag_trst" , "groups": [ "jtag0" ] },
         {},
         {},
         {}

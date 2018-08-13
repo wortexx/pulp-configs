@@ -3974,6 +3974,10 @@
                 "barriers": {
                   "nb_barriers": 8
                 },
+                "soc_event": {
+                  "nb_fifo_events": 8,
+                  "fifo_event": 27
+                },
                 "events": {
                   "barrier": 16,
                   "mutex": 17,
@@ -4096,8 +4100,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -4167,8 +4171,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -4255,8 +4259,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -4343,8 +4347,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -4431,8 +4435,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -4519,8 +4523,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -4607,8 +4611,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -4695,8 +4699,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -4783,8 +4787,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
-              "march": "imfXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
