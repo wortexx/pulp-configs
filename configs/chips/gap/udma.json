@@ -5,6 +5,10 @@
 
   "interfaces" : ["spim", "i2c", "i2s", "uart", "cam", "hyper", "lvds", "tcdm"],
 
+  "properties": {
+    "l2_read_fifo_size": 8
+  },
+
   "lvds": {
     "version"      : 1,
     "nb_channels"  : 1,
