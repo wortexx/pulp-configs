@@ -10,12 +10,6 @@
     }
   },
 
-  "vsim": {
-    "args": [
-      "-novopt"
-    ]
-  },
-
   "system_tree": {
     "board": {
       "chip": {

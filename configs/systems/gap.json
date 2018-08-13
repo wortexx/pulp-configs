@@ -66,9 +66,7 @@
     "script": "run.tcl",
     "gui": false,
     "simchecker": false,
-    "args": [
-      "-novopt"
-    ],
+    "args": [],
     "tcl_args": []
   },
   "runner": {
