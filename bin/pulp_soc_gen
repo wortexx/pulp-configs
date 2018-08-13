@@ -37,7 +37,9 @@ has_cluster       = tp.get('cluster') is not None
 nb_cluster        = tp.get_child_int('cluster/nb_cluster')
 nb_pe             = tp.get_child_int('cluster/nb_pe')
 has_fc            = tp.get('soc/fc') is not None
-has_fc_eu         = tp.get('soc/peripherals/fc_eu') is not None
+has_fc_ico        = tp.get('soc/fc_ico') is not None
+has_fc_eu         = tp.get('soc/fc_ico/peripherals/fc_eu') is not None
+has_fc_tcdm       = tp.get('soc/fc_ico/peripherals/fc_tcdm') is not None
 has_ddr           = tp.get('soc/ddr') is not None
 has_udma          = tp.get('soc/peripherals/udma') is not None
 has_spi_master    = tp.get('soc/peripherals/spi_master') is not None
@@ -45,7 +47,7 @@ has_uart          = tp.get('soc/peripherals/uart') is not None
 has_gpio          = tp.get('soc/peripherals/gpio') is not None
 has_soc_events    = tp.get('soc/peripherals/soc_eu') is not None
 if has_fc_eu:
-  fc_events         = tp.get('soc/peripherals/fc_eu/irq')
+  fc_events         = tp.get('soc/fc_ico/peripherals/fc_eu/irq')
 else:
   fc_events         = tp.get('soc/peripherals/fc_itc/irq')
 l2_is_partitioned = tp.get_child_bool('soc/l2/is_partitioned')
@@ -54,6 +56,7 @@ has_rom           = tp.get('soc/rom') is not None
 has_efuse         = tp.get('soc/peripherals/efuse') is not None
 has_pmu           = tp.get('soc/peripherals/pmu') is not None
 has_hwme          = tp.get('soc/peripherals/hwme') is not None
+has_fc_icache     = tp.get('soc/fc_ico/peripherals/fc_icache') is not None
 
 
 if fc_events is not None:
@@ -118,6 +121,9 @@ soc.soc_ico = Component(
     vp_class=None
 )
 
+if has_fc_ico:
+  fc_ico_mappings = {}
+
 ll_ico_mappings = {
   "apb"           : get_mapping(tp.get_child_dict("soc/peripherals"))
 }
@@ -125,6 +131,12 @@ ll_ico_mappings = {
 if has_rom:
   ll_ico_mappings.update({
     "rom"           : get_mapping(tp.get_child_dict("soc/rom"))
+  })
+
+if has_fc_ico:
+  ll_ico_mappings.update({
+    "fc_ico"           : get_mapping(tp.get_child_dict("soc/fc_ico")),
+    "fc_ico_alias": get_mapping(tp.get_child_dict("soc/fc_ico/alias"), add_offset=tp.get_child_int("soc/fc_ico/base") - tp.get_child_int("soc/fc_ico/alias/base")),
   })
 
 if has_cluster:
@@ -265,14 +277,37 @@ if has_udma:
     "udma"         : get_mapping(tp.get_child_dict("soc/peripherals/udma"), True),
   })
 
-if has_fc:
-  apb_soc_mappings.update({
-    "fc_itc"       : get_mapping(tp.get_child_dict("soc/peripherals/%s" % fc_itc_name), True)
+if has_fc_icache:
+  fc_ico_mappings.update({
+    "fc_icache"       : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/fc_icache"), True)
   })
-  apb_soc_mappings.update({
-    "fc_debug"     : get_mapping(tp.get_child_dict("soc/peripherals/fc_dbg_unit"), True),
-    "fc_timer"     : get_mapping(tp.get_child_dict("soc/peripherals/fc_timer"), True),
-    "fc_dbg_unit"  : get_mapping(tp.get_child_dict("soc/peripherals/fc_dbg_unit"), True),
+
+if has_fc:
+  if has_fc_ico:
+    fc_ico_mappings.update({
+      "fc_eu"       : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/%s" % fc_itc_name), True)
+    })
+    fc_ico_mappings.update({
+      "fc_eu_alias"       : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/fc_eu_alias"), True)
+    })
+    fc_ico_mappings.update({
+      "fc_debug"     : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/fc_dbg_unit"), True),
+      "fc_timer"     : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/fc_timer"), True),
+      "fc_dbg_unit"  : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/fc_dbg_unit"), True),
+    })
+  else:
+    apb_soc_mappings.update({
+      "fc_itc"       : get_mapping(tp.get_child_dict("soc/peripherals/%s" % fc_itc_name), True)
+    })
+    apb_soc_mappings.update({
+      "fc_debug"     : get_mapping(tp.get_child_dict("soc/peripherals/fc_dbg_unit"), True),
+      "fc_timer"     : get_mapping(tp.get_child_dict("soc/peripherals/fc_timer"), True),
+      "fc_dbg_unit"  : get_mapping(tp.get_child_dict("soc/peripherals/fc_dbg_unit"), True),
+    })
+
+if has_fc_tcdm:
+  fc_ico_mappings.update({
+    "fc_tcdm"       : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/fc_tcdm"), True)
   })
 
 if has_pmu:
@@ -290,6 +325,12 @@ soc.apb_ico = Component(
     includes= [ "ips/interco/router.json" ],
     mappings = apb_soc_mappings
 )
+
+if has_fc_ico:
+  soc.fc_ico =  Component(
+    includes=["ips/interco/router.json"],
+    mappings=fc_ico_mappings
+  )
 
 if has_fc:
   soc.fc = Component(
@@ -350,11 +391,6 @@ else:
       vp_class= "memory/memory"
   )
 
-if has_fc:
-  soc.fc_ico = Component(
-      l2_alias=True
-  )
-
 if has_rom:
   soc.rom = Component(
       includes  = ["ips/rom_v%d.json" % tp.get_child_int("soc/rom/version")],
@@ -369,9 +405,15 @@ soc.plt_loader = Component(
 )
 
 if has_fc:
-  soc.fc_itc = Component(
-      includes= ["ips/itc_v%d.json" % (tp.get_child_int("soc/peripherals/%s/version" % fc_itc_name))]
-  )
+  if has_fc_ico:
+    soc.fc_eu = Component(
+        includes= ["ips/eu_v%d.json" % (tp.get_child_int("soc/fc_ico/peripherals/%s/version" % fc_itc_name))],
+        nb_core=1
+    )
+  else:
+    soc.fc_itc = Component(
+        includes= ["ips/itc_v%d.json" % (tp.get_child_int("soc/peripherals/%s/version" % fc_itc_name))]
+    )
 
 if has_fll:
   soc.fll = Component(
@@ -407,6 +449,13 @@ soc.stdout = Component(
     includes= ["ips/stdout_v%d.json" % tp.get_child_int("soc/peripherals/stdout/version")]
 )
 
+if has_fc_tcdm:
+  soc.fc_tcdm = Component(
+      size= tp.get_child_int("soc/fc_ico/peripherals/fc_tcdm/size"),
+      vp_class= "memory/memory"
+  )
+
+
 if has_gpio:
   soc.gpio = Component(
     includes= ["ips/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")]
@@ -417,10 +466,20 @@ if has_pmu:
       includes= ["ips/pmu_v%d.json" % tp.get_child_int("soc/peripherals/pmu/version")]
   )
 
-if has_fc:
-  soc.timer = Component(
-      includes= ["ips/timer_v%d.json" % tp.get_child_int("soc/peripherals/fc_timer/version")]
+if has_fc_icache:
+  soc.fc_icache = Component(
+      includes= ["ips/icache_ctrl_v%d.json" % tp.get_child_int("soc/fc_ico/peripherals/fc_icache/version")]
   )
+
+if has_fc:
+  if has_fc_ico:
+    soc.timer = Component(
+        includes= ["ips/timer_v%d.json" % tp.get_child_int("soc/fc_ico/peripherals/fc_timer/version")]
+    )
+  else:
+    soc.timer = Component(
+        includes= ["ips/timer_v%d.json" % tp.get_child_int("soc/peripherals/fc_timer/version")]
+    )
 
 if has_hwme:
   soc.hwme = Component(
@@ -501,9 +560,24 @@ if has_soc_events:
   
 soc.apb_ico.apb_soc_ctrl = soc.apb_soc_ctrl.input
 if has_fc:
-  soc.apb_ico.fc_itc = soc.fc_itc.input
-  soc.apb_ico.fc_timer = soc.timer.input
-  soc.apb_ico.fc_dbg_unit = soc.fc.dbg_unit
+  if has_fc_ico:
+    soc.soc_ico.ll_ico.fc_ico = soc.soc_ico.fc
+    soc.soc_ico.fc = soc.fc_ico.input
+    soc.soc_ico.ll_ico.fc_ico_alias = soc.soc_ico.fc_alias
+    soc.soc_ico.fc_alias = soc.fc_ico.input
+    soc.fc_ico.fc_eu_alias = soc.fc_eu.input
+    soc.fc_ico.fc_eu = soc.fc_eu.input
+    soc.fc_ico.fc_timer = soc.timer.input
+    if has_fc_icache:
+      soc.fc_ico.fc_icache = soc.fc_icache.input
+    soc.fc_ico.fc_dbg_unit = soc.fc.dbg_unit
+  else:
+    soc.apb_ico.fc_itc = soc.fc_itc.input
+    soc.apb_ico.fc_timer = soc.timer.input
+    soc.apb_ico.fc_dbg_unit = soc.fc.dbg_unit
+
+if has_fc_tcdm:
+  soc.fc_ico.fc_tcdm = soc.fc_tcdm.input
 
 # Soc interco
 soc.soc_ico.apb = soc.apb_ico.input
@@ -525,8 +599,12 @@ if has_fc:
 if has_udma:
   soc.apb_soc_ctrl.event = soc.soc_eu.event_in
 if has_pmu and has_fc:
-  soc.apb_soc_ctrl.cluster_power_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_pok'))
-  soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_cg_ok'))
+  if has_fc_ico:
+    soc.apb_soc_ctrl.cluster_power_irq = soc.fc_eu.new_itf('in_event_%d_pe_0' % fc_events.get_child_int('evt_cluster_pok'))
+    soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_eu.new_itf('in_event_%d_pe_0' % fc_events.get_child_int('evt_cluster_cg_ok'))
+  else:
+    soc.apb_soc_ctrl.cluster_power_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_pok'))
+    soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_cg_ok'))
 
 # ROM
 if has_rom:
@@ -540,7 +618,10 @@ if has_pmu:
 if has_fc:
   soc.fc.fetch = soc.soc_ico.fc_fetch
   soc.fc.data = soc.soc_ico.fc_data
-  soc.fc.irq_ack = soc.fc_itc.irq_ack
+  if has_fc_ico:
+    soc.fc.irq_ack = soc.fc_eu.irq_ack_0
+  else:
+    soc.fc.irq_ack = soc.fc_itc.irq_ack
 
 # AXI
 if has_cluster:
@@ -554,20 +635,30 @@ if has_ddr:
 
 # FC ITC
 if has_fc:
-  soc.fc_itc.irq_req = soc.fc.irq_req
+  if has_fc_ico:
+    soc.fc_eu.irq_req_0 = soc.fc.irq_req
+  else:
+    soc.fc_itc.irq_req = soc.fc.irq_req
 
 # Cluster
 if has_cluster:
   for cid in range(0, nb_cluster):
     cluster_name = get_cluster_name(cid)
     if has_fc:
+      if has_fc_ico:
+        soc.get(cluster_name).dma_irq = soc.fc_eu.in_event_8_pe_0
+      else:
         soc.get(cluster_name).dma_irq = soc.fc_itc.in_event_8
     soc.get(cluster_name).soc = soc.axi_ico.input
 
 # Timer
 if has_fc:
-  soc.timer.irq_itf_0 = soc.fc_itc.in_event_10
-  soc.timer.irq_itf_1 = soc.fc_itc.in_event_11
+  if has_fc_ico:
+    soc.timer.irq_itf_0 = soc.fc_eu.in_event_10_pe_0
+    soc.timer.irq_itf_1 = soc.fc_eu.in_event_11_pe_0
+  else:
+    soc.timer.irq_itf_0 = soc.fc_itc.in_event_10
+    soc.timer.irq_itf_1 = soc.fc_itc.in_event_11
 
 # UDMA
 if has_udma:
@@ -579,7 +670,10 @@ if has_udma:
 
 # Soc EU
 if has_fc:
-  soc.soc_eu.fc_event_itf = soc.fc_itc.soc_event
+  if has_fc_ico:
+    soc.soc_eu.fc_event_itf = soc.fc_eu.soc_event
+  else:
+    soc.soc_eu.fc_event_itf = soc.fc_itc.soc_event
 
 # Adv Dbg Unit
 soc.adv_dbg_unit.io = soc.soc_ico.debug

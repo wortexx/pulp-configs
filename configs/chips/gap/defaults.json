@@ -1,0 +1,35 @@
+{
+  "runner": {
+    "boot_from_flash": true,
+    "boot-mode": "rom"
+  },
+  
+  "loader": {
+    "boot": {
+      "mode": "rom"
+    }
+  },
+
+  "vsim": {
+    "args": [
+      "-novopt"
+    ]
+  },
+
+  "system_tree": {
+    "board": {
+      "chip": {
+        "soc": {
+          "rtc": {
+            "includes": [ "../../ips/rtc.json" ]
+          }
+        }
+      }
+    },
+    "debug_bridge": {
+      "boot-mode": "jtag"
+    }
+  }
+
+}
+
