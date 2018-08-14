@@ -176,6 +176,10 @@
         [
           "dpi->jtag0",
           "chip->jtag0_pad"
+        ],
+        [
+          "dpi->cpi0",
+          "chip->cpi0_pad"
         ]
       ],
       "chip": {
@@ -204,6 +208,10 @@
             "soc->jtag"
           ],
           [
+            "padframe->cpi0",
+            "soc->cpi0"
+          ],
+          [
             "soc_clock->out",
             "padframe->clock"
           ],
@@ -222,6 +230,10 @@
           [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
+          ],
+          [
+            "self->cpi0_pad",
+            "padframe->cpi0_pad"
           ],
           [
             "padframe->uart0_pad",
@@ -396,11 +408,13 @@
           },
           "vp_ports": [
             "jtag0",
+            "cpi0",
             "spim0",
             "uart0",
             "clock",
             "uart0_pad",
-            "jtag0_pad"
+            "jtag0_pad",
+            "cpi0_pad"
           ]
         },
         "soc_clock": {
@@ -485,6 +499,7 @@
             "soc_ico",
             "pmu",
             "apb_ico",
+            "fc_ico",
             "fc",
             "l2",
             "l2_priv0",
@@ -494,7 +509,6 @@
             "l2_shared_1",
             "l2_shared_2",
             "l2_shared_3",
-            "fc_ico",
             "rom",
             "plt_loader",
             "fc_itc",
@@ -515,18 +529,24 @@
           ],
           "vp_ports": [
             "cluster_clock",
+            "cpi0",
             "jtag",
             "spim0",
             "uart0",
             "spim0",
             "uart0",
             "jtag",
+            "cpi0",
             "clock"
           ],
           "vp_bindings": [
             [
               "self->cluster_clock",
               "cluster->clock"
+            ],
+            [
+              "self->cpi0",
+              "udma->cpi0"
             ],
             [
               "self->jtag",
@@ -987,6 +1007,7 @@
             "archi_files": [
               "archi/maestro/maestro_v2.h"
             ],
+            "vp_class": "pulp/pmu/pmu_v2",
             "gv_class": "power.pmu.Pmu",
             "vp_ports": [
               "input"
@@ -1084,6 +1105,9 @@
               "pmu",
               "input"
             ]
+          },
+          "fc_ico": {
+            "l2_alias": true
           },
           "fc": {
             "version": "ri5cyv2",
@@ -1224,9 +1248,6 @@
             "vp_ports": [
               "input"
             ]
-          },
-          "fc_ico": {
-            "l2_alias": true
           },
           "rom": {
             "version": 2,
@@ -1897,7 +1918,7 @@
               ]
             },
             "uart": {
-              "version": 1,
+              "version": 2,
               "nb_channels": 1,
               "ids": [
                 4
@@ -1965,7 +1986,8 @@
               "event_itf",
               "spim0",
               "uart0",
-              "input"
+              "input",
+              "cpi0"
             ]
           },
           "uart": {
@@ -5043,6 +5065,10 @@
                 "barriers": {
                   "nb_barriers": 8
                 },
+                "soc_event": {
+                  "nb_fifo_events": 8,
+                  "fifo_event": 27
+                },
                 "events": {
                   "barrier": 16,
                   "mutex": 17,
@@ -5887,6 +5913,7 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
+          "cpi0_pad",
           "cpi0"
         ]
       },
@@ -5905,6 +5932,7 @@
         "vp_ports": [
           "clock",
           "jtag0",
+          "cpi0",
           "uart0"
         ]
       },

@@ -73,6 +73,7 @@
     "soc_ico",
     "pmu",
     "apb_ico",
+    "fc_ico",
     "fc",
     "l2",
     "l2_priv0",
@@ -82,7 +83,6 @@
     "l2_shared_1",
     "l2_shared_2",
     "l2_shared_3",
-    "fc_ico",
     "rom",
     "plt_loader",
     "fc_itc",
@@ -103,6 +103,7 @@
   ],
   "vp_ports": [
     "cluster_clock",
+    "cpi0",
     "jtag",
     "spim0",
     "uart0"
@@ -111,6 +112,10 @@
     [
       "self->cluster_clock",
       "cluster->clock"
+    ],
+    [
+      "self->cpi0",
+      "udma->cpi0"
     ],
     [
       "self->jtag",
@@ -657,6 +662,9 @@
       "input"
     ]
   },
+  "fc_ico": {
+    "l2_alias": true
+  },
   "fc": {
     "includes": [
       "ips/ri5ky_v2_fpu_sec.json"
@@ -731,9 +739,6 @@
     "vp_ports": [
       "input"
     ]
-  },
-  "fc_ico": {
-    "l2_alias": true
   },
   "rom": {
     "includes": [
@@ -856,7 +861,8 @@
       "event_itf",
       "spim0",
       "uart0",
-      "input"
+      "input",
+      "cpi0"
     ]
   },
   "uart": {

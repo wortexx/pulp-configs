@@ -326,11 +326,17 @@ soc.apb_ico = Component(
     mappings = apb_soc_mappings
 )
 
-if has_fc_ico:
-  soc.fc_ico =  Component(
-    includes=["ips/interco/router.json"],
-    mappings=fc_ico_mappings
-  )
+if has_fc:
+  if has_fc_ico:
+    soc.fc_ico =  Component(
+      includes=["ips/interco/router.json"],
+      mappings=fc_ico_mappings
+    )
+  else:
+    soc.fc_ico = Component(
+        l2_alias=True
+    )
+
 
 if has_fc:
   soc.fc = Component(
