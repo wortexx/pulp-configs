@@ -3,7 +3,7 @@
 
   "nb_periphs": 7,
 
-  "interfaces" : ["memcpy", "spim", "i2c", "i2s", "uart", "cam", "cpi"],
+  "interfaces" : ["memcpy", "spim", "i2c", "i2s", "uart", "cpi"],
 
   "properties": {
     "l2_read_fifo_size": 8

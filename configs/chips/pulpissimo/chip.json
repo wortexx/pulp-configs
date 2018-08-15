@@ -21,7 +21,11 @@
   "vp_bindings": [
     [
       "padframe->jtag0",
-      "soc->jtag"
+      "soc->jtag0"
+    ],
+    [
+      "padframe->cpi0",
+      "soc->cpi0"
     ],
     [
       "soc_clock->out",
@@ -42,13 +46,14 @@
   ],
   "padframe": {
     "includes": [
-      "chips/pulpissimo/padframe.json"
+      "templates/chips/pulpissimo/padframe.json"
     ],
     "vp_ports": [
       "jtag0",
+      "cpi0",
+      "clock",
       "spim0",
-      "uart0",
-      "clock"
+      "uart0"
     ]
   },
   "soc_clock": {
@@ -65,7 +70,8 @@
     "vp_ports": [
       "spim0",
       "uart0",
-      "jtag",
+      "jtag0",
+      "cpi0",
       "clock"
     ]
   }

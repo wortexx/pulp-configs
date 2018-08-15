@@ -24,7 +24,7 @@
   "vp_bindings": [
     [
       "padframe->jtag0",
-      "soc->jtag"
+      "soc->jtag0"
     ],
     [
       "soc_clock->out",
@@ -49,13 +49,13 @@
   ],
   "padframe": {
     "includes": [
-      "chips/oprecompkw_sa/padframe.json"
+      "templates/chips/oprecompkw_sa/padframe.json"
     ],
     "vp_ports": [
       "jtag0",
+      "clock",
       "spim0",
-      "uart0",
-      "clock"
+      "uart0"
     ]
   },
   "soc_clock": {
@@ -73,7 +73,7 @@
       "spim0",
       "uart0",
       "ddr",
-      "jtag",
+      "jtag0",
       "clock"
     ]
   }
