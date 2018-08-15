@@ -21,7 +21,11 @@
   "vp_bindings": [
     [
       "padframe->jtag0",
-      "soc->jtag"
+      "soc->jtag0"
+    ],
+    [
+      "padframe->cpi0",
+      "soc->cpi0"
     ],
     [
       "soc_clock->out",
@@ -38,17 +42,23 @@
     [
       "soc->uart0",
       "padframe->uart0"
+    ],
+    [
+      "soc->hyper",
+      "padframe->hyper"
     ]
   ],
   "padframe": {
     "includes": [
-      "chips/wolfe/padframe.json"
+      "templates/chips/wolfe/padframe.json"
     ],
     "vp_ports": [
       "jtag0",
+      "cpi0",
+      "clock",
       "spim0",
       "uart0",
-      "clock"
+      "hyper"
     ]
   },
   "soc_clock": {
@@ -65,7 +75,9 @@
     "vp_ports": [
       "spim0",
       "uart0",
-      "jtag",
+      "hyper",
+      "jtag0",
+      "cpi0",
       "clock"
     ]
   }

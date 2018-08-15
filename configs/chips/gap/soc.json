@@ -100,9 +100,11 @@
   "vp_ports": [
     "cluster_clock",
     "cpi0",
-    "jtag",
+    "jtag0",
     "spim0",
-    "uart0"
+    "spim1",
+    "uart0",
+    "hyper0"
   ],
   "vp_bindings": [
     [
@@ -114,7 +116,7 @@
       "udma->cpi0"
     ],
     [
-      "self->jtag",
+      "self->jtag0",
       "adv_dbg_unit->jtag"
     ],
     [
@@ -266,8 +268,16 @@
       "self->spim0"
     ],
     [
+      "udma->spim1",
+      "self->spim1"
+    ],
+    [
       "udma->uart0",
       "self->uart0"
+    ],
+    [
+      "udma->hyper0",
+      "self->hyper0"
     ],
     [
       "cluster->dma_irq",
@@ -834,13 +844,15 @@
   },
   "udma": {
     "includes": [
-      "chips/gap/udma.json"
+      "templates/chips/gap/udma.json"
     ],
     "vp_ports": [
       "l2_itf",
       "event_itf",
       "spim0",
+      "spim1",
       "uart0",
+      "hyper0",
       "input",
       "cpi0"
     ]

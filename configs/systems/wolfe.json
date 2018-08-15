@@ -180,6 +180,10 @@
         [
           "dpi->jtag0",
           "chip->jtag0_pad"
+        ],
+        [
+          "dpi->cpi0",
+          "chip->cpi0_pad"
         ]
       ],
       "chip": {
@@ -205,7 +209,11 @@
         "vp_bindings": [
           [
             "padframe->jtag0",
-            "soc->jtag"
+            "soc->jtag0"
+          ],
+          [
+            "padframe->cpi0",
+            "soc->cpi0"
           ],
           [
             "soc_clock->out",
@@ -224,8 +232,16 @@
             "padframe->uart0"
           ],
           [
+            "soc->hyper",
+            "padframe->hyper"
+          ],
+          [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
+          ],
+          [
+            "self->cpi0_pad",
+            "padframe->cpi0_pad"
           ],
           [
             "padframe->uart0_pad",
@@ -252,13 +268,25 @@
           },
           "groups": {
             "spim0": {
-              "type": "qspim"
+              "type": "qspim",
+              "is_master": true
             },
             "uart0": {
-              "type": "uart"
+              "type": "uart",
+              "is_master": true
             },
             "jtag0": {
-              "type": "jtag"
+              "type": "jtag",
+              "is_slave": true
+            },
+            "hyper": {
+              "type": "hyper",
+              "is_master": true,
+              "nb_cs": 2
+            },
+            "cpi0": {
+              "type": "cpi",
+              "is_slave": true
             }
           },
           "pads": {
@@ -400,11 +428,14 @@
           },
           "vp_ports": [
             "jtag0",
+            "cpi0",
+            "clock",
             "spim0",
             "uart0",
-            "clock",
+            "hyper",
             "uart0_pad",
-            "jtag0_pad"
+            "jtag0_pad",
+            "cpi0_pad"
           ]
         },
         "soc_clock": {
@@ -489,6 +520,7 @@
             "soc_ico",
             "pmu",
             "apb_ico",
+            "fc_ico",
             "fc",
             "l2",
             "l2_priv0",
@@ -498,7 +530,6 @@
             "l2_shared_1",
             "l2_shared_2",
             "l2_shared_3",
-            "fc_ico",
             "rom",
             "plt_loader",
             "fc_itc",
@@ -519,12 +550,17 @@
           ],
           "vp_ports": [
             "cluster_clock",
-            "jtag",
+            "cpi0",
+            "jtag0",
             "spim0",
+            "spim1",
+            "hyper0",
             "uart0",
             "spim0",
             "uart0",
-            "jtag",
+            "hyper",
+            "jtag0",
+            "cpi0",
             "clock"
           ],
           "vp_bindings": [
@@ -533,7 +569,11 @@
               "cluster->clock"
             ],
             [
-              "self->jtag",
+              "self->cpi0",
+              "udma->cpi0"
+            ],
+            [
+              "self->jtag0",
               "adv_dbg_unit->jtag"
             ],
             [
@@ -683,6 +723,14 @@
             [
               "udma->spim0",
               "self->spim0"
+            ],
+            [
+              "udma->spim1",
+              "self->spim1"
+            ],
+            [
+              "udma->hyper0",
+              "self->hyper0"
             ],
             [
               "udma->uart0",
@@ -991,6 +1039,7 @@
             "archi_files": [
               "archi/maestro/maestro_v2.h"
             ],
+            "vp_class": "pulp/pmu/pmu_v2",
             "gv_class": "power.pmu.Pmu",
             "vp_ports": [
               "input"
@@ -1088,6 +1137,9 @@
               "pmu",
               "input"
             ]
+          },
+          "fc_ico": {
+            "l2_alias": true
           },
           "fc": {
             "vp_class": "cpu/iss/iss",
@@ -1219,9 +1271,6 @@
               "input"
             ]
           },
-          "fc_ico": {
-            "l2_alias": true
-          },
           "rom": {
             "version": 2,
             "hal_files": [
@@ -1253,6 +1302,68 @@
             ],
             "nb_fifo_events": 8,
             "fifo_irq": 26,
+            "regmap": {
+              "mask": {
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "desc": ""
+              },
+              "mask_set": {
+                "type": "register",
+                "offset": "0x04",
+                "width": 32,
+                "desc": ""
+              },
+              "mask_clr": {
+                "type": "register",
+                "offset": "0x08",
+                "width": 32,
+                "desc": ""
+              },
+              "status": {
+                "type": "register",
+                "offset": "0x0C",
+                "width": 32,
+                "desc": ""
+              },
+              "status_set": {
+                "type": "register",
+                "offset": "0x10",
+                "width": 32,
+                "desc": ""
+              },
+              "status_clr": {
+                "type": "register",
+                "offset": "0x14",
+                "width": 32,
+                "desc": ""
+              },
+              "ack": {
+                "type": "register",
+                "offset": "0x18",
+                "width": 32,
+                "desc": ""
+              },
+              "ack_set": {
+                "type": "register",
+                "offset": "0x1C",
+                "width": 32,
+                "desc": ""
+              },
+              "ack_clr": {
+                "type": "register",
+                "offset": "0x20",
+                "width": 32,
+                "desc": ""
+              },
+              "fifo": {
+                "type": "register",
+                "offset": "0x24",
+                "width": 32,
+                "desc": ""
+              }
+            },
             "vp_ports": [
               "irq_req",
               "input",
@@ -1876,7 +1987,7 @@
               "i2c",
               "i2s",
               "uart",
-              "cam"
+              "cpi"
             ],
             "properties": {
               "l2_read_fifo_size": 8
@@ -1891,7 +2002,8 @@
               "offsets": [
                 "0x000",
                 "0x080"
-              ]
+              ],
+              "is_master": true
             },
             "hyper": {
               "version": 1,
@@ -1901,7 +2013,8 @@
               ],
               "offsets": [
                 "0x100"
-              ]
+              ],
+              "is_master": true
             },
             "uart": {
               "version": 1,
@@ -1911,7 +2024,8 @@
               ],
               "offsets": [
                 "0x180"
-              ]
+              ],
+              "is_master": true
             },
             "i2c": {
               "version": 2,
@@ -1935,7 +2049,7 @@
                 "0x300"
               ]
             },
-            "cam": {
+            "cpi": {
               "version": 1,
               "nb_channels": 1,
               "ids": [
@@ -1943,14 +2057,18 @@
               ],
               "offsets": [
                 "0x380"
-              ]
+              ],
+              "is_slave": true
             },
             "vp_ports": [
               "l2_itf",
               "event_itf",
               "spim0",
+              "spim1",
+              "hyper0",
               "uart0",
-              "input"
+              "input",
+              "cpi0"
             ]
           },
           "uart": {
@@ -5022,6 +5140,10 @@
                 "barriers": {
                   "nb_barriers": 8
                 },
+                "soc_event": {
+                  "nb_fifo_events": 8,
+                  "fifo_event": 27
+                },
                 "events": {
                   "barrier": 16,
                   "mutex": 17,
@@ -5187,7 +5309,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 0,
               "boot_addr": "0x1C000000"
@@ -5258,7 +5379,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 0,
               "fetch_enable": null,
@@ -5346,7 +5466,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 1,
               "fetch_enable": null,
@@ -5434,7 +5553,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 2,
               "fetch_enable": null,
@@ -5522,7 +5640,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 3,
               "fetch_enable": null,
@@ -5610,7 +5727,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 4,
               "fetch_enable": null,
@@ -5698,7 +5814,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 5,
               "fetch_enable": null,
@@ -5786,7 +5901,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 6,
               "fetch_enable": null,
@@ -5874,7 +5988,6 @@
                   }
                 }
               },
-              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 7,
               "fetch_enable": null,
@@ -5910,6 +6023,7 @@
           "jtag0",
           "ctrl",
           "jtag0_pad",
+          "cpi0_pad",
           "cpi0"
         ]
       },
@@ -5928,6 +6042,7 @@
         "vp_ports": [
           "clock",
           "jtag0",
+          "cpi0",
           "uart0"
         ]
       },

@@ -20,12 +20,12 @@
   ],
   "vp_bindings": [
     [
-      "padframe->jtag0",
-      "soc->jtag"
-    ],
-    [
       "padframe->cpi0",
       "soc->cpi0"
+    ],
+    [
+      "padframe->jtag0",
+      "soc->jtag0"
     ],
     [
       "soc_clock->out",
@@ -40,20 +40,25 @@
       "padframe->spim0"
     ],
     [
+      "soc->spim1",
+      "padframe->spim1"
+    ],
+    [
       "soc->uart0",
       "padframe->uart0"
     ]
   ],
   "padframe": {
     "includes": [
-      "chips/gap/padframe.json"
+      "templates/chips/gap/padframe.json"
     ],
     "vp_ports": [
-      "jtag0",
       "cpi0",
+      "jtag0",
+      "clock",
       "spim0",
-      "uart0",
-      "clock"
+      "spim1",
+      "uart0"
     ]
   },
   "soc_clock": {
@@ -69,9 +74,10 @@
     ],
     "vp_ports": [
       "spim0",
+      "spim1",
       "uart0",
-      "jtag",
       "cpi0",
+      "jtag0",
       "clock"
     ]
   }

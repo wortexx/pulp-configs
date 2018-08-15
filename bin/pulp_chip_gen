@@ -39,7 +39,10 @@ os.environ['PULP_CONFIGS_PATH'] = ':'.join(args.configs + os.environ.get('PULP_C
 tp = js.import_config_from_file(args.template, find=True)
 
 
-padframe              = tp.get_child_str('padframe')
+padframe              = tp.get('padframe')
+padframe_conf         = None
+if padframe is not None:
+  padframe_conf = js.import_config_from_file(tp.get_child_str('padframe/content'), find=True)
 chip_family           = tp.get_child_str('chip_family')
 has_udma          = tp.get('soc/peripherals/udma') is not None
 has_ddr = tp.get('ddr') is not None
@@ -62,9 +65,15 @@ chip = Component(
 
 
 if padframe is not None:
-  chip.padframe = Component(
-    includes= [ "%s" % padframe ]
-  )
+  content = tp.get_child_str('padframe/content')
+  if content is not None:
+    chip.padframe = Component(
+        includes= [ content ]
+    )
+  else:
+    chip.padframe = Component(
+      includes= [ "%s" % padframe ]
+    )
 
 
 chip.soc_clock = Component(
@@ -78,12 +87,19 @@ chip.soc = Component(
 )
 
 if padframe is not None:
-  chip.soc.spim0 = chip.padframe.spim0
-  chip.soc.uart0 = chip.padframe.uart0
-  chip.padframe.jtag0 = chip.soc.jtag
-  if has_udma:
-    chip.padframe.cpi0 = chip.soc.cpi0
   chip.soc_clock.out = chip.padframe.clock
+
+  if padframe_conf is not None:
+    groups_conf = padframe_conf.get('groups')
+    if groups_conf is not None:
+      for name, group in groups_conf.get_items().items():
+        is_master = group.get_child_bool('is_master')
+        is_slave = group.get_child_bool('is_slave')
+        if is_master:
+          chip.soc.set(name, chip.padframe.new_itf(name))
+        if is_slave:
+          chip.padframe.set(name, chip.soc.new_itf(name))
+
   
 chip.soc_clock.out = chip.soc.clock
 

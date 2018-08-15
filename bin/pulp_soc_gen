@@ -32,6 +32,8 @@ os.environ['PULP_CONFIGS_PATH'] = ':'.join(args.configs + os.environ.get('PULP_C
 tp = js.import_config_from_file(args.template, find=True)
 
 
+
+
 chip              = tp.get_child_str('chip')
 has_cluster       = tp.get('cluster') is not None
 nb_cluster        = tp.get_child_int('cluster/nb_cluster')
@@ -42,6 +44,9 @@ has_fc_eu         = tp.get('soc/fc_ico/peripherals/fc_eu') is not None
 has_fc_tcdm       = tp.get('soc/fc_ico/peripherals/fc_tcdm') is not None
 has_ddr           = tp.get('soc/ddr') is not None
 has_udma          = tp.get('soc/peripherals/udma') is not None
+udma_conf         = None
+if has_udma:
+  udma_conf = js.import_config_from_file(tp.get_child_str('soc/peripherals/udma/content'), find=True)
 has_spi_master    = tp.get('soc/peripherals/spi_master') is not None
 has_uart          = tp.get('soc/peripherals/uart') is not None
 has_gpio          = tp.get('soc/peripherals/gpio') is not None
@@ -498,9 +503,15 @@ if has_soc_events:
   )
 
 if has_udma:
-  soc.udma = Component(
-      includes= ["chips/%s/udma.json" % chip]
-  )
+  content = tp.get_child_str('soc/peripherals/udma/content')
+  if content is not None:
+    soc.udma = Component(
+        includes= [ content ]
+    )
+  else:
+    soc.udma = Component(
+        includes= ["chips/%s/udma.json" % chip]
+    )
 
 if has_spi_master:
   soc.spi_master = Component(
@@ -670,9 +681,18 @@ if has_fc:
 if has_udma:
   soc.udma.l2_itf = soc.soc_ico.udma_tx
   soc.udma.event_itf = soc.soc_eu.event_in
-  soc.udma.spim0 = soc.spim0
-  soc.udma.uart0 = soc.uart0
-  soc.cpi0 = soc.udma.cpi0
+  for itf in udma_conf.get('interfaces').get():
+    itf_conf = udma_conf.get(itf.get())
+    nb_channels = itf_conf.get_child_str('nb_channels')
+    is_master = itf_conf.get_child_bool('is_master')
+    is_slave = itf_conf.get_child_bool('is_slave')
+    for channel in range(0, nb_channels):
+      itf_name = itf.get() + str(channel)
+      if is_master:
+        soc.udma.set(itf_name, soc.new_itf(itf_name))
+      if is_slave:
+        soc.set(itf_name, soc.udma.new_itf(itf_name))
+
 
 # Soc EU
 if has_fc:
@@ -683,7 +703,7 @@ if has_fc:
 
 # Adv Dbg Unit
 soc.adv_dbg_unit.io = soc.soc_ico.debug
-soc.jtag = soc.adv_dbg_unit.jtag
+soc.jtag0 = soc.adv_dbg_unit.jtag
 
 # Loader
 soc.plt_loader.out = soc.soc_ico.debug
