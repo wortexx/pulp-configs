@@ -690,7 +690,7 @@
   },
   "fc": {
     "includes": [
-      "ips/ri5ky_v2_sec.json"
+      "ips/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 32,
     "core_id": 0,

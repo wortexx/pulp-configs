@@ -60,9 +60,10 @@
       "type": "jtag",
       "is_slave": true
     },
-    "hyper": {
+    "hyper0": {
       "type": "hyper",
-      "nb_cs": 2
+      "nb_cs": 2,
+      "is_master": true
     },
     "timer0": {},
     "timer1": {},
