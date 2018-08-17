@@ -206,10 +206,58 @@
           "soc_clock",
           "soc"
         ],
+        "vp_ports": [
+          "jtag0",
+          "cpi0",
+          "spim0",
+          "uart0",
+          "hyper0_cs0_data",
+          "hyper0_cs0",
+          "hyper0_cs1_data",
+          "hyper0_cs1",
+          "uart0",
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
+          "cpi0_pad",
+          "cpi0"
+        ],
         "vp_bindings": [
+          [
+            "self->jtag0",
+            "padframe->jtag0_pad"
+          ],
+          [
+            "self->cpi0",
+            "padframe->cpi0_pad"
+          ],
+          [
+            "padframe->spim0_pad",
+            "self->spim0"
+          ],
+          [
+            "padframe->uart0_pad",
+            "self->uart0"
+          ],
           [
             "padframe->jtag0",
             "soc->jtag0"
+          ],
+          [
+            "padframe->hyper0_cs0_data_pad",
+            "self->hyper0_cs0_data"
+          ],
+          [
+            "padframe->hyper0_cs0_pad",
+            "self->hyper0_cs0"
+          ],
+          [
+            "padframe->hyper0_cs1_data_pad",
+            "self->hyper0_cs1_data"
+          ],
+          [
+            "padframe->hyper0_cs1_pad",
+            "self->hyper0_cs1"
           ],
           [
             "padframe->cpi0",
@@ -232,8 +280,8 @@
             "padframe->uart0"
           ],
           [
-            "soc->hyper",
-            "padframe->hyper"
+            "soc->hyper0",
+            "padframe->hyper0"
           ],
           [
             "self->jtag0_pad",
@@ -264,6 +312,17 @@
                 0,
                 0
               ]
+            },
+            "hyper": {
+              "alternates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
             }
           },
           "groups": {
@@ -279,7 +338,7 @@
               "type": "jtag",
               "is_slave": true
             },
-            "hyper": {
+            "hyper0": {
               "type": "hyper",
               "is_master": true,
               "nb_cs": 2
@@ -427,12 +486,20 @@
             }
           },
           "vp_ports": [
+            "spim0_pad",
+            "uart0_pad",
             "jtag0",
+            "hyper0_cs0_data_pad",
+            "hyper0_cs0_pad",
+            "hyper0_cs1_data_pad",
+            "hyper0_cs1_pad",
             "cpi0",
             "clock",
             "spim0",
             "uart0",
-            "hyper",
+            "jtag0_pad",
+            "hyper0",
+            "cpi0_pad",
             "uart0_pad",
             "jtag0_pad",
             "cpi0_pad"
@@ -558,7 +625,7 @@
             "uart0",
             "spim0",
             "uart0",
-            "hyper",
+            "hyper0",
             "jtag0",
             "cpi0",
             "clock"
@@ -6017,15 +6084,7 @@
               "jtag"
             ]
           }
-        },
-        "vp_ports": [
-          "uart0",
-          "jtag0",
-          "ctrl",
-          "jtag0_pad",
-          "cpi0_pad",
-          "cpi0"
-        ]
+        }
       },
       "dpi_clock": {
         "vp_class": "vp/clock_domain",

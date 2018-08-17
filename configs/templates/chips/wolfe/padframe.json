@@ -10,6 +10,9 @@
   "profiles": {
     "default": {
       "alternates": [ 0, 0, 0, 0, 0, 0, 0 ]
+    },
+    "hyper": {
+      "alternates": [ 0, 0, 0, 0, 0, 0, 0 ]
     }
   },
 
@@ -26,7 +29,7 @@
       "type": "jtag",
       "is_slave": true
     },
-    "hyper": {
+    "hyper0": {
       "type": "hyper",
       "is_master": true,
       "nb_cs": 2
