@@ -6,6 +6,7 @@
 import json
 import argparse
 from comp_gen import *
+import json_tools as js
 
 
 parser = argparse.ArgumentParser(
@@ -34,6 +35,7 @@ tp = js.import_config_from_file(args.template, find=True)
 
 devices              = tp.get('devices')
 
+raw_config = js.config_object({})
 
 
 system = Component(
@@ -55,50 +57,54 @@ system.system_tree.board.chip.padframe = Empty_Component(
 )
 
 
+for name, group in tp.get_items().items():
+  if name == 'devices':
+    for name, dev in group.get_items().items():
+      dev_type = dev.get_child_str('type')
+      if dev_type is None:
+        raise Exception('The type of the device must be specified with the property "type"')
+
+      if dev_type == "hyper":
+
+        system.system_tree.board.add_component(name, Component(
+            includes=[
+                "periph/hyper.json"
+            ]
+        ))
+
+        system.system_tree.board.hyper_clock = Component(
+            vp_class= "vp/clock_domain",
+            frequency= 50000000
+        )
+
+        system.system_tree.board.hyper_clock.out = system.system_tree.board.get(name).clock
+
+        itf = dev.get_child_str('interface')
+        if itf is None:
+          raise Exception('The interface where the device should be connected must be specified with the property "interface"')
+
+        cs = dev.get_child_int('cs')
+        if cs is None:
+          cs = 0
+
+        system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.get(name).input)
+        system.system_tree.board.chip.set(itf + '_cs' + str(cs), system.system_tree.board.get(name).cs)
+
+      else:
+        raise Exception('Unknown device type: ' + dev_type)
+
+  else:
+
+    new_group = { name: group.get_dict() }
+
+    raw_config.merge(js.import_config(new_group))
 
 
-if devices is not None:
-  for name, dev in devices.get_items().items():
-    dev_type = dev.get_child_str('type')
-    if dev_type is None:
-      raise Exception('The type of the device must be specified with the property "type"')
 
-    if dev_type == "hyper":
-
-      system.system_tree.board.add_component(name, Component(
-          includes=[
-              "periph/hyper.json"
-          ]
-      ))
-
-      system.system_tree.board.hyper_clock = Component(
-          vp_class= "vp/clock_domain",
-          frequency= 50000000
-      )
-
-      system.system_tree.board.hyper_clock.out = system.system_tree.board.get(name).clock
-
-      itf = dev.get_child_str('interface')
-      if itf is None:
-        raise Exception('The interface where the device should be connected must be specified with the property "interface"')
-
-      cs = dev.get_child_int('cs')
-      if cs is None:
-        cs = 0
-
-      system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.get(name).input)
-      system.system_tree.board.chip.set(itf + '_cs' + str(cs), system.system_tree.board.get(name).cs)
-
-    else:
-      raise Exception('Unknown device type: ' + dev_type)
-
-
-
-
-
-config = system.get_json_config()
+config = system.get_js_config()
+config.merge(raw_config)
 
 if args.output is not None:
   with open(args.output, 'w') as file:
-    file.write(config)
+    file.write(config.get_string())
     file.write('\n')
