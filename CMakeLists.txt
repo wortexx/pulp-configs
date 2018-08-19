@@ -4,15 +4,15 @@ set(CMAKE_C_COMPILER_WORKS YES)
 option(StandaloneApp "Install as standalone app" OFF)
 option(InstallTools "Install the config tools" ON)
 
-# cmake's phython find module seems very buggy. This is quick and easy.
-execute_process(COMMAND python3.6 "--version"
-    RESULT_VARIABLE _RETVAL
-    OUTPUT_VARIABLE _VERSION
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-if (NOT(_RETVAL EQUAL 0) OR _VERSION VERSION_LESS PYTHON_MINIMAL_VERSION_REQUIRED)
-    message(FATAL_ERROR "Python 3.6 not found in path")
-endif()
+# # cmake's phython find module seems very buggy. This is quick and easy.
+# execute_process(COMMAND python3.6 "--version"
+#     RESULT_VARIABLE _RETVAL
+#     OUTPUT_VARIABLE _VERSION
+#     OUTPUT_STRIP_TRAILING_WHITESPACE
+# )
+# if (NOT(_RETVAL EQUAL 0))
+#     message(FATAL_ERROR "Python 3.6 not found in path")
+# endif()
 
 set(CONFIGS_DIR "configs")
 set(CONFIGS_SRC_DIR "${CMAKE_CURRENT_BINARY_DIR}/${CONFIGS_DIR}")
@@ -44,7 +44,7 @@ else()
         json-tools
         PREFIX ${CMAKE_BINARY_DIR}/json-tools
         GIT_REPOSITORY https://github.com/GreenWaves-Technologies/json-tools
-        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/json-tools
+        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/json-tools -DCMAKE_IGNORE_PATH=${CMAKE_IGNORE_PATH}
         LOG_DOWNLOAD ON
     )
 
