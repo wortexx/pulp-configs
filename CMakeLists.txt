@@ -6,6 +6,8 @@ option(WithConfigGenerators "Install the config tools" ON)
 set(JsonToolsGitTag "master" CACHE STRING "JSON tools git tag/branch to checkout")
 set(JsonToolsGitRepo "https://github.com/GreenWaves-Technologies/json-tools" CACHE STRING "JSON tools git repo to checkout")
 
+message("pulp_configs ---> ${JsonToolsGitRepo} ${JsonToolsGitTag}")
+
 # copy all the configs to the build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/configs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
