@@ -3,10 +3,6 @@ set(CMAKE_C_COMPILER_WORKS YES)
 project(pulp-configs LANGUAGES NONE)
 
 option(WithConfigGenerators "Install the config tools" ON)
-set(JsonToolsGitTag master CACHE STRING "JSON tools git tag/branch to checkout")
-set(JsonToolsGitRepo https://github.com/GreenWaves-Technologies/json-tools CACHE STRING "JSON tools git repo to checkout")
-
-message("pulp_configs ---> ${JsonToolsGitRepo} ${JsonToolsGitTag}")
 
 # copy all the configs to the build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/configs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
@@ -38,10 +34,6 @@ if(WithConfigGenerators)
     # add the generator target
     add_custom_target(gen)
 
-    # make sure that json-tools is installed
-    include(FindAddJsonTools)
-    find_add_json_tools(${JsonToolsGitRepo} ${JsonToolsGitTag})
-    
     # macros to build generators
     macro(build_something TARGET SCRIPT OUTPUT EXTRA_DEPENDS)
         add_custom_command(OUTPUT ${OUTPUT}
@@ -50,10 +42,6 @@ if(WithConfigGenerators)
             VERBATIM
         )
         add_custom_target(gen.${TARGET} DEPENDS ${OUTPUT})
-        # make sure that json tools is built before
-        if(NOT JSON_TOOLS_FOUND)
-            add_dependencies(gen.${TARGET} json-tools)
-        endif()
         # add this generator to generators target
         add_dependencies(gen gen.${TARGET})
     endmacro()
