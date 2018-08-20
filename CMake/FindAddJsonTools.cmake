@@ -36,8 +36,8 @@ function(find_add_json_tools repo tag)
             # Add in JSON-TOOLS
             ExternalProject_Add(
                 json-tools
-                GIT_REPOSITORY ${repo}
-                GIT_TAG ${tag}
+                GIT_REPOSITORY "${repo}"
+                GIT_TAG "${tag}"
                 CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DCMAKE_IGNORE_PATH=${CMAKE_IGNORE_PATH}
                 LOG_DOWNLOAD ON
             )
