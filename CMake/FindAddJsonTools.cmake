@@ -27,7 +27,7 @@ function(find_add_json_tools repo tag)
             message(STATUS "Using installed Json-tools")
             SET(JSON_TOOLS_FOUND YES PARENT_SCOPE)
         else()
-            message(STATUS "Adding Json-tools install step from ${repo} ${tag}")
+            message(STATUS "Adding Json-tools install step from ${repo} tag ${tag}")
             include(ExternalProject)
 
             SET(JSON_TOOLS_FOUND NO PARENT_SCOPE)
