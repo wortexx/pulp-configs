@@ -3,7 +3,7 @@ set(CMAKE_C_COMPILER_WORKS YES)
 project(pulp-configs LANGUAGES NONE)
 
 option(WithConfigGenerators "Install the config tools" ON)
-set(JsonToolsGitTag "" CACHE STRING "JSON tools git tag/branch to checkout")
+set(JsonToolsGitTag "master" CACHE STRING "JSON tools git tag/branch to checkout")
 set(JsonToolsGitRepo "https://github.com/GreenWaves-Technologies/json-tools" CACHE STRING "JSON tools git repo to checkout")
 
 # copy all the configs to the build directory
