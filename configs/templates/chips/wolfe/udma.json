@@ -1,7 +1,7 @@
 {
   "includes": [ "ips/udma/udma_v2.json"],
 
-  "nb_periphs": 7,
+  "nb_periphs": 8,
 
   "interfaces" : ["spim", "hyper", "i2c", "i2s", "uart", "cpi"],
 

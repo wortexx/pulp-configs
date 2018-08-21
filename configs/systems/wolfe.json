@@ -2047,7 +2047,7 @@
                 }
               }
             },
-            "nb_periphs": 7,
+            "nb_periphs": 8,
             "interfaces": [
               "spim",
               "hyper",
