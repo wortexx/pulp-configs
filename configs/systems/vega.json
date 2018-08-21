@@ -202,14 +202,33 @@
           "soc_clock",
           "soc"
         ],
+        "vp_ports": [
+          "jtag0",
+          "spim0",
+          "uart0",
+          "uart0",
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
+          "cpi0_pad",
+          "cpi0"
+        ],
         "vp_bindings": [
           [
-            "padframe->jtag0",
-            "soc->jtag"
+            "self->jtag0",
+            "padframe->jtag0_pad"
           ],
           [
-            "padframe->cpi0",
-            "soc->cpi0"
+            "padframe->spim0_pad",
+            "self->spim0"
+          ],
+          [
+            "padframe->uart0_pad",
+            "self->uart0"
+          ],
+          [
+            "padframe->jtag0",
+            "soc->jtag0"
           ],
           [
             "soc_clock->out",
@@ -260,13 +279,16 @@
           },
           "groups": {
             "spim0": {
-              "type": "qspim"
+              "type": "qspim",
+              "is_master": true
             },
             "uart0": {
-              "type": "uart"
+              "type": "uart",
+              "is_master": true
             },
             "jtag0": {
-              "type": "jtag"
+              "type": "jtag",
+              "is_slave": true
             }
           },
           "pads": {
@@ -407,11 +429,13 @@
             }
           },
           "vp_ports": [
+            "spim0_pad",
+            "uart0_pad",
             "jtag0",
-            "cpi0",
+            "clock",
             "spim0",
             "uart0",
-            "clock",
+            "jtag0_pad",
             "uart0_pad",
             "jtag0_pad",
             "cpi0_pad"
@@ -530,13 +554,16 @@
           "vp_ports": [
             "cluster_clock",
             "cpi0",
-            "jtag",
+            "jtag0",
+            "spim0",
+            "spim1",
+            "spim2",
+            "spim3",
+            "uart0",
+            "hyper0",
             "spim0",
             "uart0",
-            "spim0",
-            "uart0",
-            "jtag",
-            "cpi0",
+            "jtag0",
             "clock"
           ],
           "vp_bindings": [
@@ -549,7 +576,7 @@
               "udma->cpi0"
             ],
             [
-              "self->jtag",
+              "self->jtag0",
               "adv_dbg_unit->jtag"
             ],
             [
@@ -701,8 +728,24 @@
               "self->spim0"
             ],
             [
+              "udma->spim1",
+              "self->spim1"
+            ],
+            [
+              "udma->spim2",
+              "self->spim2"
+            ],
+            [
+              "udma->spim3",
+              "self->spim3"
+            ],
+            [
               "udma->uart0",
               "self->uart0"
+            ],
+            [
+              "udma->hyper0",
+              "self->hyper0"
             ],
             [
               "cluster->dma_irq",
@@ -1961,7 +2004,7 @@
               "i2c",
               "i2s",
               "uart",
-              "cam",
+              "cpi",
               "hyper"
             ],
             "spim": {
@@ -1977,7 +2020,8 @@
                 "0x000",
                 "0x080",
                 "0x100, 0x180"
-              ]
+              ],
+              "is_master": true
             },
             "uart": {
               "version": 1,
@@ -1987,7 +2031,8 @@
               ],
               "offsets": [
                 "0x200"
-              ]
+              ],
+              "is_master": true
             },
             "i2c": {
               "version": 3,
@@ -2011,7 +2056,8 @@
               ],
               "offsets": [
                 "0x400"
-              ]
+              ],
+              "is_master": true
             },
             "sdio": {
               "version": 0,
@@ -2033,7 +2079,7 @@
                 "0x500"
               ]
             },
-            "cam": {
+            "cpi": {
               "version": 1,
               "nb_channels": 1,
               "ids": [
@@ -2041,13 +2087,18 @@
               ],
               "offsets": [
                 "0x580"
-              ]
+              ],
+              "is_slave": true
             },
             "vp_ports": [
               "l2_itf",
               "event_itf",
               "spim0",
+              "spim1",
+              "spim2",
+              "spim3",
               "uart0",
+              "hyper0",
               "input",
               "cpi0"
             ]
@@ -5969,15 +6020,7 @@
               "jtag"
             ]
           }
-        },
-        "vp_ports": [
-          "uart0",
-          "jtag0",
-          "ctrl",
-          "jtag0_pad",
-          "cpi0_pad",
-          "cpi0"
-        ]
+        }
       },
       "dpi_clock": {
         "vp_class": "vp/clock_domain",

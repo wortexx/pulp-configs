@@ -104,9 +104,13 @@
   "vp_ports": [
     "cluster_clock",
     "cpi0",
-    "jtag",
+    "jtag0",
     "spim0",
-    "uart0"
+    "spim1",
+    "spim2",
+    "spim3",
+    "uart0",
+    "hyper0"
   ],
   "vp_bindings": [
     [
@@ -118,7 +122,7 @@
       "udma->cpi0"
     ],
     [
-      "self->jtag",
+      "self->jtag0",
       "adv_dbg_unit->jtag"
     ],
     [
@@ -270,8 +274,24 @@
       "self->spim0"
     ],
     [
+      "udma->spim1",
+      "self->spim1"
+    ],
+    [
+      "udma->spim2",
+      "self->spim2"
+    ],
+    [
+      "udma->spim3",
+      "self->spim3"
+    ],
+    [
       "udma->uart0",
       "self->uart0"
+    ],
+    [
+      "udma->hyper0",
+      "self->hyper0"
     ],
     [
       "cluster->dma_irq",
@@ -854,13 +874,17 @@
   },
   "udma": {
     "includes": [
-      "chips/vega/udma.json"
+      "templates/chips/vega/udma.json"
     ],
     "vp_ports": [
       "l2_itf",
       "event_itf",
       "spim0",
+      "spim1",
+      "spim2",
+      "spim3",
       "uart0",
+      "hyper0",
       "input",
       "cpi0"
     ]

@@ -18,14 +18,27 @@
     "soc_clock",
     "soc"
   ],
+  "vp_ports": [
+    "jtag0",
+    "spim0",
+    "uart0"
+  ],
   "vp_bindings": [
     [
-      "padframe->jtag0",
-      "soc->jtag"
+      "self->jtag0",
+      "padframe->jtag0_pad"
     ],
     [
-      "padframe->cpi0",
-      "soc->cpi0"
+      "padframe->spim0_pad",
+      "self->spim0"
+    ],
+    [
+      "padframe->uart0_pad",
+      "self->uart0"
+    ],
+    [
+      "padframe->jtag0",
+      "soc->jtag0"
     ],
     [
       "soc_clock->out",
@@ -46,14 +59,16 @@
   ],
   "padframe": {
     "includes": [
-      "chips/vega/padframe.json"
+      "templates/chips/vega/padframe.json"
     ],
     "vp_ports": [
+      "spim0_pad",
+      "uart0_pad",
       "jtag0",
-      "cpi0",
+      "clock",
       "spim0",
       "uart0",
-      "clock"
+      "jtag0_pad"
     ]
   },
   "soc_clock": {
@@ -70,8 +85,7 @@
     "vp_ports": [
       "spim0",
       "uart0",
-      "jtag",
-      "cpi0",
+      "jtag0",
       "clock"
     ]
   }
