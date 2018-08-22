@@ -248,7 +248,7 @@
           ],
           "vp_ports": [
             "cluster_clock",
-            "jtag",
+            "jtag0",
             "ddr",
             "ddr",
             "clock"
@@ -259,7 +259,7 @@
               "cluster->clock"
             ],
             [
-              "self->jtag",
+              "self->jtag0",
               "adv_dbg_unit->jtag"
             ],
             [
@@ -3758,6 +3758,10 @@
                 },
                 "barriers": {
                   "nb_barriers": 8
+                },
+                "soc_event": {
+                  "nb_fifo_events": 8,
+                  "fifo_event": 27
                 },
                 "events": {
                   "barrier": 16,

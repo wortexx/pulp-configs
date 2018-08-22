@@ -229,7 +229,7 @@
         "vp_bindings": [
           [
             "padframe->jtag0",
-            "soc->jtag"
+            "soc->jtag0"
           ],
           [
             "soc_clock->out",
@@ -280,13 +280,16 @@
           },
           "groups": {
             "spim0": {
-              "type": "qspim"
+              "type": "qspim",
+              "is_master": true
             },
             "uart0": {
-              "type": "uart"
+              "type": "uart",
+              "is_master": true
             },
             "jtag0": {
-              "type": "jtag"
+              "type": "jtag",
+              "is_slave": true
             }
           },
           "pads": {
@@ -428,9 +431,9 @@
           },
           "vp_ports": [
             "jtag0",
+            "clock",
             "spim0",
             "uart0",
-            "clock",
             "uart0_pad",
             "jtag0_pad"
           ]
@@ -466,12 +469,12 @@
           ],
           "vp_ports": [
             "cluster_clock",
-            "jtag",
+            "jtag0",
             "ddr",
             "spim0",
             "uart0",
             "ddr",
-            "jtag",
+            "jtag0",
             "clock"
           ],
           "vp_bindings": [
@@ -480,7 +483,7 @@
               "cluster->clock"
             ],
             [
-              "self->jtag",
+              "self->jtag0",
               "adv_dbg_unit->jtag"
             ],
             [
@@ -3979,6 +3982,10 @@
                 },
                 "barriers": {
                   "nb_barriers": 8
+                },
+                "soc_event": {
+                  "nb_fifo_events": 8,
+                  "fifo_event": 27
                 },
                 "events": {
                   "barrier": 16,

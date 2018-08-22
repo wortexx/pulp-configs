@@ -255,6 +255,10 @@
     "barriers": {
       "nb_barriers": 8
     },
+    "soc_event": {
+      "nb_fifo_events": 8,
+      "fifo_event": 27
+    },
     "events": {
       "barrier" : 16,
       "mutex"   : 17,

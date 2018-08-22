@@ -211,7 +211,7 @@
         "vp_bindings": [
           [
             "padframe->jtag0",
-            "soc->jtag"
+            "soc->jtag0"
           ],
           [
             "soc_clock->out",
@@ -258,13 +258,16 @@
           },
           "groups": {
             "spim0": {
-              "type": "qspim"
+              "type": "qspim",
+              "is_master": true
             },
             "uart0": {
-              "type": "uart"
+              "type": "uart",
+              "is_master": true
             },
             "jtag0": {
-              "type": "jtag"
+              "type": "jtag",
+              "is_slave": true
             }
           },
           "pads": {
@@ -406,9 +409,9 @@
           },
           "vp_ports": [
             "jtag0",
+            "clock",
             "spim0",
             "uart0",
-            "clock",
             "uart0_pad",
             "jtag0_pad"
           ]
@@ -441,10 +444,10 @@
           ],
           "vp_ports": [
             "cluster_clock",
-            "jtag",
+            "jtag0",
             "spim0",
             "uart0",
-            "jtag",
+            "jtag0",
             "clock"
           ],
           "vp_bindings": [
@@ -453,7 +456,7 @@
               "cluster->clock"
             ],
             [
-              "self->jtag",
+              "self->jtag0",
               "adv_dbg_unit->jtag"
             ],
             [
@@ -3853,6 +3856,10 @@
                 "barriers": {
                   "nb_barriers": 8
                 },
+                "soc_event": {
+                  "nb_fifo_events": 8,
+                  "fifo_event": 27
+                },
                 "events": {
                   "barrier": 16,
                   "mutex": 17,
@@ -4702,7 +4709,39 @@
             "archi_files": [
               "archi/mailbox/mailbox_v0.h"
             ]
-          }
+          },
+          "rab": {
+            "version": 1,
+            "hal_files": [
+              "hal/rab/rab_v1.h"
+            ],
+            "hal_src_files": [
+              "hal/rab/rab_v1.c"
+            ],
+            "archi_files": [
+              "archi/rab/rab_v1.h"
+            ]
+          },
+          "archi_host": {
+            "version": 1,
+            "archi_host_files": [
+              "archi-host/pgtable_hwdef.h",
+              "archi-host/phys_addr.h",
+              "archi-host/virt_addr.h",
+              "archi-host/arm/phys_addr.h",
+              "archi-host/arm/pgtable_hwdef.h",
+              "archi-host/arm64/phys_addr.h",
+              "archi-host/arm64/pgtable_dbg.h",
+              "archi-host/arm64/pgtable_hwdef.h"
+            ],
+            "archi_host_src_files": [
+              "src/phys_addr.c",
+              "src/virt_addr.c"
+            ]
+          },
+          "archi_host_src_files": [
+            "src/arm/phys_addr.c"
+          ]
         },
         "vp_ports": [
           "uart0",

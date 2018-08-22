@@ -70,13 +70,11 @@ class Component(object):
         return self.__dict__.get('_Component__fullname')
 
     def get_json_config(self, configs=None, expand=False):
-        if not expand:
-            return json.dumps(self.gen(), indent='  ')
+        return self.get_js_config(configs=configs, expand=expand).get_string()
 
-
-        config = js.import_config(self.gen(), interpret=True)
-        
-        return config.get_string()
+    def get_js_config(self, configs=None, expand=False):
+        result = js.import_config(self.gen(), interpret=expand)
+        return result
 
     def dump_to_graph(self, g, gg):
         if len(self.__dict__.get('_Component__comps').values()) == 0:

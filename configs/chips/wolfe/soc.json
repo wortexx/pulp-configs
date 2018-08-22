@@ -73,6 +73,7 @@
     "soc_ico",
     "pmu",
     "apb_ico",
+    "fc_ico",
     "fc",
     "l2",
     "l2_priv0",
@@ -82,7 +83,6 @@
     "l2_shared_1",
     "l2_shared_2",
     "l2_shared_3",
-    "fc_ico",
     "rom",
     "plt_loader",
     "fc_itc",
@@ -103,8 +103,11 @@
   ],
   "vp_ports": [
     "cluster_clock",
-    "jtag",
+    "cpi0",
+    "jtag0",
     "spim0",
+    "spim1",
+    "hyper0",
     "uart0"
   ],
   "vp_bindings": [
@@ -113,7 +116,11 @@
       "cluster->clock"
     ],
     [
-      "self->jtag",
+      "self->cpi0",
+      "udma->cpi0"
+    ],
+    [
+      "self->jtag0",
       "adv_dbg_unit->jtag"
     ],
     [
@@ -263,6 +270,14 @@
     [
       "udma->spim0",
       "self->spim0"
+    ],
+    [
+      "udma->spim1",
+      "self->spim1"
+    ],
+    [
+      "udma->hyper0",
+      "self->hyper0"
     ],
     [
       "udma->uart0",
@@ -657,6 +672,9 @@
       "input"
     ]
   },
+  "fc_ico": {
+    "l2_alias": true
+  },
   "fc": {
     "includes": [
       "ips/zeroriscy.json"
@@ -731,9 +749,6 @@
     "vp_ports": [
       "input"
     ]
-  },
-  "fc_ico": {
-    "l2_alias": true
   },
   "rom": {
     "includes": [
@@ -849,14 +864,17 @@
   },
   "udma": {
     "includes": [
-      "chips/wolfe/udma.json"
+      "templates/chips/wolfe/udma.json"
     ],
     "vp_ports": [
       "l2_itf",
       "event_itf",
       "spim0",
+      "spim1",
+      "hyper0",
       "uart0",
-      "input"
+      "input",
+      "cpi0"
     ]
   },
   "uart": {

@@ -22,7 +22,7 @@
   ],
   "vp_ports": [
     "cluster_clock",
-    "jtag",
+    "jtag0",
     "ddr"
   ],
   "vp_bindings": [
@@ -31,7 +31,7 @@
       "cluster->clock"
     ],
     [
-      "self->jtag",
+      "self->jtag0",
       "adv_dbg_unit->jtag"
     ],
     [

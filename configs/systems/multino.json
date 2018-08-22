@@ -211,7 +211,7 @@
         "vp_bindings": [
           [
             "padframe->jtag0",
-            "soc->jtag"
+            "soc->jtag0"
           ],
           [
             "soc_clock->out",
@@ -258,13 +258,16 @@
           },
           "groups": {
             "spim0": {
-              "type": "qspim"
+              "type": "qspim",
+              "is_master": true
             },
             "uart0": {
-              "type": "uart"
+              "type": "uart",
+              "is_master": true
             },
             "jtag0": {
-              "type": "jtag"
+              "type": "jtag",
+              "is_slave": true
             }
           },
           "pads": {
@@ -406,9 +409,9 @@
           },
           "vp_ports": [
             "jtag0",
+            "clock",
             "spim0",
             "uart0",
-            "clock",
             "uart0_pad",
             "jtag0_pad"
           ]
@@ -451,10 +454,10 @@
           ],
           "vp_ports": [
             "cluster_clock",
-            "jtag",
+            "jtag0",
             "spim0",
             "uart0",
-            "jtag",
+            "jtag0",
             "clock"
           ],
           "vp_bindings": [
@@ -467,7 +470,7 @@
               "cluster_1->clock"
             ],
             [
-              "self->jtag",
+              "self->jtag0",
               "adv_dbg_unit->jtag"
             ],
             [
@@ -821,7 +824,7 @@
           },
           "apb_soc_ctrl": {
             "version": 3,
-            "vp_class": "pulp/chips/pulp/apb_soc",
+            "vp_class": "pulp/chips/multino/apb_soc",
             "hal_files": [
               "hal/apb_soc/apb_soc_v3.h"
             ],
@@ -2827,6 +2830,10 @@
                 },
                 "barriers": {
                   "nb_barriers": 8
+                },
+                "soc_event": {
+                  "nb_fifo_events": 8,
+                  "fifo_event": 27
                 },
                 "events": {
                   "barrier": 16,
@@ -5147,6 +5154,10 @@
                 },
                 "barriers": {
                   "nb_barriers": 8
+                },
+                "soc_event": {
+                  "nb_fifo_events": 8,
+                  "fifo_event": 27
                 },
                 "events": {
                   "barrier": 16,

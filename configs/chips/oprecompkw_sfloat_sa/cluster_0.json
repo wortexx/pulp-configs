@@ -2825,7 +2825,7 @@
   },
   "pe": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 0,
@@ -2833,7 +2833,7 @@
   },
   "pe0": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 0,
@@ -2858,7 +2858,7 @@
   },
   "pe1": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 1,
@@ -2883,7 +2883,7 @@
   },
   "pe2": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 2,
@@ -2908,7 +2908,7 @@
   },
   "pe3": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 3,
@@ -2933,7 +2933,7 @@
   },
   "pe4": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 4,
@@ -2958,7 +2958,7 @@
   },
   "pe5": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 5,
@@ -2983,7 +2983,7 @@
   },
   "pe6": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 6,
@@ -3008,7 +3008,7 @@
   },
   "pe7": {
     "includes": [
-      "ips/ri5ky_v2_sfloat.json"
+      "ips/ri5ky_v2_sfloat_single_regfile.json"
     ],
     "cluster_id": 0,
     "core_id": 7,
