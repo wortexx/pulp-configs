@@ -197,7 +197,7 @@
       },
 
       "pmu": {
-        "version"      : 2,
+        "version"      : 3,
         "base"         : "0x1A107000",
         "size"         : "0x00000800"
       },
