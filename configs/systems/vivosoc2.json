@@ -149,8 +149,8 @@
         "debug_ir": "0x4"
       },
       "boot-mode": "default",
-      "commands": "load ioloop reqloop start wait",
-      "gdb_commands": "load ioloop reqloop start gdb wait"
+      "commands": "reset stop load ioloop reqloop start wait",
+      "gdb_commands": "reset stop load ioloop reqloop start gdb wait"
     },
     "debug-bridge": {
       "cable": {
