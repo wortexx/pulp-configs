@@ -90,6 +90,27 @@ for name, group in tp.get_items().items():
         system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.get(name).input)
         system.system_tree.board.chip.set(itf + '_cs' + str(cs), system.system_tree.board.get(name).cs)
 
+      elif dev_type == "spim_verif":
+
+        system.system_tree.board.spim = Tb_Component(
+            includes=[
+                "periph/spim_verif.json"
+            ]
+        )
+
+        itf = dev.get_child_str('interface')
+        if itf is None:
+          raise Exception('The interface where the device should be connected must be specified with the property "interface"')
+
+        cs = dev.get_child_int('cs')
+        if cs is None:
+          cs = 0
+
+        system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.dpi.new_itf(itf + '_cs' + str(cs) + '_data'))
+        system.system_tree.board.chip.set(itf + '_cs' + str(cs), system.system_tree.board.dpi.new_itf(itf + '_cs' + str(cs)))
+
+        system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.get(name).input)
+
       else:
         raise Exception('Unknown device type: ' + dev_type)
 

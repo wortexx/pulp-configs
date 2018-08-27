@@ -21,8 +21,12 @@
   "vp_ports": [
     "cpi0",
     "jtag0",
-    "spim0",
-    "spim1",
+    "spim0_cs0_data",
+    "spim0_cs0",
+    "spim0_cs1_data",
+    "spim0_cs1",
+    "spim1_cs0_data",
+    "spim1_cs0",
     "uart0",
     "hyper0_cs0_data",
     "hyper0_cs0",
@@ -39,12 +43,28 @@
       "padframe->jtag0_pad"
     ],
     [
-      "padframe->spim0_pad",
-      "self->spim0"
+      "padframe->spim0_cs0_data_pad",
+      "self->spim0_cs0_data"
     ],
     [
-      "padframe->spim1_pad",
-      "self->spim1"
+      "padframe->spim0_cs0_pad",
+      "self->spim0_cs0"
+    ],
+    [
+      "padframe->spim0_cs1_data_pad",
+      "self->spim0_cs1_data"
+    ],
+    [
+      "padframe->spim0_cs1_pad",
+      "self->spim0_cs1"
+    ],
+    [
+      "padframe->spim1_cs0_data_pad",
+      "self->spim1_cs0_data"
+    ],
+    [
+      "padframe->spim1_cs0_pad",
+      "self->spim1_cs0"
     ],
     [
       "padframe->uart0_pad",
@@ -104,8 +124,12 @@
       "templates/chips/gap/padframe.json"
     ],
     "vp_ports": [
-      "spim0_pad",
-      "spim1_pad",
+      "spim0_cs0_data_pad",
+      "spim0_cs0_pad",
+      "spim0_cs1_data_pad",
+      "spim0_cs1_pad",
+      "spim1_cs0_data_pad",
+      "spim1_cs0_pad",
       "uart0_pad",
       "cpi0",
       "jtag0",

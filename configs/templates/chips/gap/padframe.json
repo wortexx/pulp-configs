@@ -36,10 +36,12 @@
     "rf": {},
     "spim0": {
       "type": "qspim",
+      "nb_cs": 2,
       "is_master": true
     },
     "spim1": {
       "type": "qspim",
+      "nb_cs": 1,
       "is_master": true
     },
     "uart0": {
