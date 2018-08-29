@@ -213,6 +213,8 @@
           "spim0_cs1",
           "spim1_cs0_data",
           "spim1_cs0",
+          "spim1_cs1_data",
+          "spim1_cs1",
           "uart0",
           "hyper0_cs0_data",
           "hyper0_cs0",
@@ -257,6 +259,14 @@
           [
             "padframe->spim1_cs0_pad",
             "self->spim1_cs0"
+          ],
+          [
+            "padframe->spim1_cs1_data_pad",
+            "self->spim1_cs1_data"
+          ],
+          [
+            "padframe->spim1_cs1_pad",
+            "self->spim1_cs1"
           ],
           [
             "padframe->uart0_pad",
@@ -332,10 +342,10 @@
           "profiles": {
             "default": {
               "pad_rf_pactrl0": {
-                "alternate": "gpioA0"
+                "alternate": "spim1_cs0"
               },
               "pad_rf_pactrl1": {
-                "alternate": "gpioA1"
+                "alternate": "spim1_cs1"
               },
               "pad_rf_pactrl2": {
                 "alternate": "gpioA2"
@@ -373,10 +383,10 @@
             },
             "hyper": {
               "pad_rf_pactrl0": {
-                "alternate": "gpioA0"
+                "alternate": "spim1_cs0"
               },
               "pad_rf_pactrl1": {
-                "alternate": "gpioA1"
+                "alternate": "spim1_cs1"
               },
               "pad_rf_pactrl2": {
                 "alternate": "gpioA2"
@@ -452,7 +462,7 @@
             },
             "spim1": {
               "type": "qspim",
-              "nb_cs": 1,
+              "nb_cs": 2,
               "is_master": true
             },
             "uart0": {
@@ -1871,6 +1881,8 @@
             "spim0_cs1_pad",
             "spim1_cs0_data_pad",
             "spim1_cs0_pad",
+            "spim1_cs1_data_pad",
+            "spim1_cs1_pad",
             "uart0_pad",
             "cpi0",
             "jtag0",

@@ -11,8 +11,8 @@
 
   "profiles": {
     "default": {
-      "pad_rf_pactrl0"           : { "alternate": "gpioA0"},
-      "pad_rf_pactrl1"           : { "alternate": "gpioA1"},
+      "pad_rf_pactrl0"           : { "alternate": "spim1_cs0"},
+      "pad_rf_pactrl1"           : { "alternate": "spim1_cs1"},
       "pad_rf_pactrl2"           : { "alternate": "gpioA2"},
       "pad_rf_pactrl3"           : { "alternate": "gpioA3"},
       "pad_rf_pactrl4"           : { "alternate": "gpioA4"},
@@ -28,8 +28,8 @@
       "pad_spis0_mosi"           : { "alternate": "gpioA31"}
     },
     "hyper": {
-      "pad_rf_pactrl0"           : { "alternate": "gpioA0"},
-      "pad_rf_pactrl1"           : { "alternate": "gpioA1"},
+      "pad_rf_pactrl0"           : { "alternate": "spim1_cs0"},
+      "pad_rf_pactrl1"           : { "alternate": "spim1_cs1"},
       "pad_rf_pactrl2"           : { "alternate": "gpioA2"},
       "pad_rf_pactrl3"           : { "alternate": "gpioA3"},
       "pad_rf_pactrl4"           : { "alternate": "gpioA4"},
@@ -65,7 +65,7 @@
     },
     "spim1": {
       "type": "qspim",
-      "nb_cs": 1,
+      "nb_cs": 2,
       "is_master": true
     },
     "uart0": {
