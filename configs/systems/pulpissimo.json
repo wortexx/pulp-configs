@@ -209,7 +209,50 @@
           "soc_clock",
           "soc"
         ],
+        "vp_ports": [
+          "jtag0",
+          "cpi0",
+          "spim0_cs0_data",
+          "spim0_cs0",
+          "spim0_cs1_data",
+          "spim0_cs1",
+          "uart0",
+          "uart0",
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
+          "cpi0_pad",
+          "cpi0"
+        ],
         "vp_bindings": [
+          [
+            "self->jtag0",
+            "padframe->jtag0_pad"
+          ],
+          [
+            "self->cpi0",
+            "padframe->cpi0_pad"
+          ],
+          [
+            "padframe->spim0_cs0_data_pad",
+            "self->spim0_cs0_data"
+          ],
+          [
+            "padframe->spim0_cs0_pad",
+            "self->spim0_cs0"
+          ],
+          [
+            "padframe->spim0_cs1_data_pad",
+            "self->spim0_cs1_data"
+          ],
+          [
+            "padframe->spim0_cs1_pad",
+            "self->spim0_cs1"
+          ],
+          [
+            "padframe->uart0_pad",
+            "self->uart0"
+          ],
           [
             "padframe->jtag0",
             "soc->jtag0"
@@ -268,6 +311,7 @@
           "groups": {
             "spim0": {
               "type": "qspim",
+              "nb_cs": 2,
               "is_master": true
             },
             "uart0": {
@@ -421,11 +465,18 @@
             }
           },
           "vp_ports": [
+            "spim0_cs0_data_pad",
+            "spim0_cs0_pad",
+            "spim0_cs1_data_pad",
+            "spim0_cs1_pad",
+            "uart0_pad",
             "jtag0",
             "cpi0",
             "clock",
             "spim0",
             "uart0",
+            "jtag0_pad",
+            "cpi0_pad",
             "uart0_pad",
             "jtag0_pad",
             "cpi0_pad"
@@ -1929,26 +1980,26 @@
               ],
               "is_master": true
             },
-            "memcpy": {
-              "version": 1,
+            "spim": {
+              "version": 2,
               "nb_channels": 1,
               "ids": [
                 1
               ],
               "offsets": [
-                "0x080"
-              ]
+                "0x80"
+              ],
+              "is_master": true
             },
-            "spim": {
-              "version": 2,
+            "memcpy": {
+              "version": 1,
               "nb_channels": 1,
               "ids": [
                 2
               ],
               "offsets": [
                 "0x100"
-              ],
-              "is_master": true
+              ]
             },
             "i2c": {
               "version": 2,
@@ -2005,15 +2056,7 @@
               "jtag"
             ]
           }
-        },
-        "vp_ports": [
-          "uart0",
-          "jtag0",
-          "ctrl",
-          "jtag0_pad",
-          "cpi0_pad",
-          "cpi0"
-        ]
+        }
       },
       "dpi_clock": {
         "vp_class": "vp/clock_domain",

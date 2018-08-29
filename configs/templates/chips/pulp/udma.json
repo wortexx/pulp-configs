@@ -17,19 +17,19 @@
     "is_master"    : true
   },
 
-  "memcpy": {
-    "version"      : 1,
-    "nb_channels"  : 1,
-    "ids"          : [1],
-    "offsets"      : ["0x080"]
-  },
-
   "spim": {
     "version"      : 2,
     "nb_channels"  : 1,
-    "ids"          : [2],
-    "offsets"      : ["0x100"],
+    "ids"          : [1],
+    "offsets"      : ["0x080"],
     "is_master"    : true
+  },
+
+  "memcpy": {
+    "version"      : 1,
+    "nb_channels"  : 1,
+    "ids"          : [2],
+    "offsets"      : ["0x100"]
   },
 
   "i2c": {
