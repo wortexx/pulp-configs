@@ -331,140 +331,116 @@
           "vp_class": "pulp/padframe/padframe_v1",
           "profiles": {
             "default": {
-              "alternates": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-              ]
+              "pad_rf_pactrl0": {
+                "alternate": "gpioA0"
+              },
+              "pad_rf_pactrl1": {
+                "alternate": "gpioA1"
+              },
+              "pad_rf_pactrl2": {
+                "alternate": "gpioA2"
+              },
+              "pad_rf_pactrl3": {
+                "alternate": "gpioA3"
+              },
+              "pad_rf_pactrl4": {
+                "alternate": "gpioA4"
+              },
+              "pad_rf_pactrl5": {
+                "alternate": "gpioA5"
+              },
+              "pad_timer0_ch0": {
+                "alternate": "gpioA17"
+              },
+              "pad_timer0_ch1": {
+                "alternate": "gpioA18"
+              },
+              "pad_timer0_ch2": {
+                "alternate": "gpioA19"
+              },
+              "pad_timer0_ch3": {
+                "alternate": "gpioA20"
+              },
+              "pad_spis0_csn": {
+                "alternate": "gpioA29"
+              },
+              "pad_spis0_miso": {
+                "alternate": "gpioA30"
+              },
+              "pad_spis0_mosi": {
+                "alternate": "gpioA31"
+              }
             },
             "hyper": {
-              "alternates": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                1,
-                0,
-                3,
-                3,
-                0,
-                0,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-              ]
+              "pad_rf_pactrl0": {
+                "alternate": "gpioA0"
+              },
+              "pad_rf_pactrl1": {
+                "alternate": "gpioA1"
+              },
+              "pad_rf_pactrl2": {
+                "alternate": "gpioA2"
+              },
+              "pad_rf_pactrl3": {
+                "alternate": "gpioA3"
+              },
+              "pad_rf_pactrl4": {
+                "alternate": "gpioA4"
+              },
+              "pad_rf_pactrl5": {
+                "alternate": "gpioA5"
+              },
+              "pad_timer0_ch0": {
+                "alternate": "gpioA17"
+              },
+              "pad_timer0_ch1": {
+                "alternate": "gpioA18"
+              },
+              "pad_timer0_ch2": {
+                "alternate": "gpioA19"
+              },
+              "pad_timer0_ch3": {
+                "alternate": "gpioA20"
+              },
+              "pad_i2s1_ws": {
+                "alternate": "hyper_ckn"
+              },
+              "pad_i2s1_sdi": {
+                "alternate": "hyper_ck"
+              },
+              "pad_spim0_sdio0 (mosi)": {
+                "alternate": "hyper_dq[0]"
+              },
+              "pad_spim0_sdio1 (miso)": {
+                "alternate": "hyper_dq[1]"
+              },
+              "pad_spim0_sdio2": {
+                "alternate": "hyper_dq[2]"
+              },
+              "pad_spim0_sdio3": {
+                "alternate": "hyper_dq[3]"
+              },
+              "pad_spim0_csn0": {
+                "alternate": "hyper_dq[4]"
+              },
+              "pad_spim0_csn1": {
+                "alternate": "hyper_dq[5]"
+              },
+              "pad_spim0_sck": {
+                "alternate": "hyper_dq[6]"
+              },
+              "pad_spis0_csn": {
+                "alternate": "hyper_dq[7]"
+              },
+              "pad_spis0_miso": {
+                "alternate": "hyper_csn0"
+              },
+              "pad_spis0_mosi": {
+                "alternate": "hyper_csn1"
+              },
+              "pad_spis0_sck": {
+                "alternate": "hyper_rwds"
+              }
             }
           },
           "groups": {
