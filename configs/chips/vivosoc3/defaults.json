@@ -1,19 +1,12 @@
 {
   "runner": {
-    "boot_from_flash": true,
-    "boot-mode": "rom"
+    "boot-mode": "jtag"
   },
   
   "loader": {
     "boot": {
-      "mode": "rom"
+      "mode": "jtag"
     }
-  },
-
-  "vsim": {
-    "args": [
-      "-novopt"
-    ]
   },
 
   "hal_analog_files": [ "hal/analog/control_v3.h", "hal/analog/exg_v3.h", "hal/analog/ppg_v3.h", "hal/analog/stim_v3.h", "hal/analog/bioz_v3.h", "hal/analog/vivosoc3.h", "hal/analog/vivosoc.h"

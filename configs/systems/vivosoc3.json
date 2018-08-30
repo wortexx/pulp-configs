@@ -66,9 +66,7 @@
     "script": "run.tcl",
     "gui": false,
     "simchecker": false,
-    "args": [
-      "-novopt"
-    ],
+    "args": [],
     "tcl_args": []
   },
   "runner": {
@@ -76,12 +74,12 @@
       "py-stack": "Display the full python stack in case an exception is caught"
     },
     "verbose": false,
-    "boot-mode": "rom",
+    "boot-mode": "jtag",
     "use_tb_comps": false,
     "use_external_tb": false,
     "active_tb_comps": [],
     "py-stack": false,
-    "boot_from_flash": true,
+    "boot_from_flash": false,
     "flash_type": "spi",
     "flash_slm_file": "slm_files/flash_stim.slm",
     "rtl_simulator": "vsim",
@@ -131,7 +129,7 @@
     "cable": "proxy",
     "binaries": [],
     "boot": {
-      "mode": "rom"
+      "mode": "jtag"
     }
   },
   "system_tree": {
