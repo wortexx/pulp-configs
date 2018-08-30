@@ -9,8 +9,24 @@
 
   "profiles": {
     "default": {
-      "uart0_tx": { "alternate": "uart0_tx" },
-      "uart0_rx": { "alternate": "uart0_rx" }
+      "mspi0_sck"  : { "alternate": "mspi0_sck"   },
+      "mspi0_csn0" : { "alternate": "mspi0_csn0"  },
+      "mspi0_sdio0": { "alternate": "mspi0_sdio0" },
+      "mspi0_sdio1": { "alternate": "mspi0_sdio1" },
+      "mspi0_sdio2": { "alternate": "mspi0_sdio2" },
+      "mspi0_sdio3": { "alternate": "mspi0_sdio3" },
+      "mspi0_csn1" : { "alternate": "mspi0_csn1"  },
+      "mspi0_csn2" : { "alternate": "mspi0_csn2"  },
+      "mspi1_sck"  : { "alternate": "mspi1_sck"   },
+      "mspi1_csn0" : { "alternate": "mspi1_csn0"  },
+      "mspi1_sdio0": { "alternate": "mspi1_sdio0" },
+      "mspi1_sdio1": { "alternate": "mspi1_sdio1" },
+      "mspi1_sdio2": { "alternate": "mspi1_sdio2" },
+      "mspi1_sdio3": { "alternate": "mspi1_sdio3" },
+      "mspi1_csn1" : { "alternate": "mspi1_csn1"  },
+      "mspi1_csn2" : { "alternate": "mspi1_csn2"  },
+      "uart0_tx"   : { "alternate": "uart0_tx"    },
+      "uart0_rx"   : { "alternate": "uart0_rx"    }
     }
   },
 
