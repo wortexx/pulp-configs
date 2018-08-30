@@ -445,21 +445,21 @@
         },
         "l2_priv0": {
           "base": "0x1C000000",
-          "size": "0x00008000",
+          "size": "0x00004000",
           "remove_offset": "0x1C000000"
         },
         "l2_priv0_alias": {
           "base": "0x00000000",
-          "size": "0x00008000"
+          "size": "0x00004000"
         },
         "l2_priv1": {
           "base": "0x1C008000",
-          "size": "0x00008000",
+          "size": "0x00004000",
           "remove_offset": "0x1C008000"
         },
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00018000"
         }
       },
       "vp_ports": [
@@ -495,7 +495,7 @@
       "mappings": {
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00018000"
         },
         "ll_ico": {}
       },
@@ -512,7 +512,7 @@
       "mappings": {
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00018000"
         },
         "ll_ico": {}
       },
@@ -529,7 +529,7 @@
       "mappings": {
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00018000"
         },
         "ll_ico": {}
       },
@@ -545,7 +545,7 @@
       "mappings": {
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00018000"
         },
         "ll_ico": {}
       },
@@ -665,18 +665,18 @@
     "map_size": "0x00080000"
   },
   "l2_priv0": {
-    "size": 32768,
+    "size": 16384,
     "map_base": "0x1C000000",
-    "map_size": "0x00008000",
+    "map_size": "0x00004000",
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
     ]
   },
   "l2_priv1": {
-    "size": 32768,
+    "size": 16384,
     "map_base": "0x1C008000",
-    "map_size": "0x00008000",
+    "map_size": "0x00004000",
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
@@ -684,33 +684,33 @@
   },
   "l2_shared": {
     "nb_banks": 4,
-    "size": 458752,
+    "size": 98304,
     "map_base": "0x1C010000",
-    "map_size": "0x00070000"
+    "map_size": "0x00018000"
   },
   "l2_shared_0": {
-    "size": 114688,
+    "size": 24576,
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
     ]
   },
   "l2_shared_1": {
-    "size": 114688,
+    "size": 24576,
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
     ]
   },
   "l2_shared_2": {
-    "size": 114688,
+    "size": 24576,
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
     ]
   },
   "l2_shared_3": {
-    "size": 114688,
+    "size": 24576,
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"

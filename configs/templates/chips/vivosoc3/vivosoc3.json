@@ -12,7 +12,7 @@
     "core": "ri5ky_v2_fpu",
     "version": 5,
     "nb_cluster": 1,
-    "nb_pe": 8,
+    "nb_pe": 4,
     
     "pe": {
       "irq": [
@@ -29,7 +29,7 @@
 
     "l1": {
       "base": "0x10000000",
-      "size": "0x00010000",
+      "size": "0x00008000",
       "banking_factor": 2
     },
 
@@ -118,24 +118,24 @@
 
       "priv0": {
         "base"         : "0x1C000000",
-        "size"         : "0x00008000"
+        "size"         : "0x00004000"
       },
 
       "priv0_alias": {
         "base"         : "0x00000000",
-        "size"         : "0x00008000"
+        "size"         : "0x00004000"
       },
 
       "priv1": {
         "base"         : "0x1C008000",
-        "size"         : "0x00008000"
+        "size"         : "0x00004000"
       },
 
       "shared": {
         "nb_banks"     : 4,
         "interleaving_bits" : 2,
         "base"         : "0x1C010000",
-        "size"         : "0x00070000"
+        "size"         : "0x00018000"
       }
     },
 
