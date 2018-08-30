@@ -106,7 +106,7 @@ gen.gap:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap/gap.json --output-dir=$(CURDIR)/configs/chips/gap --output=configs/systems/gap.json --usecase=usecases/jtag-cam.json
 
 gen.vivosoc3:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc3   --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/vivosoc3/vivosoc3.json --output-dir=$(CURDIR)/configs/chips/vivosoc3 --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
 
 gen.bigpulp-z-7045:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-z-7045/bigpulp-z-7045.json --output-dir=$(CURDIR)/configs/chips/bigpulp-z-7045 --output=configs/systems/bigpulp-z-7045.json --usecase=usecases/jtag.json
