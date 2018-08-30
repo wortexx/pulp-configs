@@ -306,10 +306,10 @@
           "vp_class": "pulp/padframe/padframe_v1",
           "profiles": {
             "default": {
-              "mspi0_sdio0": {
+              "uart0_tx": {
                 "alternate": "uart0_tx"
               },
-              "mspi0_sdio1": {
+              "uart0_rx": {
                 "alternate": "uart0_rx"
               }
             }

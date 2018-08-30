@@ -9,8 +9,8 @@
 
   "profiles": {
     "default": {
-      "mspi0_sdio0": { "alternate": "uart0_tx" },
-      "mspi0_sdio1": { "alternate": "uart0_rx" }
+      "uart0_tx": { "alternate": "uart0_tx" },
+      "uart0_rx": { "alternate": "uart0_rx" }
     }
   },
 
