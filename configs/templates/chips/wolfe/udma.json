@@ -1,6 +1,8 @@
 {
   "includes": [ "ips/udma/udma_v2.json"],
 
+  "vp_impl": "pulp.udma.udma_v2_wolfe_impl",
+
   "nb_periphs": 8,
 
   "interfaces" : ["spim", "hyper", "i2c", "i2s", "uart", "cpi"],

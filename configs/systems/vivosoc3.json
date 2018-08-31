@@ -2725,6 +2725,7 @@
                 }
               }
             },
+            "vp_impl": "pulp.udma.udma_v2_vivosoc3_impl",
             "nb_periphs": 9,
             "interfaces": [
               "spim",

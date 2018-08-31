@@ -149,8 +149,8 @@
         "debug_ir": "0x4"
       },
       "boot-mode": "jtag",
-      "commands": "load ioloop reqloop start wait",
-      "gdb_commands": "load ioloop reqloop start gdb wait"
+      "commands": "reset stop load ioloop reqloop start wait",
+      "gdb_commands": "reset stop load ioloop reqloop start gdb wait"
     },
     "vp_class": "pulp/system",
     "vp_comps": [
@@ -1994,6 +1994,7 @@
                 }
               }
             },
+            "vp_impl": "pulp.udma.udma_v3_veg_impl",
             "nb_periphs": 7,
             "properties": {
               "l2_read_fifo_size": 8

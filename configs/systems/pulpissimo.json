@@ -152,7 +152,7 @@
       },
       "boot-mode": "default",
       "commands": "reset stop load ioloop reqloop start wait",
-      "gdb_commands": "load ioloop reqloop start gdb wait",
+      "gdb_commands": "reset stop load ioloop reqloop start gdb wait",
       "start_addr": "0x1A110000",
       "start_value": "0",
       "stop_addr": "0x1A110000",
@@ -1957,6 +1957,7 @@
                 }
               }
             },
+            "vp_impl": "pulp.udma.udma_v2_pulpissimo_impl",
             "nb_periphs": 7,
             "interfaces": [
               "memcpy",
