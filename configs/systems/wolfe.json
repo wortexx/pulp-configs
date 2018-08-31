@@ -2061,6 +2061,7 @@
                 }
               }
             },
+            "vp_impl": "pulp.udma.udma_v2_wolfe_impl",
             "nb_periphs": 8,
             "interfaces": [
               "spim",
