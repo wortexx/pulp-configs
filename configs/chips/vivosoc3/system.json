@@ -8,11 +8,11 @@
       "board"
     ],
     "debug_bridge": {
-      "start_addr": "0x1A104010",
+      "start_addr": "0x1A104014",
       "start_value": "1",
       "stop_addr": "0x1A110000",
       "stop_value": "0x00010000",
-      "set_pc_addr": "0x1A104088",
+      "set_pc_addr": "0x1A104010",
       "commands": "reset stop load ioloop reqloop start wait"
     },
     "board": {
