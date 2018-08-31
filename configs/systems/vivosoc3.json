@@ -1479,7 +1479,6 @@
             "jtag0",
             "spim0",
             "spim1",
-            "hyper0",
             "uart0",
             "uart1",
             "spim0",
@@ -1637,10 +1636,6 @@
             [
               "udma->spim1",
               "self->spim1"
-            ],
-            [
-              "udma->hyper0",
-              "self->hyper0"
             ],
             [
               "udma->uart0",
@@ -2729,7 +2724,6 @@
             "nb_periphs": 9,
             "interfaces": [
               "spim",
-              "hyper",
               "i2c",
               "uart"
             ],
@@ -2762,17 +2756,6 @@
               ],
               "is_master": true
             },
-            "hyper": {
-              "version": 1,
-              "nb_channels": 1,
-              "ids": [
-                4
-              ],
-              "offsets": [
-                "0x200"
-              ],
-              "is_master": true
-            },
             "i2c": {
               "version": 2,
               "nb_channels": 1,
@@ -2802,7 +2785,6 @@
               "event_itf",
               "spim0",
               "spim1",
-              "hyper0",
               "uart0",
               "uart1",
               "input"

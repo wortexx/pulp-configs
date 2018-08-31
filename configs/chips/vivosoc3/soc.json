@@ -102,7 +102,6 @@
     "jtag0",
     "spim0",
     "spim1",
-    "hyper0",
     "uart0",
     "uart1"
   ],
@@ -254,10 +253,6 @@
     [
       "udma->spim1",
       "self->spim1"
-    ],
-    [
-      "udma->hyper0",
-      "self->hyper0"
     ],
     [
       "udma->uart0",
@@ -808,7 +803,6 @@
       "event_itf",
       "spim0",
       "spim1",
-      "hyper0",
       "uart0",
       "uart1",
       "input"
