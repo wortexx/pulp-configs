@@ -152,7 +152,12 @@
       },
       "boot-mode": "jtag",
       "commands": "reset stop load ioloop reqloop start wait",
-      "gdb_commands": "reset stop load ioloop reqloop start gdb wait"
+      "gdb_commands": "reset stop load ioloop reqloop start gdb wait",
+      "start_addr": "0x1A104010",
+      "start_value": "1",
+      "stop_addr": "0x1A110000",
+      "stop_value": "0x00010000",
+      "set_pc_addr": "0x1A104088"
     },
     "vp_class": "pulp/system",
     "vp_comps": [
