@@ -265,17 +265,8 @@
           "default_profile": "default",
           "vp_class": "pulp/padframe/padframe_v1",
           "profiles": {
-            "default": {
-              "alternates": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-              ]
-            }
+            "default": {},
+            "hyper": {}
           },
           "groups": {
             "spim0": {
