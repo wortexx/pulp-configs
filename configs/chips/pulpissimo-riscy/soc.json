@@ -72,6 +72,7 @@
     "axi_ico",
     "soc_ico",
     "apb_ico",
+    "fc_ico",
     "fc",
     "l2",
     "l2_priv0",
@@ -81,7 +82,6 @@
     "l2_shared_1",
     "l2_shared_2",
     "l2_shared_3",
-    "fc_ico",
     "rom",
     "plt_loader",
     "fc_itc",
@@ -100,13 +100,18 @@
     "adv_dbg_unit"
   ],
   "vp_ports": [
-    "jtag",
+    "cpi0",
+    "jtag0",
     "spim0",
     "uart0"
   ],
   "vp_bindings": [
     [
-      "self->jtag",
+      "self->cpi0",
+      "udma->cpi0"
+    ],
+    [
+      "self->jtag0",
       "adv_dbg_unit->jtag"
     ],
     [
@@ -598,6 +603,9 @@
       "input"
     ]
   },
+  "fc_ico": {
+    "l2_alias": true
+  },
   "fc": {
     "includes": [
       "ips/ri5ky_v2.json"
@@ -672,9 +680,6 @@
     "vp_ports": [
       "input"
     ]
-  },
-  "fc_ico": {
-    "l2_alias": true
   },
   "rom": {
     "includes": [
@@ -783,14 +788,15 @@
   },
   "udma": {
     "includes": [
-      "chips/pulpissimo/udma.json"
+      "templates/chips/pulpissimo-riscy/udma.json"
     ],
     "vp_ports": [
       "l2_itf",
       "event_itf",
       "spim0",
       "uart0",
-      "input"
+      "input",
+      "cpi0"
     ]
   },
   "uart": {

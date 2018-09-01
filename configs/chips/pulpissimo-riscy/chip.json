@@ -18,10 +18,51 @@
     "soc_clock",
     "soc"
   ],
+  "vp_ports": [
+    "jtag0",
+    "cpi0",
+    "spim0_cs0_data",
+    "spim0_cs0",
+    "spim0_cs1_data",
+    "spim0_cs1",
+    "uart0"
+  ],
   "vp_bindings": [
     [
+      "self->jtag0",
+      "padframe->jtag0_pad"
+    ],
+    [
+      "self->cpi0",
+      "padframe->cpi0_pad"
+    ],
+    [
+      "padframe->spim0_cs0_data_pad",
+      "self->spim0_cs0_data"
+    ],
+    [
+      "padframe->spim0_cs0_pad",
+      "self->spim0_cs0"
+    ],
+    [
+      "padframe->spim0_cs1_data_pad",
+      "self->spim0_cs1_data"
+    ],
+    [
+      "padframe->spim0_cs1_pad",
+      "self->spim0_cs1"
+    ],
+    [
+      "padframe->uart0_pad",
+      "self->uart0"
+    ],
+    [
       "padframe->jtag0",
-      "soc->jtag"
+      "soc->jtag0"
+    ],
+    [
+      "padframe->cpi0",
+      "soc->cpi0"
     ],
     [
       "soc_clock->out",
@@ -42,13 +83,21 @@
   ],
   "padframe": {
     "includes": [
-      "chips/pulpissimo-riscy/padframe.json"
+      "templates/chips/pulpissimo-riscy/padframe.json"
     ],
     "vp_ports": [
+      "spim0_cs0_data_pad",
+      "spim0_cs0_pad",
+      "spim0_cs1_data_pad",
+      "spim0_cs1_pad",
+      "uart0_pad",
       "jtag0",
+      "cpi0",
+      "clock",
       "spim0",
       "uart0",
-      "clock"
+      "jtag0_pad",
+      "cpi0_pad"
     ]
   },
   "soc_clock": {
@@ -65,7 +114,8 @@
     "vp_ports": [
       "spim0",
       "uart0",
-      "jtag",
+      "jtag0",
+      "cpi0",
       "clock"
     ]
   }
