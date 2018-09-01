@@ -211,7 +211,10 @@
         ],
         "vp_ports": [
           "jtag0",
-          "spim0",
+          "spim0_cs0_data",
+          "spim0_cs0",
+          "spim0_cs1_data",
+          "spim0_cs1",
           "uart0",
           "uart0",
           "jtag0",
@@ -226,8 +229,20 @@
             "padframe->jtag0_pad"
           ],
           [
-            "padframe->spim0_pad",
-            "self->spim0"
+            "padframe->spim0_cs0_data_pad",
+            "self->spim0_cs0_data"
+          ],
+          [
+            "padframe->spim0_cs0_pad",
+            "self->spim0_cs0"
+          ],
+          [
+            "padframe->spim0_cs1_data_pad",
+            "self->spim0_cs1_data"
+          ],
+          [
+            "padframe->spim0_cs1_pad",
+            "self->spim0_cs1"
           ],
           [
             "padframe->uart0_pad",
@@ -287,6 +302,7 @@
           "groups": {
             "spim0": {
               "type": "qspim",
+              "nb_cs": 2,
               "is_master": true
             },
             "uart0": {
@@ -436,7 +452,10 @@
             }
           },
           "vp_ports": [
-            "spim0_pad",
+            "spim0_cs0_data_pad",
+            "spim0_cs0_pad",
+            "spim0_cs1_data_pad",
+            "spim0_cs1_pad",
             "uart0_pad",
             "jtag0",
             "clock",
