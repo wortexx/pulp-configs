@@ -114,6 +114,9 @@ gen.bigpulp-z-7045:
 gen.bigpulp:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp/bigpulp.json --output-dir=$(CURDIR)/configs/chips/bigpulp --output=configs/systems/bigpulp.json --usecase=usecases/jtag.json
 
+gen.bigpulp-standalone:
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-standalone/bigpulp.json --output-dir=$(CURDIR)/configs/chips/bigpulp-standalone --output=configs/systems/bigpulp-standalone.json --usecase=usecases/jtag.json
+
 gen.fulmine:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=fulmine    --output=configs/systems/fulmine.json
 
