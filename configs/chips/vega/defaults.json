@@ -13,8 +13,16 @@
   "system_tree": {
     "debug_bridge": {
       "boot-mode": "jtag"
-    }
+    },
+   "board": {
+     "chip": {
+       "soc": {
+         "quiddikey": {
+           "includes": [ "../../ips/vendors/iid/quiddikey_v1.json"]
+         }
+       }
+     }
+   }
   }
-
 }
 
