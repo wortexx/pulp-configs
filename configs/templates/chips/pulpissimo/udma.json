@@ -26,7 +26,8 @@
     "nb_channels"  : 1,
     "ids"          : [1],
     "offsets"      : ["0x80"],
-    "is_master"    : true
+    "is_master"    : true,
+    "eot_events"   : [ 23 ]
   },
 
   "memcpy": {
