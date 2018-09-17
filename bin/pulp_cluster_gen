@@ -205,7 +205,9 @@ for i in range(0, nb_l1_banks):
     'bank%d' % i,
     Component(
       size=l1_bank_size,
-      vp_class="memory/memory"
+      vp_class="memory/memory",
+      power_models={"includes": ["power_models/l1/l1.json"] },
+      power_trigger= True if i == 0 else False
     )
   )
 

@@ -1150,26 +1150,36 @@
             "power_models": {
               "clock_gated": {
                 "type": "linear",
+                "unit": "W",
                 "values": {
                   "25": {
                     "1.2": {
-                      "any": "1"
-                    },
-                    "1.1": {
-                      "any": "0.9"
+                      "any": "0.0000016"
                     }
                   }
                 }
               },
               "insn": {
                 "type": "linear",
+                "unit": "pJ",
                 "values": {
                   "25": {
                     "1.2": {
-                      "any": "40"
+                      "any": "2.4854524"
                     },
                     "1.1": {
-                      "any": "30"
+                      "any": "1.2"
+                    }
+                  }
+                }
+              },
+              "leakage": {
+                "type": "linear",
+                "unit": "W",
+                "values": {
+                  "25": {
+                    "1.2": {
+                      "any": "0.000030"
                     }
                   }
                 }
@@ -1990,7 +2000,10 @@
               "offsets": [
                 "0x80"
               ],
-              "is_master": true
+              "is_master": true,
+              "eot_events": [
+                23
+              ]
             },
             "memcpy": {
               "version": 1,
