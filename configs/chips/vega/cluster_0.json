@@ -2497,6 +2497,12 @@
     "bank0": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": true,
       "vp_ports": [
         "input"
       ]
@@ -2504,6 +2510,12 @@
     "bank1": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2511,6 +2523,12 @@
     "bank2": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2518,6 +2536,12 @@
     "bank3": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2525,6 +2549,12 @@
     "bank4": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2532,6 +2562,12 @@
     "bank5": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2539,6 +2575,12 @@
     "bank6": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2546,6 +2588,12 @@
     "bank7": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2553,6 +2601,12 @@
     "bank8": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2560,6 +2614,12 @@
     "bank9": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2567,6 +2627,12 @@
     "bank10": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2574,6 +2640,12 @@
     "bank11": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2581,6 +2653,12 @@
     "bank12": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2588,6 +2666,12 @@
     "bank13": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2595,6 +2679,12 @@
     "bank14": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -2602,6 +2692,12 @@
     "bank15": {
       "size": 4096,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
