@@ -19,6 +19,7 @@
     "soc"
   ],
   "vp_ports": [
+    "ref_clock",
     "cpi0",
     "jtag0",
     "spim0_cs0_data",
@@ -37,12 +38,20 @@
   ],
   "vp_bindings": [
     [
+      "self->ref_clock",
+      "padframe->ref_clock_pad"
+    ],
+    [
       "self->cpi0",
       "padframe->cpi0_pad"
     ],
     [
       "self->jtag0",
       "padframe->jtag0_pad"
+    ],
+    [
+      "padframe->ref_clock",
+      "soc->ref_clock"
     ],
     [
       "padframe->spim0_cs0_data_pad",
@@ -134,6 +143,7 @@
       "templates/chips/gap/padframe.json"
     ],
     "vp_ports": [
+      "ref_clock",
       "spim0_cs0_data_pad",
       "spim0_cs0_pad",
       "spim0_cs1_data_pad",
@@ -149,6 +159,7 @@
       "hyper0_cs0_pad",
       "hyper0_cs1_data_pad",
       "hyper0_cs1_pad",
+      "ref_clock_pad",
       "clock",
       "spim0",
       "spim1",
@@ -174,6 +185,7 @@
       "spim1",
       "uart0",
       "hyper0",
+      "ref_clock",
       "cpi0",
       "jtag0",
       "clock"

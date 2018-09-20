@@ -125,6 +125,21 @@ system.system_tree.board.dpi = Component(
 
 system.system_tree.board.dpi_clock.out = system.system_tree.board.dpi.clock
 
+
+system.system_tree.board.ref_clock_clock = Component(
+vp_class="vp/clock_domain",
+frequency=65536
+)
+
+system.system_tree.board.ref_clock = Component(
+  includes= [ "ips/misc/clock.json" ]
+)
+
+system.system_tree.board.ref_clock_clock.out = system.system_tree.board.ref_clock.clock
+
+system.system_tree.board.ref_clock.clock_sync = system.system_tree.board.chip.ref_clock
+
+
 has_ddr = tp.get('ddr') is not None
 
 if has_ddr:

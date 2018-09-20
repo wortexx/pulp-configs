@@ -75,6 +75,7 @@ if padframe is not None:
       includes= [ "%s" % padframe ]
     )
 
+  chip.ref_clock = chip.padframe.ref_clock_pad
 
 chip.soc_clock = Component(
   vp_class="vp/clock_domain",
@@ -88,6 +89,7 @@ chip.soc = Component(
 
 if padframe is not None:
   chip.soc_clock.out = chip.padframe.clock
+  chip.padframe.ref_clock = chip.soc.ref_clock
 
   if padframe_conf is not None:
     groups_conf = padframe_conf.get('groups')

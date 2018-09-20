@@ -162,12 +162,22 @@
         "chip",
         "dpi_clock",
         "pulp_chip",
-        "dpi"
+        "dpi",
+        "ref_clock_clock",
+        "ref_clock"
       ],
       "vp_bindings": [
         [
           "dpi_clock->out",
           "dpi->clock"
+        ],
+        [
+          "ref_clock_clock->out",
+          "ref_clock->clock"
+        ],
+        [
+          "ref_clock->clock_sync",
+          "chip->ref_clock"
         ],
         [
           "chip->uart0",
@@ -205,6 +215,7 @@
           "soc"
         ],
         "vp_ports": [
+          "ref_clock",
           "cpi0",
           "jtag0",
           "spim0_cs0_data",
@@ -220,6 +231,7 @@
           "hyper0_cs0",
           "hyper0_cs1_data",
           "hyper0_cs1",
+          "ref_clock",
           "uart0",
           "jtag0",
           "ctrl",
@@ -229,12 +241,20 @@
         ],
         "vp_bindings": [
           [
+            "self->ref_clock",
+            "padframe->ref_clock_pad"
+          ],
+          [
             "self->cpi0",
             "padframe->cpi0_pad"
           ],
           [
             "self->jtag0",
             "padframe->jtag0_pad"
+          ],
+          [
+            "padframe->ref_clock",
+            "soc->ref_clock"
           ],
           [
             "padframe->spim0_cs0_data_pad",
@@ -1875,6 +1895,7 @@
             }
           },
           "vp_ports": [
+            "ref_clock",
             "spim0_cs0_data_pad",
             "spim0_cs0_pad",
             "spim0_cs1_data_pad",
@@ -1890,6 +1911,7 @@
             "hyper0_cs0_pad",
             "hyper0_cs1_data_pad",
             "hyper0_cs1_pad",
+            "ref_clock_pad",
             "clock",
             "spim0",
             "spim1",
@@ -2010,6 +2032,7 @@
           ],
           "vp_ports": [
             "cluster_clock",
+            "ref_clock",
             "cpi0",
             "jtag0",
             "spim0",
@@ -2020,6 +2043,7 @@
             "spim1",
             "uart0",
             "hyper0",
+            "ref_clock",
             "cpi0",
             "jtag0",
             "clock"
@@ -2028,6 +2052,10 @@
             [
               "self->cluster_clock",
               "cluster->clock"
+            ],
+            [
+              "self->ref_clock",
+              "timer->ref_clock"
             ],
             [
               "self->cpi0",
@@ -3333,7 +3361,8 @@
             "vp_ports": [
               "irq_itf_0",
               "irq_itf_1",
-              "input"
+              "input",
+              "ref_clock"
             ]
           },
           "soc_eu": {
@@ -9432,6 +9461,20 @@
           "jtag0",
           "cpi0",
           "uart0"
+        ]
+      },
+      "ref_clock_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 65536,
+        "vp_ports": [
+          "out"
+        ]
+      },
+      "ref_clock": {
+        "vp_class": "utils/clock",
+        "vp_ports": [
+          "clock_sync",
+          "clock"
         ]
       },
       "tb_comps": [

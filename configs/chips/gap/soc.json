@@ -99,6 +99,7 @@
   ],
   "vp_ports": [
     "cluster_clock",
+    "ref_clock",
     "cpi0",
     "jtag0",
     "spim0",
@@ -110,6 +111,10 @@
     [
       "self->cluster_clock",
       "cluster->clock"
+    ],
+    [
+      "self->ref_clock",
+      "timer->ref_clock"
     ],
     [
       "self->cpi0",
@@ -829,7 +834,8 @@
     "vp_ports": [
       "irq_itf_0",
       "irq_itf_1",
-      "input"
+      "input",
+      "ref_clock"
     ]
   },
   "soc_eu": {
