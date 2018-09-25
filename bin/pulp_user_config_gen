@@ -92,10 +92,16 @@ for name, group in tp.get_items().items():
 
       elif dev_type == "spim_verif":
 
+        dev_config = dev.get('config')
+        dev_args = {}
+        if dev_config is not None:
+          dev_args = dev_config.get_dict()
+
         system.system_tree.board.add_component(name, Tb_Component(
             includes=[
                 "periph/spim_verif.json"
-            ]
+            ],
+            **dev_args
         ))
 
         itf = dev.get_child_str('interface')
