@@ -2,7 +2,7 @@
   "nb_cluster"       : 1,
 
   "cluster": {
-    "includes": ["../cluster_v5.json"],
+    "includes": ["../cluster_v5_a.json"],
     "l1": {
       "size" : 262144,
       "alias_base": "0x1b000000"
