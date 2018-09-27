@@ -860,8 +860,8 @@
     "vp_ports": [
       "irq_itf_0",
       "irq_itf_1",
-      "input",
-      "ref_clock"
+      "ref_clock",
+      "input"
     ]
   },
   "soc_eu": {

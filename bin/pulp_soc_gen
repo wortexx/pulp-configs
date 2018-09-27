@@ -586,6 +586,7 @@ if has_soc_events:
   
 soc.apb_ico.apb_soc_ctrl = soc.apb_soc_ctrl.input
 if has_fc:
+  soc.ref_clock = soc.timer.ref_clock
   if has_fc_ico:
     soc.soc_ico.ll_ico.fc_ico = soc.soc_ico.fc
     soc.soc_ico.fc = soc.fc_ico.input
@@ -594,7 +595,6 @@ if has_fc:
     soc.fc_ico.fc_eu_alias = soc.fc_eu.input
     soc.fc_ico.fc_eu = soc.fc_eu.input
     soc.fc_ico.fc_timer = soc.timer.input
-    soc.ref_clock = soc.timer.ref_clock
     if has_fc_icache:
       soc.fc_ico.fc_icache = soc.fc_icache.input
     soc.fc_ico.fc_dbg_unit = soc.fc.dbg_unit

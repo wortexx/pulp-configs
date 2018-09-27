@@ -122,6 +122,10 @@
       "fll2->ref_clock"
     ],
     [
+      "self->ref_clock",
+      "timer->ref_clock"
+    ],
+    [
       "self->cpi0",
       "udma->cpi0"
     ],
@@ -796,6 +800,7 @@
     "vp_ports": [
       "irq_itf_0",
       "irq_itf_1",
+      "ref_clock",
       "input"
     ]
   },
