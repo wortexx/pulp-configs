@@ -1,9 +1,9 @@
 {
-  "chip": "gap",
+  "chip": "gap_rev1",
   "chip_family": "gap",
-    
+  
   "padframe": {
-    "content": "templates/chips/gap/padframe.json"
+    "content": "templates/chips/gap_rev1/padframe.json"
   },
 
   "cluster": {
@@ -240,7 +240,7 @@
       },
 
       "udma": {
-        "content"      : "templates/chips/gap/udma.json",
+        "content"      : "templates/chips/gap_rev1/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },

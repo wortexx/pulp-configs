@@ -81,6 +81,9 @@ gen.pulpissimo.riscy:
 gen.wolfe:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/wolfe/wolfe.json --output-dir=$(CURDIR)/configs/chips/wolfe --output=configs/systems/wolfe.json --usecase=usecases/jtag-cam.json
 
+gen.usoc_v1:
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/usoc_v1/usoc_v1.json --output-dir=$(CURDIR)/configs/chips/usoc_v1 --output=configs/systems/usoc_v1.json --usecase=usecases/jtag-cam.json
+
 gen.oprecompkw:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw/oprecompkw.json --output-dir=$(CURDIR)/configs/chips/oprecompkw --output=configs/systems/oprecompkw.json
 
@@ -104,6 +107,9 @@ gen.vega:
 
 gen.gap:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap/gap.json --output-dir=$(CURDIR)/configs/chips/gap --output=configs/systems/gap.json --usecase=usecases/jtag-cam.json
+
+gen.gap_rev1:
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap_rev1/gap_rev1.json --output-dir=$(CURDIR)/configs/chips/gap_rev1 --output=configs/systems/gap_rev1.json --usecase=usecases/jtag-cam.json
 
 gen.vivosoc3:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/vivosoc3/vivosoc3.json --output-dir=$(CURDIR)/configs/chips/vivosoc3 --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
@@ -141,7 +147,7 @@ gen.vivosoc2:
 gen: gen.usecases gen.pulp gen.pulpissimo gen.pulpissimo.zeroriscy gen.pulpissimo.microriscy \
   gen.pulpissimo.riscy gen.wolfe gen.oprecompkw gen.vega gen.gap gen.vivosoc3 gen.bigpulp-z-7045 gen.bigpulp \
   gen.fulmine gen.hero-z-7045 gen.honey gen.multino gen.neuraghe \
-  gen.quentin gen.vivosoc2_1 gen.vivosoc2
+  gen.quentin gen.vivosoc2_1 gen.vivosoc2 gen.gap_rev1 gen.usoc_v1
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
