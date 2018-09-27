@@ -445,6 +445,12 @@ if has_fll:
       gv_class= "pulp.Fll_ctrl.fll_ctrl"
   )
 
+  soc.ref_clock = soc.fll.ref_clock
+  soc.ref_clock = soc.fll1.ref_clock
+  soc.ref_clock = soc.fll2.ref_clock
+
+  soc.fll.clock_out = soc.fll_soc_clock
+
 apb_soc_params = {}
 
 if has_cluster and has_pmu:
@@ -545,13 +551,16 @@ if has_cluster:
         includes=["chips/%s/cluster_%d.json" % (chip, cid)]
       )
     )
-    #for core_id in range(0, nb_pe):
-    #  soc.get(get_cluster_name(cid)).add_component(
-    #    'pe%d' % core_id,
-    #    Empty_Component(
-    #      cluster_id= cid
-    #    )
-    #  )
+
+    soc.add_component(
+      get_cluster_name(cid) + '_clock',
+      Component(
+        vp_class="vp/clock_domain",
+        frequency=50000000
+      )
+    )
+    
+    soc.get(get_cluster_name(cid) + '_clock').out = soc.get(get_cluster_name(cid)).clock
 
 
 soc.adv_dbg_unit = Component(

@@ -99,17 +99,32 @@
     "uart",
     "fc_debug",
     "cluster",
+    "cluster_clock",
     "adv_dbg_unit"
   ],
   "vp_ports": [
+    "ref_clock",
     "cluster_clock",
     "cpi0",
     "jtag0",
+    "fll_soc_clock",
     "spim0",
     "hyper0",
     "uart0"
   ],
   "vp_bindings": [
+    [
+      "self->ref_clock",
+      "fll->ref_clock"
+    ],
+    [
+      "self->ref_clock",
+      "fll1->ref_clock"
+    ],
+    [
+      "self->ref_clock",
+      "fll2->ref_clock"
+    ],
     [
       "self->cluster_clock",
       "cluster->clock"
@@ -231,6 +246,10 @@
       "fc->irq_req"
     ],
     [
+      "fll->clock_out",
+      "self->fll_soc_clock"
+    ],
+    [
       "apb_soc_ctrl->bootaddr",
       "fc->bootaddr"
     ],
@@ -285,6 +304,10 @@
     [
       "cluster->soc",
       "axi_ico->input"
+    ],
+    [
+      "cluster_clock->out",
+      "cluster->clock"
     ],
     [
       "adv_dbg_unit->io",
@@ -786,6 +809,8 @@
       "ips/fll_v1.json"
     ],
     "vp_ports": [
+      "clock_out",
+      "ref_clock",
       "input"
     ]
   },
@@ -794,6 +819,7 @@
       "ips/fll_v1.json"
     ],
     "vp_ports": [
+      "ref_clock",
       "input"
     ]
   },
@@ -802,6 +828,7 @@
       "ips/fll_v1.json"
     ],
     "vp_ports": [
+      "ref_clock",
       "input"
     ]
   },
@@ -886,6 +913,13 @@
       "soc",
       "clock",
       "input"
+    ]
+  },
+  "cluster_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out"
     ]
   },
   "adv_dbg_unit": {

@@ -83,9 +83,11 @@ chip.soc_clock = Component(
 )
 
 
+
 chip.soc = Component(
   includes= [ soc_file ]
 )
+
 
 if padframe is not None:
   chip.soc_clock.out = chip.padframe.clock
@@ -122,6 +124,8 @@ if padframe is not None:
 
   
 chip.soc_clock.out = chip.soc.clock
+
+chip.soc.fll_soc_clock = chip.soc_clock.clock_in
 
 if has_ddr:
 
