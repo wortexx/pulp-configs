@@ -562,6 +562,8 @@ if has_cluster:
     
     soc.get(get_cluster_name(cid) + '_clock').out = soc.get(get_cluster_name(cid)).clock
 
+    soc.fll1.clock_out = soc.get(get_cluster_name(cid) + '_clock').clock_in
+
 
 soc.adv_dbg_unit = Component(
     includes=["ips/adv_dbg_unit/adv_dbg_unit.json"]

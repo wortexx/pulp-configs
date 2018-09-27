@@ -1038,6 +1038,10 @@
               "self->fll_soc_clock"
             ],
             [
+              "fll1->clock_out",
+              "cluster_clock->clock_in"
+            ],
+            [
               "apb_soc_ctrl->bootaddr",
               "fc->bootaddr"
             ],
@@ -2032,6 +2036,7 @@
               }
             },
             "vp_ports": [
+              "clock_out",
               "ref_clock",
               "input"
             ]
@@ -8295,7 +8300,8 @@
             "vp_class": "vp/clock_domain",
             "frequency": 50000000,
             "vp_ports": [
-              "out"
+              "out",
+              "clock_in"
             ]
           },
           "adv_dbg_unit": {
