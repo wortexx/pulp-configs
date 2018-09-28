@@ -16,7 +16,7 @@
         "hal_files": [ "hal/chips/gap_rev1/pulp.h", "hal/chips/gap_rev1/efuse.h" ],
         "soc": {
           "rtc": {
-            "includes": [ "../../ips/rtc.json" ]
+            "includes": [ "../../ips/rtc/rtc.json" ]
           }
         }
       }

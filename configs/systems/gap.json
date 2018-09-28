@@ -20,21 +20,6 @@
       "files": []
     }
   },
-  "dpi_models": {
-    "uart_loopback": {
-      "module": "uart_tb.so",
-      "baudrate": 625000,
-      "loopback": true,
-      "stdout": true,
-      "tx_file": "tx_uart.log",
-      "ports": {
-        "in": {
-          "type": "uart",
-          "itf": 0
-        }
-      }
-    }
-  },
   "platform": "gvsoc",
   "pulp_compiler": {
     "default": "gcc",

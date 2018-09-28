@@ -593,7 +593,7 @@
   },
   "pmu": {
     "includes": [
-      "ips/pmu_v1.json"
+      "ips/pmu/pmu_v1.json"
     ],
     "vp_ports": [
       "input"
@@ -721,7 +721,7 @@
   },
   "fc": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 32,
     "core_id": 0,
@@ -747,7 +747,7 @@
   },
   "rom": {
     "includes": [
-      "ips/rom_v2.json"
+      "ips/rom/rom_v2.json"
     ],
     "size": 8192,
     "map_base": "0x1A000000",
@@ -767,7 +767,7 @@
   },
   "fc_eu": {
     "includes": [
-      "ips/eu_v3.json"
+      "ips/event_unit/eu_v3.json"
     ],
     "nb_core": 1,
     "vp_ports": [
@@ -784,7 +784,7 @@
   },
   "fll": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
       "clock_out",
@@ -794,7 +794,7 @@
   },
   "fll1": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
       "clock_out",
@@ -804,7 +804,7 @@
   },
   "fll2": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
       "ref_clock",
@@ -832,7 +832,7 @@
   },
   "stdout": {
     "includes": [
-      "ips/stdout_v3.json"
+      "ips/stdout/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -847,12 +847,12 @@
   },
   "gpio": {
     "includes": [
-      "ips/gpio_v2.json"
+      "ips/gpio/gpio_v2.json"
     ]
   },
   "fc_icache": {
     "includes": [
-      "ips/icache_ctrl_v2.json"
+      "ips/icache_ctrl/icache_ctrl_v2.json"
     ],
     "vp_ports": [
       "input"
@@ -860,7 +860,7 @@
   },
   "timer": {
     "includes": [
-      "ips/timer_v2.json"
+      "ips/timer/timer_v2.json"
     ],
     "vp_ports": [
       "irq_itf_0",
@@ -871,7 +871,7 @@
   },
   "soc_eu": {
     "includes": [
-      "ips/soc_eu_v1.json"
+      "ips/soc_eu/soc_eu_v1.json"
     ],
     "vp_ports": [
       "fc_event_itf",
@@ -896,7 +896,7 @@
   },
   "efuse": {
     "includes": [
-      "ips/efuse_v1.json"
+      "ips/efuse/efuse_v1.json"
     ]
   },
   "uart": {

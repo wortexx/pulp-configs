@@ -1,5 +1,5 @@
 {
-  "includes": [ "gvsoc.json" ],
+  "includes": [ "tools/vp/gvsoc.json" ],
 
   "platform": "gvsoc",
 

@@ -222,32 +222,32 @@ cluster.icache = Empty_Component(
 )
 
 cluster.dma = Component(
-  includes=["ips/mchan_v%d.json" % tp.get_child_int('cluster/peripherals/dma/version')],
+  includes=["ips/mchan/mchan_v%d.json" % tp.get_child_int('cluster/peripherals/dma/version')],
   nb_channels=nb_pe+1,
   is_64=tp.get_child_bool('cluster/peripherals/dma/is_64') == True
 )
 
 cluster.cluster_ctrl = Component(
-  includes=["ips/cluster_ctrl_v2.json"],
+  includes=["ips/cluster_ctrl/cluster_ctrl_v2.json"],
   nb_core=nb_pe
 )
 
 cluster.event_unit = Component(
-  includes=["ips/eu_v3.json"],
+  includes=["ips/event_unit/eu_v3.json"],
   nb_core=nb_pe
 )
 
 cluster.timer = Component(
-  includes=["ips/timer_v2.json"]
+  includes=["ips/timer/timer_v2.json"]
 )
 
 if has_hwce:
   cluster.hwce = Component(
-    includes=["ips/hwce_v%d.json" % tp.get_child_int('cluster/peripherals/hwce/version')]
+    includes=["ips/hwce/hwce_v%d.json" % tp.get_child_int('cluster/peripherals/hwce/version')]
   )
 
 cluster.icache_ctrl = Component(
-  includes=["ips/icache_ctrl_v2.json"]
+  includes=["ips/icache_ctrl/icache_ctrl_v2.json"]
 )
 
 cluster.pe = Empty_Component(
@@ -257,7 +257,7 @@ for i in range(0, nb_pe):
   cluster.add_component(
     'pe%d' % i,
     Component(
-      includes=["ips/%s.json" % cluster_core],
+      includes=["ips/riscv/%s.json" % cluster_core],
       cluster_id=cluster_id,
       core_id=i,
       fetch_enable=tp.get_child_bool("cluster%d/pe%d/fetch_enable" % (cluster_id, i)),
@@ -268,7 +268,7 @@ for i in range(0, nb_pe):
   cluster.add_component(
     'pe',
     Empty_Component(
-      includes=["ips/%s.json" % cluster_core],
+      includes=["ips/riscv/%s.json" % cluster_core],
       cluster_id=cluster_id,
       core_id=0,
       boot_addr="0x1C000000"
