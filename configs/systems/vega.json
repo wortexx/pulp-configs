@@ -20,21 +20,6 @@
       "files": []
     }
   },
-  "dpi_models": {
-    "uart_loopback": {
-      "module": "uart_tb.so",
-      "baudrate": 625000,
-      "loopback": true,
-      "stdout": true,
-      "tx_file": "tx_uart.log",
-      "ports": {
-        "in": {
-          "type": "uart",
-          "itf": 0
-        }
-      }
-    }
-  },
   "platform": "gvsoc",
   "pulp_compiler": {
     "default": "gcc",
@@ -8093,6 +8078,16 @@
             ],
             "archi_files": [
               "archi/vendors/iid/quiddikey_v1.h"
+            ]
+          },
+          "csi2": {
+            "version": 1,
+            "vp_class": "pulp/lnt/csi2_v1",
+            "hal_files": [
+              "hal/vendors/lnt/csi2_v1.h"
+            ],
+            "archi_files": [
+              "archi/vendors/lnt/csi2_v1.h"
             ]
           }
         }
