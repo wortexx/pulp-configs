@@ -1,4 +1,6 @@
 {
+  "vp_class": "devices/spiflash/spiflash",
+
   "type": "spiflash",
   "size": "0x00800000",
   "fs": {

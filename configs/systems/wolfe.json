@@ -20,21 +20,6 @@
       "files": []
     }
   },
-  "dpi_models": {
-    "uart_loopback": {
-      "module": "uart_tb.so",
-      "baudrate": 625000,
-      "loopback": true,
-      "stdout": true,
-      "tx_file": "tx_uart.log",
-      "ports": {
-        "in": {
-          "type": "uart",
-          "itf": 0
-        }
-      }
-    }
-  },
   "platform": "gvsoc",
   "pulp_compiler": {
     "default": "gcc",
@@ -168,7 +153,9 @@
         "pulp_chip",
         "dpi",
         "ref_clock_clock",
-        "ref_clock"
+        "ref_clock",
+        "spiflash",
+        "spiflash_clock"
       ],
       "vp_bindings": [
         [
@@ -188,12 +175,24 @@
           "dpi->uart0"
         ],
         [
+          "chip->spim0_cs0",
+          "spiflash->cs"
+        ],
+        [
+          "chip->spim0_cs0_data",
+          "spiflash->input"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ],
         [
           "dpi->cpi0",
           "chip->cpi0_pad"
+        ],
+        [
+          "spiflash_clock->out",
+          "spiflash->clock"
         ]
       ],
       "chip": {
@@ -235,6 +234,8 @@
           "ctrl",
           "jtag0_pad",
           "cpi0_pad",
+          "spim0_cs0",
+          "spim0_cs0_data",
           "cpi0"
         ],
         "vp_bindings": [
@@ -698,6 +699,10 @@
               "timer->ref_clock"
             ],
             [
+              "self->ref_clock",
+              "soc_eu->ref_clock"
+            ],
+            [
               "self->cluster_clock",
               "cluster->clock"
             ],
@@ -848,6 +853,10 @@
             [
               "timer->irq_itf_1",
               "fc_itc->in_event_11"
+            ],
+            [
+              "soc_eu->ref_clock_event",
+              "fc_itc->in_event_14"
             ],
             [
               "soc_eu->fc_event_itf",
@@ -1354,7 +1363,7 @@
             "cluster_id": 31,
             "core_id": 0,
             "fetch_enable": true,
-            "boot_addr": "0x1C008000",
+            "boot_addr": "0x1A000000",
             "vp_ports": [
               "fetch",
               "data",
@@ -1517,6 +1526,7 @@
             },
             "vp_ports": [
               "irq_req",
+              "in_event_14",
               "input",
               "in_event_22",
               "in_event_23",
@@ -2194,9 +2204,12 @@
               "nb_fc_events": 8,
               "first_fc_event": 48
             },
+            "ref_clock_event": 56,
             "vp_ports": [
+              "ref_clock_event",
               "fc_event_itf",
               "input",
+              "ref_clock",
               "event_in"
             ]
           },
@@ -8261,6 +8274,29 @@
         "module": "camera.so",
         "vp_ports": [
           "cpi"
+        ]
+      },
+      "spiflash": {
+        "vp_class": "devices/spiflash/spiflash",
+        "type": "spiflash",
+        "size": "0x00800000",
+        "fs": {
+          "files": [],
+          "encrypt": false,
+          "aes_key": 0,
+          "aes_iv": 0
+        },
+        "vp_ports": [
+          "cs",
+          "input",
+          "clock"
+        ]
+      },
+      "spiflash_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 50000000,
+        "vp_ports": [
+          "out"
         ]
       }
     }

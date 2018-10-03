@@ -112,6 +112,13 @@ for name, group in tp.get_items().items():
         if cs is None:
           cs = 0
 
+        gpios = dev.get('gpio')
+        if gpios is not None:
+          for gpio in gpios.get_dict():
+            system.system_tree.board.chip.set(gpio, system.system_tree.board.dpi.new_itf(gpio))
+            system.system_tree.board.chip.set(gpio, system.system_tree.board.get(name).new_itf(gpio))
+
+
         system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.dpi.new_itf(itf + '_cs' + str(cs) + '_data'))
         system.system_tree.board.chip.set(itf + '_cs' + str(cs), system.system_tree.board.dpi.new_itf(itf + '_cs' + str(cs)))
 

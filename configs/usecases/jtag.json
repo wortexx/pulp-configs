@@ -4,6 +4,9 @@
   ],
   "system_tree": {
     "board": {
+      "vp_comps": [
+        "spiflash"
+      ],
       "tb_comps": [
         "jtag_proxy",
         "uart",
@@ -90,6 +93,17 @@
         "type": "dpi",
         "model": "himax",
         "module": "camera.so"
+      },
+      "spiflash": {
+        "vp_class": "devices/spiflash/spiflash",
+        "type": "spiflash",
+        "size": "0x00800000",
+        "fs": {
+          "files": [],
+          "encrypt": false,
+          "aes_key": 0,
+          "aes_iv": 0
+        }
       }
     }
   }

@@ -505,7 +505,8 @@ if has_hwme:
 
 if has_soc_events:
   soc.soc_eu = Component(
-      includes= ["ips/soc_eu/soc_eu_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")]
+      includes= ["ips/soc_eu/soc_eu_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")],
+      ref_clock_event=tp.get('soc_events').get('soc_evt_ref_clock').get_int()
   )
 
 if has_udma:
@@ -589,6 +590,15 @@ if has_soc_events:
 soc.apb_ico.apb_soc_ctrl = soc.apb_soc_ctrl.input
 if has_fc:
   soc.ref_clock = soc.timer.ref_clock
+
+  if has_soc_events:
+    soc.ref_clock = soc.soc_eu.ref_clock
+    if has_fc_ico:
+      soc.soc_eu.ref_clock_event = soc.fc_eu.new_itf('in_event_%d_pe_0' % fc_events.get_child_int('evt_clkref'))
+    else:
+      soc.soc_eu.ref_clock_event = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_clkref'))
+
+
   if has_fc_ico:
     soc.soc_ico.ll_ico.fc_ico = soc.soc_ico.fc
     soc.soc_ico.fc = soc.fc_ico.input

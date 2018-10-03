@@ -5,7 +5,8 @@
   "system_tree": {
     "board": {
       "vp_comps": [
-        "spiflash"
+        "spiflash",
+        "spiflash_clock"
       ],
       "tb_comps": [
         "jtag_proxy",
@@ -18,12 +19,24 @@
           "dpi->uart0"
         ],
         [
+          "chip->spim0_cs0",
+          "spiflash->cs"
+        ],
+        [
+          "chip->spim0_cs0_data",
+          "spiflash->input"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ],
         [
           "dpi->cpi0",
           "chip->cpi0_pad"
+        ],
+        [
+          "spiflash_clock->out",
+          "spiflash->clock"
         ]
       ],
       "tb_bindings": [
@@ -51,6 +64,8 @@
           "ctrl",
           "jtag0_pad",
           "cpi0_pad",
+          "spim0_cs0",
+          "spim0_cs0_data",
           "cpi0"
         ],
         "vp_bindings": [
@@ -122,7 +137,19 @@
           "encrypt": false,
           "aes_key": 0,
           "aes_iv": 0
-        }
+        },
+        "vp_ports": [
+          "cs",
+          "input",
+          "clock"
+        ]
+      },
+      "spiflash_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 50000000,
+        "vp_ports": [
+          "out"
+        ]
       }
     }
   }

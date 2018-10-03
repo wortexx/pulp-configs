@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--configs", dest="configs", default=[], action="append", help="Specify path to configurations")
 parser.add_argument("--output", dest="output", default=None, help="Specify path to output configuration")
 parser.add_argument("--cam", dest="cam", default=False, action="store_true", help="Activate camera")
+parser.add_argument("--spiflash", dest="spiflash", default=False, action="store_true", help="Activate spi flash")
 
 args = parser.parse_args()
 
@@ -61,6 +62,12 @@ system.system_tree.board.camera = Tb_Component(
     ]
 )
 
+system.system_tree.board.spiflash = Component(
+    includes=[
+        "periph/spiflash.json"
+    ]
+)
+
 system.system_tree.board.chip.uart0 = system.system_tree.board.uart.uart
 system.system_tree.board.chip.jtag0 = system.system_tree.board.jtag_proxy.jtag
 system.system_tree.board.chip.ctrl = system.system_tree.board.jtag_proxy.ctrl
@@ -75,6 +82,15 @@ if args.cam:
   system.system_tree.board.camera.cpi = system.system_tree.board.chip.cpi0
   system.system_tree.board.dpi.cpi0 = system.system_tree.board.chip.cpi0_pad
   system.system_tree.board.chip.cpi0_pad = system.system_tree.board.chip.padframe.cpi0_pad
+
+if args.spiflash:
+  system.system_tree.board.spiflash_clock = Component(
+      vp_class= "vp/clock_domain",
+      frequency= 50000000
+  )
+  system.system_tree.board.chip.spim0_cs0 = system.system_tree.board.spiflash.cs
+  system.system_tree.board.chip.spim0_cs0_data = system.system_tree.board.spiflash.input
+  system.system_tree.board.spiflash_clock.out = system.system_tree.board.spiflash.clock
 
 config = system.get_json_config(expand=True)
 
