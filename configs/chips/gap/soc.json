@@ -207,6 +207,10 @@
       "pmu->input"
     ],
     [
+      "apb_ico->efuse",
+      "efuse->input"
+    ],
+    [
       "fc_ico->fc_eu_alias",
       "fc_eu->input"
     ],
@@ -652,6 +656,11 @@
         "size": "0x00002000",
         "remove_offset": "0x1A102000"
       },
+      "efuse": {
+        "base": "0x1A109000",
+        "size": "0x00001000",
+        "remove_offset": "0x1A109000"
+      },
       "pmu": {
         "base": "0x1A107000",
         "size": "0x00000800",
@@ -673,6 +682,7 @@
       "apb_soc_ctrl",
       "rom",
       "pmu",
+      "efuse",
       "input"
     ]
   },
@@ -909,6 +919,9 @@
   "efuse": {
     "includes": [
       "ips/efuse/efuse_v1.json"
+    ],
+    "vp_ports": [
+      "input"
     ]
   },
   "uart": {

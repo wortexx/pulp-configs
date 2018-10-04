@@ -315,6 +315,11 @@ if has_fc_tcdm:
     "fc_tcdm"       : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/fc_tcdm"), True)
   })
 
+if has_efuse:
+  apb_soc_mappings.update({
+    "efuse"           : get_mapping(tp.get_child_dict("soc/peripherals/efuse"), True)
+  })
+
 if has_pmu:
   apb_soc_mappings.update({
     "pmu"       : get_mapping(tp.get_child_dict("soc/peripherals/pmu"), True),
@@ -532,7 +537,7 @@ if has_uart:
 
 if has_efuse:
   soc.efuse = Component(
-      includes= ["ips/efuse/efuse_v%d.json" % tp.get_child_int("soc/peripherals/soc_eu/version")]
+      includes= ["ips/efuse/efuse_v%d.json" % tp.get_child_int("soc/peripherals/efuse/version")]
   )
 
 soc.uart = Component(
@@ -652,6 +657,10 @@ if has_rom:
 # PMU
 if has_pmu:
   soc.apb_ico.pmu = soc.pmu.input
+
+# EFUSE
+if has_efuse:
+  soc.apb_ico.efuse = soc.efuse.input
 
 # FC
 if has_fc:
