@@ -206,7 +206,8 @@
           "archi/chips/gap/pulp.h",
           "archi/chips/gap/memory_map.h",
           "archi/chips/gap/properties.h",
-          "archi/chips/gap/apb_soc.h"
+          "archi/chips/gap/apb_soc.h",
+          "archi/chips/gap/padframe.h"
         ],
         "vp_comps": [
           "padframe",
@@ -2155,6 +2156,10 @@
               "pmu->input"
             ],
             [
+              "apb_ico->efuse",
+              "efuse->input"
+            ],
+            [
               "fc_ico->fc_eu_alias",
               "fc_eu->input"
             ],
@@ -2613,6 +2618,11 @@
                 "size": "0x00002000",
                 "remove_offset": "0x1A102000"
               },
+              "efuse": {
+                "base": "0x1A109000",
+                "size": "0x00001000",
+                "remove_offset": "0x1A109000"
+              },
               "pmu": {
                 "base": "0x1A107000",
                 "size": "0x00000800",
@@ -2634,6 +2644,7 @@
               "apb_soc_ctrl",
               "rom",
               "pmu",
+              "efuse",
               "input"
             ]
           },
@@ -4384,13 +4395,23 @@
           },
           "efuse": {
             "version": 1,
+            "vp_class": "pulp/efuse/efuse_v1",
             "hal_files": [
               "hal/efuse/efuse_v1.h"
             ],
             "archi_files": [
               "archi/efuse/efuse_v1.h"
             ],
-            "nb_regs": 128
+            "nb_regs": 128,
+            "aes_key": null,
+            "aes_iv": null,
+            "xtal_check": false,
+            "xtalCheck_delta": "0.1",
+            "xtalCheck_min": "3",
+            "xtalCheck_max": "10",
+            "vp_ports": [
+              "input"
+            ]
           },
           "uart": {
             "version": 1

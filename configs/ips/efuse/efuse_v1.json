@@ -6,5 +6,13 @@
   "hal_files" : [ "hal/efuse/efuse_v1.h" ],
   "archi_files" : [ "archi/efuse/efuse_v1.h" ],
 
-  "nb_regs"   : 128
+  "nb_regs"   : 128,
+
+  "aes_key": null,
+  "aes_iv": null,
+  "xtal_check": false,
+  "xtalCheck_delta": "0.1",
+  "xtalCheck_min": "3",
+  "xtalCheck_max": "10"
+
 }
