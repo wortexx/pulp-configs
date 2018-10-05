@@ -20,6 +20,7 @@
   ],
   "vp_ports": [
     "ref_clock",
+    "bootsel",
     "jtag0",
     "cpi0",
     "spim0_cs0_data",
@@ -38,6 +39,10 @@
       "padframe->ref_clock_pad"
     ],
     [
+      "self->bootsel",
+      "padframe->bootsel_pad"
+    ],
+    [
       "self->jtag0",
       "padframe->jtag0_pad"
     ],
@@ -48,6 +53,10 @@
     [
       "padframe->ref_clock",
       "soc->ref_clock"
+    ],
+    [
+      "padframe->bootsel",
+      "soc->bootsel"
     ],
     [
       "padframe->spim0_cs0_data_pad",
@@ -124,6 +133,7 @@
     ],
     "vp_ports": [
       "ref_clock",
+      "bootsel",
       "spim0_cs0_data_pad",
       "spim0_cs0_pad",
       "spim0_cs1_data_pad",
@@ -137,6 +147,7 @@
       "cpi0",
       "ref_clock_pad",
       "clock",
+      "bootsel_pad",
       "spim0",
       "uart0",
       "jtag0_pad",
@@ -162,6 +173,7 @@
       "hyper0",
       "fll_soc_clock",
       "ref_clock",
+      "bootsel",
       "jtag0",
       "cpi0",
       "clock"

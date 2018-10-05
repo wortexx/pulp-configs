@@ -16,7 +16,8 @@
         "pulp_chip",
         "dpi",
         "ref_clock_clock",
-        "ref_clock"
+        "ref_clock",
+        "bootsel"
       ],
       "vp_bindings": [
         [
@@ -30,6 +31,10 @@
         [
           "ref_clock->clock_sync",
           "chip->ref_clock"
+        ],
+        [
+          "bootsel->out",
+          "chip->bootsel"
         ]
       ],
       "chip": {
@@ -37,7 +42,8 @@
           "chip.json"
         ],
         "vp_ports": [
-          "ref_clock"
+          "ref_clock",
+          "bootsel"
         ]
       },
       "dpi_clock": {
@@ -72,6 +78,13 @@
         "vp_ports": [
           "clock_sync",
           "clock"
+        ]
+      },
+      "bootsel": {
+        "vp_class": "board/switch",
+        "value": "0",
+        "vp_ports": [
+          "out"
         ]
       }
     }

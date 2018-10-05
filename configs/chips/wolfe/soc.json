@@ -107,6 +107,7 @@
     "cluster_clock",
     "cpi0",
     "jtag0",
+    "bootsel",
     "fll_soc_clock",
     "spim0",
     "hyper0",
@@ -144,6 +145,10 @@
     [
       "self->jtag0",
       "adv_dbg_unit->jtag"
+    ],
+    [
+      "self->bootsel",
+      "apb_soc_ctrl->bootsel"
     ],
     [
       "axi_ico->cluster",
@@ -866,7 +871,8 @@
       "event",
       "cluster_power_irq",
       "cluster_clock_gate_irq",
-      "input"
+      "input",
+      "bootsel"
     ]
   },
   "stdout": {

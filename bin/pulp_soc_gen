@@ -764,6 +764,9 @@ if tp.get('soc/job_fifo') is not None:
     for cid in range(0, nb_cluster):
       soc.job_fifo.irq = soc.get(get_cluster_name(cid)).job_fifo_irq
 
+if chip == 'wolfe':
+  soc.bootsel = soc.apb_soc_ctrl.bootsel
+
 
 config = soc.get_json_config()
 
