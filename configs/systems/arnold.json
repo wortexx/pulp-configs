@@ -20,21 +20,6 @@
       "files": []
     }
   },
-  "dpi_models": {
-    "uart_loopback": {
-      "module": "uart_tb.so",
-      "baudrate": 625000,
-      "loopback": true,
-      "stdout": true,
-      "tx_file": "tx_uart.log",
-      "ports": {
-        "in": {
-          "type": "uart",
-          "itf": 0
-        }
-      }
-    }
-  },
   "platform": "gvsoc",
   "pulp_compiler": {
     "default": "gcc",
@@ -149,8 +134,8 @@
         "debug_ir": "0x4"
       },
       "boot-mode": "default",
-      "commands": "load ioloop reqloop start wait",
-      "gdb_commands": "load ioloop reqloop start gdb wait"
+      "commands": "reset stop load ioloop reqloop start wait",
+      "gdb_commands": "reset stop load ioloop reqloop start gdb wait"
     },
     "vp_class": "pulp/system",
     "vp_comps": [
@@ -162,12 +147,23 @@
         "chip",
         "dpi_clock",
         "pulp_chip",
-        "dpi"
+        "dpi",
+        "ref_clock_clock",
+        "ref_clock",
+        "spiflash"
       ],
       "vp_bindings": [
         [
           "dpi_clock->out",
           "dpi->clock"
+        ],
+        [
+          "ref_clock_clock->out",
+          "ref_clock->clock"
+        ],
+        [
+          "ref_clock->clock_sync",
+          "chip->ref_clock"
         ],
         [
           "chip->uart0",
@@ -176,6 +172,10 @@
         [
           "dpi->jtag0",
           "chip->jtag0_pad"
+        ],
+        [
+          "dpi->cpi0",
+          "chip->cpi0_pad"
         ]
       ],
       "chip": {
@@ -198,10 +198,43 @@
           "soc_clock",
           "soc"
         ],
+        "vp_ports": [
+          "ref_clock",
+          "jtag0",
+          "spim0",
+          "uart0",
+          "ref_clock",
+          "uart0",
+          "jtag0",
+          "ctrl",
+          "jtag0_pad",
+          "cpi0_pad",
+          "cpi0"
+        ],
         "vp_bindings": [
           [
+            "self->ref_clock",
+            "padframe->ref_clock_pad"
+          ],
+          [
+            "self->jtag0",
+            "padframe->jtag0_pad"
+          ],
+          [
+            "padframe->ref_clock",
+            "soc->ref_clock"
+          ],
+          [
+            "padframe->spim0_pad",
+            "self->spim0"
+          ],
+          [
+            "padframe->uart0_pad",
+            "self->uart0"
+          ],
+          [
             "padframe->jtag0",
-            "soc->jtag"
+            "soc->jtag0"
           ],
           [
             "soc_clock->out",
@@ -220,8 +253,16 @@
             "padframe->uart0"
           ],
           [
+            "soc->fll_soc_clock",
+            "soc_clock->clock_in"
+          ],
+          [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
+          ],
+          [
+            "self->cpi0_pad",
+            "padframe->cpi0_pad"
           ],
           [
             "padframe->uart0_pad",
@@ -248,13 +289,16 @@
           },
           "groups": {
             "spim0": {
-              "type": "qspim"
+              "type": "qspim",
+              "is_master": true
             },
             "uart0": {
-              "type": "uart"
+              "type": "uart",
+              "is_master": true
             },
             "jtag0": {
-              "type": "jtag"
+              "type": "jtag",
+              "is_slave": true
             }
           },
           "pads": {
@@ -395,19 +439,26 @@
             }
           },
           "vp_ports": [
+            "ref_clock",
+            "spim0_pad",
+            "uart0_pad",
             "jtag0",
+            "ref_clock_pad",
+            "clock",
             "spim0",
             "uart0",
-            "clock",
+            "jtag0_pad",
             "uart0_pad",
-            "jtag0_pad"
+            "jtag0_pad",
+            "cpi0_pad"
           ]
         },
         "soc_clock": {
           "vp_class": "vp/clock_domain",
           "frequency": 50000000,
           "vp_ports": [
-            "out"
+            "out",
+            "clock_in"
           ]
         },
         "soc": {
@@ -484,6 +535,7 @@
             "axi_ico",
             "soc_ico",
             "apb_ico",
+            "fc_ico",
             "fc",
             "l2",
             "l2_priv0",
@@ -493,7 +545,6 @@
             "l2_shared_1",
             "l2_shared_2",
             "l2_shared_3",
-            "fc_ico",
             "rom",
             "plt_loader",
             "fc_itc",
@@ -513,17 +564,46 @@
             "adv_dbg_unit"
           ],
           "vp_ports": [
-            "jtag",
+            "ref_clock",
+            "cpi0",
+            "jtag0",
+            "fll_soc_clock",
             "spim0",
             "uart0",
             "spim0",
             "uart0",
-            "jtag",
+            "fll_soc_clock",
+            "ref_clock",
+            "jtag0",
             "clock"
           ],
           "vp_bindings": [
             [
-              "self->jtag",
+              "self->ref_clock",
+              "fll->ref_clock"
+            ],
+            [
+              "self->ref_clock",
+              "fll1->ref_clock"
+            ],
+            [
+              "self->ref_clock",
+              "fll2->ref_clock"
+            ],
+            [
+              "self->ref_clock",
+              "timer->ref_clock"
+            ],
+            [
+              "self->ref_clock",
+              "soc_eu->ref_clock"
+            ],
+            [
+              "self->cpi0",
+              "udma->cpi0"
+            ],
+            [
+              "self->jtag0",
               "adv_dbg_unit->jtag"
             ],
             [
@@ -627,6 +707,10 @@
               "fc->irq_req"
             ],
             [
+              "fll->clock_out",
+              "self->fll_soc_clock"
+            ],
+            [
               "apb_soc_ctrl->bootaddr",
               "fc->bootaddr"
             ],
@@ -641,6 +725,10 @@
             [
               "timer->irq_itf_1",
               "fc_itc->in_event_11"
+            ],
+            [
+              "soc_eu->ref_clock_event",
+              "fc_itc->in_event_14"
             ],
             [
               "soc_eu->fc_event_itf",
@@ -1021,6 +1109,9 @@
               "input"
             ]
           },
+          "fc_ico": {
+            "l2_alias": true
+          },
           "fc": {
             "version": "ri5cyv2",
             "archi": "riscv",
@@ -1036,7 +1127,8 @@
               "--fpud",
               "--shared-fpu"
             ],
-            "isa": "RV32IMFCXpulpv2",
+            "isa": "rv32imfcXpulpv2",
+            "march": "imfcXpulpv2",
             "priv_version": 1.9,
             "perf_counters": true,
             "features": [
@@ -1061,26 +1153,36 @@
             "power_models": {
               "clock_gated": {
                 "type": "linear",
+                "unit": "W",
                 "values": {
                   "25": {
                     "1.2": {
-                      "any": "1"
-                    },
-                    "1.1": {
-                      "any": "0.9"
+                      "any": "0.0000016"
                     }
                   }
                 }
               },
               "insn": {
                 "type": "linear",
+                "unit": "pJ",
                 "values": {
                   "25": {
                     "1.2": {
-                      "any": "40"
+                      "any": "2.4854524"
                     },
                     "1.1": {
-                      "any": "30"
+                      "any": "1.2"
+                    }
+                  }
+                }
+              },
+              "leakage": {
+                "type": "linear",
+                "unit": "W",
+                "values": {
+                  "25": {
+                    "1.2": {
+                      "any": "0.000030"
                     }
                   }
                 }
@@ -1157,9 +1259,6 @@
               "input"
             ]
           },
-          "fc_ico": {
-            "l2_alias": true
-          },
           "rom": {
             "version": 2,
             "hal_files": [
@@ -1191,8 +1290,71 @@
             ],
             "nb_fifo_events": 8,
             "fifo_irq": 26,
+            "regmap": {
+              "mask": {
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "desc": ""
+              },
+              "mask_set": {
+                "type": "register",
+                "offset": "0x04",
+                "width": 32,
+                "desc": ""
+              },
+              "mask_clr": {
+                "type": "register",
+                "offset": "0x08",
+                "width": 32,
+                "desc": ""
+              },
+              "status": {
+                "type": "register",
+                "offset": "0x0C",
+                "width": 32,
+                "desc": ""
+              },
+              "status_set": {
+                "type": "register",
+                "offset": "0x10",
+                "width": 32,
+                "desc": ""
+              },
+              "status_clr": {
+                "type": "register",
+                "offset": "0x14",
+                "width": 32,
+                "desc": ""
+              },
+              "ack": {
+                "type": "register",
+                "offset": "0x18",
+                "width": 32,
+                "desc": ""
+              },
+              "ack_set": {
+                "type": "register",
+                "offset": "0x1C",
+                "width": 32,
+                "desc": ""
+              },
+              "ack_clr": {
+                "type": "register",
+                "offset": "0x20",
+                "width": 32,
+                "desc": ""
+              },
+              "fifo": {
+                "type": "register",
+                "offset": "0x24",
+                "width": 32,
+                "desc": ""
+              }
+            },
             "vp_ports": [
               "irq_req",
+              "in_event_14",
               "input",
               "irq_ack",
               "in_event_10",
@@ -1209,7 +1371,157 @@
             "archi_files": [
               "archi/fll/fll_v1.h"
             ],
+            "regmap": {
+              "status": {
+                "desc": "Return the current status of the FLL",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x00000000",
+                "content": {
+                  "actual_mult": {
+                    "bit": 0,
+                    "width": 16,
+                    "access": "R/W",
+                    "name": "Actual multiplication factor.",
+                    "desc": "Returns the current multiplication factor (i.e., current frequency), which is measured out of the DCO at each clock ref cycle."
+                  }
+                }
+              },
+              "conf1": {
+                "desc": "Configuration register I",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x454C05F5",
+                "content": {
+                  "mult_factor": {
+                    "bit": 0,
+                    "width": 16,
+                    "access": "R/W",
+                    "name": "Target clock multiplication factor for normal mode.",
+                    "desc": "When using normal mode, this sets the target multiplication factor, i.e. the one that the feedback will try to reach by tuning the DCO input code."
+                  },
+                  "dco_input": {
+                    "bit": 16,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "DCO input code for stand-alone mode.",
+                    "desc": "When using the stand-alone mode, this sets the DCO input code, i.e. this sets the output frequency of the DCO. See the transfer function to get more details about the relationship between output frequency and DCO input code."
+                  },
+                  "div": {
+                    "bit": 26,
+                    "width": 4,
+                    "access": "R/W",
+                    "name": "FLL output clock divider setting.",
+                    "desc": "This sets the divider between the FLL output frequency and the DCO output frequency. 0 means no division."
+                  },
+                  "lock_en": {
+                    "bit": 30,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "FLL output gated by LOCK signal (active high)",
+                    "desc": "When active, the FLL is producing the output clock signal only if the produced frequency is within the lock tolerance."
+                  },
+                  "mode": {
+                    "bit": 31,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Operation mode select (0=stand-alone, 1=normal).",
+                    "desc": "The normal mode is using a feedback loop to reach the requested frequency while the stand-alone mode is directly using the output of the DCO to get a frequency proportional to the given DCO input code."
+                  }
+                }
+              },
+              "conf2": {
+                "desc": "Configuration register II",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x02004109",
+                "content": {
+                  "gain": {
+                    "bit": 0,
+                    "width": 4,
+                    "access": "R/W",
+                    "name": "FLL loop gain setting (default: 2^\u22128 = 1/256).",
+                    "desc": "When using normal mode, this defines the gain applied to the difference between the specified multiplication factor and the actual one, before it is provided to the loop filter."
+                  },
+                  "deassert_cycles": {
+                    "bit": 4,
+                    "width": 6,
+                    "access": "R/W",
+                    "name": "De-assert cycles",
+                    "desc": "In normal mode, this gives the number of unstable ref-clock cycles (i.e. out of the tolerance) until the lock is de-asserted. In stand-alone mode, this gives the lower 6-bit of the LOCK assert counter target, after which the FLL starts producing a clock."
+                  },
+                  "assert_cycles": {
+                    "bit": 10,
+                    "width": 6,
+                    "access": "R/W",
+                    "name": "Assert cycles",
+                    "desc": "In normal mode, this gives the number of stable ref-clock cycles (i.e. within the tolerance) after which the lock is asserted. In stand-alone mode, this gives the upper 6-bit of LOCK assert counter target, after which the FLL starts producing a clock."
+                  },
+                  "tolerance": {
+                    "bit": 16,
+                    "width": 12,
+                    "access": "R/W",
+                    "name": "Lock tolerance",
+                    "desc": "this gives the margin around the target multiplication factor within which the output clock is considered stable."
+                  },
+                  "reserved0": {
+                    "bit": 28,
+                    "width": 1,
+                    "access": "R/W"
+                  },
+                  "sta_clock": {
+                    "bit": 29,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Config clock select in STA mode (0=DCOCLK, 1=REFCLK).",
+                    "desc": "In stand-alone mode, this specifies the clock driving the configuration registers (either ref-clock or DCO clock)."
+                  },
+                  "open_lock": {
+                    "bit": 30,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Open-loop-when-locked (active high).",
+                    "desc": "This switched to open loop mode when the output frequency is within the tolerance."
+                  },
+                  "dithering": {
+                    "bit": 31,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Dithering enable (active high).",
+                    "desc": "Applies dither filter to the DCO input code to get one moe bit and improve the precision using noise generation."
+                  }
+                }
+              },
+              "integrator": {
+                "name": "Integrator register",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x00000000",
+                "content": {
+                  "state_fract": {
+                    "bit": 6,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "Integrator state: fractional part (dither unit input)",
+                    "desc": "This gives the fractional part of the integrator unit output used to compute the DCO input code. This corresponds to the input given to the dither unit."
+                  },
+                  "state_int": {
+                    "bit": 16,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "Integrator state: integer part (DCO input bits)",
+                    "desc": "This gives the integer part of the integrator unit output used to compute the DCO input code. This corresponds to the DCO input code before it is rounded with the dither unit output."
+                  }
+                }
+              }
+            },
             "vp_ports": [
+              "clock_out",
+              "ref_clock",
               "input"
             ]
           },
@@ -1222,7 +1534,156 @@
             "archi_files": [
               "archi/fll/fll_v1.h"
             ],
+            "regmap": {
+              "status": {
+                "desc": "Return the current status of the FLL",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x00000000",
+                "content": {
+                  "actual_mult": {
+                    "bit": 0,
+                    "width": 16,
+                    "access": "R/W",
+                    "name": "Actual multiplication factor.",
+                    "desc": "Returns the current multiplication factor (i.e., current frequency), which is measured out of the DCO at each clock ref cycle."
+                  }
+                }
+              },
+              "conf1": {
+                "desc": "Configuration register I",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x454C05F5",
+                "content": {
+                  "mult_factor": {
+                    "bit": 0,
+                    "width": 16,
+                    "access": "R/W",
+                    "name": "Target clock multiplication factor for normal mode.",
+                    "desc": "When using normal mode, this sets the target multiplication factor, i.e. the one that the feedback will try to reach by tuning the DCO input code."
+                  },
+                  "dco_input": {
+                    "bit": 16,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "DCO input code for stand-alone mode.",
+                    "desc": "When using the stand-alone mode, this sets the DCO input code, i.e. this sets the output frequency of the DCO. See the transfer function to get more details about the relationship between output frequency and DCO input code."
+                  },
+                  "div": {
+                    "bit": 26,
+                    "width": 4,
+                    "access": "R/W",
+                    "name": "FLL output clock divider setting.",
+                    "desc": "This sets the divider between the FLL output frequency and the DCO output frequency. 0 means no division."
+                  },
+                  "lock_en": {
+                    "bit": 30,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "FLL output gated by LOCK signal (active high)",
+                    "desc": "When active, the FLL is producing the output clock signal only if the produced frequency is within the lock tolerance."
+                  },
+                  "mode": {
+                    "bit": 31,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Operation mode select (0=stand-alone, 1=normal).",
+                    "desc": "The normal mode is using a feedback loop to reach the requested frequency while the stand-alone mode is directly using the output of the DCO to get a frequency proportional to the given DCO input code."
+                  }
+                }
+              },
+              "conf2": {
+                "desc": "Configuration register II",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x02004109",
+                "content": {
+                  "gain": {
+                    "bit": 0,
+                    "width": 4,
+                    "access": "R/W",
+                    "name": "FLL loop gain setting (default: 2^\u22128 = 1/256).",
+                    "desc": "When using normal mode, this defines the gain applied to the difference between the specified multiplication factor and the actual one, before it is provided to the loop filter."
+                  },
+                  "deassert_cycles": {
+                    "bit": 4,
+                    "width": 6,
+                    "access": "R/W",
+                    "name": "De-assert cycles",
+                    "desc": "In normal mode, this gives the number of unstable ref-clock cycles (i.e. out of the tolerance) until the lock is de-asserted. In stand-alone mode, this gives the lower 6-bit of the LOCK assert counter target, after which the FLL starts producing a clock."
+                  },
+                  "assert_cycles": {
+                    "bit": 10,
+                    "width": 6,
+                    "access": "R/W",
+                    "name": "Assert cycles",
+                    "desc": "In normal mode, this gives the number of stable ref-clock cycles (i.e. within the tolerance) after which the lock is asserted. In stand-alone mode, this gives the upper 6-bit of LOCK assert counter target, after which the FLL starts producing a clock."
+                  },
+                  "tolerance": {
+                    "bit": 16,
+                    "width": 12,
+                    "access": "R/W",
+                    "name": "Lock tolerance",
+                    "desc": "this gives the margin around the target multiplication factor within which the output clock is considered stable."
+                  },
+                  "reserved0": {
+                    "bit": 28,
+                    "width": 1,
+                    "access": "R/W"
+                  },
+                  "sta_clock": {
+                    "bit": 29,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Config clock select in STA mode (0=DCOCLK, 1=REFCLK).",
+                    "desc": "In stand-alone mode, this specifies the clock driving the configuration registers (either ref-clock or DCO clock)."
+                  },
+                  "open_lock": {
+                    "bit": 30,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Open-loop-when-locked (active high).",
+                    "desc": "This switched to open loop mode when the output frequency is within the tolerance."
+                  },
+                  "dithering": {
+                    "bit": 31,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Dithering enable (active high).",
+                    "desc": "Applies dither filter to the DCO input code to get one moe bit and improve the precision using noise generation."
+                  }
+                }
+              },
+              "integrator": {
+                "name": "Integrator register",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x00000000",
+                "content": {
+                  "state_fract": {
+                    "bit": 6,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "Integrator state: fractional part (dither unit input)",
+                    "desc": "This gives the fractional part of the integrator unit output used to compute the DCO input code. This corresponds to the input given to the dither unit."
+                  },
+                  "state_int": {
+                    "bit": 16,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "Integrator state: integer part (DCO input bits)",
+                    "desc": "This gives the integer part of the integrator unit output used to compute the DCO input code. This corresponds to the DCO input code before it is rounded with the dither unit output."
+                  }
+                }
+              }
+            },
             "vp_ports": [
+              "ref_clock",
               "input"
             ]
           },
@@ -1235,7 +1696,156 @@
             "archi_files": [
               "archi/fll/fll_v1.h"
             ],
+            "regmap": {
+              "status": {
+                "desc": "Return the current status of the FLL",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x00000000",
+                "content": {
+                  "actual_mult": {
+                    "bit": 0,
+                    "width": 16,
+                    "access": "R/W",
+                    "name": "Actual multiplication factor.",
+                    "desc": "Returns the current multiplication factor (i.e., current frequency), which is measured out of the DCO at each clock ref cycle."
+                  }
+                }
+              },
+              "conf1": {
+                "desc": "Configuration register I",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x454C05F5",
+                "content": {
+                  "mult_factor": {
+                    "bit": 0,
+                    "width": 16,
+                    "access": "R/W",
+                    "name": "Target clock multiplication factor for normal mode.",
+                    "desc": "When using normal mode, this sets the target multiplication factor, i.e. the one that the feedback will try to reach by tuning the DCO input code."
+                  },
+                  "dco_input": {
+                    "bit": 16,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "DCO input code for stand-alone mode.",
+                    "desc": "When using the stand-alone mode, this sets the DCO input code, i.e. this sets the output frequency of the DCO. See the transfer function to get more details about the relationship between output frequency and DCO input code."
+                  },
+                  "div": {
+                    "bit": 26,
+                    "width": 4,
+                    "access": "R/W",
+                    "name": "FLL output clock divider setting.",
+                    "desc": "This sets the divider between the FLL output frequency and the DCO output frequency. 0 means no division."
+                  },
+                  "lock_en": {
+                    "bit": 30,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "FLL output gated by LOCK signal (active high)",
+                    "desc": "When active, the FLL is producing the output clock signal only if the produced frequency is within the lock tolerance."
+                  },
+                  "mode": {
+                    "bit": 31,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Operation mode select (0=stand-alone, 1=normal).",
+                    "desc": "The normal mode is using a feedback loop to reach the requested frequency while the stand-alone mode is directly using the output of the DCO to get a frequency proportional to the given DCO input code."
+                  }
+                }
+              },
+              "conf2": {
+                "desc": "Configuration register II",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x02004109",
+                "content": {
+                  "gain": {
+                    "bit": 0,
+                    "width": 4,
+                    "access": "R/W",
+                    "name": "FLL loop gain setting (default: 2^\u22128 = 1/256).",
+                    "desc": "When using normal mode, this defines the gain applied to the difference between the specified multiplication factor and the actual one, before it is provided to the loop filter."
+                  },
+                  "deassert_cycles": {
+                    "bit": 4,
+                    "width": 6,
+                    "access": "R/W",
+                    "name": "De-assert cycles",
+                    "desc": "In normal mode, this gives the number of unstable ref-clock cycles (i.e. out of the tolerance) until the lock is de-asserted. In stand-alone mode, this gives the lower 6-bit of the LOCK assert counter target, after which the FLL starts producing a clock."
+                  },
+                  "assert_cycles": {
+                    "bit": 10,
+                    "width": 6,
+                    "access": "R/W",
+                    "name": "Assert cycles",
+                    "desc": "In normal mode, this gives the number of stable ref-clock cycles (i.e. within the tolerance) after which the lock is asserted. In stand-alone mode, this gives the upper 6-bit of LOCK assert counter target, after which the FLL starts producing a clock."
+                  },
+                  "tolerance": {
+                    "bit": 16,
+                    "width": 12,
+                    "access": "R/W",
+                    "name": "Lock tolerance",
+                    "desc": "this gives the margin around the target multiplication factor within which the output clock is considered stable."
+                  },
+                  "reserved0": {
+                    "bit": 28,
+                    "width": 1,
+                    "access": "R/W"
+                  },
+                  "sta_clock": {
+                    "bit": 29,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Config clock select in STA mode (0=DCOCLK, 1=REFCLK).",
+                    "desc": "In stand-alone mode, this specifies the clock driving the configuration registers (either ref-clock or DCO clock)."
+                  },
+                  "open_lock": {
+                    "bit": 30,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Open-loop-when-locked (active high).",
+                    "desc": "This switched to open loop mode when the output frequency is within the tolerance."
+                  },
+                  "dithering": {
+                    "bit": 31,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "Dithering enable (active high).",
+                    "desc": "Applies dither filter to the DCO input code to get one moe bit and improve the precision using noise generation."
+                  }
+                }
+              },
+              "integrator": {
+                "name": "Integrator register",
+                "type": "register",
+                "offset": "0x00",
+                "width": 32,
+                "reset": "0x00000000",
+                "content": {
+                  "state_fract": {
+                    "bit": 6,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "Integrator state: fractional part (dither unit input)",
+                    "desc": "This gives the fractional part of the integrator unit output used to compute the DCO input code. This corresponds to the input given to the dither unit."
+                  },
+                  "state_int": {
+                    "bit": 16,
+                    "width": 10,
+                    "access": "R/W",
+                    "name": "Integrator state: integer part (DCO input bits)",
+                    "desc": "This gives the integer part of the integrator unit output used to compute the DCO input code. This corresponds to the DCO input code before it is rounded with the dither unit output."
+                  }
+                }
+              }
+            },
             "vp_ports": [
+              "ref_clock",
               "input"
             ]
           },
@@ -1397,6 +2007,7 @@
             "vp_ports": [
               "irq_itf_0",
               "irq_itf_1",
+              "ref_clock",
               "input"
             ]
           },
@@ -1422,9 +2033,12 @@
               "nb_fc_events": 8,
               "first_fc_event": 48
             },
+            "ref_clock_event": 56,
             "vp_ports": [
+              "ref_clock_event",
               "fc_event_itf",
               "input",
+              "ref_clock",
               "event_in"
             ]
           },
@@ -1809,6 +2423,7 @@
                 }
               }
             },
+            "vp_impl": "pulp.udma.udma_v2_arnold_impl",
             "nb_periphs": 7,
             "interfaces": [
               "memcpy",
@@ -1816,7 +2431,7 @@
               "i2c",
               "i2s",
               "uart",
-              "cam"
+              "cpi"
             ],
             "properties": {
               "l2_read_fifo_size": 8
@@ -1829,7 +2444,8 @@
               ],
               "offsets": [
                 "0x00"
-              ]
+              ],
+              "is_master": true
             },
             "memcpy": {
               "version": 1,
@@ -1849,7 +2465,8 @@
               ],
               "offsets": [
                 "0x100"
-              ]
+              ],
+              "is_master": true
             },
             "i2c": {
               "version": 2,
@@ -1873,7 +2490,7 @@
                 "0x280"
               ]
             },
-            "cam": {
+            "cpi": {
               "version": 1,
               "nb_channels": 1,
               "ids": [
@@ -1881,14 +2498,16 @@
               ],
               "offsets": [
                 "0x300"
-              ]
+              ],
+              "is_slave": true
             },
             "vp_ports": [
               "l2_itf",
               "event_itf",
               "spim0",
               "uart0",
-              "input"
+              "input",
+              "cpi0"
             ]
           },
           "uart": {
@@ -1904,14 +2523,7 @@
               "jtag"
             ]
           }
-        },
-        "vp_ports": [
-          "uart0",
-          "jtag0",
-          "ctrl",
-          "jtag0_pad",
-          "cpi0"
-        ]
+        }
       },
       "dpi_clock": {
         "vp_class": "vp/clock_domain",
@@ -1928,7 +2540,22 @@
         "vp_ports": [
           "clock",
           "jtag0",
+          "cpi0",
           "uart0"
+        ]
+      },
+      "ref_clock_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 65536,
+        "vp_ports": [
+          "out"
+        ]
+      },
+      "ref_clock": {
+        "vp_class": "utils/clock",
+        "vp_ports": [
+          "clock_sync",
+          "clock"
         ]
       },
       "tb_comps": [
@@ -1970,7 +2597,7 @@
         "module": "uart.so",
         "verbose": false,
         "baudrate": 625000,
-        "loopback": false,
+        "loopback": true,
         "stdout": false,
         "tx_file": "tx_uart.log",
         "vp_ports": [
@@ -1984,6 +2611,17 @@
         "vp_ports": [
           "cpi"
         ]
+      },
+      "spiflash": {
+        "vp_class": "devices/spiflash/spiflash",
+        "type": "spiflash",
+        "size": "0x00800000",
+        "fs": {
+          "files": [],
+          "encrypt": false,
+          "aes_key": 0,
+          "aes_iv": 0
+        }
       }
     }
   },

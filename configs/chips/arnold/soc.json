@@ -72,6 +72,7 @@
     "axi_ico",
     "soc_ico",
     "apb_ico",
+    "fc_ico",
     "fc",
     "l2",
     "l2_priv0",
@@ -81,7 +82,6 @@
     "l2_shared_1",
     "l2_shared_2",
     "l2_shared_3",
-    "fc_ico",
     "rom",
     "plt_loader",
     "fc_itc",
@@ -101,13 +101,40 @@
     "adv_dbg_unit"
   ],
   "vp_ports": [
-    "jtag",
+    "ref_clock",
+    "cpi0",
+    "jtag0",
+    "fll_soc_clock",
     "spim0",
     "uart0"
   ],
   "vp_bindings": [
     [
-      "self->jtag",
+      "self->ref_clock",
+      "fll->ref_clock"
+    ],
+    [
+      "self->ref_clock",
+      "fll1->ref_clock"
+    ],
+    [
+      "self->ref_clock",
+      "fll2->ref_clock"
+    ],
+    [
+      "self->ref_clock",
+      "timer->ref_clock"
+    ],
+    [
+      "self->ref_clock",
+      "soc_eu->ref_clock"
+    ],
+    [
+      "self->cpi0",
+      "udma->cpi0"
+    ],
+    [
+      "self->jtag0",
       "adv_dbg_unit->jtag"
     ],
     [
@@ -211,6 +238,10 @@
       "fc->irq_req"
     ],
     [
+      "fll->clock_out",
+      "self->fll_soc_clock"
+    ],
+    [
       "apb_soc_ctrl->bootaddr",
       "fc->bootaddr"
     ],
@@ -225,6 +256,10 @@
     [
       "timer->irq_itf_1",
       "fc_itc->in_event_11"
+    ],
+    [
+      "soc_eu->ref_clock_event",
+      "fc_itc->in_event_14"
     ],
     [
       "soc_eu->fc_event_itf",
@@ -599,9 +634,12 @@
       "input"
     ]
   },
+  "fc_ico": {
+    "l2_alias": true
+  },
   "fc": {
     "includes": [
-      "ips/ri5ky_v2_fpu.json"
+      "ips/riscv/ri5ky_v2_fpu.json"
     ],
     "cluster_id": 31,
     "core_id": 0,
@@ -674,12 +712,9 @@
       "input"
     ]
   },
-  "fc_ico": {
-    "l2_alias": true
-  },
   "rom": {
     "includes": [
-      "ips/rom_v2.json"
+      "ips/rom/rom_v2.json"
     ],
     "size": 8192,
     "map_base": "0x1A000000",
@@ -699,10 +734,11 @@
   },
   "fc_itc": {
     "includes": [
-      "ips/itc_v1.json"
+      "ips/itc/itc_v1.json"
     ],
     "vp_ports": [
       "irq_req",
+      "in_event_14",
       "input",
       "irq_ack",
       "in_event_10",
@@ -712,25 +748,29 @@
   },
   "fll": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
+      "clock_out",
+      "ref_clock",
       "input"
     ]
   },
   "fll1": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
+      "ref_clock",
       "input"
     ]
   },
   "fll2": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
+      "ref_clock",
       "input"
     ]
   },
@@ -751,7 +791,7 @@
   },
   "stdout": {
     "includes": [
-      "ips/stdout_v3.json"
+      "ips/stdout/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -759,44 +799,49 @@
   },
   "gpio": {
     "includes": [
-      "ips/gpio_v2.json"
+      "ips/gpio/gpio_v2.json"
     ]
   },
   "timer": {
     "includes": [
-      "ips/timer_v2.json"
+      "ips/timer/timer_v2.json"
     ],
     "vp_ports": [
       "irq_itf_0",
       "irq_itf_1",
+      "ref_clock",
       "input"
     ]
   },
   "hwme": {
     "includes": [
-      "ips/hwme_v1.json"
+      "ips/hwme/hwme_v1.json"
     ]
   },
   "soc_eu": {
     "includes": [
-      "ips/soc_eu_v1.json"
+      "ips/soc_eu/soc_eu_v1.json"
     ],
+    "ref_clock_event": 56,
     "vp_ports": [
+      "ref_clock_event",
       "fc_event_itf",
       "input",
+      "ref_clock",
       "event_in"
     ]
   },
   "udma": {
     "includes": [
-      "chips/arnold/udma.json"
+      "templates/chips/arnold/udma.json"
     ],
     "vp_ports": [
       "l2_itf",
       "event_itf",
       "spim0",
       "uart0",
-      "input"
+      "input",
+      "cpi0"
     ]
   },
   "uart": {
