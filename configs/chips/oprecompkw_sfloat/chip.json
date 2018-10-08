@@ -26,6 +26,10 @@
       "soc->clock"
     ],
     [
+      "soc->fll_soc_clock",
+      "soc_clock->clock_in"
+    ],
+    [
       "soc->ddr",
       "self->ddr"
     ]
@@ -34,7 +38,8 @@
     "vp_class": "vp/clock_domain",
     "frequency": 50000000,
     "vp_ports": [
-      "out"
+      "out",
+      "clock_in"
     ]
   },
   "soc": {
@@ -42,6 +47,7 @@
       "soc.json"
     ],
     "vp_ports": [
+      "fll_soc_clock",
       "ddr",
       "clock"
     ]

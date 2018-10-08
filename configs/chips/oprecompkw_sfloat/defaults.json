@@ -20,7 +20,7 @@
       "mode": "jtag"
     },
     "set_pc_addr": "0x10200040",
-    "set_pc_offset": "-128",
+    "set_pc_offset": "0",
     "start_addr": "0x10200008",
     "start_value": "0x1"
   }
