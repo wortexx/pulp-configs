@@ -53,10 +53,6 @@ sdk_install: install
 	@mkdir -p $(TARGET_INSTALL_DIR)/rules
 	touch $(TARGET_INSTALL_DIR)/rules/tools.mk
 
-
-gen: $(BUILD_DIR)/Makefile
-	( cd $(BUILD_DIR) ; make gen $(DBG_CMAKE) VERBOSE=$(VERBOSE) )
-
 clean:
 	rm -rf $(BUILD_DIR)
 

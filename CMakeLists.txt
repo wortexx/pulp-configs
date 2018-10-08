@@ -4,6 +4,10 @@ project(pulp-configs LANGUAGES NONE)
 
 option(WithConfigGenerators "Install the config tools" OFF)
 
+set(CONFIGS_DIR "configs")
+set(CONFIGS_SRC_DIR "${CMAKE_CURRENT_BINARY_DIR}/${CONFIGS_DIR}")
+set(CONFIGS_DST_DIR "${CMAKE_CURRENT_BINARY_DIR}/${CONFIGS_DIR}")
+
 # copy all the configs to the build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/configs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
@@ -23,9 +27,6 @@ if(WithConfigGenerators)
         endif()
     endif()
 
-    set(CONFIGS_DIR "configs")
-    set(CONFIGS_SRC_DIR "${CMAKE_CURRENT_BINARY_DIR}/${CONFIGS_DIR}")
-    set(CONFIGS_DST_DIR "${CMAKE_CURRENT_BINARY_DIR}/${CONFIGS_DIR}")
     set(USECASES_DIR "usecases")
     set(CHIPS_DIR "chips")
     set(SYSTEMS_DIR "systems")
