@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 set(CMAKE_C_COMPILER_WORKS YES)
 project(pulp-configs LANGUAGES NONE)
 
-option(WithConfigGenerators "Install the config tools" ON)
+option(WithConfigGenerators "Install the config tools" OFF)
 
 # copy all the configs to the build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/configs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
