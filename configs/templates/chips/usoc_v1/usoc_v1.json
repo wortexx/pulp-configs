@@ -1,5 +1,6 @@
 {
   "chip": "usoc_v1",
+  "chip_family": "usoc_v1",
     
   "padframe": {
     "content": "templates/chips/usoc_v1/padframe.json"
@@ -20,7 +21,7 @@
 
     "l2": {
       "base": "0x1C000000",
-      "size": "0x00080000",
+      "size": "0x00082000",
       "is_partitioned": true,
 
       "priv0": {
@@ -42,7 +43,7 @@
         "nb_banks"     : 4,
         "interleaving_bits" : 2,
         "base"         : "0x1C010000",
-        "size"         : "0x00070000"
+        "size"         : "0x00072000"
       }
     },
 
@@ -72,12 +73,6 @@
         "version"      : 1,
         "base"         : "0x1A106000",
         "size"         : "0x00001000"
-      },
-
-      "pmu": {
-        "version"      : 2,
-        "base"         : "0x1A107000",
-        "size"         : "0x00000800"
       },
 
       "fc_itc": {

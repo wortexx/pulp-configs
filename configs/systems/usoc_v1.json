@@ -176,10 +176,6 @@
         [
           "dpi->jtag0",
           "chip->jtag0_pad"
-        ],
-        [
-          "dpi->cpi0",
-          "chip->cpi0_pad"
         ]
       ],
       "chip": {
@@ -219,9 +215,7 @@
           "uart0",
           "jtag0",
           "ctrl",
-          "jtag0_pad",
-          "cpi0_pad",
-          "cpi0"
+          "jtag0_pad"
         ],
         "vp_bindings": [
           [
@@ -311,10 +305,6 @@
           [
             "self->jtag0_pad",
             "padframe->jtag0_pad"
-          ],
-          [
-            "self->cpi0_pad",
-            "padframe->cpi0_pad"
           ],
           [
             "padframe->uart0_pad",
@@ -532,8 +522,7 @@
             "hyper0",
             "cpi0_pad",
             "uart0_pad",
-            "jtag0_pad",
-            "cpi0_pad"
+            "jtag0_pad"
           ]
         },
         "soc_clock": {
@@ -617,7 +606,6 @@
           "vp_comps": [
             "axi_ico",
             "soc_ico",
-            "pmu",
             "apb_ico",
             "fc_ico",
             "fc",
@@ -643,7 +631,6 @@
           ],
           "vp_ports": [
             "ref_clock",
-            "cpi0",
             "jtag0",
             "spim0",
             "hyper0",
@@ -665,10 +652,6 @@
             [
               "self->ref_clock",
               "soc_eu->ref_clock"
-            ],
-            [
-              "self->cpi0",
-              "udma->cpi0"
             ],
             [
               "self->jtag0",
@@ -739,10 +722,6 @@
               "fc->dbg_unit"
             ],
             [
-              "apb_ico->pmu",
-              "pmu->input"
-            ],
-            [
               "fc->fetch",
               "soc_ico->fc_fetch"
             ],
@@ -769,14 +748,6 @@
             [
               "apb_soc_ctrl->event",
               "soc_eu->event_in"
-            ],
-            [
-              "apb_soc_ctrl->cluster_power_irq",
-              "fc_itc->in_event_22"
-            ],
-            [
-              "apb_soc_ctrl->cluster_clock_gate_irq",
-              "fc_itc->in_event_23"
             ],
             [
               "timer->irq_itf_0",
@@ -978,7 +949,7 @@
                 },
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00072000"
                 }
               },
               "vp_ports": [
@@ -1013,7 +984,7 @@
               "mappings": {
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00072000"
                 },
                 "ll_ico": {}
               },
@@ -1031,7 +1002,7 @@
               "mappings": {
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00072000"
                 },
                 "ll_ico": {}
               },
@@ -1049,7 +1020,7 @@
               "mappings": {
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00072000"
                 },
                 "ll_ico": {}
               },
@@ -1066,7 +1037,7 @@
               "mappings": {
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00072000"
                 },
                 "ll_ico": {}
               },
@@ -1076,21 +1047,6 @@
                 "input"
               ]
             }
-          },
-          "pmu": {
-            "version": 2,
-            "nb_domains": 2,
-            "hal_files": [
-              "hal/maestro/pmu_v2.h"
-            ],
-            "archi_files": [
-              "archi/maestro/maestro_v2.h"
-            ],
-            "vp_class": "pulp/pmu/pmu_v2",
-            "gv_class": "power.pmu.Pmu",
-            "vp_ports": [
-              "input"
-            ]
           },
           "apb_ico": {
             "vp_class": "interco/router",
@@ -1142,11 +1098,6 @@
                 "base": "0x1A110000",
                 "size": "0x00008000",
                 "remove_offset": "0x1A110000"
-              },
-              "pmu": {
-                "base": "0x1A107000",
-                "size": "0x00000800",
-                "remove_offset": "0x1A107000"
               }
             },
             "vp_ports": [
@@ -1157,7 +1108,6 @@
               "fc_itc",
               "fc_timer",
               "fc_dbg_unit",
-              "pmu",
               "input"
             ]
           },
@@ -1252,7 +1202,7 @@
             "is_partitioned": true,
             "nb_shared_banks": 4,
             "map_base": "0x1C000000",
-            "map_size": "0x00080000"
+            "map_size": "0x00082000"
           },
           "l2_priv0": {
             "size": 32768,
@@ -1274,33 +1224,33 @@
           },
           "l2_shared": {
             "nb_banks": 4,
-            "size": 458752,
+            "size": 466944,
             "map_base": "0x1C010000",
-            "map_size": "0x00070000"
+            "map_size": "0x00072000"
           },
           "l2_shared_0": {
-            "size": 114688,
+            "size": 116736,
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
             ]
           },
           "l2_shared_1": {
-            "size": 114688,
+            "size": 116736,
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
             ]
           },
           "l2_shared_2": {
-            "size": 114688,
+            "size": 116736,
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
             ]
           },
           "l2_shared_3": {
-            "size": 114688,
+            "size": 116736,
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
@@ -1390,8 +1340,6 @@
               "irq_req",
               "in_event_14",
               "input",
-              "in_event_22",
-              "in_event_23",
               "irq_ack",
               "in_event_10",
               "in_event_11",
@@ -1514,8 +1462,6 @@
             "vp_ports": [
               "bootaddr",
               "event",
-              "cluster_power_irq",
-              "cluster_clock_gate_irq",
               "input"
             ]
           },
@@ -1967,8 +1913,7 @@
               "hyper",
               "i2c",
               "i2s",
-              "uart",
-              "cpi"
+              "uart"
             ],
             "properties": {
               "l2_read_fifo_size": 8
@@ -2032,25 +1977,13 @@
                 "0x300"
               ]
             },
-            "cpi": {
-              "version": 1,
-              "nb_channels": 1,
-              "ids": [
-                7
-              ],
-              "offsets": [
-                "0x380"
-              ],
-              "is_slave": true
-            },
             "vp_ports": [
               "l2_itf",
               "event_itf",
               "spim0",
               "hyper0",
               "uart0",
-              "input",
-              "cpi0"
+              "input"
             ]
           },
           "uart": {
@@ -2083,7 +2016,6 @@
         "vp_ports": [
           "clock",
           "jtag0",
-          "cpi0",
           "uart0"
         ]
       },
@@ -2118,10 +2050,6 @@
         [
           "chip->ctrl",
           "jtag_proxy->ctrl"
-        ],
-        [
-          "camera->cpi",
-          "chip->cpi0"
         ]
       ],
       "jtag_proxy": {
@@ -2150,10 +2078,7 @@
       "camera": {
         "type": "dpi",
         "model": "himax",
-        "module": "camera.so",
-        "vp_ports": [
-          "cpi"
-        ]
+        "module": "camera.so"
       },
       "spiflash": {
         "vp_class": "devices/spiflash/spiflash",

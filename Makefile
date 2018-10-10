@@ -86,7 +86,7 @@ gen.wolfe:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/wolfe/wolfe.json --output-dir=$(CURDIR)/configs/chips/wolfe --output=configs/systems/wolfe.json --usecase=usecases/jtag-cam-spi.json
 
 gen.usoc_v1:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/usoc_v1/usoc_v1.json --output-dir=$(CURDIR)/configs/chips/usoc_v1 --output=configs/systems/usoc_v1.json --usecase=usecases/jtag-cam.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/usoc_v1/usoc_v1.json --output-dir=$(CURDIR)/configs/chips/usoc_v1 --output=configs/systems/usoc_v1.json --usecase=usecases/jtag.json
 
 gen.oprecompkw:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw/oprecompkw.json --output-dir=$(CURDIR)/configs/chips/oprecompkw --output=configs/systems/oprecompkw.json
