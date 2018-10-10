@@ -1,15 +1,9 @@
 {
   "runner": {
-    "boot_from_flash": true,
-    "boot-mode": "rom"
+    "boot_from_flash": false,
+    "boot-mode": "jtag"
   },
   
-  "loader": {
-    "boot": {
-      "mode": "rom"
-    }
-  },
-
   "vsim": {
     "args": [
       "-novopt"

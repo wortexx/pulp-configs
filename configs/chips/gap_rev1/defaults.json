@@ -1,7 +1,8 @@
 {
   "runner": {
     "boot_from_flash": true,
-    "boot-mode": "rom"
+    "boot-mode": "rom",
+    "vsim_chip": "gap_rev1"
   },
   
   "loader": {

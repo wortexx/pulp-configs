@@ -1,5 +1,5 @@
 {
-  "nb_cluster": 1,
+  "nb_cluster": null,
   "vp_class": "pulp/soc",
   "peripherals_base": "0x1A100000",
   "soc_events_ids": {
@@ -83,7 +83,6 @@
     "l2_shared_1",
     "l2_shared_2",
     "l2_shared_3",
-    "rom",
     "plt_loader",
     "fc_itc",
     "apb_soc_ctrl",
@@ -94,28 +93,24 @@
     "udma",
     "uart",
     "fc_debug",
-    "cluster",
-    "cluster_clock",
     "adv_dbg_unit"
   ],
   "vp_ports": [
-    "cluster_clock",
     "ref_clock",
     "cpi0",
     "jtag0",
-    "fll1",
     "spim0",
     "hyper0",
     "uart0"
   ],
   "vp_bindings": [
     [
-      "self->cluster_clock",
-      "cluster->clock"
+      "self->ref_clock",
+      "timer->ref_clock"
     ],
     [
       "self->ref_clock",
-      "timer->ref_clock"
+      "soc_eu->ref_clock"
     ],
     [
       "self->cpi0",
@@ -124,10 +119,6 @@
     [
       "self->jtag0",
       "adv_dbg_unit->jtag"
-    ],
-    [
-      "axi_ico->cluster",
-      "cluster->input"
     ],
     [
       "axi_ico->soc",
@@ -194,10 +185,6 @@
       "fc->dbg_unit"
     ],
     [
-      "apb_ico->rom",
-      "rom->input"
-    ],
-    [
       "apb_ico->pmu",
       "pmu->input"
     ],
@@ -246,6 +233,10 @@
       "fc_itc->in_event_11"
     ],
     [
+      "soc_eu->ref_clock_event",
+      "fc_itc->in_event_14"
+    ],
+    [
       "soc_eu->fc_event_itf",
       "fc_itc->soc_event"
     ],
@@ -270,18 +261,6 @@
       "self->uart0"
     ],
     [
-      "cluster->dma_irq",
-      "fc_itc->in_event_8"
-    ],
-    [
-      "cluster->soc",
-      "axi_ico->input"
-    ],
-    [
-      "cluster_clock->out",
-      "cluster->clock"
-    ],
-    [
       "adv_dbg_unit->io",
       "soc_ico->debug"
     ]
@@ -295,14 +274,9 @@
       "soc": {
         "base": "0x1A000000",
         "size": "0x06000000"
-      },
-      "cluster": {
-        "base": "0x10000000",
-        "size": "0x400000"
       }
     },
     "vp_ports": [
-      "cluster",
       "soc",
       "input"
     ]
@@ -360,10 +334,6 @@
         "self->apb"
       ],
       [
-        "ll_ico->rom",
-        "self->apb"
-      ],
-      [
         "ll_ico->l2_priv0",
         "self->l2_priv0"
       ],
@@ -378,10 +348,6 @@
       [
         "ll_ico->l2_shared",
         "hb_ico->input"
-      ],
-      [
-        "ll_ico->axi_master",
-        "self->axi_master"
       ],
       [
         "hb_ico->out_0",
@@ -441,14 +407,6 @@
           "base": "0x1A100000",
           "size": "0x00100000"
         },
-        "rom": {
-          "base": "0x1A000000",
-          "size": "0x00002000"
-        },
-        "axi_master": {
-          "base": "0x10000000",
-          "size": "0x400000"
-        },
         "l2_priv0": {
           "base": "0x1C000000",
           "size": "0x00008000",
@@ -470,12 +428,10 @@
       },
       "vp_ports": [
         "apb",
-        "rom",
         "l2_priv0",
         "l2_priv0_alias",
         "l2_priv1",
         "l2_shared",
-        "axi_master",
         "input"
       ]
     },
@@ -624,11 +580,6 @@
         "base": "0x1A107000",
         "size": "0x00000800",
         "remove_offset": "0x1A107000"
-      },
-      "rom": {
-        "base": "0x1A000000",
-        "size": "0x00002000",
-        "remove_offset": "0x1A000000"
       }
     },
     "vp_ports": [
@@ -639,7 +590,6 @@
       "fc_itc",
       "fc_timer",
       "fc_dbg_unit",
-      "rom",
       "pmu",
       "input"
     ]
@@ -649,7 +599,7 @@
   },
   "fc": {
     "includes": [
-      "ips/riscv/zeroriscy.json"
+      "ips/riscv/ri5ky_v2.json"
     ],
     "cluster_id": 31,
     "core_id": 0,
@@ -722,18 +672,6 @@
       "input"
     ]
   },
-  "rom": {
-    "includes": [
-      "ips/rom/rom_v2.json"
-    ],
-    "size": 8192,
-    "map_base": "0x1A000000",
-    "map_size": "0x00002000",
-    "vp_class": "memory/memory",
-    "vp_ports": [
-      "input"
-    ]
-  },
   "plt_loader": {
     "includes": [
       "tools/plt_loader/plt_loader.json"
@@ -748,11 +686,11 @@
     ],
     "vp_ports": [
       "irq_req",
+      "in_event_14",
       "input",
       "in_event_22",
       "in_event_23",
       "irq_ack",
-      "in_event_8",
       "in_event_10",
       "in_event_11",
       "soc_event"
@@ -762,8 +700,6 @@
     "includes": [
       "chips/usoc_v1/apb_soc.json"
     ],
-    "cluster_power_event": 31,
-    "cluster_clock_gate_event": 35,
     "vp_ports": [
       "bootaddr",
       "event",
@@ -800,9 +736,12 @@
     "includes": [
       "ips/soc_eu/soc_eu_v1.json"
     ],
+    "ref_clock_event": 56,
     "vp_ports": [
+      "ref_clock_event",
       "fc_event_itf",
       "input",
+      "ref_clock",
       "event_in"
     ]
   },
@@ -825,25 +764,6 @@
   },
   "fc_debug": {
     "version": 1
-  },
-  "cluster": {
-    "includes": [
-      "chips/usoc_v1/cluster_0.json"
-    ],
-    "vp_ports": [
-      "dma_irq",
-      "soc",
-      "clock",
-      "input"
-    ]
-  },
-  "cluster_clock": {
-    "vp_class": "vp/clock_domain",
-    "frequency": 50000000,
-    "vp_ports": [
-      "out",
-      "clock_in"
-    ]
   },
   "adv_dbg_unit": {
     "includes": [

@@ -20,21 +20,6 @@
       "files": []
     }
   },
-  "dpi_models": {
-    "uart_loopback": {
-      "module": "uart_tb.so",
-      "baudrate": 625000,
-      "loopback": true,
-      "stdout": true,
-      "tx_file": "tx_uart.log",
-      "ports": {
-        "in": {
-          "type": "uart",
-          "itf": 0
-        }
-      }
-    }
-  },
   "platform": "gvsoc",
   "pulp_compiler": {
     "default": "gcc",
@@ -85,7 +70,8 @@
     "rtl_simulator": "vsim",
     "simulator": null,
     "aes_key": "12345678275689075642768987654345",
-    "aes_iv": "0987654323456789"
+    "aes_iv": "0987654323456789",
+    "vsim_chip": "gap_rev1"
   },
   "gdb": {
     "active": false
@@ -164,7 +150,8 @@
         "pulp_chip",
         "dpi",
         "ref_clock_clock",
-        "ref_clock"
+        "ref_clock",
+        "spiflash"
       ],
       "vp_bindings": [
         [
@@ -2074,6 +2061,10 @@
               "timer->ref_clock"
             ],
             [
+              "self->ref_clock",
+              "soc_eu->ref_clock"
+            ],
+            [
               "self->cluster_clock",
               "cluster->clock"
             ],
@@ -2150,6 +2141,10 @@
               "pmu->input"
             ],
             [
+              "apb_ico->efuse",
+              "efuse->input"
+            ],
+            [
               "fc_ico->fc_eu_alias",
               "fc_eu->input"
             ],
@@ -2224,6 +2219,10 @@
             [
               "timer->irq_itf_1",
               "fc_eu->in_event_11_pe_0"
+            ],
+            [
+              "soc_eu->ref_clock_event",
+              "fc_eu->in_event_14_pe_0"
             ],
             [
               "soc_eu->fc_event_itf",
@@ -2604,6 +2603,11 @@
                 "size": "0x00002000",
                 "remove_offset": "0x1A102000"
               },
+              "efuse": {
+                "base": "0x1A109000",
+                "size": "0x00001000",
+                "remove_offset": "0x1A109000"
+              },
               "pmu": {
                 "base": "0x1A107000",
                 "size": "0x00000800",
@@ -2625,6 +2629,7 @@
               "apb_soc_ctrl",
               "rom",
               "pmu",
+              "efuse",
               "input"
             ]
           },
@@ -3155,6 +3160,7 @@
             },
             "vp_ports": [
               "irq_req_0",
+              "in_event_14_pe_0",
               "input",
               "in_event_22_pe_0",
               "in_event_23_pe_0",
@@ -3859,9 +3865,12 @@
               "nb_fc_events": 8,
               "first_fc_event": 48
             },
+            "ref_clock_event": 56,
             "vp_ports": [
+              "ref_clock_event",
               "fc_event_itf",
               "input",
+              "ref_clock",
               "event_in"
             ]
           },
@@ -4371,13 +4380,23 @@
           },
           "efuse": {
             "version": 1,
+            "vp_class": "pulp/efuse/efuse_v1",
             "hal_files": [
               "hal/efuse/efuse_v1.h"
             ],
             "archi_files": [
               "archi/efuse/efuse_v1.h"
             ],
-            "nb_regs": 128
+            "nb_regs": 128,
+            "aes_key": null,
+            "aes_iv": null,
+            "xtal_check": false,
+            "xtalCheck_delta": "0.1",
+            "xtalCheck_min": "3",
+            "xtalCheck_max": "10",
+            "vp_ports": [
+              "input"
+            ]
           },
           "uart": {
             "version": 1
@@ -10019,6 +10038,17 @@
         "vp_ports": [
           "cpi"
         ]
+      },
+      "spiflash": {
+        "vp_class": "devices/spiflash/spiflash",
+        "type": "spiflash",
+        "size": "0x00800000",
+        "fs": {
+          "files": [],
+          "encrypt": false,
+          "aes_key": 0,
+          "aes_iv": 0
+        }
       }
     }
   },

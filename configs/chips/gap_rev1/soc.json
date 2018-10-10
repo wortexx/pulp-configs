@@ -127,6 +127,10 @@
       "timer->ref_clock"
     ],
     [
+      "self->ref_clock",
+      "soc_eu->ref_clock"
+    ],
+    [
       "self->cluster_clock",
       "cluster->clock"
     ],
@@ -203,6 +207,10 @@
       "pmu->input"
     ],
     [
+      "apb_ico->efuse",
+      "efuse->input"
+    ],
+    [
       "fc_ico->fc_eu_alias",
       "fc_eu->input"
     ],
@@ -277,6 +285,10 @@
     [
       "timer->irq_itf_1",
       "fc_eu->in_event_11_pe_0"
+    ],
+    [
+      "soc_eu->ref_clock_event",
+      "fc_eu->in_event_14_pe_0"
     ],
     [
       "soc_eu->fc_event_itf",
@@ -593,7 +605,7 @@
   },
   "pmu": {
     "includes": [
-      "ips/pmu_v1.json"
+      "ips/pmu/pmu_v1.json"
     ],
     "vp_ports": [
       "input"
@@ -644,6 +656,11 @@
         "size": "0x00002000",
         "remove_offset": "0x1A102000"
       },
+      "efuse": {
+        "base": "0x1A109000",
+        "size": "0x00001000",
+        "remove_offset": "0x1A109000"
+      },
       "pmu": {
         "base": "0x1A107000",
         "size": "0x00000800",
@@ -665,6 +682,7 @@
       "apb_soc_ctrl",
       "rom",
       "pmu",
+      "efuse",
       "input"
     ]
   },
@@ -721,7 +739,7 @@
   },
   "fc": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 32,
     "core_id": 0,
@@ -747,7 +765,7 @@
   },
   "rom": {
     "includes": [
-      "ips/rom_v2.json"
+      "ips/rom/rom_v2.json"
     ],
     "size": 8192,
     "map_base": "0x1A000000",
@@ -767,11 +785,12 @@
   },
   "fc_eu": {
     "includes": [
-      "ips/eu_v3.json"
+      "ips/event_unit/eu_v3.json"
     ],
     "nb_core": 1,
     "vp_ports": [
       "irq_req_0",
+      "in_event_14_pe_0",
       "input",
       "in_event_22_pe_0",
       "in_event_23_pe_0",
@@ -784,7 +803,7 @@
   },
   "fll": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
       "clock_out",
@@ -794,7 +813,7 @@
   },
   "fll1": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
       "clock_out",
@@ -804,7 +823,7 @@
   },
   "fll2": {
     "includes": [
-      "ips/fll_v1.json"
+      "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
       "ref_clock",
@@ -832,7 +851,7 @@
   },
   "stdout": {
     "includes": [
-      "ips/stdout_v3.json"
+      "ips/stdout/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -847,12 +866,12 @@
   },
   "gpio": {
     "includes": [
-      "ips/gpio_v2.json"
+      "ips/gpio/gpio_v2.json"
     ]
   },
   "fc_icache": {
     "includes": [
-      "ips/icache_ctrl_v2.json"
+      "ips/icache_ctrl/icache_ctrl_v2.json"
     ],
     "vp_ports": [
       "input"
@@ -860,7 +879,7 @@
   },
   "timer": {
     "includes": [
-      "ips/timer_v2.json"
+      "ips/timer/timer_v2.json"
     ],
     "vp_ports": [
       "irq_itf_0",
@@ -871,11 +890,14 @@
   },
   "soc_eu": {
     "includes": [
-      "ips/soc_eu_v1.json"
+      "ips/soc_eu/soc_eu_v1.json"
     ],
+    "ref_clock_event": 56,
     "vp_ports": [
+      "ref_clock_event",
       "fc_event_itf",
       "input",
+      "ref_clock",
       "event_in"
     ]
   },
@@ -896,7 +918,10 @@
   },
   "efuse": {
     "includes": [
-      "ips/efuse_v1.json"
+      "ips/efuse/efuse_v1.json"
+    ],
+    "vp_ports": [
+      "input"
     ]
   },
   "uart": {

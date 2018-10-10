@@ -2714,7 +2714,7 @@
   },
   "dma": {
     "includes": [
-      "ips/mchan_v6.json"
+      "ips/mchan/mchan_v6.json"
     ],
     "nb_channels": 9,
     "is_64": false,
@@ -2754,7 +2754,7 @@
   },
   "cluster_ctrl": {
     "includes": [
-      "ips/cluster_ctrl_v2.json"
+      "ips/cluster_ctrl/cluster_ctrl_v2.json"
     ],
     "nb_core": 8,
     "vp_ports": [
@@ -2795,7 +2795,7 @@
   },
   "event_unit": {
     "includes": [
-      "ips/eu_v3.json"
+      "ips/event_unit/eu_v3.json"
     ],
     "nb_core": 8,
     "vp_ports": [
@@ -2868,7 +2868,7 @@
   },
   "timer": {
     "includes": [
-      "ips/timer_v2.json"
+      "ips/timer/timer_v2.json"
     ],
     "vp_ports": [
       "irq_itf_0",
@@ -2878,12 +2878,12 @@
   },
   "hwce": {
     "includes": [
-      "ips/hwce_v4.json"
+      "ips/hwce/hwce_v4.json"
     ]
   },
   "icache_ctrl": {
     "includes": [
-      "ips/icache_ctrl_v2.json"
+      "ips/icache_ctrl/icache_ctrl_v2.json"
     ],
     "vp_ports": [
       "input"
@@ -2891,7 +2891,7 @@
   },
   "pe": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 0,
@@ -2899,7 +2899,7 @@
   },
   "pe0": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 0,
@@ -2924,7 +2924,7 @@
   },
   "pe1": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 1,
@@ -2949,7 +2949,7 @@
   },
   "pe2": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 2,
@@ -2974,7 +2974,7 @@
   },
   "pe3": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 3,
@@ -2999,7 +2999,7 @@
   },
   "pe4": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 4,
@@ -3024,7 +3024,7 @@
   },
   "pe5": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 5,
@@ -3049,7 +3049,7 @@
   },
   "pe6": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 6,
@@ -3074,7 +3074,7 @@
   },
   "pe7": {
     "includes": [
-      "ips/ri5ky_v2_cplx.json"
+      "ips/riscv/ri5ky_v2_cplx.json"
     ],
     "cluster_id": 0,
     "core_id": 7,

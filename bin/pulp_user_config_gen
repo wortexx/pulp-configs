@@ -124,6 +124,27 @@ for name, group in tp.get_items().items():
 
         system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.get(name).input)
 
+      elif dev_type == "i2s_microphone":
+
+        dev_config = dev.get('config')
+        dev_args = {}
+        if dev_config is not None:
+          dev_args = dev_config.get_dict()
+
+        system.system_tree.board.add_component(name, Tb_Component(
+            includes=[
+                "periph/i2s_microphone.json"
+            ],
+            **dev_args
+        ))
+
+        itf = dev.get_child_str('interface')
+        if itf is None:
+          raise Exception('The interface where the device should be connected must be specified with the property "interface"')
+
+        system.system_tree.board.chip.set(itf, system.system_tree.board.dpi.new_itf(itf))
+        system.system_tree.board.chip.set(itf, system.system_tree.board.get(name).i2s)
+
       else:
         raise Exception('Unknown device type: ' + dev_type)
 
