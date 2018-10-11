@@ -149,7 +149,8 @@
         "pulp_chip",
         "dpi",
         "ref_clock_clock",
-        "ref_clock"
+        "ref_clock",
+        "spiflash"
       ],
       "vp_bindings": [
         [
@@ -592,6 +593,10 @@
               "timer->ref_clock"
             ],
             [
+              "self->ref_clock",
+              "soc_eu->ref_clock"
+            ],
+            [
               "self->cluster_clock",
               "cluster->clock"
             ],
@@ -742,6 +747,10 @@
             [
               "timer->irq_itf_1",
               "fc_itc->in_event_11"
+            ],
+            [
+              "soc_eu->ref_clock_event",
+              "fc_itc->in_event_14"
             ],
             [
               "soc_eu->fc_event_itf",
@@ -1432,6 +1441,7 @@
             },
             "vp_ports": [
               "irq_req",
+              "in_event_14",
               "input",
               "in_event_22",
               "in_event_23",
@@ -2108,9 +2118,12 @@
               "nb_fc_events": 8,
               "first_fc_event": 48
             },
+            "ref_clock_event": 56,
             "vp_ports": [
+              "ref_clock_event",
               "fc_event_itf",
               "input",
+              "ref_clock",
               "event_in"
             ]
           },
@@ -2120,14 +2133,23 @@
             "vp_class": "pulp/udma/udma_v3",
             "hal_files": [
               "hal/udma/udma_v3.h",
-              "hal/udma/udma_periph_v3.h",
-              "hal/udma/udma_periph_hyper_v1.h",
-              "hal/udma/udma_periph_i2s_v1.h"
+              "hal/udma/cpi/udma_cpi_v1.h",
+              "hal/udma/csi2/udma_csi2_v1.h",
+              "hal/udma/hyper/udma_hyper_v1.h",
+              "hal/udma/i2c/udma_i2c_v2.h",
+              "hal/udma/i2s/udma_i2s_v2.h",
+              "hal/udma/spim/udma_spim_v3.h",
+              "hal/udma/uart/udma_uart_v1.h"
             ],
             "archi_files": [
               "archi/udma/udma_v3.h",
-              "archi/udma/udma_periph_v3.h",
-              "archi/udma/hyper.h"
+              "archi/udma/cpi/udma_cpi_v1.h",
+              "archi/udma/csi2/udma_csi2_v1.h",
+              "archi/udma/hyper/udma_hyper_v1.h",
+              "archi/udma/i2c/udma_i2c_v2.h",
+              "archi/udma/i2s/udma_i2s_v2.h",
+              "archi/udma/spim/udma_spim_v3.h",
+              "archi/udma/uart/udma_uart_v1.h"
             ],
             "regmap": {
               "channel": {
@@ -8178,6 +8200,17 @@
         "vp_ports": [
           "cpi"
         ]
+      },
+      "spiflash": {
+        "vp_class": "devices/spiflash/spiflash",
+        "type": "spiflash",
+        "size": "0x00800000",
+        "fs": {
+          "files": [],
+          "encrypt": false,
+          "aes_key": 0,
+          "aes_iv": 0
+        }
       }
     }
   },

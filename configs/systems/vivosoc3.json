@@ -20,21 +20,6 @@
       "files": []
     }
   },
-  "dpi_models": {
-    "uart_loopback": {
-      "module": "uart_tb.so",
-      "baudrate": 625000,
-      "loopback": true,
-      "stdout": true,
-      "tx_file": "tx_uart.log",
-      "ports": {
-        "in": {
-          "type": "uart",
-          "itf": 0
-        }
-      }
-    }
-  },
   "platform": "gvsoc",
   "pulp_compiler": {
     "default": "gcc",
@@ -169,12 +154,23 @@
         "chip",
         "dpi_clock",
         "pulp_chip",
-        "dpi"
+        "dpi",
+        "ref_clock_clock",
+        "ref_clock",
+        "spiflash"
       ],
       "vp_bindings": [
         [
           "dpi_clock->out",
           "dpi->clock"
+        ],
+        [
+          "ref_clock_clock->out",
+          "ref_clock->clock"
+        ],
+        [
+          "ref_clock->clock_sync",
+          "chip->ref_clock"
         ],
         [
           "chip->uart0",
@@ -206,6 +202,7 @@
           "soc"
         ],
         "vp_ports": [
+          "ref_clock",
           "jtag0",
           "cpi0",
           "spim0_cs0_data",
@@ -217,6 +214,7 @@
           "hyper0_cs0",
           "hyper0_cs1_data",
           "hyper0_cs1",
+          "ref_clock",
           "uart0",
           "jtag0",
           "ctrl",
@@ -224,12 +222,20 @@
         ],
         "vp_bindings": [
           [
+            "self->ref_clock",
+            "padframe->ref_clock_pad"
+          ],
+          [
             "self->jtag0",
             "padframe->jtag0_pad"
           ],
           [
             "self->cpi0",
             "padframe->cpi0_pad"
+          ],
+          [
+            "padframe->ref_clock",
+            "soc->ref_clock"
           ],
           [
             "padframe->spim0_cs0_data_pad",
@@ -294,6 +300,10 @@
           [
             "soc->hyper0",
             "padframe->hyper0"
+          ],
+          [
+            "soc->fll_soc_clock",
+            "soc_clock->clock_in"
           ],
           [
             "self->jtag0_pad",
@@ -1352,6 +1362,7 @@
             }
           },
           "vp_ports": [
+            "ref_clock",
             "spim0_cs0_data_pad",
             "spim0_cs0_pad",
             "spim0_cs1_data_pad",
@@ -1363,6 +1374,7 @@
             "hyper0_cs1_data_pad",
             "hyper0_cs1_pad",
             "cpi0",
+            "ref_clock_pad",
             "clock",
             "spim0",
             "uart0",
@@ -1377,7 +1389,8 @@
           "vp_class": "vp/clock_domain",
           "frequency": 50000000,
           "vp_ports": [
-            "out"
+            "out",
+            "clock_in"
           ]
         },
         "soc": {
@@ -1477,11 +1490,14 @@
             "uart",
             "fc_debug",
             "cluster",
+            "cluster_clock",
             "adv_dbg_unit"
           ],
           "vp_ports": [
             "cluster_clock",
+            "ref_clock",
             "jtag0",
+            "fll1",
             "spim0",
             "spim1",
             "uart0",
@@ -1489,6 +1505,8 @@
             "spim0",
             "uart0",
             "hyper0",
+            "fll_soc_clock",
+            "ref_clock",
             "jtag0",
             "cpi0",
             "clock"
@@ -1497,6 +1515,14 @@
             [
               "self->cluster_clock",
               "cluster->clock"
+            ],
+            [
+              "self->ref_clock",
+              "timer->ref_clock"
+            ],
+            [
+              "self->ref_clock",
+              "soc_eu->ref_clock"
             ],
             [
               "self->jtag0",
@@ -1623,6 +1649,10 @@
               "fc_itc->in_event_11"
             ],
             [
+              "soc_eu->ref_clock_event",
+              "fc_itc->in_event_14"
+            ],
+            [
               "soc_eu->fc_event_itf",
               "fc_itc->soc_event"
             ],
@@ -1657,6 +1687,10 @@
             [
               "cluster->soc",
               "axi_ico->input"
+            ],
+            [
+              "cluster_clock->out",
+              "cluster->clock"
             ],
             [
               "adv_dbg_unit->io",
@@ -2071,26 +2105,36 @@
             "power_models": {
               "clock_gated": {
                 "type": "linear",
+                "unit": "W",
                 "values": {
                   "25": {
                     "1.2": {
-                      "any": "1"
-                    },
-                    "1.1": {
-                      "any": "0.9"
+                      "any": "0.0000016"
                     }
                   }
                 }
               },
               "insn": {
                 "type": "linear",
+                "unit": "pJ",
                 "values": {
                   "25": {
                     "1.2": {
-                      "any": "40"
+                      "any": "2.4854524"
                     },
                     "1.1": {
-                      "any": "30"
+                      "any": "1.2"
+                    }
+                  }
+                }
+              },
+              "leakage": {
+                "type": "linear",
+                "unit": "W",
+                "values": {
+                  "25": {
+                    "1.2": {
+                      "any": "0.000030"
                     }
                   }
                 }
@@ -2262,6 +2306,7 @@
             },
             "vp_ports": [
               "irq_req",
+              "in_event_14",
               "input",
               "in_event_22",
               "in_event_23",
@@ -2322,6 +2367,7 @@
             "vp_ports": [
               "irq_itf_0",
               "irq_itf_1",
+              "ref_clock",
               "input"
             ]
           },
@@ -2338,9 +2384,12 @@
               "nb_fc_events": 8,
               "first_fc_event": 48
             },
+            "ref_clock_event": 56,
             "vp_ports": [
+              "ref_clock_event",
               "fc_event_itf",
               "input",
+              "ref_clock",
               "event_in"
             ]
           },
@@ -2350,14 +2399,15 @@
             "vp_class": "pulp/udma/udma_v2",
             "hal_files": [
               "hal/udma/udma_v2.h",
-              "hal/udma/udma_periph_v2.h",
-              "hal/udma/udma_periph_hyper_v1.h",
-              "hal/udma/udma_periph_i2s_v1.h"
+              "hal/udma/i2c/udma_i2c_v2.h",
+              "hal/udma/spim/udma_spim_v2.h",
+              "hal/udma/uart/udma_uart_v1.h"
             ],
             "archi_files": [
               "archi/udma/udma_v2.h",
-              "archi/udma/udma_periph_v2.h",
-              "archi/udma/hyper.h"
+              "archi/udma/i2c/udma_i2c_v2.h",
+              "archi/udma/spim/udma_spim_v2.h",
+              "archi/udma/uart/udma_uart_v1.h"
             ],
             "regmap": {
               "channel": {
@@ -4185,6 +4235,97 @@
               "bank0": {
                 "size": 4096,
                 "vp_class": "memory/memory",
+                "power_models": {
+                  "idle": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00000501264031"
+                        }
+                      }
+                    }
+                  },
+                  "leakage": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00001707210625"
+                        }
+                      }
+                    }
+                  },
+                  "read_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  }
+                },
+                "power_trigger": true,
                 "vp_ports": [
                   "input"
                 ]
@@ -4192,6 +4333,97 @@
               "bank1": {
                 "size": 4096,
                 "vp_class": "memory/memory",
+                "power_models": {
+                  "idle": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00000501264031"
+                        }
+                      }
+                    }
+                  },
+                  "leakage": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00001707210625"
+                        }
+                      }
+                    }
+                  },
+                  "read_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  }
+                },
+                "power_trigger": false,
                 "vp_ports": [
                   "input"
                 ]
@@ -4199,6 +4431,97 @@
               "bank2": {
                 "size": 4096,
                 "vp_class": "memory/memory",
+                "power_models": {
+                  "idle": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00000501264031"
+                        }
+                      }
+                    }
+                  },
+                  "leakage": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00001707210625"
+                        }
+                      }
+                    }
+                  },
+                  "read_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  }
+                },
+                "power_trigger": false,
                 "vp_ports": [
                   "input"
                 ]
@@ -4206,6 +4529,97 @@
               "bank3": {
                 "size": 4096,
                 "vp_class": "memory/memory",
+                "power_models": {
+                  "idle": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00000501264031"
+                        }
+                      }
+                    }
+                  },
+                  "leakage": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00001707210625"
+                        }
+                      }
+                    }
+                  },
+                  "read_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  }
+                },
+                "power_trigger": false,
                 "vp_ports": [
                   "input"
                 ]
@@ -4213,6 +4627,97 @@
               "bank4": {
                 "size": 4096,
                 "vp_class": "memory/memory",
+                "power_models": {
+                  "idle": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00000501264031"
+                        }
+                      }
+                    }
+                  },
+                  "leakage": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00001707210625"
+                        }
+                      }
+                    }
+                  },
+                  "read_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  }
+                },
+                "power_trigger": false,
                 "vp_ports": [
                   "input"
                 ]
@@ -4220,6 +4725,97 @@
               "bank5": {
                 "size": 4096,
                 "vp_class": "memory/memory",
+                "power_models": {
+                  "idle": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00000501264031"
+                        }
+                      }
+                    }
+                  },
+                  "leakage": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00001707210625"
+                        }
+                      }
+                    }
+                  },
+                  "read_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  }
+                },
+                "power_trigger": false,
                 "vp_ports": [
                   "input"
                 ]
@@ -4227,6 +4823,97 @@
               "bank6": {
                 "size": 4096,
                 "vp_class": "memory/memory",
+                "power_models": {
+                  "idle": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00000501264031"
+                        }
+                      }
+                    }
+                  },
+                  "leakage": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00001707210625"
+                        }
+                      }
+                    }
+                  },
+                  "read_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  }
+                },
+                "power_trigger": false,
                 "vp_ports": [
                   "input"
                 ]
@@ -4234,6 +4921,97 @@
               "bank7": {
                 "size": 4096,
                 "vp_class": "memory/memory",
+                "power_models": {
+                  "idle": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00000501264031"
+                        }
+                      }
+                    }
+                  },
+                  "leakage": {
+                    "type": "linear",
+                    "unit": "W",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "0.00001707210625"
+                        }
+                      }
+                    }
+                  },
+                  "read_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "read_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_8": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_16": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  },
+                  "write_32": {
+                    "type": "linear",
+                    "unit": "pJ",
+                    "values": {
+                      "25": {
+                        "1.2": {
+                          "any": "2.124280487"
+                        }
+                      }
+                    }
+                  }
+                },
+                "power_trigger": false,
                 "vp_ports": [
                   "input"
                 ]
@@ -4772,26 +5550,36 @@
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
+                  "unit": "W",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "1"
-                      },
-                      "1.1": {
-                        "any": "0.9"
+                        "any": "0.0000016"
                       }
                     }
                   }
                 },
                 "insn": {
                   "type": "linear",
+                  "unit": "pJ",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "40"
+                        "any": "2.4854524"
                       },
                       "1.1": {
-                        "any": "30"
+                        "any": "1.2"
+                      }
+                    }
+                  }
+                },
+                "leakage": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.000030"
                       }
                     }
                   }
@@ -4842,26 +5630,36 @@
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
+                  "unit": "W",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "1"
-                      },
-                      "1.1": {
-                        "any": "0.9"
+                        "any": "0.0000016"
                       }
                     }
                   }
                 },
                 "insn": {
                   "type": "linear",
+                  "unit": "pJ",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "40"
+                        "any": "2.4854524"
                       },
                       "1.1": {
-                        "any": "30"
+                        "any": "1.2"
+                      }
+                    }
+                  }
+                },
+                "leakage": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.000030"
                       }
                     }
                   }
@@ -4929,26 +5727,36 @@
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
+                  "unit": "W",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "1"
-                      },
-                      "1.1": {
-                        "any": "0.9"
+                        "any": "0.0000016"
                       }
                     }
                   }
                 },
                 "insn": {
                   "type": "linear",
+                  "unit": "pJ",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "40"
+                        "any": "2.4854524"
                       },
                       "1.1": {
-                        "any": "30"
+                        "any": "1.2"
+                      }
+                    }
+                  }
+                },
+                "leakage": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.000030"
                       }
                     }
                   }
@@ -5016,26 +5824,36 @@
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
+                  "unit": "W",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "1"
-                      },
-                      "1.1": {
-                        "any": "0.9"
+                        "any": "0.0000016"
                       }
                     }
                   }
                 },
                 "insn": {
                   "type": "linear",
+                  "unit": "pJ",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "40"
+                        "any": "2.4854524"
                       },
                       "1.1": {
-                        "any": "30"
+                        "any": "1.2"
+                      }
+                    }
+                  }
+                },
+                "leakage": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.000030"
                       }
                     }
                   }
@@ -5103,26 +5921,36 @@
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
+                  "unit": "W",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "1"
-                      },
-                      "1.1": {
-                        "any": "0.9"
+                        "any": "0.0000016"
                       }
                     }
                   }
                 },
                 "insn": {
                   "type": "linear",
+                  "unit": "pJ",
                   "values": {
                     "25": {
                       "1.2": {
-                        "any": "40"
+                        "any": "2.4854524"
                       },
                       "1.1": {
-                        "any": "30"
+                        "any": "1.2"
+                      }
+                    }
+                  }
+                },
+                "leakage": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.000030"
                       }
                     }
                   }
@@ -5150,6 +5978,14 @@
               ]
             }
           },
+          "cluster_clock": {
+            "vp_class": "vp/clock_domain",
+            "frequency": 50000000,
+            "vp_ports": [
+              "out",
+              "clock_in"
+            ]
+          },
           "adv_dbg_unit": {
             "vp_class": "pulp/adv_dbg_unit/adv_dbg_unit",
             "vp_ports": [
@@ -5175,6 +6011,20 @@
           "clock",
           "jtag0",
           "uart0"
+        ]
+      },
+      "ref_clock_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 65536,
+        "vp_ports": [
+          "out"
+        ]
+      },
+      "ref_clock": {
+        "vp_class": "utils/clock",
+        "vp_ports": [
+          "clock_sync",
+          "clock"
         ]
       },
       "tb_comps": [
@@ -5223,6 +6073,17 @@
         "type": "dpi",
         "model": "himax",
         "module": "camera.so"
+      },
+      "spiflash": {
+        "vp_class": "devices/spiflash/spiflash",
+        "type": "spiflash",
+        "size": "0x00800000",
+        "fs": {
+          "files": [],
+          "encrypt": false,
+          "aes_key": 0,
+          "aes_iv": 0
+        }
       }
     }
   },

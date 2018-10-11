@@ -11,6 +11,24 @@
     "l2_read_fifo_size": 8
   },
 
+  "archi_files": [
+    "archi/udma/cpi/udma_cpi_v1.h",
+    "archi/udma/hyper/udma_hyper_v1.h",
+    "archi/udma/i2c/udma_i2c_v2.h",
+    "archi/udma/i2s/udma_i2s_v1.h",
+    "archi/udma/spim/udma_spim_v2.h",
+    "archi/udma/uart/udma_uart_v1.h"
+  ],
+
+  "hal_files": [
+    "hal/udma/cpi/udma_cpi_v1.h",
+    "hal/udma/hyper/udma_hyper_v1.h",
+    "hal/udma/i2c/udma_i2c_v2.h",
+    "hal/udma/i2s/udma_i2s_v1.h",
+    "hal/udma/spim/udma_spim_v2.h",
+    "hal/udma/uart/udma_uart_v1.h"
+  ],
+
   "spim": {
     "version"      : 2,
     "nb_channels"  : 1,

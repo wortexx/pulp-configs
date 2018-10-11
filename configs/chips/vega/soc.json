@@ -133,6 +133,10 @@
       "timer->ref_clock"
     ],
     [
+      "self->ref_clock",
+      "soc_eu->ref_clock"
+    ],
+    [
       "self->cluster_clock",
       "cluster->clock"
     ],
@@ -283,6 +287,10 @@
     [
       "timer->irq_itf_1",
       "fc_itc->in_event_11"
+    ],
+    [
+      "soc_eu->ref_clock_event",
+      "fc_itc->in_event_14"
     ],
     [
       "soc_eu->fc_event_itf",
@@ -817,6 +825,7 @@
     ],
     "vp_ports": [
       "irq_req",
+      "in_event_14",
       "input",
       "in_event_22",
       "in_event_23",
@@ -903,9 +912,12 @@
     "includes": [
       "ips/soc_eu/soc_eu_v2.json"
     ],
+    "ref_clock_event": 56,
     "vp_ports": [
+      "ref_clock_event",
       "fc_event_itf",
       "input",
+      "ref_clock",
       "event_in"
     ]
   },

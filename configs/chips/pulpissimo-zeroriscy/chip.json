@@ -19,6 +19,7 @@
     "soc"
   ],
   "vp_ports": [
+    "ref_clock",
     "jtag0",
     "spim0_cs0_data",
     "spim0_cs0",
@@ -28,8 +29,16 @@
   ],
   "vp_bindings": [
     [
+      "self->ref_clock",
+      "padframe->ref_clock_pad"
+    ],
+    [
       "self->jtag0",
       "padframe->jtag0_pad"
+    ],
+    [
+      "padframe->ref_clock",
+      "soc->ref_clock"
     ],
     [
       "padframe->spim0_cs0_data_pad",
@@ -70,6 +79,10 @@
     [
       "soc->uart0",
       "padframe->uart0"
+    ],
+    [
+      "soc->fll_soc_clock",
+      "soc_clock->clock_in"
     ]
   ],
   "padframe": {
@@ -77,12 +90,14 @@
       "templates/chips/pulpissimo-zeroriscy/padframe.json"
     ],
     "vp_ports": [
+      "ref_clock",
       "spim0_cs0_data_pad",
       "spim0_cs0_pad",
       "spim0_cs1_data_pad",
       "spim0_cs1_pad",
       "uart0_pad",
       "jtag0",
+      "ref_clock_pad",
       "clock",
       "spim0",
       "uart0",
@@ -93,7 +108,8 @@
     "vp_class": "vp/clock_domain",
     "frequency": 50000000,
     "vp_ports": [
-      "out"
+      "out",
+      "clock_in"
     ]
   },
   "soc": {
@@ -103,6 +119,8 @@
     "vp_ports": [
       "spim0",
       "uart0",
+      "fll_soc_clock",
+      "ref_clock",
       "jtag0",
       "clock"
     ]

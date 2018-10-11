@@ -187,14 +187,15 @@
         "vp_class": "pulp/chip",
         "hal_files": [
           "hal/chips/gap/pulp.h",
-          "hal/chips/gap_rev1/pulp.h",
-          "hal/chips/gap_rev1/efuse.h"
+          "hal/chips/gap/pulp.h",
+          "hal/chips/gap/efuse.h"
         ],
         "archi_files": [
           "archi/chips/gap/pulp.h",
           "archi/chips/gap/memory_map.h",
           "archi/chips/gap/properties.h",
-          "archi/chips/gap/apb_soc.h"
+          "archi/chips/gap/apb_soc.h",
+          "archi/chips/gap/padframe.h"
         ],
         "vp_comps": [
           "padframe",
@@ -3880,14 +3881,23 @@
             "vp_class": "pulp/udma/udma_v2",
             "hal_files": [
               "hal/udma/udma_v2.h",
-              "hal/udma/udma_periph_v2.h",
-              "hal/udma/udma_periph_hyper_v1.h",
-              "hal/udma/udma_periph_i2s_v1.h"
+              "hal/udma/cpi/udma_cpi_v1.h",
+              "hal/udma/hyper/udma_hyper_v1.h",
+              "hal/udma/i2c/udma_i2c_v2.h",
+              "hal/udma/i2s/udma_i2s_v1.h",
+              "hal/udma/spim/udma_spim_v2.h",
+              "hal/udma/tcdm/udma_tcdm_v1.h",
+              "hal/udma/uart/udma_uart_v1.h"
             ],
             "archi_files": [
               "archi/udma/udma_v2.h",
-              "archi/udma/udma_periph_v2.h",
-              "archi/udma/hyper.h"
+              "archi/udma/cpi/udma_cpi_v1.h",
+              "archi/udma/hyper/udma_hyper_v1.h",
+              "archi/udma/i2c/udma_i2c_v2.h",
+              "archi/udma/i2s/udma_i2s_v1.h",
+              "archi/udma/spim/udma_spim_v2.h",
+              "archi/udma/tcdm/udma_tcdm_v1.h",
+              "archi/udma/uart/udma_uart_v1.h"
             ],
             "regmap": {
               "channel": {

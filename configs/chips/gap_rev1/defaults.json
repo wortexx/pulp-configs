@@ -14,7 +14,8 @@
   "system_tree": {
     "board": {
       "chip": {
-        "hal_files": [ "hal/chips/gap_rev1/pulp.h", "hal/chips/gap_rev1/efuse.h" ],
+        "archi_files": [ "archi/chips/gap/padframe.h" ],
+        "hal_files": [ "hal/chips/gap/pulp.h", "hal/chips/gap/efuse.h" ],
         "soc": {
           "rtc": {
             "includes": [ "../../ips/rtc/rtc.json" ]

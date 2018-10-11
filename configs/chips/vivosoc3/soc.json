@@ -95,11 +95,14 @@
     "uart",
     "fc_debug",
     "cluster",
+    "cluster_clock",
     "adv_dbg_unit"
   ],
   "vp_ports": [
     "cluster_clock",
+    "ref_clock",
     "jtag0",
+    "fll1",
     "spim0",
     "spim1",
     "uart0",
@@ -109,6 +112,14 @@
     [
       "self->cluster_clock",
       "cluster->clock"
+    ],
+    [
+      "self->ref_clock",
+      "timer->ref_clock"
+    ],
+    [
+      "self->ref_clock",
+      "soc_eu->ref_clock"
     ],
     [
       "self->jtag0",
@@ -235,6 +246,10 @@
       "fc_itc->in_event_11"
     ],
     [
+      "soc_eu->ref_clock_event",
+      "fc_itc->in_event_14"
+    ],
+    [
       "soc_eu->fc_event_itf",
       "fc_itc->soc_event"
     ],
@@ -269,6 +284,10 @@
     [
       "cluster->soc",
       "axi_ico->input"
+    ],
+    [
+      "cluster_clock->out",
+      "cluster->clock"
     ],
     [
       "adv_dbg_unit->io",
@@ -553,7 +572,7 @@
   },
   "pmu": {
     "includes": [
-      "ips/pmu_v2.json"
+      "ips/pmu/pmu_v2.json"
     ],
     "vp_ports": [
       "input"
@@ -638,7 +657,7 @@
   },
   "fc": {
     "includes": [
-      "ips/zeroriscy.json"
+      "ips/riscv/zeroriscy.json"
     ],
     "cluster_id": 31,
     "core_id": 0,
@@ -713,7 +732,7 @@
   },
   "rom": {
     "includes": [
-      "ips/rom_v2.json"
+      "ips/rom/rom_v2.json"
     ],
     "size": 8192,
     "map_base": "0x1A000000",
@@ -733,10 +752,11 @@
   },
   "fc_itc": {
     "includes": [
-      "ips/itc_v1.json"
+      "ips/itc/itc_v1.json"
     ],
     "vp_ports": [
       "irq_req",
+      "in_event_14",
       "input",
       "in_event_22",
       "in_event_23",
@@ -763,7 +783,7 @@
   },
   "stdout": {
     "includes": [
-      "ips/stdout_v3.json"
+      "ips/stdout/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -771,26 +791,30 @@
   },
   "gpio": {
     "includes": [
-      "ips/gpio_v2.json"
+      "ips/gpio/gpio_v2.json"
     ]
   },
   "timer": {
     "includes": [
-      "ips/timer_v2.json"
+      "ips/timer/timer_v2.json"
     ],
     "vp_ports": [
       "irq_itf_0",
       "irq_itf_1",
+      "ref_clock",
       "input"
     ]
   },
   "soc_eu": {
     "includes": [
-      "ips/soc_eu_v1.json"
+      "ips/soc_eu/soc_eu_v1.json"
     ],
+    "ref_clock_event": 56,
     "vp_ports": [
+      "ref_clock_event",
       "fc_event_itf",
       "input",
+      "ref_clock",
       "event_in"
     ]
   },
@@ -823,6 +847,14 @@
       "soc",
       "clock",
       "input"
+    ]
+  },
+  "cluster_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out",
+      "clock_in"
     ]
   },
   "adv_dbg_unit": {
