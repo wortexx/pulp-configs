@@ -194,109 +194,13 @@
           "archi/chips/usoc_v1/apb_soc.h"
         ],
         "vp_comps": [
-          "padframe",
           "soc_clock",
           "soc"
         ],
-        "vp_ports": [
-          "ref_clock",
-          "jtag0",
-          "cpi0",
-          "spim0_cs0_data",
-          "spim0_cs0",
-          "spim0_cs1_data",
-          "spim0_cs1",
-          "uart0",
-          "hyper0_cs0_data",
-          "hyper0_cs0",
-          "hyper0_cs1_data",
-          "hyper0_cs1",
-          "ref_clock",
-          "uart0",
-          "jtag0",
-          "ctrl",
-          "jtag0_pad"
-        ],
         "vp_bindings": [
-          [
-            "self->ref_clock",
-            "padframe->ref_clock_pad"
-          ],
-          [
-            "self->jtag0",
-            "padframe->jtag0_pad"
-          ],
-          [
-            "self->cpi0",
-            "padframe->cpi0_pad"
-          ],
-          [
-            "padframe->ref_clock",
-            "soc->ref_clock"
-          ],
-          [
-            "padframe->spim0_cs0_data_pad",
-            "self->spim0_cs0_data"
-          ],
-          [
-            "padframe->spim0_cs0_pad",
-            "self->spim0_cs0"
-          ],
-          [
-            "padframe->spim0_cs1_data_pad",
-            "self->spim0_cs1_data"
-          ],
-          [
-            "padframe->spim0_cs1_pad",
-            "self->spim0_cs1"
-          ],
-          [
-            "padframe->uart0_pad",
-            "self->uart0"
-          ],
-          [
-            "padframe->jtag0",
-            "soc->jtag0"
-          ],
-          [
-            "padframe->hyper0_cs0_data_pad",
-            "self->hyper0_cs0_data"
-          ],
-          [
-            "padframe->hyper0_cs0_pad",
-            "self->hyper0_cs0"
-          ],
-          [
-            "padframe->hyper0_cs1_data_pad",
-            "self->hyper0_cs1_data"
-          ],
-          [
-            "padframe->hyper0_cs1_pad",
-            "self->hyper0_cs1"
-          ],
-          [
-            "padframe->cpi0",
-            "soc->cpi0"
-          ],
-          [
-            "soc_clock->out",
-            "padframe->clock"
-          ],
           [
             "soc_clock->out",
             "soc->clock"
-          ],
-          [
-            "soc->spim0",
-            "padframe->spim0"
-          ],
-          [
-            "soc->uart0",
-            "padframe->uart0"
-          ],
-          [
-            "soc->hyper0",
-            "padframe->hyper0"
           ],
           [
             "soc->fll_soc_clock",
@@ -311,220 +215,6 @@
             "self->uart0"
           ]
         ],
-        "padframe": {
-          "nb_alternate": 4,
-          "version": 1,
-          "default_profile": "default",
-          "vp_class": "pulp/padframe/padframe_v1",
-          "profiles": {
-            "default": {
-              "alternates": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-              ]
-            },
-            "hyper": {
-              "alternates": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-              ]
-            }
-          },
-          "groups": {
-            "spim0": {
-              "type": "qspim",
-              "nb_cs": 2,
-              "is_master": true
-            },
-            "uart0": {
-              "type": "uart",
-              "is_master": true
-            },
-            "jtag0": {
-              "type": "jtag",
-              "is_slave": true
-            },
-            "hyper0": {
-              "type": "hyper",
-              "is_master": true,
-              "nb_cs": 2
-            },
-            "cpi0": {
-              "type": "cpi",
-              "is_slave": true
-            }
-          },
-          "pads": {
-            "pad_spim0_sdio0 (mosi)": {
-              "id": 0,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "spim0_sdio0",
-                  "groups": [
-                    "spim0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            },
-            "pad_spim0_sdio1 (miso)": {
-              "id": 1,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "spim0_sdio1",
-                  "groups": [
-                    "spim0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            },
-            "pad_spim0_sdio2": {
-              "id": 2,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "spim0_sdio2",
-                  "groups": [
-                    "spim0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            },
-            "pad_spim0_sdio3": {
-              "id": 3,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "spim0_sdio3",
-                  "groups": [
-                    "spim0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            },
-            "pad_spim0_csn0": {
-              "id": 4,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "spim0_cs0",
-                  "groups": [
-                    "spim0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            },
-            "pad_spim0_csn1": {
-              "id": 5,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "spim0_cs1",
-                  "groups": [
-                    "spim0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            },
-            "pad_spim0_sck": {
-              "id": 6,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "spim0_sck",
-                  "groups": [
-                    "spim0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            },
-            "pad_uart_tx": {
-              "id": 7,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "uart_tx",
-                  "groups": [
-                    "uart0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            },
-            "pad_uart_rx": {
-              "id": 8,
-              "position": null,
-              "alternates": [
-                {
-                  "name": "uart_rx",
-                  "groups": [
-                    "uart0"
-                  ]
-                },
-                {},
-                {},
-                {}
-              ]
-            }
-          },
-          "vp_ports": [
-            "ref_clock",
-            "spim0_cs0_data_pad",
-            "spim0_cs0_pad",
-            "spim0_cs1_data_pad",
-            "spim0_cs1_pad",
-            "uart0_pad",
-            "jtag0",
-            "hyper0_cs0_data_pad",
-            "hyper0_cs0_pad",
-            "hyper0_cs1_data_pad",
-            "hyper0_cs1_pad",
-            "cpi0",
-            "ref_clock_pad",
-            "clock",
-            "spim0",
-            "uart0",
-            "jtag0_pad",
-            "hyper0",
-            "cpi0_pad",
-            "uart0_pad",
-            "jtag0_pad"
-          ]
-        },
         "soc_clock": {
           "vp_class": "vp/clock_domain",
           "frequency": 50000000,
@@ -635,13 +325,7 @@
             "spim0",
             "hyper0",
             "uart0",
-            "spim0",
-            "uart0",
-            "hyper0",
             "fll_soc_clock",
-            "ref_clock",
-            "jtag0",
-            "cpi0",
             "clock"
           ],
           "vp_bindings": [
@@ -1998,7 +1682,28 @@
               "io",
               "jtag"
             ]
-          }
+          },
+          "archi_files": [
+            "archi/chips/usoc_v1/apb_soc.h",
+            "archi/chips/usoc_v1/gpio.h"
+          ],
+          "hal_files": [
+            "hal/chips/usoc_v1/apb_soc.h",
+            "hal/chips/usoc_v1/gpio.h"
+          ]
+        },
+        "vp_ports": [
+          "ref_clock",
+          "uart0",
+          "jtag0",
+          "ctrl",
+          "jtag0_pad"
+        ],
+        "padframe": {
+          "vp_ports": [
+            "uart0_pad",
+            "jtag0_pad"
+          ]
         }
       },
       "dpi_clock": {

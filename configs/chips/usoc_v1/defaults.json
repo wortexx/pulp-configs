@@ -11,6 +11,14 @@
   },
 
   "system_tree": {
+    "board": {
+      "chip": {
+        "soc": {
+          "archi_files" : [ "archi/chips/usoc_v1/apb_soc.h", "archi/chips/usoc_v1/gpio.h" ],
+          "hal_files" : [ "hal/chips/usoc_v1/apb_soc.h", "hal/chips/usoc_v1/gpio.h" ]
+        }
+      }
+    },
     "debug_bridge": {
       "adv_dbg_unit": {
         "retry_count": 10,

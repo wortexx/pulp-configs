@@ -1,10 +1,6 @@
 {
   "chip": "usoc_v1",
   "chip_family": "usoc_v1",
-    
-  "padframe": {
-    "content": "templates/chips/usoc_v1/padframe.json"
-  },
 
   "soc": {
     
