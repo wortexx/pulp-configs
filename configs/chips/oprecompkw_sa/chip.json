@@ -21,7 +21,6 @@
   "vp_ports": [
     "ref_clock",
     "jtag0",
-    "spim0",
     "uart0",
     "ddr"
   ],
@@ -39,10 +38,6 @@
       "soc->ref_clock"
     ],
     [
-      "padframe->spim0_pad",
-      "self->spim0"
-    ],
-    [
       "padframe->uart0_pad",
       "self->uart0"
     ],
@@ -57,10 +52,6 @@
     [
       "soc_clock->out",
       "soc->clock"
-    ],
-    [
-      "soc->spim0",
-      "padframe->spim0"
     ],
     [
       "soc->uart0",
@@ -81,12 +72,10 @@
     ],
     "vp_ports": [
       "ref_clock",
-      "spim0_pad",
       "uart0_pad",
       "jtag0",
       "ref_clock_pad",
       "clock",
-      "spim0",
       "uart0",
       "jtag0_pad"
     ]
@@ -104,7 +93,6 @@
       "soc.json"
     ],
     "vp_ports": [
-      "spim0",
       "uart0",
       "fll_soc_clock",
       "ddr",

@@ -207,7 +207,6 @@
         "vp_ports": [
           "ref_clock",
           "jtag0",
-          "spim0",
           "uart0",
           "ref_clock",
           "uart0",
@@ -229,10 +228,6 @@
             "soc->ref_clock"
           ],
           [
-            "padframe->spim0_pad",
-            "self->spim0"
-          ],
-          [
             "padframe->uart0_pad",
             "self->uart0"
           ],
@@ -247,10 +242,6 @@
           [
             "soc_clock->out",
             "soc->clock"
-          ],
-          [
-            "soc->spim0",
-            "padframe->spim0"
           ],
           [
             "soc->uart0",
@@ -288,10 +279,6 @@
             }
           },
           "groups": {
-            "spim0": {
-              "type": "qspim",
-              "is_master": true
-            },
             "uart0": {
               "type": "uart",
               "is_master": true
@@ -440,12 +427,10 @@
           },
           "vp_ports": [
             "ref_clock",
-            "spim0_pad",
             "uart0_pad",
             "jtag0",
             "ref_clock_pad",
             "clock",
-            "spim0",
             "uart0",
             "jtag0_pad",
             "uart0_pad",
@@ -495,7 +480,6 @@
             "cluster_clock",
             "jtag0",
             "fll1",
-            "spim0",
             "uart0",
             "fll_soc_clock",
             "ref_clock",

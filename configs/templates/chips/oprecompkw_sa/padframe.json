@@ -14,10 +14,6 @@
   },
 
   "groups": {
-    "spim0": {
-      "type": "qspim",
-      "is_master": true
-    },
     "uart0": {
       "type": "uart",
       "is_master": true
