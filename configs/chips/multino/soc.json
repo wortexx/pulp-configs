@@ -24,12 +24,15 @@
     "spi_master",
     "uart",
     "cluster",
+    "cluster_clock",
     "cluster_1",
+    "cluster_1_clock",
     "adv_dbg_unit"
   ],
   "vp_ports": [
     "cluster_clock",
-    "jtag0"
+    "jtag0",
+    "fll1"
   ],
   "vp_bindings": [
     [
@@ -109,8 +112,16 @@
       "axi_ico->input"
     ],
     [
+      "cluster_clock->out",
+      "cluster->clock"
+    ],
+    [
       "cluster_1->soc",
       "axi_ico->input"
+    ],
+    [
+      "cluster_1_clock->out",
+      "cluster_1->clock"
     ],
     [
       "adv_dbg_unit->io",
@@ -373,7 +384,7 @@
   },
   "rom": {
     "includes": [
-      "ips/rom_v2.json"
+      "ips/rom/rom_v2.json"
     ],
     "size": 2048,
     "map_base": "0x1A000000",
@@ -401,7 +412,7 @@
   },
   "stdout": {
     "includes": [
-      "ips/stdout_v3.json"
+      "ips/stdout/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -409,12 +420,12 @@
   },
   "gpio": {
     "includes": [
-      "ips/gpio_v2.json"
+      "ips/gpio/gpio_v2.json"
     ]
   },
   "spi_master": {
     "includes": [
-      "ips/spi_master_v1.json"
+      "ips/spi_master/spi_master_v1.json"
     ]
   },
   "uart": {
@@ -430,6 +441,14 @@
       "input"
     ]
   },
+  "cluster_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out",
+      "clock_in"
+    ]
+  },
   "cluster_1": {
     "includes": [
       "chips/multino/cluster_1.json"
@@ -438,6 +457,14 @@
       "soc",
       "clock",
       "input"
+    ]
+  },
+  "cluster_1_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out",
+      "clock_in"
     ]
   },
   "adv_dbg_unit": {

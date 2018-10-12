@@ -18,10 +18,36 @@
     "soc_clock",
     "soc"
   ],
+  "vp_ports": [
+    "ref_clock",
+    "jtag0",
+    "spim0",
+    "uart0"
+  ],
   "vp_bindings": [
     [
+      "self->ref_clock",
+      "padframe->ref_clock_pad"
+    ],
+    [
+      "self->jtag0",
+      "padframe->jtag0_pad"
+    ],
+    [
+      "padframe->ref_clock",
+      "soc->ref_clock"
+    ],
+    [
+      "padframe->spim0_pad",
+      "self->spim0"
+    ],
+    [
+      "padframe->uart0_pad",
+      "self->uart0"
+    ],
+    [
       "padframe->jtag0",
-      "soc->jtag"
+      "soc->jtag0"
     ],
     [
       "soc_clock->out",
@@ -38,24 +64,34 @@
     [
       "soc->uart0",
       "padframe->uart0"
+    ],
+    [
+      "soc->fll_soc_clock",
+      "soc_clock->clock_in"
     ]
   ],
   "padframe": {
     "includes": [
-      "chips/bigpulp/padframe.json"
+      "templates/chips/bigpulp/padframe.json"
     ],
     "vp_ports": [
+      "ref_clock",
+      "spim0_pad",
+      "uart0_pad",
       "jtag0",
+      "ref_clock_pad",
+      "clock",
       "spim0",
       "uart0",
-      "clock"
+      "jtag0_pad"
     ]
   },
   "soc_clock": {
     "vp_class": "vp/clock_domain",
     "frequency": 50000000,
     "vp_ports": [
-      "out"
+      "out",
+      "clock_in"
     ]
   },
   "soc": {
@@ -65,7 +101,9 @@
     "vp_ports": [
       "spim0",
       "uart0",
-      "jtag",
+      "fll_soc_clock",
+      "ref_clock",
+      "jtag0",
       "clock"
     ]
   }

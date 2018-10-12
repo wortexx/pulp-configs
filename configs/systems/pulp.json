@@ -1484,12 +1484,12 @@
             ],
             "hal_files": [
               "hal/riscv/riscv_v4.h",
-              "hal/riscv/builtins_v2.h",
-              "hal/riscv/builtins_v2_emu.h",
               "hal/riscv/types.h"
             ],
             "archi_files": [
               "archi/riscv/priv_1_9.h",
+              "archi/riscv/builtins_v2.h",
+              "archi/riscv/builtins_v2_emu.h",
               "archi/riscv/pcer_v1.h"
             ],
             "defines": [
@@ -7506,12 +7506,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [
@@ -7582,12 +7582,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [
@@ -7674,12 +7674,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [
@@ -7766,12 +7766,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [
@@ -7858,12 +7858,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [
@@ -7950,12 +7950,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [
@@ -8042,12 +8042,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [
@@ -8134,12 +8134,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [
@@ -8226,12 +8226,12 @@
               ],
               "hal_files": [
                 "hal/riscv/riscv_v4.h",
-                "hal/riscv/builtins_v2.h",
-                "hal/riscv/builtins_v2_emu.h",
                 "hal/riscv/types.h"
               ],
               "archi_files": [
                 "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
                 "archi/riscv/pcer_v1.h"
               ],
               "defines": [

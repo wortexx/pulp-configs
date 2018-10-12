@@ -23,6 +23,8 @@
         "dpi_clock",
         "pulp_chip",
         "dpi",
+        "ref_clock_clock",
+        "ref_clock",
         "ddr_clock",
         "ddr"
       ],
@@ -36,6 +38,14 @@
           "dpi->clock"
         ],
         [
+          "ref_clock_clock->out",
+          "ref_clock->clock"
+        ],
+        [
+          "ref_clock->clock_sync",
+          "chip->ref_clock"
+        ],
+        [
           "ddr_clock->out",
           "ddr->clock"
         ]
@@ -45,7 +55,8 @@
           "chip.json"
         ],
         "vp_ports": [
-          "ddr"
+          "ddr",
+          "ref_clock"
         ]
       },
       "dpi_clock": {
@@ -63,6 +74,22 @@
           "periph/dpi_wrapper.json"
         ],
         "vp_ports": [
+          "clock"
+        ]
+      },
+      "ref_clock_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 65536,
+        "vp_ports": [
+          "out"
+        ]
+      },
+      "ref_clock": {
+        "includes": [
+          "ips/misc/clock.json"
+        ],
+        "vp_ports": [
+          "clock_sync",
           "clock"
         ]
       },

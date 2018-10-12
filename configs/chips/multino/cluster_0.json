@@ -1375,6 +1375,12 @@
     "bank0": {
       "size": 8192,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": true,
       "vp_ports": [
         "input"
       ]
@@ -1382,6 +1388,12 @@
     "bank1": {
       "size": 8192,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -1389,6 +1401,12 @@
     "bank2": {
       "size": 8192,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -1396,6 +1414,12 @@
     "bank3": {
       "size": 8192,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -1403,6 +1427,12 @@
     "bank4": {
       "size": 8192,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -1410,6 +1440,12 @@
     "bank5": {
       "size": 8192,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -1417,6 +1453,12 @@
     "bank6": {
       "size": 8192,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -1424,6 +1466,12 @@
     "bank7": {
       "size": 8192,
       "vp_class": "memory/memory",
+      "power_models": {
+        "includes": [
+          "power_models/l1/l1.json"
+        ]
+      },
+      "power_trigger": false,
       "vp_ports": [
         "input"
       ]
@@ -1440,7 +1488,7 @@
   },
   "dma": {
     "includes": [
-      "ips/mchan_v6.json"
+      "ips/mchan/mchan_v6.json"
     ],
     "nb_channels": 5,
     "is_64": false,
@@ -1468,7 +1516,7 @@
   },
   "cluster_ctrl": {
     "includes": [
-      "ips/cluster_ctrl_v2.json"
+      "ips/cluster_ctrl/cluster_ctrl_v2.json"
     ],
     "nb_core": 4,
     "vp_ports": [
@@ -1493,7 +1541,7 @@
   },
   "event_unit": {
     "includes": [
-      "ips/eu_v3.json"
+      "ips/event_unit/eu_v3.json"
     ],
     "nb_core": 4,
     "vp_ports": [
@@ -1534,7 +1582,7 @@
   },
   "timer": {
     "includes": [
-      "ips/timer_v2.json"
+      "ips/timer/timer_v2.json"
     ],
     "vp_ports": [
       "irq_itf_0",
@@ -1544,7 +1592,7 @@
   },
   "icache_ctrl": {
     "includes": [
-      "ips/icache_ctrl_v2.json"
+      "ips/icache_ctrl/icache_ctrl_v2.json"
     ],
     "vp_ports": [
       "input"
@@ -1552,7 +1600,7 @@
   },
   "pe": {
     "includes": [
-      "ips/ri5ky_v2.json"
+      "ips/riscv/ri5ky_v2.json"
     ],
     "cluster_id": 0,
     "core_id": 0,
@@ -1560,7 +1608,7 @@
   },
   "pe0": {
     "includes": [
-      "ips/ri5ky_v2.json"
+      "ips/riscv/ri5ky_v2.json"
     ],
     "cluster_id": 0,
     "core_id": 0,
@@ -1585,7 +1633,7 @@
   },
   "pe1": {
     "includes": [
-      "ips/ri5ky_v2.json"
+      "ips/riscv/ri5ky_v2.json"
     ],
     "cluster_id": 0,
     "core_id": 1,
@@ -1610,7 +1658,7 @@
   },
   "pe2": {
     "includes": [
-      "ips/ri5ky_v2.json"
+      "ips/riscv/ri5ky_v2.json"
     ],
     "cluster_id": 0,
     "core_id": 2,
@@ -1635,7 +1683,7 @@
   },
   "pe3": {
     "includes": [
-      "ips/ri5ky_v2.json"
+      "ips/riscv/ri5ky_v2.json"
     ],
     "cluster_id": 0,
     "core_id": 3,

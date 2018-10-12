@@ -15,11 +15,13 @@
     "apb_uart",
     "uart",
     "cluster",
+    "cluster_clock",
     "adv_dbg_unit"
   ],
   "vp_ports": [
     "cluster_clock",
-    "jtag0"
+    "jtag0",
+    "fll1"
   ],
   "vp_bindings": [
     [
@@ -65,6 +67,10 @@
     [
       "cluster->soc",
       "axi_ico->input"
+    ],
+    [
+      "cluster_clock->out",
+      "cluster->clock"
     ],
     [
       "adv_dbg_unit->io",
@@ -239,7 +245,7 @@
   },
   "stdout": {
     "includes": [
-      "ips/stdout_v3.json"
+      "ips/stdout/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -247,7 +253,7 @@
   },
   "apb_uart": {
     "includes": [
-      "ips/uart_v0.json"
+      "ips/uart/uart_v0.json"
     ]
   },
   "uart": {
@@ -261,6 +267,14 @@
       "soc",
       "clock",
       "input"
+    ]
+  },
+  "cluster_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out",
+      "clock_in"
     ]
   },
   "adv_dbg_unit": {
