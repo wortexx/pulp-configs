@@ -70,7 +70,7 @@
   },
 
   "i2s": {
-    "version"      : 1,
+    "version"      : 2,
     "nb_channels"  : 1,
     "ids"          : [10],
     "offsets"      : ["0x500"]

@@ -110,7 +110,7 @@
           "name": "",
           "desc": "Enables LSB shifting"
         },
-        "2ch": {
+        "two_channels": {
           "bit": 17,
           "width": 1,
           "access": "R/W",
@@ -155,7 +155,7 @@
           "name": "",
           "desc": "Enables LSB shifting"
         },
-        "2ch": {
+        "two_channels": {
           "bit": 17,
           "width": 1,
           "access": "R/W",
