@@ -2588,7 +2588,7 @@
               ]
             },
             "i2s": {
-              "version": "2",
+              "version": 2,
               "regmap": {
                 "clkcfg_setup": {
                   "desc": "Clock configuration for both master, slave and pdm",
