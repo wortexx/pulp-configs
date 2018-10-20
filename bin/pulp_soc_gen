@@ -43,6 +43,7 @@ has_fc_ico        = tp.get('soc/fc_ico') is not None
 has_fc_eu         = tp.get('soc/fc_ico/peripherals/fc_eu') is not None
 has_fc_tcdm       = tp.get('soc/fc_ico/peripherals/fc_tcdm') is not None
 has_ddr           = tp.get('soc/ddr') is not None
+has_rtc           = tp.get('soc/peripherals/rtc') is not None
 has_udma          = tp.get('soc/peripherals/udma') is not None
 udma_conf         = None
 if has_udma:
@@ -488,6 +489,22 @@ if has_pmu:
       includes= ["ips/pmu/pmu_v%d.json" % tp.get_child_int("soc/peripherals/pmu/version")]
   )
 
+for name, config in tp.get("soc/peripherals").get_items().items():
+  file = config.get_child_str("file")
+  if file is not None:
+    apb_soc_mappings.update({
+      name : get_mapping(config.get_dict(), True),
+    })
+    comp_config = {}
+    if config.get('config') is not None:
+      comp_config = config.get('config').get_dict()
+    soc.add_component(name, Component(
+        includes= [ file ],
+        **comp_config
+    ))
+    soc.apb_ico.set(name, soc.get(name).input)
+
+
 if has_fc_icache:
   soc.fc_icache = Component(
       includes= ["ips/icache_ctrl/icache_ctrl_v%d.json" % tp.get_child_int("soc/fc_ico/peripherals/fc_icache/version")]
@@ -649,6 +666,11 @@ if has_pmu and has_fc:
   else:
     soc.apb_soc_ctrl.cluster_power_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_pok'))
     soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_cg_ok'))
+
+# RTC
+if has_rtc:
+  soc.rtc.event = soc.soc_eu.event_in
+  soc.ref_clock = soc.rtc.ref_clock
 
 # ROM
 if has_rom:
