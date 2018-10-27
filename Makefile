@@ -113,7 +113,7 @@ gen.gap:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap/gap.json --output-dir=$(CURDIR)/configs/chips/gap --output=configs/systems/gap.json --usecase=usecases/jtag-cam-spi.json
 
 gen.gap_rev1:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap_rev1/gap_rev1.json --output-dir=$(CURDIR)/configs/chips/gap_rev1 --output=configs/systems/gap_rev1.json --usecase=usecases/jtag-cam.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap_rev1/gap_rev1.json --output-dir=$(CURDIR)/configs/chips/gap_rev1 --output=configs/systems/gap_rev1.json --usecase=usecases/jtag-cam-spi.json
 
 gen.vivosoc3:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/vivosoc3/vivosoc3.json --output-dir=$(CURDIR)/configs/chips/vivosoc3 --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json

@@ -151,7 +151,8 @@
         "dpi",
         "ref_clock_clock",
         "ref_clock",
-        "spiflash"
+        "spiflash",
+        "spiflash_clock"
       ],
       "vp_bindings": [
         [
@@ -171,12 +172,24 @@
           "dpi->uart0"
         ],
         [
+          "chip->spim0_cs0",
+          "spiflash->cs"
+        ],
+        [
+          "chip->spim0_cs0_data",
+          "spiflash->input"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ],
         [
           "dpi->cpi0",
           "chip->cpi0_pad"
+        ],
+        [
+          "spiflash_clock->out",
+          "spiflash->clock"
         ]
       ],
       "chip": {
@@ -225,6 +238,8 @@
           "ctrl",
           "jtag0_pad",
           "cpi0_pad",
+          "spim0_cs0",
+          "spim0_cs0_data",
           "cpi0"
         ],
         "vp_bindings": [
@@ -2728,7 +2743,7 @@
               "ARCHI_CORE_HAS_SECURITY"
             ],
             "fetch_enable": true,
-            "boot_addr": "0x1C000000",
+            "boot_addr": "0x1A000000",
             "power_models": {
               "clock_gated": {
                 "type": "linear",
@@ -10058,7 +10073,19 @@
           "encrypt": false,
           "aes_key": 0,
           "aes_iv": 0
-        }
+        },
+        "vp_ports": [
+          "cs",
+          "input",
+          "clock"
+        ]
+      },
+      "spiflash_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 50000000,
+        "vp_ports": [
+          "out"
+        ]
       }
     }
   },
