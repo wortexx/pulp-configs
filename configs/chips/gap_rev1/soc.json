@@ -87,6 +87,7 @@
     "stdout",
     "fc_tcdm",
     "gpio",
+    "rtc",
     "fc_icache",
     "timer",
     "soc_eu",
@@ -131,6 +132,10 @@
       "soc_eu->ref_clock"
     ],
     [
+      "self->ref_clock",
+      "rtc->ref_clock"
+    ],
+    [
       "self->cluster_clock",
       "cluster->clock"
     ],
@@ -169,6 +174,10 @@
     [
       "soc_ico->l2",
       "l2->input"
+    ],
+    [
+      "apb_ico->rtc",
+      "rtc->input"
     ],
     [
       "apb_ico->stdout",
@@ -277,6 +286,10 @@
     [
       "apb_soc_ctrl->cluster_clock_gate_irq",
       "fc_eu->in_event_23_pe_0"
+    ],
+    [
+      "rtc->event",
+      "soc_eu->event_in"
     ],
     [
       "timer->irq_itf_0",
@@ -670,9 +683,15 @@
         "base": "0x1A000000",
         "size": "0x00002000",
         "remove_offset": "0x1A000000"
+      },
+      "rtc": {
+        "base": "0x1A108000",
+        "size": "0x00001000",
+        "remove_offset": "0x1A108000"
       }
     },
     "vp_ports": [
+      "rtc",
       "stdout",
       "fll",
       "fll1",
@@ -867,6 +886,20 @@
   "gpio": {
     "includes": [
       "ips/gpio/gpio_v2.json"
+    ]
+  },
+  "rtc": {
+    "includes": [
+      "ips/vendors/dolphin/rtc.json"
+    ],
+    "apb_irq_soc_event": 43,
+    "irq_soc_event": 44,
+    "calendar_time": "0x00124808",
+    "calendar_date": "0x00171228",
+    "vp_ports": [
+      "event",
+      "input",
+      "ref_clock"
     ]
   },
   "fc_icache": {

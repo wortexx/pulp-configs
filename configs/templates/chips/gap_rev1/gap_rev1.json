@@ -262,6 +262,18 @@
         "size"         : "0x00000800"
       },
 
+      "rtc": {
+        "file"         : "ips/vendors/dolphin/rtc.json",
+        "base"         : "0x1A108000",
+        "size"         : "0x00001000",
+        "config": {
+          "apb_irq_soc_event": 43,
+          "irq_soc_event"    : 44,
+          "calendar_time"    : "0x00124808",
+          "calendar_date"    : "0x00171228"
+        }
+      },
+
       "efuse": {
         "version"      : 1,
         "base"         : "0x1A109000",
