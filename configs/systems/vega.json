@@ -1213,6 +1213,10 @@
             ],
             "isa": "rv32imfcXpulpv2",
             "march": "imfcXpulpv2",
+            "compiler_args": [
+              "-mabi=ilp32f",
+              "-mfdiv"
+            ],
             "priv_version": 1.9,
             "perf_counters": true,
             "features": [
@@ -7451,13 +7455,22 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
-                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--itc-external-req"
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
               ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -7479,84 +7492,6 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": false,
-              "boot_addr": "0x1C000000",
-              "power_models": {
-                "clock_gated": {
-                  "type": "linear",
-                  "unit": "W",
-                  "values": {
-                    "25": {
-                      "1.2": {
-                        "any": "0.0000016"
-                      }
-                    }
-                  }
-                },
-                "insn": {
-                  "type": "linear",
-                  "unit": "pJ",
-                  "values": {
-                    "25": {
-                      "1.2": {
-                        "any": "2.4854524"
-                      },
-                      "1.1": {
-                        "any": "1.2"
-                      }
-                    }
-                  }
-                },
-                "leakage": {
-                  "type": "linear",
-                  "unit": "W",
-                  "values": {
-                    "25": {
-                      "1.2": {
-                        "any": "0.000030"
-                      }
-                    }
-                  }
-                }
-              },
-              "cluster_id": 0,
-              "core_id": 0
-            },
-            "pe0": {
-              "version": "ri5cyv2",
-              "archi": "riscv",
-              "implementation": "ri5cy",
-              "gv_isa": [
-                "--pulpv2",
-                "--pulp",
-                "--rv32m",
-                "--itc-external-req"
-              ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
-              "priv_version": 1.9,
-              "perf_counters": true,
-              "features": [
-                "misaligned",
-                "perf"
-              ],
-              "hal_files": [
-                "hal/riscv/riscv_v4.h",
-                "hal/riscv/types.h"
-              ],
-              "archi_files": [
-                "archi/riscv/priv_1_9.h",
-                "archi/riscv/builtins_v2.h",
-                "archi/riscv/builtins_v2_emu.h",
-                "archi/riscv/pcer_v1.h"
-              ],
-              "defines": [
-                "ARCHI_CORE_HAS_PULPV2",
-                "CORE_PULP_BUILTINS"
-              ],
-              "vp_class": "cpu/iss/iss",
-              "fetch_enable": null,
-              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -7597,6 +7532,92 @@
               },
               "cluster_id": 0,
               "core_id": 0,
+              "boot_addr": "0x1C000000"
+            },
+            "pe0": {
+              "version": "ri5cyv2",
+              "archi": "riscv",
+              "implementation": "ri5cy",
+              "gv_isa": [
+                "--pulp",
+                "--rv32m",
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
+              ],
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
+              "priv_version": 1.9,
+              "perf_counters": true,
+              "features": [
+                "misaligned",
+                "perf"
+              ],
+              "hal_files": [
+                "hal/riscv/riscv_v4.h",
+                "hal/riscv/types.h"
+              ],
+              "archi_files": [
+                "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
+                "archi/riscv/pcer_v1.h"
+              ],
+              "defines": [
+                "ARCHI_CORE_HAS_PULPV2",
+                "CORE_PULP_BUILTINS"
+              ],
+              "vp_class": "cpu/iss/iss",
+              "power_models": {
+                "clock_gated": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.0000016"
+                      }
+                    }
+                  }
+                },
+                "insn": {
+                  "type": "linear",
+                  "unit": "pJ",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "2.4854524"
+                      },
+                      "1.1": {
+                        "any": "1.2"
+                      }
+                    }
+                  }
+                },
+                "leakage": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.000030"
+                      }
+                    }
+                  }
+                }
+              },
+              "cluster_id": 0,
+              "core_id": 0,
+              "fetch_enable": null,
+              "boot_addr": null,
               "vp_ports": [
                 "halt_status",
                 "data",
@@ -7619,13 +7640,22 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
-                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--itc-external-req"
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
               ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -7647,8 +7677,6 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": null,
-              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -7689,6 +7717,8 @@
               },
               "cluster_id": 0,
               "core_id": 1,
+              "fetch_enable": null,
+              "boot_addr": null,
               "vp_ports": [
                 "halt_status",
                 "data",
@@ -7711,13 +7741,22 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
-                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--itc-external-req"
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
               ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -7739,8 +7778,6 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": null,
-              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -7781,6 +7818,8 @@
               },
               "cluster_id": 0,
               "core_id": 2,
+              "fetch_enable": null,
+              "boot_addr": null,
               "vp_ports": [
                 "halt_status",
                 "data",
@@ -7803,13 +7842,22 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
-                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--itc-external-req"
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
               ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -7831,8 +7879,6 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": null,
-              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -7873,6 +7919,8 @@
               },
               "cluster_id": 0,
               "core_id": 3,
+              "fetch_enable": null,
+              "boot_addr": null,
               "vp_ports": [
                 "halt_status",
                 "data",
@@ -7895,13 +7943,22 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
-                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--itc-external-req"
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
               ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -7923,8 +7980,6 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": null,
-              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -7965,6 +8020,8 @@
               },
               "cluster_id": 0,
               "core_id": 4,
+              "fetch_enable": null,
+              "boot_addr": null,
               "vp_ports": [
                 "halt_status",
                 "data",
@@ -7987,13 +8044,22 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
-                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--itc-external-req"
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
               ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8015,8 +8081,6 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": null,
-              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -8057,6 +8121,8 @@
               },
               "cluster_id": 0,
               "core_id": 5,
+              "fetch_enable": null,
+              "boot_addr": null,
               "vp_ports": [
                 "halt_status",
                 "data",
@@ -8079,13 +8145,22 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
-                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--itc-external-req"
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
               ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8107,8 +8182,6 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": null,
-              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -8149,6 +8222,8 @@
               },
               "cluster_id": 0,
               "core_id": 6,
+              "fetch_enable": null,
+              "boot_addr": null,
               "vp_ports": [
                 "halt_status",
                 "data",
@@ -8171,13 +8246,22 @@
               "archi": "riscv",
               "implementation": "ri5cy",
               "gv_isa": [
-                "--pulpv2",
                 "--pulp",
                 "--rv32m",
-                "--itc-external-req"
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
               ],
-              "march": "imcXpulpv2",
-              "isa": "rv32imcXpulpv2",
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mabi=ilp32f",
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8199,8 +8283,6 @@
                 "CORE_PULP_BUILTINS"
               ],
               "vp_class": "cpu/iss/iss",
-              "fetch_enable": null,
-              "boot_addr": null,
               "power_models": {
                 "clock_gated": {
                   "type": "linear",
@@ -8241,6 +8323,8 @@
               },
               "cluster_id": 0,
               "core_id": 7,
+              "fetch_enable": null,
+              "boot_addr": null,
               "vp_ports": [
                 "halt_status",
                 "data",
