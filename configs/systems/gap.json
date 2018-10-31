@@ -87,7 +87,7 @@
     "werror": true,
     "assert": false,
     "trace": false,
-    "trace_level": 0,
+    "trace-level": "trace",
     "traces": "all",
     "libc": false,
     "no-rt": false,
@@ -2237,6 +2237,10 @@
               "fc_eu->in_event_23_pe_0"
             ],
             [
+              "apb_soc_ctrl->confreg_soc",
+              "adv_dbg_unit->confreg_soc"
+            ],
+            [
               "rtc->event",
               "soc_eu->event_in"
             ],
@@ -2295,6 +2299,10 @@
             [
               "adv_dbg_unit->io",
               "soc_ico->debug"
+            ],
+            [
+              "adv_dbg_unit->confreg_ext",
+              "apb_soc_ctrl->confreg_ext"
             ]
           ],
           "axi_ico": {
@@ -3828,7 +3836,9 @@
               "event",
               "cluster_power_irq",
               "cluster_clock_gate_irq",
-              "input"
+              "confreg_soc",
+              "input",
+              "confreg_ext"
             ]
           },
           "stdout": {
@@ -5393,6 +5403,10 @@
                   "base": "0x00200000",
                   "size": "0x00200000",
                   "add_offset": "268435456"
+                },
+                "error": {
+                  "base": "0x10000000",
+                  "size": "0x400000"
                 },
                 "soc": {}
               },
@@ -10000,7 +10014,9 @@
             "vp_class": "pulp/adv_dbg_unit/adv_dbg_unit",
             "vp_ports": [
               "io",
-              "jtag"
+              "confreg_ext",
+              "jtag",
+              "confreg_soc"
             ]
           }
         }
