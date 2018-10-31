@@ -758,6 +758,9 @@ if has_fc:
 soc.adv_dbg_unit.io = soc.soc_ico.debug
 soc.jtag0 = soc.adv_dbg_unit.jtag
 
+#soc.apb_soc_ctrl.confreg_soc = soc.adv_dbg_unit.confreg_soc
+#soc.adv_dbg_unit.confreg_ext = soc.apb_soc_ctrl.confreg_ext
+
 # Loader
 soc.plt_loader.out = soc.soc_ico.debug
 

@@ -77,7 +77,7 @@
     "werror"         : true,
     "assert"         : false,
     "trace"          : false,
-    "trace_level"    : 0,
+    "trace-level"    : "trace",
     "traces"         : "all",
     "libc"           : false,
     "no-rt"          : false,

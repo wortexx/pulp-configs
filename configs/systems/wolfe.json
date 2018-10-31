@@ -89,7 +89,7 @@
     "werror": true,
     "assert": false,
     "trace": false,
-    "trace_level": 0,
+    "trace-level": "trace",
     "traces": "all",
     "libc": false,
     "no-rt": false,
@@ -4115,6 +4115,10 @@
                   "size": "0x00200000",
                   "add_offset": "268435456"
                 },
+                "error": {
+                  "base": "0x10000000",
+                  "size": "0x400000"
+                },
                 "soc": {}
               },
               "vp_ports": [
@@ -7827,6 +7831,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -7907,6 +7914,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8004,6 +8014,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8101,6 +8114,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8198,6 +8214,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8295,6 +8314,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8392,6 +8414,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8489,6 +8514,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8586,6 +8614,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [

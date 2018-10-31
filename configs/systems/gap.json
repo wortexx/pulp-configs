@@ -3702,7 +3702,7 @@
             "version": 2,
             "vp_class": "pulp/chips/gap/apb_soc",
             "hal_files": [
-              "hal/apb_soc/apb_soc_v2.h"
+              "hal/chips/gap/apb_soc.h"
             ],
             "regmap": {
               "power": {
