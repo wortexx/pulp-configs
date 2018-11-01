@@ -159,6 +159,10 @@
           "dpi->clock"
         ],
         [
+          "dpi->chip_reset",
+          "chip->reset"
+        ],
+        [
           "ref_clock_clock->out",
           "ref_clock->clock"
         ],
@@ -231,6 +235,7 @@
           "hyper0_cs0",
           "hyper0_cs1_data",
           "hyper0_cs1",
+          "reset",
           "ref_clock",
           "uart0",
           "jtag0",
@@ -10034,6 +10039,7 @@
       "dpi": {
         "vp_class": "utils/dpi_wrapper",
         "vp_ports": [
+          "chip_reset",
           "clock",
           "jtag0",
           "cpi0",

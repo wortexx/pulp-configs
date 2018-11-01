@@ -124,6 +124,7 @@ system.system_tree.board.dpi = Component(
 )
 
 system.system_tree.board.dpi_clock.out = system.system_tree.board.dpi.clock
+system.system_tree.board.dpi.chip_reset = system.system_tree.board.chip.reset
 
 
 system.system_tree.board.ref_clock_clock = Component(
