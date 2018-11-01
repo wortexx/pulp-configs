@@ -21,7 +21,9 @@
   "vp_ports": [
     "ref_clock",
     "jtag0",
-    "spim0",
+    "cpi0",
+    "spim0_cs0_data",
+    "spim0_cs0",
     "uart0"
   ],
   "vp_bindings": [
@@ -34,12 +36,20 @@
       "padframe->jtag0_pad"
     ],
     [
+      "self->cpi0",
+      "padframe->cpi0_pad"
+    ],
+    [
       "padframe->ref_clock",
       "soc->ref_clock"
     ],
     [
-      "padframe->spim0_pad",
-      "self->spim0"
+      "padframe->spim0_cs0_data_pad",
+      "self->spim0_cs0_data"
+    ],
+    [
+      "padframe->spim0_cs0_pad",
+      "self->spim0_cs0"
     ],
     [
       "padframe->uart0_pad",
@@ -48,6 +58,10 @@
     [
       "padframe->jtag0",
       "soc->jtag0"
+    ],
+    [
+      "padframe->cpi0",
+      "soc->cpi0"
     ],
     [
       "soc_clock->out",
@@ -76,14 +90,17 @@
     ],
     "vp_ports": [
       "ref_clock",
-      "spim0_pad",
+      "spim0_cs0_data_pad",
+      "spim0_cs0_pad",
       "uart0_pad",
       "jtag0",
+      "cpi0",
       "ref_clock_pad",
       "clock",
       "spim0",
       "uart0",
-      "jtag0_pad"
+      "jtag0_pad",
+      "cpi0_pad"
     ]
   },
   "soc_clock": {
@@ -104,6 +121,7 @@
       "fll_soc_clock",
       "ref_clock",
       "jtag0",
+      "cpi0",
       "clock"
     ]
   }

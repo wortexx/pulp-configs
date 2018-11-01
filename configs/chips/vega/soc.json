@@ -675,9 +675,9 @@
         "remove_offset": "0x1A102000"
       },
       "fc_itc": {
-        "base": "0x1A109800",
-        "size": "0x00000800",
-        "remove_offset": "0x1A109800"
+        "base": "0x1A109000",
+        "size": "0x00001000",
+        "remove_offset": "0x1A109000"
       },
       "fc_debug": {
         "base": "0x1A110000",
@@ -731,7 +731,7 @@
     "cluster_id": 31,
     "core_id": 0,
     "fetch_enable": true,
-    "boot_addr": "0x1C008000",
+    "boot_addr": "0x1A000000",
     "vp_ports": [
       "fetch",
       "data",

@@ -87,7 +87,7 @@
     "werror": true,
     "assert": false,
     "trace": false,
-    "trace_level": 0,
+    "trace-level": "trace",
     "traces": "all",
     "libc": false,
     "no-rt": false,
@@ -158,6 +158,10 @@
           "dpi->clock"
         ],
         [
+          "dpi->chip_reset",
+          "chip->reset"
+        ],
+        [
           "ref_clock_clock->out",
           "ref_clock->clock"
         ],
@@ -201,8 +205,11 @@
         "vp_ports": [
           "ref_clock",
           "jtag0",
-          "spim0",
+          "cpi0",
+          "spim0_cs0_data",
+          "spim0_cs0",
           "uart0",
+          "reset",
           "ref_clock",
           "uart0",
           "jtag0",
@@ -221,12 +228,20 @@
             "padframe->jtag0_pad"
           ],
           [
+            "self->cpi0",
+            "padframe->cpi0_pad"
+          ],
+          [
             "padframe->ref_clock",
             "soc->ref_clock"
           ],
           [
-            "padframe->spim0_pad",
-            "self->spim0"
+            "padframe->spim0_cs0_data_pad",
+            "self->spim0_cs0_data"
+          ],
+          [
+            "padframe->spim0_cs0_pad",
+            "self->spim0_cs0"
           ],
           [
             "padframe->uart0_pad",
@@ -235,6 +250,10 @@
           [
             "padframe->jtag0",
             "soc->jtag0"
+          ],
+          [
+            "padframe->cpi0",
+            "soc->cpi0"
           ],
           [
             "soc_clock->out",
@@ -281,6 +300,7 @@
           "groups": {
             "spim0": {
               "type": "qspim",
+              "nb_cs": 1,
               "is_master": true
             },
             "uart0": {
@@ -289,6 +309,10 @@
             },
             "jtag0": {
               "type": "jtag",
+              "is_slave": true
+            },
+            "cpi0": {
+              "type": "cpi",
               "is_slave": true
             }
           },
@@ -431,14 +455,17 @@
           },
           "vp_ports": [
             "ref_clock",
-            "spim0_pad",
+            "spim0_cs0_data_pad",
+            "spim0_cs0_pad",
             "uart0_pad",
             "jtag0",
+            "cpi0",
             "ref_clock_pad",
             "clock",
             "spim0",
             "uart0",
             "jtag0_pad",
+            "cpi0_pad",
             "uart0_pad",
             "jtag0_pad",
             "cpi0_pad"
@@ -573,6 +600,7 @@
             "fll_soc_clock",
             "ref_clock",
             "jtag0",
+            "cpi0",
             "clock"
           ],
           "vp_bindings": [
@@ -1147,9 +1175,9 @@
                 "remove_offset": "0x1A102000"
               },
               "fc_itc": {
-                "base": "0x1A109800",
-                "size": "0x00000800",
-                "remove_offset": "0x1A109800"
+                "base": "0x1A109000",
+                "size": "0x00001000",
+                "remove_offset": "0x1A109000"
               },
               "fc_debug": {
                 "base": "0x1A110000",
@@ -1282,7 +1310,7 @@
             "cluster_id": 31,
             "core_id": 0,
             "fetch_enable": true,
-            "boot_addr": "0x1C008000",
+            "boot_addr": "0x1A000000",
             "vp_ports": [
               "fetch",
               "data",
@@ -1951,6 +1979,7 @@
           },
           "apb_soc_ctrl": {
             "version": 3,
+            "vp_class": "pulp/chips/vega/apb_soc",
             "hal_files": [
               "hal/apb_soc/apb_soc_v3.h"
             ],
@@ -2516,8 +2545,8 @@
                 }
               }
             },
-            "vp_impl": "pulp.udma.udma_v3_veg_impl",
-            "nb_periphs": 7,
+            "vp_impl": "pulp.udma.udma_v3_vega_impl",
+            "nb_periphs": 12,
             "properties": {
               "l2_read_fifo_size": 8
             },
@@ -2541,7 +2570,8 @@
               "offsets": [
                 "0x000",
                 "0x080",
-                "0x100, 0x180"
+                "0x100",
+                "0x180"
               ],
               "is_master": true
             },
@@ -3740,6 +3770,10 @@
                   "base": "0x00200000",
                   "size": "0x00200000",
                   "add_offset": "268435456"
+                },
+                "error": {
+                  "base": "0x10000000",
+                  "size": "0x400000"
                 },
                 "soc": {}
               },
@@ -8393,6 +8427,7 @@
       "dpi": {
         "vp_class": "utils/dpi_wrapper",
         "vp_ports": [
+          "chip_reset",
           "clock",
           "jtag0",
           "cpi0",
