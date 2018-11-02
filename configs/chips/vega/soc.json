@@ -635,9 +635,9 @@
     ],
     "mappings": {
       "stdout": {
-        "base": "0x1A10F000",
+        "base": "0x1A120000",
         "size": "0x00001000",
-        "remove_offset": "0x1A10F000"
+        "remove_offset": "0x1A120000"
       },
       "apb_soc_ctrl": {
         "base": "0x1A104000",

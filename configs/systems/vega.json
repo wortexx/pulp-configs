@@ -150,7 +150,8 @@
         "dpi",
         "ref_clock_clock",
         "ref_clock",
-        "spiflash"
+        "spiflash",
+        "spiflash_clock"
       ],
       "vp_bindings": [
         [
@@ -174,12 +175,24 @@
           "dpi->uart0"
         ],
         [
+          "chip->spim0_cs0",
+          "spiflash->cs"
+        ],
+        [
+          "chip->spim0_cs0_data",
+          "spiflash->input"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ],
         [
           "dpi->cpi0",
           "chip->cpi0_pad"
+        ],
+        [
+          "spiflash_clock->out",
+          "spiflash->clock"
         ]
       ],
       "chip": {
@@ -216,6 +229,8 @@
           "ctrl",
           "jtag0_pad",
           "cpi0_pad",
+          "spim0_cs0",
+          "spim0_cs0_data",
           "cpi0"
         ],
         "vp_bindings": [
@@ -1135,9 +1150,9 @@
             "id": 0,
             "mappings": {
               "stdout": {
-                "base": "0x1A10F000",
+                "base": "0x1A120000",
                 "size": "0x00001000",
-                "remove_offset": "0x1A10F000"
+                "remove_offset": "0x1A120000"
               },
               "apb_soc_ctrl": {
                 "base": "0x1A104000",
@@ -1239,7 +1254,7 @@
               "--fpud",
               "--shared-fpu"
             ],
-            "isa": "rv32imfcXpulpv2",
+            "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
             "march": "imfcXpulpv2",
             "compiler_args": [
               "-mabi=ilp32f",
@@ -2573,7 +2588,13 @@
                 "0x100",
                 "0x180"
               ],
-              "is_master": true
+              "is_master": true,
+              "eot_events": [
+                3,
+                7,
+                11,
+                15
+              ]
             },
             "uart": {
               "version": 1,
@@ -7499,7 +7520,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -7583,7 +7604,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -7684,7 +7705,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -7785,7 +7806,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -7886,7 +7907,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -7987,7 +8008,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -8088,7 +8109,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -8189,7 +8210,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -8290,7 +8311,7 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "march": "imfcXpulpv2",
               "compiler_args": [
                 "-mabi=ilp32f",
@@ -8511,7 +8532,19 @@
           "encrypt": false,
           "aes_key": 0,
           "aes_iv": 0
-        }
+        },
+        "vp_ports": [
+          "cs",
+          "input",
+          "clock"
+        ]
+      },
+      "spiflash_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 50000000,
+        "vp_ports": [
+          "out"
+        ]
       }
     }
   },

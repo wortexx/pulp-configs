@@ -248,7 +248,7 @@
 
       "stdout": {
         "version"      : 3,
-        "base"         : "0x1A10F000",
+        "base"         : "0x1A120000",
         "size"         : "0x00001000"
       },
 
