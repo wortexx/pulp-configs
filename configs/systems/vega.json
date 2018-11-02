@@ -1254,10 +1254,9 @@
               "--fpud",
               "--shared-fpu"
             ],
-            "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+            "isa": "rv32imfcXpulpv2",
             "march": "imfcXpulpv2",
             "compiler_args": [
-              "-mabi=ilp32f",
               "-mfdiv"
             ],
             "priv_version": 1.9,
@@ -7520,10 +7519,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
@@ -7604,10 +7602,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
@@ -7705,10 +7702,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
@@ -7806,10 +7802,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
@@ -7907,10 +7902,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
@@ -8008,10 +8002,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
@@ -8109,10 +8102,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
@@ -8210,10 +8202,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
@@ -8311,10 +8302,9 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
               "compiler_args": [
-                "-mabi=ilp32f",
                 "-mfdiv"
               ],
               "priv_version": 1.9,
