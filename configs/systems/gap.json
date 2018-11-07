@@ -10163,6 +10163,7 @@
         "type": "dpi",
         "model": "himax",
         "module": "camera.so",
+        "color-mode": "gray",
         "vp_ports": [
           "cpi",
           "i2c"

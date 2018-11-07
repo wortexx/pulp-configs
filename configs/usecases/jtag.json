@@ -92,7 +92,8 @@
       "camera": {
         "type": "dpi",
         "model": "himax",
-        "module": "camera.so"
+        "module": "camera.so",
+        "color-mode": "gray"
       },
       "spiflash": {
         "vp_class": "devices/spiflash/spiflash",
