@@ -11,7 +11,7 @@
     "size": "0x06000000",
 
     "fc": {
-      "core"        : "ri5ky_v2_fpu",
+      "core"        : "ri5ky_v2_fpu_1_10",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,

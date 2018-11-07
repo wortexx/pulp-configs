@@ -639,7 +639,7 @@
   },
   "fc": {
     "includes": [
-      "ips/riscv/ri5ky_v2_fpu.json"
+      "ips/riscv/ri5ky_v2_fpu_1_10.json"
     ],
     "cluster_id": 31,
     "core_id": 0,
