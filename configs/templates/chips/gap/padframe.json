@@ -72,8 +72,14 @@
       "type": "uart",
       "is_master": true
     },
-    "i2c0": {},
-    "i2c1": {},
+    "i2c0": {
+      "type": "i2c",
+      "is_master": true
+    },
+    "i2c1": {
+      "type": "i2c",
+      "is_master": true
+    },
     "i2s0": {},
     "i2s1": {},
     "spis": {},

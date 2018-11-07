@@ -18,6 +18,10 @@
           "dpi->uart0"
         ],
         [
+          "chip->i2c1",
+          "dpi->i2c1"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ],
@@ -40,6 +44,10 @@
           "jtag_proxy->ctrl"
         ],
         [
+          "chip->i2c1",
+          "camera->i2c"
+        ],
+        [
           "camera->cpi",
           "chip->cpi0"
         ]
@@ -51,6 +59,7 @@
           "ctrl",
           "jtag0_pad",
           "cpi0_pad",
+          "i2c1",
           "cpi0"
         ],
         "vp_bindings": [
@@ -79,7 +88,8 @@
         "vp_ports": [
           "jtag0",
           "cpi0",
-          "uart0"
+          "uart0",
+          "i2c1"
         ]
       },
       "jtag_proxy": {
@@ -110,7 +120,8 @@
         "model": "himax",
         "module": "camera.so",
         "vp_ports": [
-          "cpi"
+          "cpi",
+          "i2c"
         ]
       },
       "spiflash": {

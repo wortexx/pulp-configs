@@ -175,6 +175,10 @@
           "dpi->uart0"
         ],
         [
+          "chip->i2c1",
+          "dpi->i2c1"
+        ],
+        [
           "chip->spim0_cs0",
           "spiflash->cs"
         ],
@@ -231,6 +235,8 @@
           "spim1_cs1_data",
           "spim1_cs1",
           "uart0",
+          "i2c0",
+          "i2c1",
           "hyper0_cs0_data",
           "hyper0_cs0",
           "hyper0_cs1_data",
@@ -242,6 +248,7 @@
           "ctrl",
           "jtag0_pad",
           "cpi0_pad",
+          "i2c1",
           "spim0_cs0",
           "spim0_cs0_data",
           "cpi0"
@@ -300,6 +307,14 @@
             "self->uart0"
           ],
           [
+            "padframe->i2c0_pad",
+            "self->i2c0"
+          ],
+          [
+            "padframe->i2c1_pad",
+            "self->i2c1"
+          ],
+          [
             "padframe->cpi0",
             "soc->cpi0"
           ],
@@ -342,6 +357,14 @@
           [
             "soc->uart0",
             "padframe->uart0"
+          ],
+          [
+            "soc->i2c0",
+            "padframe->i2c0"
+          ],
+          [
+            "soc->i2c1",
+            "padframe->i2c1"
           ],
           [
             "soc->hyper0",
@@ -500,8 +523,14 @@
               "type": "uart",
               "is_master": true
             },
-            "i2c0": {},
-            "i2c1": {},
+            "i2c0": {
+              "type": "i2c",
+              "is_master": true
+            },
+            "i2c1": {
+              "type": "i2c",
+              "is_master": true
+            },
             "i2s0": {},
             "i2s1": {},
             "spis": {},
@@ -1916,6 +1945,8 @@
             "spim1_cs1_data_pad",
             "spim1_cs1_pad",
             "uart0_pad",
+            "i2c0_pad",
+            "i2c1_pad",
             "cpi0",
             "jtag0",
             "hyper0_cs0_data_pad",
@@ -1927,6 +1958,8 @@
             "spim0",
             "spim1",
             "uart0",
+            "i2c0",
+            "i2c1",
             "cpi0_pad",
             "jtag0_pad",
             "hyper0",
@@ -2052,11 +2085,15 @@
             "fll_soc_clock",
             "spim0",
             "spim1",
+            "i2c0",
+            "i2c1",
             "uart0",
             "hyper0",
             "spim0",
             "spim1",
             "uart0",
+            "i2c0",
+            "i2c1",
             "hyper0",
             "fll_soc_clock",
             "ref_clock",
@@ -2280,6 +2317,14 @@
             [
               "udma->spim1",
               "self->spim1"
+            ],
+            [
+              "udma->i2c0",
+              "self->i2c0"
+            ],
+            [
+              "udma->i2c1",
+              "self->i2c1"
             ],
             [
               "udma->uart0",
@@ -4411,7 +4456,8 @@
               "offsets": [
                 "0x280",
                 "0x300"
-              ]
+              ],
+              "is_master": true
             },
             "tcdm": {
               "version": 1,
@@ -4449,6 +4495,8 @@
               "event_itf",
               "spim0",
               "spim1",
+              "i2c0",
+              "i2c1",
               "uart0",
               "hyper0",
               "input",
@@ -10043,7 +10091,8 @@
           "clock",
           "jtag0",
           "cpi0",
-          "uart0"
+          "uart0",
+          "i2c1"
         ]
       },
       "ref_clock_clock": {
@@ -10079,6 +10128,10 @@
           "jtag_proxy->ctrl"
         ],
         [
+          "chip->i2c1",
+          "camera->i2c"
+        ],
+        [
           "camera->cpi",
           "chip->cpi0"
         ]
@@ -10111,7 +10164,8 @@
         "model": "himax",
         "module": "camera.so",
         "vp_ports": [
-          "cpi"
+          "cpi",
+          "i2c"
         ]
       },
       "spiflash": {

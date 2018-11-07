@@ -87,7 +87,7 @@
     "werror": true,
     "assert": false,
     "trace": false,
-    "trace_level": 0,
+    "trace-level": "trace",
     "traces": "all",
     "libc": false,
     "no-rt": false,
@@ -165,6 +165,10 @@
           "dpi->clock"
         ],
         [
+          "dpi->chip_reset",
+          "chip->reset"
+        ],
+        [
           "ref_clock_clock->out",
           "ref_clock->clock"
         ],
@@ -175,6 +179,10 @@
         [
           "chip->uart0",
           "dpi->uart0"
+        ],
+        [
+          "chip->i2c1",
+          "dpi->i2c1"
         ],
         [
           "dpi->jtag0",
@@ -214,12 +222,14 @@
           "spim0_cs1_data",
           "spim0_cs1",
           "uart0",
+          "reset",
           "ref_clock",
           "uart0",
           "jtag0",
           "ctrl",
           "jtag0_pad",
           "cpi0_pad",
+          "i2c1",
           "cpi0"
         ],
         "vp_bindings": [
@@ -1171,6 +1181,9 @@
             ],
             "isa": "rv32imfcXpulpv2",
             "march": "imfcXpulpv2",
+            "compiler_args": [
+              "-mfdiv"
+            ],
             "priv_version": 1.9,
             "perf_counters": true,
             "features": [
@@ -2588,10 +2601,12 @@
       "dpi": {
         "vp_class": "utils/dpi_wrapper",
         "vp_ports": [
+          "chip_reset",
           "clock",
           "jtag0",
           "cpi0",
-          "uart0"
+          "uart0",
+          "i2c1"
         ]
       },
       "ref_clock_clock": {
@@ -2627,6 +2642,10 @@
           "jtag_proxy->ctrl"
         ],
         [
+          "chip->i2c1",
+          "camera->i2c"
+        ],
+        [
           "camera->cpi",
           "chip->cpi0"
         ]
@@ -2659,7 +2678,8 @@
         "model": "himax",
         "module": "camera.so",
         "vp_ports": [
-          "cpi"
+          "cpi",
+          "i2c"
         ]
       },
       "spiflash": {

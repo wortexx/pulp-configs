@@ -82,6 +82,8 @@ if args.cam:
   system.system_tree.board.camera.cpi = system.system_tree.board.chip.cpi0
   system.system_tree.board.dpi.cpi0 = system.system_tree.board.chip.cpi0_pad
   system.system_tree.board.chip.cpi0_pad = system.system_tree.board.chip.padframe.cpi0_pad
+  system.system_tree.board.chip.i2c1 = system.system_tree.board.camera.i2c
+  system.system_tree.board.chip.i2c1 = system.system_tree.board.dpi.i2c1
 
 if args.spiflash:
   system.system_tree.board.spiflash_clock = Component(

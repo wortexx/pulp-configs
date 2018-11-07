@@ -31,6 +31,8 @@
     "spim1_cs1_data",
     "spim1_cs1",
     "uart0",
+    "i2c0",
+    "i2c1",
     "hyper0_cs0_data",
     "hyper0_cs0",
     "hyper0_cs1_data",
@@ -90,6 +92,14 @@
       "self->uart0"
     ],
     [
+      "padframe->i2c0_pad",
+      "self->i2c0"
+    ],
+    [
+      "padframe->i2c1_pad",
+      "self->i2c1"
+    ],
+    [
       "padframe->cpi0",
       "soc->cpi0"
     ],
@@ -134,6 +144,14 @@
       "padframe->uart0"
     ],
     [
+      "soc->i2c0",
+      "padframe->i2c0"
+    ],
+    [
+      "soc->i2c1",
+      "padframe->i2c1"
+    ],
+    [
       "soc->hyper0",
       "padframe->hyper0"
     ],
@@ -157,6 +175,8 @@
       "spim1_cs1_data_pad",
       "spim1_cs1_pad",
       "uart0_pad",
+      "i2c0_pad",
+      "i2c1_pad",
       "cpi0",
       "jtag0",
       "hyper0_cs0_data_pad",
@@ -168,6 +188,8 @@
       "spim0",
       "spim1",
       "uart0",
+      "i2c0",
+      "i2c1",
       "cpi0_pad",
       "jtag0_pad",
       "hyper0"
@@ -189,6 +211,8 @@
       "spim0",
       "spim1",
       "uart0",
+      "i2c0",
+      "i2c1",
       "hyper0",
       "fll_soc_clock",
       "ref_clock",
