@@ -222,6 +222,8 @@
           "spim0_cs1_data",
           "spim0_cs1",
           "uart0",
+          "i2c0",
+          "i2c1",
           "reset",
           "ref_clock",
           "uart0",
@@ -278,6 +280,14 @@
             "soc->cpi0"
           ],
           [
+            "padframe->i2c0_pad",
+            "self->i2c0"
+          ],
+          [
+            "padframe->i2c1_pad",
+            "self->i2c1"
+          ],
+          [
             "soc_clock->out",
             "padframe->clock"
           ],
@@ -292,6 +302,14 @@
           [
             "soc->uart0",
             "padframe->uart0"
+          ],
+          [
+            "soc->i2c0",
+            "padframe->i2c0"
+          ],
+          [
+            "soc->i2c1",
+            "padframe->i2c1"
           ],
           [
             "soc->fll_soc_clock",
@@ -345,6 +363,14 @@
             "cpi0": {
               "type": "cpi",
               "is_slave": true
+            },
+            "i2c0": {
+              "type": "i2c",
+              "is_master": true
+            },
+            "i2c1": {
+              "type": "i2c",
+              "is_master": true
             }
           },
           "pads": {
@@ -758,12 +784,16 @@
             "uart0_pad",
             "jtag0",
             "cpi0",
+            "i2c0_pad",
+            "i2c1_pad",
             "ref_clock_pad",
             "clock",
             "spim0",
             "uart0",
             "jtag0_pad",
             "cpi0_pad",
+            "i2c0",
+            "i2c1",
             "uart0_pad",
             "jtag0_pad",
             "cpi0_pad"
@@ -887,9 +917,13 @@
             "jtag0",
             "fll_soc_clock",
             "spim0",
+            "i2c0",
+            "i2c1",
             "uart0",
             "spim0",
             "uart0",
+            "i2c0",
+            "i2c1",
             "fll_soc_clock",
             "ref_clock",
             "jtag0",
@@ -1076,6 +1110,14 @@
             [
               "udma->spim0",
               "self->spim0"
+            ],
+            [
+              "udma->i2c0",
+              "self->i2c0"
+            ],
+            [
+              "udma->i2c1",
+              "self->i2c1"
             ],
             [
               "udma->uart0",
@@ -2839,7 +2881,8 @@
               "offsets": [
                 "0x180",
                 "0x200"
-              ]
+              ],
+              "is_master": true
             },
             "i2s": {
               "version": 1,
@@ -2866,6 +2909,8 @@
               "l2_itf",
               "event_itf",
               "spim0",
+              "i2c0",
+              "i2c1",
               "uart0",
               "input",
               "cpi0"

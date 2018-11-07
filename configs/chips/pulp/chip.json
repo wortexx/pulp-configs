@@ -26,7 +26,9 @@
     "spim0_cs0",
     "spim0_cs1_data",
     "spim0_cs1",
-    "uart0"
+    "uart0",
+    "i2c0",
+    "i2c1"
   ],
   "vp_bindings": [
     [
@@ -74,6 +76,14 @@
       "soc->cpi0"
     ],
     [
+      "padframe->i2c0_pad",
+      "self->i2c0"
+    ],
+    [
+      "padframe->i2c1_pad",
+      "self->i2c1"
+    ],
+    [
       "soc_clock->out",
       "padframe->clock"
     ],
@@ -88,6 +98,14 @@
     [
       "soc->uart0",
       "padframe->uart0"
+    ],
+    [
+      "soc->i2c0",
+      "padframe->i2c0"
+    ],
+    [
+      "soc->i2c1",
+      "padframe->i2c1"
     ],
     [
       "soc->fll_soc_clock",
@@ -107,12 +125,16 @@
       "uart0_pad",
       "jtag0",
       "cpi0",
+      "i2c0_pad",
+      "i2c1_pad",
       "ref_clock_pad",
       "clock",
       "spim0",
       "uart0",
       "jtag0_pad",
-      "cpi0_pad"
+      "cpi0_pad",
+      "i2c0",
+      "i2c1"
     ]
   },
   "soc_clock": {
@@ -130,6 +152,8 @@
     "vp_ports": [
       "spim0",
       "uart0",
+      "i2c0",
+      "i2c1",
       "fll_soc_clock",
       "ref_clock",
       "jtag0",

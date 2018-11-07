@@ -107,6 +107,8 @@
     "fll_soc_clock",
     "spim0",
     "spim1",
+    "i2c0",
+    "i2c1",
     "uart0",
     "hyper0"
   ],
@@ -326,6 +328,14 @@
     [
       "udma->spim1",
       "self->spim1"
+    ],
+    [
+      "udma->i2c0",
+      "self->i2c0"
+    ],
+    [
+      "udma->i2c1",
+      "self->i2c1"
     ],
     [
       "udma->uart0",
@@ -953,6 +963,8 @@
       "event_itf",
       "spim0",
       "spim1",
+      "i2c0",
+      "i2c1",
       "uart0",
       "hyper0",
       "input",

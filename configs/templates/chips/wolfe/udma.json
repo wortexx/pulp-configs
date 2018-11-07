@@ -58,7 +58,8 @@
     "version"      : 2,
     "nb_channels"  : 2,
     "ids"          : [4, 5],
-    "offsets"      : ["0x200", "0x280"]
+    "offsets"      : ["0x200", "0x280"],
+    "is_master"    : true
   },
 
   "i2s": {

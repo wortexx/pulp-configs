@@ -111,6 +111,8 @@
     "fll_soc_clock",
     "spim0",
     "hyper0",
+    "i2c0",
+    "i2c1",
     "uart0"
   ],
   "vp_bindings": [
@@ -313,6 +315,14 @@
     [
       "udma->hyper0",
       "self->hyper0"
+    ],
+    [
+      "udma->i2c0",
+      "self->i2c0"
+    ],
+    [
+      "udma->i2c1",
+      "self->i2c1"
     ],
     [
       "udma->uart0",
@@ -921,6 +931,8 @@
       "event_itf",
       "spim0",
       "hyper0",
+      "i2c0",
+      "i2c1",
       "uart0",
       "input",
       "cpi0"

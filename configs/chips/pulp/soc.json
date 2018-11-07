@@ -108,6 +108,8 @@
     "jtag0",
     "fll_soc_clock",
     "spim0",
+    "i2c0",
+    "i2c1",
     "uart0"
   ],
   "vp_bindings": [
@@ -290,6 +292,14 @@
     [
       "udma->spim0",
       "self->spim0"
+    ],
+    [
+      "udma->i2c0",
+      "self->i2c0"
+    ],
+    [
+      "udma->i2c1",
+      "self->i2c1"
     ],
     [
       "udma->uart0",
@@ -876,6 +886,8 @@
       "l2_itf",
       "event_itf",
       "spim0",
+      "i2c0",
+      "i2c1",
       "uart0",
       "input",
       "cpi0"
