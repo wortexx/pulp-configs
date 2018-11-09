@@ -121,6 +121,9 @@ gen.vivosoc3:
 gen.bigpulp-z-7045:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-z-7045/bigpulp-z-7045.json --output-dir=$(CURDIR)/configs/chips/bigpulp-z-7045 --output=configs/systems/bigpulp-z-7045.json --usecase=usecases/jtag.json
 
+gen.bigpulp-zu9eg:
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-zu9eg/bigpulp-zu9eg.json --output-dir=$(CURDIR)/configs/chips/bigpulp-zu9eg --output=configs/systems/bigpulp-zu9eg.json --usecase=usecases/jtag.json
+
 gen.bigpulp-juno:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-juno/bigpulp-juno.json --output-dir=$(CURDIR)/configs/chips/bigpulp-juno --output=configs/systems/bigpulp-juno.json --usecase=usecases/jtag.json
 
