@@ -59,7 +59,7 @@
       "py-stack": "Display the full python stack in case an exception is caught"
     },
     "verbose": false,
-    "boot-mode": "jtag",
+    "boot-mode": "loader",
     "use_tb_comps": false,
     "use_external_tb": false,
     "active_tb_comps": [],
@@ -87,7 +87,7 @@
     "werror": true,
     "assert": false,
     "trace": false,
-    "trace_level": 0,
+    "trace-level": "trace",
     "traces": "all",
     "libc": false,
     "no-rt": false,
@@ -168,6 +168,10 @@
           "dpi->clock"
         ],
         [
+          "dpi->chip_reset",
+          "chip->reset"
+        ],
+        [
           "ref_clock_clock->out",
           "ref_clock->clock"
         ],
@@ -208,6 +212,7 @@
           "ref_clock",
           "jtag0",
           "uart0",
+          "reset",
           "ref_clock",
           "uart0",
           "jtag0",
@@ -1528,6 +1533,10 @@
                   "base": "0x1B200000",
                   "size": "0x00200000",
                   "add_offset": "-184549376"
+                },
+                "error": {
+                  "base": "0x10000000",
+                  "size": "0x400000"
                 },
                 "soc": {}
               },
@@ -4639,6 +4648,10 @@
                   "size": "0x00200000",
                   "add_offset": "-180355072"
                 },
+                "error": {
+                  "base": "0x10000000",
+                  "size": "0x400000"
+                },
                 "soc": {}
               },
               "vp_ports": [
@@ -7249,6 +7262,7 @@
       "dpi": {
         "vp_class": "utils/dpi_wrapper",
         "vp_ports": [
+          "chip_reset",
           "clock",
           "jtag0",
           "uart0"
@@ -7313,7 +7327,8 @@
       "camera": {
         "type": "dpi",
         "model": "himax",
-        "module": "camera.so"
+        "module": "camera.so",
+        "color-mode": "gray"
       },
       "spiflash": {
         "vp_class": "devices/spiflash/spiflash",

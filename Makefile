@@ -62,13 +62,13 @@ gen.usecases:
 	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --output=configs/usecases/jtag.json
 
 gen.pulp:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulp/pulp.json --output-dir=$(CURDIR)/configs/chips/pulp --output=configs/systems/pulp.json --usecase=usecases/jtag-cam.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulp/pulp.json --output-dir=$(CURDIR)/configs/chips/pulp --output=configs/systems/pulp.json --usecase=usecases/jtag-cam-spi.json
 
 gen.multino:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/multino/multino.json --output-dir=$(CURDIR)/configs/chips/multino --output=configs/systems/multino.json --usecase=usecases/jtag.json
 
 gen.pulpissimo:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo/pulpissimo.json --output-dir=$(CURDIR)/configs/chips/pulpissimo --output=configs/systems/pulpissimo.json --usecase=usecases/jtag-cam.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo/pulpissimo.json --output-dir=$(CURDIR)/configs/chips/pulpissimo --output=configs/systems/pulpissimo.json --usecase=usecases/jtag-cam-spi.json
 
 gen.arnold:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/arnold/arnold.json --output-dir=$(CURDIR)/configs/chips/arnold --output=configs/systems/arnold.json --usecase=usecases/jtag-cam.json

@@ -38,6 +38,10 @@
           "dpi->clock"
         ],
         [
+          "dpi->chip_reset",
+          "chip->reset"
+        ],
+        [
           "ref_clock_clock->out",
           "ref_clock->clock"
         ],
@@ -56,6 +60,7 @@
         ],
         "vp_ports": [
           "ddr",
+          "reset",
           "ref_clock"
         ]
       },
@@ -74,6 +79,7 @@
           "periph/dpi_wrapper.json"
         ],
         "vp_ports": [
+          "chip_reset",
           "clock"
         ]
       },

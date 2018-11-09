@@ -59,12 +59,12 @@
       "py-stack": "Display the full python stack in case an exception is caught"
     },
     "verbose": false,
-    "boot-mode": "jtag",
+    "boot-mode": "rom",
     "use_tb_comps": false,
     "use_external_tb": false,
     "active_tb_comps": [],
     "py-stack": false,
-    "boot_from_flash": false,
+    "boot_from_flash": true,
     "flash_type": "spi",
     "flash_slm_file": "slm_files/flash_stim.slm",
     "rtl_simulator": "vsim",
@@ -114,7 +114,7 @@
     "cable": "proxy",
     "binaries": [],
     "boot": {
-      "mode": "jtag"
+      "mode": "rom"
     }
   },
   "system_tree": {
@@ -157,7 +157,8 @@
         "dpi",
         "ref_clock_clock",
         "ref_clock",
-        "spiflash"
+        "spiflash",
+        "spiflash_clock"
       ],
       "vp_bindings": [
         [
@@ -185,12 +186,24 @@
           "dpi->i2c1"
         ],
         [
+          "chip->spim0_cs0",
+          "spiflash->cs"
+        ],
+        [
+          "chip->spim0_cs0_data",
+          "spiflash->input"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ],
         [
           "dpi->cpi0",
           "chip->cpi0_pad"
+        ],
+        [
+          "spiflash_clock->out",
+          "spiflash->clock"
         ]
       ],
       "chip": {
@@ -232,6 +245,8 @@
           "jtag0_pad",
           "cpi0_pad",
           "i2c1",
+          "spim0_cs0",
+          "spim0_cs0_data",
           "cpi0"
         ],
         "vp_bindings": [
@@ -1593,7 +1608,7 @@
             "cluster_id": 31,
             "core_id": 0,
             "fetch_enable": true,
-            "boot_addr": "0x1C008000",
+            "boot_addr": "0x1A000000",
             "vp_ports": [
               "fetch",
               "data",
@@ -8467,6 +8482,7 @@
         "type": "dpi",
         "model": "himax",
         "module": "camera.so",
+        "color-mode": "gray",
         "vp_ports": [
           "cpi",
           "i2c"
@@ -8481,7 +8497,19 @@
           "encrypt": false,
           "aes_key": 0,
           "aes_iv": 0
-        }
+        },
+        "vp_ports": [
+          "cs",
+          "input",
+          "clock"
+        ]
+      },
+      "spiflash_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 50000000,
+        "vp_ports": [
+          "out"
+        ]
       }
     }
   },

@@ -14,7 +14,6 @@
     "archi/chips/oprecompkw/apb_soc.h"
   ],
   "vp_comps": [
-    "padframe",
     "soc_clock",
     "soc"
   ],
@@ -23,46 +22,24 @@
   ],
   "vp_bindings": [
     [
-      "padframe->jtag0",
-      "soc->jtag"
-    ],
-    [
-      "soc_clock->out",
-      "padframe->clock"
-    ],
-    [
       "soc_clock->out",
       "soc->clock"
     ],
     [
-      "soc->spim0",
-      "padframe->spim0"
-    ],
-    [
-      "soc->uart0",
-      "padframe->uart0"
+      "soc->fll_soc_clock",
+      "soc_clock->clock_in"
     ],
     [
       "soc->ddr",
       "self->ddr"
     ]
   ],
-  "padframe": {
-    "includes": [
-      "chips/oprecompkw_sfloat_sa/padframe.json"
-    ],
-    "vp_ports": [
-      "jtag0",
-      "spim0",
-      "uart0",
-      "clock"
-    ]
-  },
   "soc_clock": {
     "vp_class": "vp/clock_domain",
     "frequency": 50000000,
     "vp_ports": [
-      "out"
+      "out",
+      "clock_in"
     ]
   },
   "soc": {
@@ -70,10 +47,8 @@
       "soc.json"
     ],
     "vp_ports": [
-      "spim0",
-      "uart0",
+      "fll_soc_clock",
       "ddr",
-      "jtag",
       "clock"
     ]
   }

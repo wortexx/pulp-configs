@@ -1,4 +1,8 @@
 {
+  "runner": {
+    "boot-mode": "loader"
+  },
+  
   "system_tree": {
     "board": {
       "chip": {

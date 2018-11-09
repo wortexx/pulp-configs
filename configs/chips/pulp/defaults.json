@@ -1,12 +1,12 @@
 {
   "runner": {
-    "boot_from_flash": false,
-    "boot-mode": "jtag"
+    "boot_from_flash": true,
+    "boot-mode": "rom"
   },
   
   "loader": {
     "boot": {
-      "mode": "jtag"
+      "mode": "rom"
     }
   },
 

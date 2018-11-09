@@ -15,6 +15,7 @@
     "stdout",
     "uart",
     "cluster",
+    "cluster_clock",
     "adv_dbg_unit",
     "job_fifo",
     "job_fifo_injector",
@@ -22,7 +23,8 @@
   ],
   "vp_ports": [
     "cluster_clock",
-    "jtag",
+    "jtag0",
+    "fll1",
     "ddr"
   ],
   "vp_bindings": [
@@ -31,7 +33,7 @@
       "cluster->clock"
     ],
     [
-      "self->jtag",
+      "self->jtag0",
       "adv_dbg_unit->jtag"
     ],
     [
@@ -85,6 +87,10 @@
     [
       "cluster->soc",
       "axi_ico->input"
+    ],
+    [
+      "cluster_clock->out",
+      "cluster->clock"
     ],
     [
       "adv_dbg_unit->io",
@@ -283,7 +289,7 @@
   },
   "rom": {
     "includes": [
-      "ips/rom_v2.json"
+      "ips/rom/rom_v2.json"
     ],
     "size": 8192,
     "map_base": "0x1A000000",
@@ -311,7 +317,7 @@
   },
   "stdout": {
     "includes": [
-      "ips/stdout_v3.json"
+      "ips/stdout/stdout_v3.json"
     ],
     "vp_ports": [
       "input"
@@ -329,6 +335,14 @@
       "clock",
       "input",
       "job_fifo_irq"
+    ]
+  },
+  "cluster_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out",
+      "clock_in"
     ]
   },
   "adv_dbg_unit": {

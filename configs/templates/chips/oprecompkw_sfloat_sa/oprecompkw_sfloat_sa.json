@@ -2,10 +2,6 @@
   "chip": "oprecompkw_sfloat_sa",
   "chip_family": "oprecompkw",
     
-  "padframe": {
-    "content": "templates/chips/oprecompkw_sfloat_sa/padframe.json"
-  },
-
   "ddr": {
     "size"  : "0x10000000"
   },
