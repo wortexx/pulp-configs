@@ -52,19 +52,20 @@
     "gui": false,
     "simchecker": false,
     "args": [],
-    "tcl_args": []
+    "tcl_args": [],
+    "boot-mode": "jtag"
   },
   "runner": {
     "help": {
       "py-stack": "Display the full python stack in case an exception is caught"
     },
     "verbose": false,
-    "boot-mode": "jtag",
+    "boot-mode": "rom",
     "use_tb_comps": false,
     "use_external_tb": false,
     "active_tb_comps": [],
     "py-stack": false,
-    "boot_from_flash": false,
+    "boot_from_flash": true,
     "flash_type": "spi",
     "flash_slm_file": "slm_files/flash_stim.slm",
     "rtl_simulator": "vsim",
@@ -114,7 +115,7 @@
     "cable": "proxy",
     "binaries": [],
     "boot": {
-      "mode": "jtag"
+      "mode": "rom"
     }
   },
   "system_tree": {
@@ -2638,6 +2639,7 @@
         "type": "dpi",
         "model": "himax",
         "module": "camera.so",
+        "color-mode": "gray",
         "vp_ports": [
           "cpi",
           "i2c"
