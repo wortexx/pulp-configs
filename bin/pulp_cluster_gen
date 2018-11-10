@@ -76,7 +76,7 @@ cluster.cluster_ico = Component(
       "l1": get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True),
       "periph_ico": get_mapping_area(tp.get_child_dict("cluster/peripherals"), cluster_size, cluster_id),
       "periph_ico_alias": get_mapping(tp.get_child_dict("cluster/peripherals/alias"), add_offset=get_area_int('%d' % ((tp.get_child_int("cluster/peripherals/base") - tp.get_child_int("cluster/peripherals/alias/base"))), cluster_size, cluster_id)),
-      "error": OrderedDict({ "base": '0x%x' % tp.get_child_int("cluster/base"), "size": '0x%x' % cluster_size}),
+      "error": OrderedDict({ "base": get_area('%d' % tp.get_child_int("cluster/base"), cluster_size, cluster_id), "size": '0x%x' % cluster_size}),
       "soc": {}
     }
 )
