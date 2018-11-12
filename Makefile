@@ -71,7 +71,7 @@ gen.pulpissimo:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo/pulpissimo.json --output-dir=$(CURDIR)/configs/chips/pulpissimo --output=configs/systems/pulpissimo.json --usecase=usecases/jtag-cam-spi.json
 
 gen.arnold:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/arnold/arnold.json --output-dir=$(CURDIR)/configs/chips/arnold --output=configs/systems/arnold.json --usecase=usecases/jtag-cam.json
+	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/arnold/arnold.json --output-dir=$(CURDIR)/configs/chips/arnold --output=configs/systems/arnold.json --usecase=usecases/jtag-cam-spi.json
 
 gen.pulpissimo.zeroriscy:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-zeroriscy/pulpissimo-zeroriscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-zeroriscy --output=configs/systems/pulpissimo-zeroriscy.json --usecase=usecases/jtag-cam.json

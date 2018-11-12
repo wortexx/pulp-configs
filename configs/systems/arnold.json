@@ -52,19 +52,20 @@
     "gui": false,
     "simchecker": false,
     "args": [],
-    "tcl_args": []
+    "tcl_args": [],
+    "boot-mode": "jtag"
   },
   "runner": {
     "help": {
       "py-stack": "Display the full python stack in case an exception is caught"
     },
     "verbose": false,
-    "boot-mode": "jtag",
+    "boot-mode": "rom",
     "use_tb_comps": false,
     "use_external_tb": false,
     "active_tb_comps": [],
     "py-stack": false,
-    "boot_from_flash": false,
+    "boot_from_flash": true,
     "flash_type": "spi",
     "flash_slm_file": "slm_files/flash_stim.slm",
     "rtl_simulator": "vsim",
@@ -114,7 +115,7 @@
     "cable": "proxy",
     "binaries": [],
     "boot": {
-      "mode": "jtag"
+      "mode": "rom"
     }
   },
   "system_tree": {
@@ -150,7 +151,8 @@
         "dpi",
         "ref_clock_clock",
         "ref_clock",
-        "spiflash"
+        "spiflash",
+        "spiflash_clock"
       ],
       "vp_bindings": [
         [
@@ -178,12 +180,24 @@
           "dpi->i2c1"
         ],
         [
+          "chip->spim0_cs0",
+          "spiflash->cs"
+        ],
+        [
+          "chip->spim0_cs0_data",
+          "spiflash->input"
+        ],
+        [
           "dpi->jtag0",
           "chip->jtag0_pad"
         ],
         [
           "dpi->cpi0",
           "chip->cpi0_pad"
+        ],
+        [
+          "spiflash_clock->out",
+          "spiflash->clock"
         ]
       ],
       "chip": {
@@ -209,7 +223,11 @@
         "vp_ports": [
           "ref_clock",
           "jtag0",
-          "spim0",
+          "cpi0",
+          "spim0_cs0_data",
+          "spim0_cs0",
+          "spim0_cs1_data",
+          "spim0_cs1",
           "uart0",
           "reset",
           "ref_clock",
@@ -219,6 +237,8 @@
           "jtag0_pad",
           "cpi0_pad",
           "i2c1",
+          "spim0_cs0",
+          "spim0_cs0_data",
           "cpi0"
         ],
         "vp_bindings": [
@@ -231,12 +251,28 @@
             "padframe->jtag0_pad"
           ],
           [
+            "self->cpi0",
+            "padframe->cpi0_pad"
+          ],
+          [
             "padframe->ref_clock",
             "soc->ref_clock"
           ],
           [
-            "padframe->spim0_pad",
-            "self->spim0"
+            "padframe->spim0_cs0_data_pad",
+            "self->spim0_cs0_data"
+          ],
+          [
+            "padframe->spim0_cs0_pad",
+            "self->spim0_cs0"
+          ],
+          [
+            "padframe->spim0_cs1_data_pad",
+            "self->spim0_cs1_data"
+          ],
+          [
+            "padframe->spim0_cs1_pad",
+            "self->spim0_cs1"
           ],
           [
             "padframe->uart0_pad",
@@ -245,6 +281,10 @@
           [
             "padframe->jtag0",
             "soc->jtag0"
+          ],
+          [
+            "padframe->cpi0",
+            "soc->cpi0"
           ],
           [
             "soc_clock->out",
@@ -300,6 +340,7 @@
           "groups": {
             "spim0": {
               "type": "qspim",
+              "nb_cs": 2,
               "is_master": true
             },
             "uart0": {
@@ -308,6 +349,10 @@
             },
             "jtag0": {
               "type": "jtag",
+              "is_slave": true
+            },
+            "cpi0": {
+              "type": "cpi",
               "is_slave": true
             }
           },
@@ -450,14 +495,19 @@
           },
           "vp_ports": [
             "ref_clock",
-            "spim0_pad",
+            "spim0_cs0_data_pad",
+            "spim0_cs0_pad",
+            "spim0_cs1_data_pad",
+            "spim0_cs1_pad",
             "uart0_pad",
             "jtag0",
+            "cpi0",
             "ref_clock_pad",
             "clock",
             "spim0",
             "uart0",
             "jtag0_pad",
+            "cpi0_pad",
             "uart0_pad",
             "jtag0_pad",
             "cpi0_pad"
@@ -580,11 +630,13 @@
             "fll_soc_clock",
             "spim0",
             "uart0",
+            "hyper0",
             "spim0",
             "uart0",
             "fll_soc_clock",
             "ref_clock",
             "jtag0",
+            "cpi0",
             "clock"
           ],
           "vp_bindings": [
@@ -759,6 +811,10 @@
             [
               "udma->uart0",
               "self->uart0"
+            ],
+            [
+              "udma->hyper0",
+              "self->hyper0"
             ],
             [
               "adv_dbg_unit->io",
@@ -1207,7 +1263,7 @@
             "cluster_id": 31,
             "core_id": 0,
             "fetch_enable": true,
-            "boot_addr": "0x1C008000",
+            "boot_addr": "0x1A000000",
             "vp_ports": [
               "fetch",
               "data",
@@ -2037,14 +2093,14 @@
             ]
           },
           "soc_eu": {
-            "version": 1,
+            "version": 2,
             "hal_files": [
-              "hal/soc_eu/soc_eu_v1.h"
+              "hal/soc_eu/soc_eu_v2.h"
             ],
             "archi_files": [
-              "archi/soc_eu/soc_eu_v1.h"
+              "archi/soc_eu/soc_eu_v2.h"
             ],
-            "vp_class": "pulp/soc_eu/soc_eu_v1",
+            "vp_class": "pulp/soc_eu/soc_eu_v2",
             "properties": {
               "nb_fc_events": 8,
               "first_fc_event": 48
@@ -2059,23 +2115,25 @@
             ]
           },
           "udma": {
-            "version": 2,
-            "archi": 2,
-            "vp_class": "pulp/udma/udma_v2",
+            "version": 3,
+            "archi": 3,
+            "vp_class": "pulp/udma/udma_v3",
             "hal_files": [
-              "hal/udma/udma_v2.h",
+              "hal/udma/udma_v3.h",
               "hal/udma/cpi/udma_cpi_v1.h",
+              "hal/udma/csi2/udma_csi2_v1.h",
+              "hal/udma/hyper/udma_hyper_v1.h",
               "hal/udma/i2c/udma_i2c_v2.h",
-              "hal/udma/i2s/udma_i2s_v1.h",
-              "hal/udma/spim/udma_spim_v2.h",
+              "hal/udma/spim/udma_spim_v3.h",
               "hal/udma/uart/udma_uart_v1.h"
             ],
             "archi_files": [
-              "archi/udma/udma_v2.h",
+              "archi/udma/udma_v3.h",
               "archi/udma/cpi/udma_cpi_v1.h",
+              "archi/udma/csi2/udma_csi2_v1.h",
+              "archi/udma/hyper/udma_hyper_v1.h",
               "archi/udma/i2c/udma_i2c_v2.h",
-              "archi/udma/i2s/udma_i2s_v1.h",
-              "archi/udma/spim/udma_spim_v2.h",
+              "archi/udma/spim/udma_spim_v3.h",
               "archi/udma/uart/udma_uart_v1.h"
             ],
             "regmap": {
@@ -2444,31 +2502,33 @@
                 }
               }
             },
-            "vp_impl": "pulp.udma.udma_v2_arnold_impl",
+            "vp_impl": "pulp.udma.udma_v3_arnold_impl",
             "nb_periphs": 7,
             "interfaces": [
-              "memcpy",
               "spim",
               "i2c",
-              "i2s",
               "uart",
-              "cpi"
+              "cpi",
+              "hyper"
             ],
             "properties": {
               "l2_read_fifo_size": 8
             },
-            "uart": {
-              "version": 1,
+            "spim": {
+              "version": 3,
               "nb_channels": 1,
               "ids": [
                 0
               ],
               "offsets": [
-                "0x00"
+                "0x000"
               ],
-              "is_master": true
+              "is_master": true,
+              "eot_events": [
+                3
+              ]
             },
-            "memcpy": {
+            "uart": {
               "version": 1,
               "nb_channels": 1,
               "ids": [
@@ -2476,32 +2536,42 @@
               ],
               "offsets": [
                 "0x080"
-              ]
+              ],
+              "is_master": true
             },
-            "spim": {
-              "version": 2,
+            "i2c": {
+              "version": 3,
               "nb_channels": 1,
               "ids": [
                 2
               ],
               "offsets": [
                 "0x100"
+              ]
+            },
+            "hyper": {
+              "version": 1,
+              "nb_channels": 1,
+              "ids": [
+                3
+              ],
+              "offsets": [
+                "0x180"
               ],
               "is_master": true
             },
-            "i2c": {
-              "version": 2,
-              "nb_channels": 2,
+            "cpi": {
+              "version": 1,
+              "nb_channels": 1,
               "ids": [
-                3,
                 4
               ],
               "offsets": [
-                "0x180",
                 "0x200"
-              ]
+              ],
+              "is_slave": true
             },
-            "i2s": {
+            "filter": {
               "version": 1,
               "nb_channels": 1,
               "ids": [
@@ -2509,9 +2579,10 @@
               ],
               "offsets": [
                 "0x280"
-              ]
+              ],
+              "is_slave": true
             },
-            "cpi": {
+            "fpga": {
               "version": 1,
               "nb_channels": 1,
               "ids": [
@@ -2527,6 +2598,7 @@
               "event_itf",
               "spim0",
               "uart0",
+              "hyper0",
               "input",
               "cpi0"
             ]
@@ -2650,7 +2722,19 @@
           "encrypt": false,
           "aes_key": 0,
           "aes_iv": 0
-        }
+        },
+        "vp_ports": [
+          "cs",
+          "input",
+          "clock"
+        ]
+      },
+      "spiflash_clock": {
+        "vp_class": "vp/clock_domain",
+        "frequency": 50000000,
+        "vp_ports": [
+          "out"
+        ]
       }
     }
   },

@@ -8,8 +8,9 @@
 
   "nb_regs"   : 128,
 
-  "aes_key": null,
-  "aes_iv": null,
+  "encrypted": false,
+  "aes_key": "12345678275689075642768987654345",
+  "aes_iv": "0987654323456789",
   "xtal_check": false,
   "xtalCheck_delta": "0.1",
   "xtalCheck_min": "3",

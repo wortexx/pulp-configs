@@ -16,6 +16,7 @@
   "groups": {
     "spim0": {
       "type": "qspim",
+      "nb_cs": 2,
       "is_master": true
     },
     "uart0": {
@@ -24,6 +25,10 @@
     },
     "jtag0": {
       "type": "jtag",
+      "is_slave": true
+    },
+    "cpi0": {
+      "type": "cpi",
       "is_slave": true
     }
   },
