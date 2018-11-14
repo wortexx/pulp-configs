@@ -1386,18 +1386,25 @@
                 "reset": "0x00000000",
                 "content": {
                   "start": {
-                    "bit": 15,
+                    "bit": 0,
                     "width": 1,
                     "access": "R/W",
-                    "name": "PICL access direction.",
-                    "desc": "Direction of the transfer on the PICL bus. dir = 1 means read operation, dir = 0 means write operation."
+                    "name": "PICL access start.",
+                    "desc": "Start of PICL access sequence. A rising edge of the start bit starts a PICL picl transfer. Start bit remains high until the end of the sequence, which means that no new access can be performed if an access is on going."
                   },
-                  "dir": {
+                  "paddr": {
                     "bit": 1,
                     "width": 14,
                     "access": "R/W",
                     "name": "PICL access address.",
                     "desc": "Address of the transfer on the PICL bus."
+                  },
+                  "dir": {
+                    "bit": 15,
+                    "width": 1,
+                    "access": "R/W",
+                    "name": "PICL access direction.",
+                    "desc": "Direction of the transfer on the PICL bus. dir = 1 means read operation, dir = 0 means write operation."
                   },
                   "pwdata": {
                     "bit": 16,

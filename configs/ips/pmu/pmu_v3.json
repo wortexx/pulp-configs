@@ -97,14 +97,14 @@
           "name": "PICL access start.",
           "desc": "Start of PICL access sequence. A rising edge of the start bit starts a PICL picl transfer. Start bit remains high until the end of the sequence, which means that no new access can be performed if an access is on going."
         },
-        "dir": {
+        "paddr": {
           "bit": 1,
           "width": 14,
           "access": "R/W",
           "name": "PICL access address.",
           "desc": "Address of the transfer on the PICL bus."
         },
-        "start": {
+        "dir": {
           "bit": 15,
           "width": 1,
           "access": "R/W",
