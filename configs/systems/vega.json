@@ -737,6 +737,7 @@
             "timer",
             "soc_eu",
             "udma",
+            "efuse",
             "uart",
             "fc_debug",
             "cluster",
@@ -898,6 +899,10 @@
             [
               "apb_ico->pmu",
               "pmu->input"
+            ],
+            [
+              "apb_ico->efuse",
+              "efuse->input"
             ],
             [
               "fc->fetch",
@@ -2190,6 +2195,11 @@
                 "size": "0x00008000",
                 "remove_offset": "0x1A110000"
               },
+              "efuse": {
+                "base": "0x1A10F000",
+                "size": "0x00001000",
+                "remove_offset": "0x1A10F000"
+              },
               "pmu": {
                 "base": "0x1A107000",
                 "size": "0x00000800",
@@ -2220,6 +2230,7 @@
               "fc_dbg_unit",
               "rom",
               "pmu",
+              "efuse",
               "input"
             ]
           },
@@ -3848,6 +3859,27 @@
               "hyper0",
               "input",
               "cpi0"
+            ]
+          },
+          "efuse": {
+            "version": 1,
+            "vp_class": "pulp/efuse/efuse_v1",
+            "hal_files": [
+              "hal/efuse/efuse_v1.h"
+            ],
+            "archi_files": [
+              "archi/efuse/efuse_v1.h"
+            ],
+            "nb_regs": 128,
+            "encrypted": false,
+            "aes_key": "12345678275689075642768987654345",
+            "aes_iv": "0987654323456789",
+            "xtal_check": false,
+            "xtalCheck_delta": "0.1",
+            "xtalCheck_min": "3",
+            "xtalCheck_max": "10",
+            "vp_ports": [
+              "input"
             ]
           },
           "uart": {

@@ -97,6 +97,7 @@
     "timer",
     "soc_eu",
     "udma",
+    "efuse",
     "uart",
     "fc_debug",
     "cluster",
@@ -245,6 +246,10 @@
     [
       "apb_ico->pmu",
       "pmu->input"
+    ],
+    [
+      "apb_ico->efuse",
+      "efuse->input"
     ],
     [
       "fc->fetch",
@@ -712,6 +717,11 @@
         "size": "0x00008000",
         "remove_offset": "0x1A110000"
       },
+      "efuse": {
+        "base": "0x1A10F000",
+        "size": "0x00001000",
+        "remove_offset": "0x1A10F000"
+      },
       "pmu": {
         "base": "0x1A107000",
         "size": "0x00000800",
@@ -742,6 +752,7 @@
       "fc_dbg_unit",
       "rom",
       "pmu",
+      "efuse",
       "input"
     ]
   },
@@ -975,6 +986,14 @@
       "hyper0",
       "input",
       "cpi0"
+    ]
+  },
+  "efuse": {
+    "includes": [
+      "ips/efuse/efuse_v1.json"
+    ],
+    "vp_ports": [
+      "input"
     ]
   },
   "uart": {
