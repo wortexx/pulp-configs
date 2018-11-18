@@ -114,6 +114,7 @@
     "spim2",
     "spim3",
     "uart0",
+    "uart1",
     "hyper0"
   ],
   "vp_bindings": [
@@ -336,6 +337,10 @@
     [
       "udma->uart0",
       "self->uart0"
+    ],
+    [
+      "udma->uart1",
+      "self->uart1"
     ],
     [
       "udma->hyper0",
@@ -966,6 +971,7 @@
       "spim2",
       "spim3",
       "uart0",
+      "uart1",
       "hyper0",
       "input",
       "cpi0"

@@ -221,11 +221,23 @@
         ],
         "vp_ports": [
           "ref_clock",
-          "jtag0",
           "cpi0",
+          "jtag0",
           "spim0_cs0_data",
           "spim0_cs0",
+          "spim1_cs0_data",
+          "spim1_cs0",
+          "spim2_cs0_data",
+          "spim2_cs0",
+          "spim3_cs0_data",
+          "spim3_cs0",
           "uart0",
+          "uart1",
+          "i2c0",
+          "hyper0_cs0_data",
+          "hyper0_cs0",
+          "hyper0_cs1_data",
+          "hyper0_cs1",
           "reset",
           "ref_clock",
           "uart0",
@@ -244,12 +256,12 @@
             "padframe->ref_clock_pad"
           ],
           [
-            "self->jtag0",
-            "padframe->jtag0_pad"
-          ],
-          [
             "self->cpi0",
             "padframe->cpi0_pad"
+          ],
+          [
+            "self->jtag0",
+            "padframe->jtag0_pad"
           ],
           [
             "padframe->ref_clock",
@@ -264,16 +276,64 @@
             "self->spim0_cs0"
           ],
           [
+            "padframe->spim1_cs0_data_pad",
+            "self->spim1_cs0_data"
+          ],
+          [
+            "padframe->spim1_cs0_pad",
+            "self->spim1_cs0"
+          ],
+          [
+            "padframe->spim2_cs0_data_pad",
+            "self->spim2_cs0_data"
+          ],
+          [
+            "padframe->spim2_cs0_pad",
+            "self->spim2_cs0"
+          ],
+          [
+            "padframe->spim3_cs0_data_pad",
+            "self->spim3_cs0_data"
+          ],
+          [
+            "padframe->spim3_cs0_pad",
+            "self->spim3_cs0"
+          ],
+          [
             "padframe->uart0_pad",
             "self->uart0"
+          ],
+          [
+            "padframe->uart1_pad",
+            "self->uart1"
+          ],
+          [
+            "padframe->i2c0_pad",
+            "self->i2c0"
+          ],
+          [
+            "padframe->cpi0",
+            "soc->cpi0"
           ],
           [
             "padframe->jtag0",
             "soc->jtag0"
           ],
           [
-            "padframe->cpi0",
-            "soc->cpi0"
+            "padframe->hyper0_cs0_data_pad",
+            "self->hyper0_cs0_data"
+          ],
+          [
+            "padframe->hyper0_cs0_pad",
+            "self->hyper0_cs0"
+          ],
+          [
+            "padframe->hyper0_cs1_data_pad",
+            "self->hyper0_cs1_data"
+          ],
+          [
+            "padframe->hyper0_cs1_pad",
+            "self->hyper0_cs1"
           ],
           [
             "soc_clock->out",
@@ -288,8 +348,32 @@
             "padframe->spim0"
           ],
           [
+            "soc->spim1",
+            "padframe->spim1"
+          ],
+          [
+            "soc->spim2",
+            "padframe->spim2"
+          ],
+          [
+            "soc->spim3",
+            "padframe->spim3"
+          ],
+          [
             "soc->uart0",
             "padframe->uart0"
+          ],
+          [
+            "soc->uart1",
+            "padframe->uart1"
+          ],
+          [
+            "soc->i2c0",
+            "padframe->i2c0"
+          ],
+          [
+            "soc->hyper0",
+            "padframe->hyper0"
           ],
           [
             "soc->fll_soc_clock",
@@ -323,18 +407,55 @@
               "nb_cs": 1,
               "is_master": true
             },
+            "spim1": {
+              "type": "qspim",
+              "nb_cs": 1,
+              "is_master": true
+            },
+            "spim2": {
+              "type": "qspim",
+              "nb_cs": 1,
+              "is_master": true
+            },
+            "spim3": {
+              "type": "qspim",
+              "nb_cs": 1,
+              "is_master": true
+            },
             "uart0": {
               "type": "uart",
               "is_master": true
             },
+            "uart1": {
+              "type": "uart",
+              "is_master": true
+            },
+            "i2c0": {
+              "type": "i2c",
+              "is_master": true
+            },
+            "i2s0": {},
+            "i2s1": {},
+            "spis": {},
+            "cpi0": {
+              "type": "cpi",
+              "is_slave": true
+            },
+            "reset": {},
             "jtag0": {
               "type": "jtag",
               "is_slave": true
             },
-            "cpi0": {
-              "type": "cpi",
-              "is_slave": true
-            }
+            "hyper0": {
+              "type": "hyper",
+              "nb_cs": 2,
+              "is_master": true
+            },
+            "timer0": {},
+            "timer1": {},
+            "timer2": {},
+            "timer3": {},
+            "xtal": {}
           },
           "pads": {
             "pad_spim0_sdio0 (mosi)": {
@@ -477,15 +598,33 @@
             "ref_clock",
             "spim0_cs0_data_pad",
             "spim0_cs0_pad",
+            "spim1_cs0_data_pad",
+            "spim1_cs0_pad",
+            "spim2_cs0_data_pad",
+            "spim2_cs0_pad",
+            "spim3_cs0_data_pad",
+            "spim3_cs0_pad",
             "uart0_pad",
-            "jtag0",
+            "uart1_pad",
+            "i2c0_pad",
             "cpi0",
+            "jtag0",
+            "hyper0_cs0_data_pad",
+            "hyper0_cs0_pad",
+            "hyper0_cs1_data_pad",
+            "hyper0_cs1_pad",
             "ref_clock_pad",
             "clock",
             "spim0",
+            "spim1",
+            "spim2",
+            "spim3",
             "uart0",
-            "jtag0_pad",
+            "uart1",
+            "i2c0",
             "cpi0_pad",
+            "jtag0_pad",
+            "hyper0",
             "uart0_pad",
             "jtag0_pad",
             "cpi0_pad"
@@ -615,13 +754,20 @@
             "spim2",
             "spim3",
             "uart0",
+            "uart1",
             "hyper0",
             "spim0",
+            "spim1",
+            "spim2",
+            "spim3",
             "uart0",
+            "uart1",
+            "i2c0",
+            "hyper0",
             "fll_soc_clock",
             "ref_clock",
-            "jtag0",
             "cpi0",
+            "jtag0",
             "clock"
           ],
           "vp_bindings": [
@@ -844,6 +990,10 @@
             [
               "udma->uart0",
               "self->uart0"
+            ],
+            [
+              "udma->uart1",
+              "self->uart1"
             ],
             [
               "udma->hyper0",
@@ -3441,37 +3591,35 @@
             },
             "uart": {
               "version": 1,
-              "nb_channels": 1,
+              "nb_channels": 2,
               "ids": [
-                4
+                4,
+                5
               ],
               "offsets": [
-                "0x200"
+                "0x200",
+                "0x280"
               ],
               "is_master": true
             },
             "i2c": {
-              "version": 3,
-              "nb_channels": 3,
+              "version": 2,
+              "nb_channels": 1,
               "ids": [
-                5,
-                6,
-                7
+                6
               ],
               "offsets": [
-                "0x280",
-                "0x300",
-                "0x380"
+                "0x300"
               ]
             },
             "hyper": {
               "version": 1,
               "nb_channels": 1,
               "ids": [
-                8
+                7
               ],
               "offsets": [
-                "0x400"
+                "0x380"
               ],
               "is_master": true
             },
@@ -3696,6 +3844,7 @@
               "spim2",
               "spim3",
               "uart0",
+              "uart1",
               "hyper0",
               "input",
               "cpi0"
