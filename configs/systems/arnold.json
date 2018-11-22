@@ -222,13 +222,17 @@
         ],
         "vp_ports": [
           "ref_clock",
-          "jtag0",
           "cpi0",
+          "jtag0",
           "spim0_cs0_data",
           "spim0_cs0",
           "spim0_cs1_data",
           "spim0_cs1",
           "uart0",
+          "hyper0_cs0_data",
+          "hyper0_cs0",
+          "hyper0_cs1_data",
+          "hyper0_cs1",
           "reset",
           "ref_clock",
           "uart0",
@@ -247,12 +251,12 @@
             "padframe->ref_clock_pad"
           ],
           [
-            "self->jtag0",
-            "padframe->jtag0_pad"
-          ],
-          [
             "self->cpi0",
             "padframe->cpi0_pad"
+          ],
+          [
+            "self->jtag0",
+            "padframe->jtag0_pad"
           ],
           [
             "padframe->ref_clock",
@@ -279,12 +283,28 @@
             "self->uart0"
           ],
           [
+            "padframe->cpi0",
+            "soc->cpi0"
+          ],
+          [
             "padframe->jtag0",
             "soc->jtag0"
           ],
           [
-            "padframe->cpi0",
-            "soc->cpi0"
+            "padframe->hyper0_cs0_data_pad",
+            "self->hyper0_cs0_data"
+          ],
+          [
+            "padframe->hyper0_cs0_pad",
+            "self->hyper0_cs0"
+          ],
+          [
+            "padframe->hyper0_cs1_data_pad",
+            "self->hyper0_cs1_data"
+          ],
+          [
+            "padframe->hyper0_cs1_pad",
+            "self->hyper0_cs1"
           ],
           [
             "soc_clock->out",
@@ -301,6 +321,10 @@
           [
             "soc->uart0",
             "padframe->uart0"
+          ],
+          [
+            "soc->hyper0",
+            "padframe->hyper0"
           ],
           [
             "soc->fll_soc_clock",
@@ -335,7 +359,8 @@
                 0,
                 0
               ]
-            }
+            },
+            "hyper": {}
           },
           "groups": {
             "spim0": {
@@ -347,13 +372,18 @@
               "type": "uart",
               "is_master": true
             },
+            "cpi0": {
+              "type": "cpi",
+              "is_slave": true
+            },
             "jtag0": {
               "type": "jtag",
               "is_slave": true
             },
-            "cpi0": {
-              "type": "cpi",
-              "is_slave": true
+            "hyper0": {
+              "type": "hyper",
+              "nb_cs": 2,
+              "is_master": true
             }
           },
           "pads": {
@@ -500,14 +530,19 @@
             "spim0_cs1_data_pad",
             "spim0_cs1_pad",
             "uart0_pad",
-            "jtag0",
             "cpi0",
+            "jtag0",
+            "hyper0_cs0_data_pad",
+            "hyper0_cs0_pad",
+            "hyper0_cs1_data_pad",
+            "hyper0_cs1_pad",
             "ref_clock_pad",
             "clock",
             "spim0",
             "uart0",
-            "jtag0_pad",
             "cpi0_pad",
+            "jtag0_pad",
+            "hyper0",
             "uart0_pad",
             "jtag0_pad",
             "cpi0_pad"
@@ -633,10 +668,11 @@
             "hyper0",
             "spim0",
             "uart0",
+            "hyper0",
             "fll_soc_clock",
             "ref_clock",
-            "jtag0",
             "cpi0",
+            "jtag0",
             "clock"
           ],
           "vp_bindings": [
@@ -1354,12 +1390,6 @@
           "fc_itc": {
             "version": 1,
             "vp_class": "pulp/itc/itc_v1",
-            "hal_files": [
-              "hal/itc/itc_v1.h"
-            ],
-            "archi_files": [
-              "archi/itc/itc_v1.h"
-            ],
             "nb_fifo_events": 8,
             "fifo_irq": 26,
             "regmap": {
@@ -2540,7 +2570,7 @@
               "is_master": true
             },
             "i2c": {
-              "version": 3,
+              "version": 2,
               "nb_channels": 1,
               "ids": [
                 2

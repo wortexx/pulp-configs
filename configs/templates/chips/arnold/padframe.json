@@ -10,6 +10,8 @@
   "profiles": {
     "default": {
       "alternates": [ 0, 0, 0, 0, 0, 0, 0 ]
+    },
+    "hyper": {
     }
   },
 
@@ -23,13 +25,18 @@
       "type": "uart",
       "is_master": true
     },
+    "cpi0": {
+      "type": "cpi",
+      "is_slave": true
+    },
     "jtag0": {
       "type": "jtag",
       "is_slave": true
     },
-    "cpi0": {
-      "type": "cpi",
-      "is_slave": true
+    "hyper0": {
+      "type": "hyper",
+      "nb_cs": 2,
+      "is_master": true
     }
   },
 

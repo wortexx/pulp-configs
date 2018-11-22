@@ -20,13 +20,17 @@
   ],
   "vp_ports": [
     "ref_clock",
-    "jtag0",
     "cpi0",
+    "jtag0",
     "spim0_cs0_data",
     "spim0_cs0",
     "spim0_cs1_data",
     "spim0_cs1",
-    "uart0"
+    "uart0",
+    "hyper0_cs0_data",
+    "hyper0_cs0",
+    "hyper0_cs1_data",
+    "hyper0_cs1"
   ],
   "vp_bindings": [
     [
@@ -34,12 +38,12 @@
       "padframe->ref_clock_pad"
     ],
     [
-      "self->jtag0",
-      "padframe->jtag0_pad"
-    ],
-    [
       "self->cpi0",
       "padframe->cpi0_pad"
+    ],
+    [
+      "self->jtag0",
+      "padframe->jtag0_pad"
     ],
     [
       "padframe->ref_clock",
@@ -66,12 +70,28 @@
       "self->uart0"
     ],
     [
+      "padframe->cpi0",
+      "soc->cpi0"
+    ],
+    [
       "padframe->jtag0",
       "soc->jtag0"
     ],
     [
-      "padframe->cpi0",
-      "soc->cpi0"
+      "padframe->hyper0_cs0_data_pad",
+      "self->hyper0_cs0_data"
+    ],
+    [
+      "padframe->hyper0_cs0_pad",
+      "self->hyper0_cs0"
+    ],
+    [
+      "padframe->hyper0_cs1_data_pad",
+      "self->hyper0_cs1_data"
+    ],
+    [
+      "padframe->hyper0_cs1_pad",
+      "self->hyper0_cs1"
     ],
     [
       "soc_clock->out",
@@ -90,6 +110,10 @@
       "padframe->uart0"
     ],
     [
+      "soc->hyper0",
+      "padframe->hyper0"
+    ],
+    [
       "soc->fll_soc_clock",
       "soc_clock->clock_in"
     ]
@@ -105,14 +129,19 @@
       "spim0_cs1_data_pad",
       "spim0_cs1_pad",
       "uart0_pad",
-      "jtag0",
       "cpi0",
+      "jtag0",
+      "hyper0_cs0_data_pad",
+      "hyper0_cs0_pad",
+      "hyper0_cs1_data_pad",
+      "hyper0_cs1_pad",
       "ref_clock_pad",
       "clock",
       "spim0",
       "uart0",
+      "cpi0_pad",
       "jtag0_pad",
-      "cpi0_pad"
+      "hyper0"
     ]
   },
   "soc_clock": {
@@ -130,10 +159,11 @@
     "vp_ports": [
       "spim0",
       "uart0",
+      "hyper0",
       "fll_soc_clock",
       "ref_clock",
-      "jtag0",
       "cpi0",
+      "jtag0",
       "clock"
     ]
   }
