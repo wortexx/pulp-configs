@@ -132,9 +132,11 @@
         "access_timeout_us": 1000000
       },
       "adv_dbg_unit": {
-        "debug_ir": "0x4"
+        "debug_ir": "0x4",
+        "retry_count": 10,
+        "check_errors": true
       },
-      "boot-mode": "default",
+      "boot-mode": "jtag",
       "commands": "reset stop load ioloop reqloop start wait",
       "gdb_commands": "reset stop load ioloop reqloop start gdb wait"
     },
@@ -817,6 +819,10 @@
               "soc_eu->event_in"
             ],
             [
+              "apb_soc_ctrl->confreg_soc",
+              "adv_dbg_unit->confreg_soc"
+            ],
+            [
               "timer->irq_itf_0",
               "fc_itc->in_event_10"
             ],
@@ -855,6 +861,10 @@
             [
               "adv_dbg_unit->io",
               "soc_ico->debug"
+            ],
+            [
+              "adv_dbg_unit->confreg_ext",
+              "apb_soc_ctrl->confreg_ext"
             ]
           ],
           "axi_ico": {
@@ -2072,7 +2082,9 @@
             "vp_ports": [
               "bootaddr",
               "event",
-              "input"
+              "confreg_soc",
+              "input",
+              "confreg_ext"
             ]
           },
           "stdout": {
@@ -2643,7 +2655,9 @@
             "vp_class": "pulp/adv_dbg_unit/adv_dbg_unit",
             "vp_ports": [
               "io",
-              "jtag"
+              "confreg_ext",
+              "jtag",
+              "confreg_soc"
             ]
           }
         }

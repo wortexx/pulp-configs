@@ -251,6 +251,10 @@
       "soc_eu->event_in"
     ],
     [
+      "apb_soc_ctrl->confreg_soc",
+      "adv_dbg_unit->confreg_soc"
+    ],
+    [
       "timer->irq_itf_0",
       "fc_itc->in_event_10"
     ],
@@ -289,6 +293,10 @@
     [
       "adv_dbg_unit->io",
       "soc_ico->debug"
+    ],
+    [
+      "adv_dbg_unit->confreg_ext",
+      "apb_soc_ctrl->confreg_ext"
     ]
   ],
   "axi_ico": {
@@ -791,7 +799,9 @@
     "vp_ports": [
       "bootaddr",
       "event",
-      "input"
+      "confreg_soc",
+      "input",
+      "confreg_ext"
     ]
   },
   "stdout": {
@@ -862,7 +872,9 @@
     ],
     "vp_ports": [
       "io",
-      "jtag"
+      "confreg_ext",
+      "jtag",
+      "confreg_soc"
     ]
   }
 }
