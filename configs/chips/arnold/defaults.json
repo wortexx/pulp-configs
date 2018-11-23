@@ -10,10 +10,6 @@
     }
   },
 
-  "vsim": {
-    "boot-mode": "jtag"
-  },
-
   "system_tree": {
     "debug_bridge": {
       "adv_dbg_unit": {

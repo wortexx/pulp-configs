@@ -52,8 +52,7 @@
     "gui": false,
     "simchecker": false,
     "args": [],
-    "tcl_args": [],
-    "boot-mode": "jtag"
+    "tcl_args": []
   },
   "runner": {
     "help": {
