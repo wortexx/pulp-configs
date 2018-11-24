@@ -2652,6 +2652,7 @@
           },
           "adv_dbg_unit": {
             "vp_class": "pulp/adv_dbg_unit/adv_dbg_unit",
+            "confreg_length": 9,
             "vp_ports": [
               "io",
               "confreg_ext",

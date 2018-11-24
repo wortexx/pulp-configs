@@ -870,6 +870,7 @@
     "includes": [
       "ips/adv_dbg_unit/adv_dbg_unit.json"
     ],
+    "confreg_length": 9,
     "vp_ports": [
       "io",
       "confreg_ext",

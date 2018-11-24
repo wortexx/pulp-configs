@@ -18,6 +18,12 @@
       "boot_addr"   : "0x1A000000"
     },
 
+    "adv_dbg_unit": {
+      "config": {
+        "confreg_length": 9
+      }
+    },
+
     "rom": {
       "version": 2,
       "base": "0x1A000000",
