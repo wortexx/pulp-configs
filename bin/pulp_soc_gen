@@ -588,8 +588,13 @@ if has_cluster:
     soc.fll1.clock_out = soc.get(get_cluster_name(cid) + '_clock').clock_in
 
 
+adv_dbg_unit_config = {}
+if tp.get('**/adv_dbg_unit/config') is not None:
+  adv_dbg_unit_config = tp.get('**/adv_dbg_unit/config').get_dict()
+
 soc.adv_dbg_unit = Component(
-    includes=["ips/adv_dbg_unit/adv_dbg_unit.json"]
+    includes=["ips/adv_dbg_unit/adv_dbg_unit.json"],
+    **adv_dbg_unit_config
 )
 
 if has_cluster:
