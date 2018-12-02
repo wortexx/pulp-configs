@@ -9,6 +9,10 @@
       "mode": "rom"
     }
   },
+    
+  "vsim": {
+    "boot-mode": "jtag"
+  },
 
   "system_tree": {
     "debug_bridge": {
