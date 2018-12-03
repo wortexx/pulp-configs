@@ -20,6 +20,7 @@
   ],
   "vp_ports": [
     "cluster_clock",
+    "ref_clock",
     "jtag0",
     "fll1"
   ],
@@ -27,6 +28,10 @@
     [
       "self->cluster_clock",
       "cluster->clock"
+    ],
+    [
+      "self->ref_clock",
+      "cluster->ref_clock"
     ],
     [
       "self->jtag0",
@@ -266,7 +271,8 @@
     "vp_ports": [
       "soc",
       "clock",
-      "input"
+      "input",
+      "ref_clock"
     ]
   },
   "cluster_clock": {

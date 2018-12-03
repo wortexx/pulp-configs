@@ -491,6 +491,7 @@
           ],
           "vp_ports": [
             "cluster_clock",
+            "ref_clock",
             "jtag0",
             "fll1",
             "ddr",
@@ -505,6 +506,10 @@
             [
               "self->cluster_clock",
               "cluster->clock"
+            ],
+            [
+              "self->ref_clock",
+              "cluster->ref_clock"
             ],
             [
               "self->jtag0",
@@ -941,18 +946,24 @@
             ],
             "vp_ports": [
               "input",
+              "ref_clock",
               "job_fifo_irq",
               "dma_irq",
               "soc",
               "soc",
               "clock",
               "input",
+              "ref_clock",
               "job_fifo_irq"
             ],
             "vp_bindings": [
               [
                 "self->input",
                 "cluster_ico->input"
+              ],
+              [
+                "self->ref_clock",
+                "timer->ref_clock"
               ],
               [
                 "self->job_fifo_irq",
@@ -5569,7 +5580,8 @@
               "vp_ports": [
                 "irq_itf_0",
                 "irq_itf_1",
-                "input"
+                "input",
+                "ref_clock"
               ]
             },
             "icache_ctrl": {
@@ -6526,8 +6538,8 @@
         "module": "uart.so",
         "verbose": false,
         "baudrate": 625000,
-        "loopback": true,
-        "stdout": false,
+        "loopback": false,
+        "stdout": true,
         "tx_file": "tx_uart.log",
         "vp_ports": [
           "uart"

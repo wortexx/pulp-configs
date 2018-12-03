@@ -287,6 +287,7 @@ cluster.periph_ico.icache_ctrl = cluster.icache_ctrl.input
 cluster.periph_ico.event_unit = cluster.event_unit.input
 cluster.periph_ico.cluster_ctrl = cluster.cluster_ctrl.input
 cluster.periph_ico.timer = cluster.timer.input
+cluster.ref_clock = cluster.timer.ref_clock
 cluster.periph_ico.dma = cluster.dma.new_itf("in_%d" % nb_pe)
 
 for i in range(0, nb_pe):

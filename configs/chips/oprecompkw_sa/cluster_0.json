@@ -24,6 +24,7 @@
   ],
   "vp_ports": [
     "input",
+    "ref_clock",
     "job_fifo_irq",
     "dma_irq",
     "soc"
@@ -32,6 +33,10 @@
     [
       "self->input",
       "cluster_ico->input"
+    ],
+    [
+      "self->ref_clock",
+      "timer->ref_clock"
     ],
     [
       "self->job_fifo_irq",
@@ -2912,7 +2917,8 @@
     "vp_ports": [
       "irq_itf_0",
       "irq_itf_1",
-      "input"
+      "input",
+      "ref_clock"
     ]
   },
   "icache_ctrl": {

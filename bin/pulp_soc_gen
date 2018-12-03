@@ -726,6 +726,8 @@ if has_cluster:
         soc.get(cluster_name).dma_irq = soc.fc_itc.in_event_8
     soc.get(cluster_name).soc = soc.axi_ico.input
 
+    soc.ref_clock = soc.get(cluster_name).ref_clock
+
 # Timer
 if has_fc:
   if has_fc_ico:
