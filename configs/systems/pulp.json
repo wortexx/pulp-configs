@@ -968,6 +968,10 @@
               "soc_eu->ref_clock"
             ],
             [
+              "self->ref_clock",
+              "cluster->ref_clock"
+            ],
+            [
               "self->cluster_clock",
               "cluster->clock"
             ],
@@ -1700,12 +1704,6 @@
           "fc_itc": {
             "version": 1,
             "vp_class": "pulp/itc/itc_v1",
-            "hal_files": [
-              "hal/itc/itc_v1.h"
-            ],
-            "archi_files": [
-              "archi/itc/itc_v1.h"
-            ],
             "nb_fifo_events": 8,
             "fifo_irq": 26,
             "regmap": {
@@ -2964,17 +2962,23 @@
             ],
             "vp_ports": [
               "input",
+              "ref_clock",
               "dma_irq",
               "soc",
               "dma_irq",
               "soc",
               "clock",
-              "input"
+              "input",
+              "ref_clock"
             ],
             "vp_bindings": [
               [
                 "self->input",
                 "cluster_ico->input"
+              ],
+              [
+                "self->ref_clock",
+                "timer->ref_clock"
               ],
               [
                 "cluster_ico->soc",
@@ -7551,7 +7555,8 @@
               "vp_ports": [
                 "irq_itf_0",
                 "irq_itf_1",
-                "input"
+                "input",
+                "ref_clock"
               ]
             },
             "icache_ctrl": {
@@ -8472,8 +8477,8 @@
         "module": "uart.so",
         "verbose": false,
         "baudrate": 625000,
-        "loopback": true,
-        "stdout": false,
+        "loopback": false,
+        "stdout": true,
         "tx_file": "tx_uart.log",
         "vp_ports": [
           "uart"

@@ -122,6 +122,10 @@
       "soc_eu->ref_clock"
     ],
     [
+      "self->ref_clock",
+      "cluster->ref_clock"
+    ],
+    [
       "self->jtag0",
       "adv_dbg_unit->jtag"
     ],
@@ -846,7 +850,8 @@
       "dma_irq",
       "soc",
       "clock",
-      "input"
+      "input",
+      "ref_clock"
     ]
   },
   "cluster_clock": {

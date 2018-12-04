@@ -2741,8 +2741,8 @@
         "module": "uart.so",
         "verbose": false,
         "baudrate": 625000,
-        "loopback": true,
-        "stdout": false,
+        "loopback": false,
+        "stdout": true,
         "tx_file": "tx_uart.log",
         "vp_ports": [
           "uart"

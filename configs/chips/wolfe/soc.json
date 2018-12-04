@@ -137,6 +137,10 @@
       "soc_eu->ref_clock"
     ],
     [
+      "self->ref_clock",
+      "cluster->ref_clock"
+    ],
+    [
       "self->cluster_clock",
       "cluster->clock"
     ],
@@ -952,7 +956,8 @@
       "dma_irq",
       "soc",
       "clock",
-      "input"
+      "input",
+      "ref_clock"
     ]
   },
   "cluster_clock": {

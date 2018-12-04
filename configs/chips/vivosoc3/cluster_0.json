@@ -20,6 +20,7 @@
   ],
   "vp_ports": [
     "input",
+    "ref_clock",
     "dma_irq",
     "soc"
   ],
@@ -27,6 +28,10 @@
     [
       "self->input",
       "cluster_ico->input"
+    ],
+    [
+      "self->ref_clock",
+      "timer->ref_clock"
     ],
     [
       "cluster_ico->soc",
@@ -516,6 +521,10 @@
         "base": "0x00200000",
         "size": "0x00200000",
         "add_offset": "268435456"
+      },
+      "error": {
+        "base": "0x10000000",
+        "size": "0x400000"
       },
       "soc": {}
     },
@@ -1587,7 +1596,8 @@
     "vp_ports": [
       "irq_itf_0",
       "irq_itf_1",
-      "input"
+      "input",
+      "ref_clock"
     ]
   },
   "icache_ctrl": {

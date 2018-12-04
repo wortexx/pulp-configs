@@ -1395,12 +1395,6 @@
           "fc_itc": {
             "version": 1,
             "vp_class": "pulp/itc/itc_v1",
-            "hal_files": [
-              "hal/itc/itc_v1.h"
-            ],
-            "archi_files": [
-              "archi/itc/itc_v1.h"
-            ],
             "nb_fifo_events": 8,
             "fifo_irq": 26,
             "regmap": {
@@ -2727,8 +2721,8 @@
         "module": "uart.so",
         "verbose": false,
         "baudrate": 625000,
-        "loopback": true,
-        "stdout": false,
+        "loopback": false,
+        "stdout": true,
         "tx_file": "tx_uart.log",
         "vp_ports": [
           "uart"

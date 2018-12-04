@@ -87,7 +87,7 @@
     "werror": true,
     "assert": false,
     "trace": false,
-    "trace_level": 0,
+    "trace-level": "trace",
     "traces": "all",
     "libc": false,
     "no-rt": false,
@@ -165,6 +165,10 @@
           "dpi->clock"
         ],
         [
+          "dpi->chip_reset",
+          "chip->reset"
+        ],
+        [
           "ref_clock_clock->out",
           "ref_clock->clock"
         ],
@@ -214,6 +218,7 @@
           "hyper0_cs0",
           "hyper0_cs1_data",
           "hyper0_cs1",
+          "reset",
           "ref_clock",
           "uart0",
           "jtag0",
@@ -1525,6 +1530,10 @@
               "soc_eu->ref_clock"
             ],
             [
+              "self->ref_clock",
+              "cluster->ref_clock"
+            ],
+            [
               "self->jtag0",
               "adv_dbg_unit->jtag"
             ],
@@ -2234,12 +2243,6 @@
           "fc_itc": {
             "version": 1,
             "vp_class": "pulp/itc/itc_v1",
-            "hal_files": [
-              "hal/itc/itc_v1.h"
-            ],
-            "archi_files": [
-              "archi/itc/itc_v1.h"
-            ],
             "nb_fifo_events": 8,
             "fifo_irq": 26,
             "regmap": {
@@ -2873,17 +2876,23 @@
             ],
             "vp_ports": [
               "input",
+              "ref_clock",
               "dma_irq",
               "soc",
               "dma_irq",
               "soc",
               "clock",
-              "input"
+              "input",
+              "ref_clock"
             ],
             "vp_bindings": [
               [
                 "self->input",
                 "cluster_ico->input"
+              ],
+              [
+                "self->ref_clock",
+                "timer->ref_clock"
               ],
               [
                 "cluster_ico->soc",
@@ -3373,6 +3382,10 @@
                   "base": "0x00200000",
                   "size": "0x00200000",
                   "add_offset": "268435456"
+                },
+                "error": {
+                  "base": "0x10000000",
+                  "size": "0x400000"
                 },
                 "soc": {}
               },
@@ -5496,7 +5509,8 @@
               "vp_ports": [
                 "irq_itf_0",
                 "irq_itf_1",
-                "input"
+                "input",
+                "ref_clock"
               ]
             },
             "icache_ctrl": {
@@ -5526,6 +5540,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5606,6 +5623,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5703,6 +5723,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5800,6 +5823,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -5897,6 +5923,9 @@
               ],
               "isa": "rv32imfcXpulpv2",
               "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -6008,6 +6037,7 @@
       "dpi": {
         "vp_class": "utils/dpi_wrapper",
         "vp_ports": [
+          "chip_reset",
           "clock",
           "jtag0",
           "uart0"
@@ -6062,8 +6092,8 @@
         "module": "uart.so",
         "verbose": false,
         "baudrate": 625000,
-        "loopback": true,
-        "stdout": false,
+        "loopback": false,
+        "stdout": true,
         "tx_file": "tx_uart.log",
         "vp_ports": [
           "uart"
@@ -6072,7 +6102,8 @@
       "camera": {
         "type": "dpi",
         "model": "himax",
-        "module": "camera.so"
+        "module": "camera.so",
+        "color-mode": "gray"
       },
       "spiflash": {
         "vp_class": "devices/spiflash/spiflash",
