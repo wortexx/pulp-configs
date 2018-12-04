@@ -2128,6 +2128,10 @@
               "rtc->ref_clock"
             ],
             [
+              "self->ref_clock",
+              "cluster->ref_clock"
+            ],
+            [
               "self->cluster_clock",
               "cluster->clock"
             ],
@@ -4552,17 +4556,23 @@
             ],
             "vp_ports": [
               "input",
+              "ref_clock",
               "dma_irq",
               "soc",
               "dma_irq",
               "soc",
               "clock",
-              "input"
+              "input",
+              "ref_clock"
             ],
             "vp_bindings": [
               [
                 "self->input",
                 "cluster_ico->input"
+              ],
+              [
+                "self->ref_clock",
+                "timer->ref_clock"
               ],
               [
                 "cluster_ico->soc",
@@ -9144,7 +9154,8 @@
               "vp_ports": [
                 "irq_itf_0",
                 "irq_itf_1",
-                "input"
+                "input",
+                "ref_clock"
               ]
             },
             "hwce": {

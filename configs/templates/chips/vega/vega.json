@@ -15,6 +15,7 @@
     "json_file": "cluster_v6",
     "nb_cluster": 1,
     "nb_pe": 9,
+    "has_cc": true,
     
     "pe": {
       "irq": [

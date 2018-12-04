@@ -4531,6 +4531,7 @@
           "cluster": {
             "version": 5,
             "nb_pe": 8,
+            "has_cc": null,
             "vp_class": "pulp/cluster/cluster",
             "vp_comps": [
               "cluster_ico",

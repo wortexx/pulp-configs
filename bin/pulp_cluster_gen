@@ -39,6 +39,7 @@ nb_pe             = tp.get_child_int('cluster/nb_pe')
 l1_banking_factor = tp.get_child_int('cluster/l1/banking_factor')
 cluster_core      = tp.get_child_str('cluster/core')
 cluster_version   = tp.get_child_int('cluster/version')
+has_cc            = tp.get_child_bool('cluster/has_cc')
 has_hwce          = tp.get('cluster/peripherals/hwce') is not None
 dma_irq_0         = tp.get('cluster/pe/irq').get_dict().index('dma_0')
 dma_irq_1         = tp.get('cluster/pe/irq').get_dict().index('dma_1')
@@ -62,6 +63,7 @@ l1_bank_size = int(tp.get_child_int('cluster/l1/size') / nb_l1_banks)
 cluster = Component(
   version=cluster_version,
   nb_pe=nb_pe,
+  has_cc=has_cc,
   vp_class="pulp/cluster/cluster"
 )
 
