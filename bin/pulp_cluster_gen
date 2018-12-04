@@ -7,6 +7,7 @@ import json
 import json_tools as js
 import argparse
 from comp_gen import *
+import math
 
 parser = argparse.ArgumentParser(
   description='Generate configuration for Pulp cluster',
@@ -53,7 +54,7 @@ except:
 #else:
 #  alias = "0x00000000"
 
-nb_l1_banks = nb_pe * l1_banking_factor
+nb_l1_banks = 1<<int(math.log2(nb_pe * l1_banking_factor))
 l1_bank_size = int(tp.get_child_int('cluster/l1/size') / nb_l1_banks)
 
 

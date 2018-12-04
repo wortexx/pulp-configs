@@ -3890,7 +3890,7 @@
           },
           "cluster": {
             "version": 5,
-            "nb_pe": 8,
+            "nb_pe": 9,
             "vp_class": "pulp/cluster/cluster",
             "vp_comps": [
               "cluster_ico",
@@ -3911,7 +3911,8 @@
               "pe4",
               "pe5",
               "pe6",
-              "pe7"
+              "pe7",
+              "pe8"
             ],
             "vp_ports": [
               "input",
@@ -3961,7 +3962,7 @@
               ],
               [
                 "periph_ico->dma",
-                "dma->in_8"
+                "dma->in_9"
               ],
               [
                 "periph_ico->dbg_unit_0",
@@ -3994,6 +3995,10 @@
               [
                 "periph_ico->dbg_unit_7",
                 "pe7->dbg_unit"
+              ],
+              [
+                "periph_ico->dbg_unit_8",
+                "pe8->dbg_unit"
               ],
               [
                 "periph_ico->cluster_ico",
@@ -4032,6 +4037,10 @@
                 "event_unit->demux_in_7"
               ],
               [
+                "l1_ico->event_unit_8",
+                "event_unit->demux_in_8"
+              ],
+              [
                 "l1_ico->event_unit_alias_0",
                 "event_unit->demux_in_0"
               ],
@@ -4062,6 +4071,10 @@
               [
                 "l1_ico->event_unit_alias_7",
                 "event_unit->demux_in_7"
+              ],
+              [
+                "l1_ico->event_unit_alias_8",
+                "event_unit->demux_in_8"
               ],
               [
                 "l1_ico->dma_0",
@@ -4096,6 +4109,10 @@
                 "dma->in_7"
               ],
               [
+                "l1_ico->dma_8",
+                "dma->in_8"
+              ],
+              [
                 "l1_ico->dma_alias_0",
                 "dma->in_0"
               ],
@@ -4126,6 +4143,10 @@
               [
                 "l1_ico->dma_alias_7",
                 "dma->in_7"
+              ],
+              [
+                "l1_ico->dma_alias_8",
+                "dma->in_8"
               ],
               [
                 "l1_ico->out_0",
@@ -4232,6 +4253,10 @@
                 "event_unit->in_event_22_pe_7"
               ],
               [
+                "dma->ext_irq_itf",
+                "event_unit->in_event_22_pe_8"
+              ],
+              [
                 "dma->event_itf_0",
                 "event_unit->in_event_8_pe_0"
               ],
@@ -4264,6 +4289,10 @@
                 "event_unit->in_event_8_pe_7"
               ],
               [
+                "dma->event_itf_8",
+                "event_unit->in_event_8_pe_8"
+              ],
+              [
                 "dma->irq_itf_0",
                 "event_unit->in_event_9_pe_0"
               ],
@@ -4294,6 +4323,10 @@
               [
                 "dma->irq_itf_7",
                 "event_unit->in_event_9_pe_7"
+              ],
+              [
+                "dma->irq_itf_8",
+                "event_unit->in_event_9_pe_8"
               ],
               [
                 "dma->ext_itf",
@@ -4348,6 +4381,10 @@
                 "pe7->bootaddr"
               ],
               [
+                "cluster_ctrl->bootaddr_8",
+                "pe8->bootaddr"
+              ],
+              [
                 "cluster_ctrl->fetchen_0",
                 "pe0->fetchen"
               ],
@@ -4378,6 +4415,10 @@
               [
                 "cluster_ctrl->fetchen_7",
                 "pe7->fetchen"
+              ],
+              [
+                "cluster_ctrl->fetchen_8",
+                "pe8->fetchen"
               ],
               [
                 "cluster_ctrl->halt_0",
@@ -4412,6 +4453,10 @@
                 "pe7->halt"
               ],
               [
+                "cluster_ctrl->halt_8",
+                "pe8->halt"
+              ],
+              [
                 "event_unit->irq_req_0",
                 "pe0->irq_req"
               ],
@@ -4442,6 +4487,10 @@
               [
                 "event_unit->irq_req_7",
                 "pe7->irq_req"
+              ],
+              [
+                "event_unit->irq_req_8",
+                "pe8->irq_req"
               ],
               [
                 "timer->irq_itf_0",
@@ -4476,6 +4525,10 @@
                 "event_unit->in_event_10_pe_7"
               ],
               [
+                "timer->irq_itf_0",
+                "event_unit->in_event_10_pe_8"
+              ],
+              [
                 "timer->irq_itf_1",
                 "event_unit->in_event_11_pe_0"
               ],
@@ -4506,6 +4559,10 @@
               [
                 "timer->irq_itf_1",
                 "event_unit->in_event_11_pe_7"
+              ],
+              [
+                "timer->irq_itf_1",
+                "event_unit->in_event_11_pe_8"
               ],
               [
                 "pe0->halt_status",
@@ -4794,6 +4851,42 @@
               [
                 "pe7->ext_counter[15]",
                 "l1_ico->ext_counter_7[15]"
+              ],
+              [
+                "pe8->halt_status",
+                "cluster_ctrl->core_halt_8"
+              ],
+              [
+                "pe8->data",
+                "l1_ico->data_pe_8"
+              ],
+              [
+                "pe8->fetch",
+                "cluster_ico->input"
+              ],
+              [
+                "pe8->irq_ack",
+                "event_unit->irq_ack_8"
+              ],
+              [
+                "pe8->ext_counter[11]",
+                "l1_ico->ext_counter_8[11]"
+              ],
+              [
+                "pe8->ext_counter[12]",
+                "l1_ico->ext_counter_8[12]"
+              ],
+              [
+                "pe8->ext_counter[13]",
+                "l1_ico->ext_counter_8[13]"
+              ],
+              [
+                "pe8->ext_counter[14]",
+                "l1_ico->ext_counter_8[14]"
+              ],
+              [
+                "pe8->ext_counter[15]",
+                "l1_ico->ext_counter_8[15]"
               ]
             ],
             "cluster_ico": {
@@ -4888,6 +4981,11 @@
                   "size": "0x8000",
                   "remove_offset": "0x10338000"
                 },
+                "dbg_unit_8": {
+                  "base": "0x10340000",
+                  "size": "0x8000",
+                  "remove_offset": "0x10340000"
+                },
                 "cluster_ctrl": {
                   "base": "0x10200000",
                   "size": "0x00000400",
@@ -4934,6 +5032,7 @@
                 "dbg_unit_5",
                 "dbg_unit_6",
                 "dbg_unit_7",
+                "dbg_unit_8",
                 "cluster_ico",
                 "input"
               ]
@@ -4949,6 +5048,7 @@
                 "pe5_ico",
                 "pe6_ico",
                 "pe7_ico",
+                "pe8_ico",
                 "interleaver",
                 "ext2loc"
               ],
@@ -4961,6 +5061,7 @@
                 "event_unit_5",
                 "event_unit_6",
                 "event_unit_7",
+                "event_unit_8",
                 "event_unit_alias_0",
                 "event_unit_alias_1",
                 "event_unit_alias_2",
@@ -4969,6 +5070,7 @@
                 "event_unit_alias_5",
                 "event_unit_alias_6",
                 "event_unit_alias_7",
+                "event_unit_alias_8",
                 "dma_0",
                 "dma_1",
                 "dma_2",
@@ -4977,6 +5079,7 @@
                 "dma_5",
                 "dma_6",
                 "dma_7",
+                "dma_8",
                 "dma_alias_0",
                 "dma_alias_1",
                 "dma_alias_2",
@@ -4985,6 +5088,7 @@
                 "dma_alias_5",
                 "dma_alias_6",
                 "dma_alias_7",
+                "dma_alias_8",
                 "out_0",
                 "out_1",
                 "out_2",
@@ -5015,6 +5119,7 @@
                 "ext_counter_5[11]",
                 "ext_counter_6[11]",
                 "ext_counter_7[11]",
+                "ext_counter_8[11]",
                 "ext_counter_0[12]",
                 "ext_counter_1[12]",
                 "ext_counter_2[12]",
@@ -5023,6 +5128,7 @@
                 "ext_counter_5[12]",
                 "ext_counter_6[12]",
                 "ext_counter_7[12]",
+                "ext_counter_8[12]",
                 "ext_counter_0[13]",
                 "ext_counter_1[13]",
                 "ext_counter_2[13]",
@@ -5031,6 +5137,7 @@
                 "ext_counter_5[13]",
                 "ext_counter_6[13]",
                 "ext_counter_7[13]",
+                "ext_counter_8[13]",
                 "ext_counter_0[14]",
                 "ext_counter_1[14]",
                 "ext_counter_2[14]",
@@ -5039,6 +5146,7 @@
                 "ext_counter_5[14]",
                 "ext_counter_6[14]",
                 "ext_counter_7[14]",
+                "ext_counter_8[14]",
                 "ext_counter_0[15]",
                 "ext_counter_1[15]",
                 "ext_counter_2[15]",
@@ -5047,6 +5155,7 @@
                 "ext_counter_5[15]",
                 "ext_counter_6[15]",
                 "ext_counter_7[15]",
+                "ext_counter_8[15]",
                 "data_pe_0",
                 "data_pe_1",
                 "data_pe_2",
@@ -5054,24 +5163,25 @@
                 "data_pe_4",
                 "data_pe_5",
                 "data_pe_6",
-                "data_pe_7"
+                "data_pe_7",
+                "data_pe_8"
               ],
               "vp_bindings": [
                 [
                   "self->dma_in_0",
-                  "interleaver->in_8"
-                ],
-                [
-                  "self->dma_in_1",
                   "interleaver->in_9"
                 ],
                 [
-                  "self->dma_in_2",
+                  "self->dma_in_1",
                   "interleaver->in_10"
                 ],
                 [
-                  "self->dma_in_3",
+                  "self->dma_in_2",
                   "interleaver->in_11"
+                ],
+                [
+                  "self->dma_in_3",
+                  "interleaver->in_12"
                 ],
                 [
                   "self->ext2loc_itf",
@@ -5110,6 +5220,10 @@
                   "pe7_ico->nb_read[1]"
                 ],
                 [
+                  "self->ext_counter_8[11]",
+                  "pe8_ico->nb_read[1]"
+                ],
+                [
                   "self->ext_counter_0[12]",
                   "pe0_ico->nb_write[1]"
                 ],
@@ -5140,6 +5254,10 @@
                 [
                   "self->ext_counter_7[12]",
                   "pe7_ico->nb_write[1]"
+                ],
+                [
+                  "self->ext_counter_8[12]",
+                  "pe8_ico->nb_write[1]"
                 ],
                 [
                   "self->ext_counter_0[13]",
@@ -5174,6 +5292,10 @@
                   "pe7_ico->read_stalls[1]"
                 ],
                 [
+                  "self->ext_counter_8[13]",
+                  "pe8_ico->read_stalls[1]"
+                ],
+                [
                   "self->ext_counter_0[14]",
                   "pe0_ico->write_stalls[1]"
                 ],
@@ -5204,6 +5326,10 @@
                 [
                   "self->ext_counter_7[14]",
                   "pe7_ico->write_stalls[1]"
+                ],
+                [
+                  "self->ext_counter_8[14]",
+                  "pe8_ico->write_stalls[1]"
                 ],
                 [
                   "self->ext_counter_0[15]",
@@ -5238,6 +5364,10 @@
                   "pe7_ico->stalls[0]"
                 ],
                 [
+                  "self->ext_counter_8[15]",
+                  "pe8_ico->stalls[0]"
+                ],
+                [
                   "self->data_pe_0",
                   "pe0_ico->input"
                 ],
@@ -5268,6 +5398,10 @@
                 [
                   "self->data_pe_7",
                   "pe7_ico->input"
+                ],
+                [
+                  "self->data_pe_8",
+                  "pe8_ico->input"
                 ],
                 [
                   "pe0_ico->dma",
@@ -5558,6 +5692,42 @@
                   "interleaver->ts_in_7"
                 ],
                 [
+                  "pe8_ico->dma",
+                  "self->dma_8"
+                ],
+                [
+                  "pe8_ico->dma_alias",
+                  "self->dma_alias_8"
+                ],
+                [
+                  "pe8_ico->event_unit",
+                  "self->event_unit_8"
+                ],
+                [
+                  "pe8_ico->event_unit_alias",
+                  "self->event_unit_alias_8"
+                ],
+                [
+                  "pe8_ico->cluster_ico",
+                  "self->cluster_ico"
+                ],
+                [
+                  "pe8_ico->l1",
+                  "interleaver->in_8"
+                ],
+                [
+                  "pe8_ico->l1_alias",
+                  "interleaver->in_8"
+                ],
+                [
+                  "pe8_ico->l1_ts",
+                  "interleaver->ts_in_8"
+                ],
+                [
+                  "pe8_ico->l1_ts_alias",
+                  "interleaver->ts_in_8"
+                ],
+                [
                   "interleaver->out_0",
                   "self->out_0"
                 ],
@@ -5623,7 +5793,7 @@
                 ],
                 [
                   "ext2loc->out",
-                  "interleaver->in_8"
+                  "interleaver->in_9"
                 ]
               ],
               "pe0_ico": {
@@ -6234,10 +6404,86 @@
                   "input"
                 ]
               },
+              "pe8_ico": {
+                "vp_class": "interco/router",
+                "bandwidth": 4,
+                "latency": 0,
+                "id": 0,
+                "mappings": {
+                  "l1": {
+                    "base": "0x10000000",
+                    "size": "0x00010000",
+                    "remove_offset": "0x10000000",
+                    "id": 0
+                  },
+                  "l1_ts": {
+                    "base": "0x10100000",
+                    "size": "0x00010000",
+                    "remove_offset": "0x10100000",
+                    "id": 0
+                  },
+                  "event_unit": {
+                    "base": "0x10204000",
+                    "size": "0x00000400",
+                    "remove_offset": "0x10204000",
+                    "id": 1
+                  },
+                  "dma": {
+                    "base": "0x10204400",
+                    "size": "0x00000400",
+                    "remove_offset": "0x10204400",
+                    "id": 1
+                  },
+                  "l1_alias": {
+                    "base": "0x0",
+                    "size": "0x00010000",
+                    "remove_offset": "0x0",
+                    "id": 0
+                  },
+                  "l1_ts_alias": {
+                    "base": "0x100000",
+                    "size": "0x00010000",
+                    "remove_offset": "0x100000",
+                    "id": 0
+                  },
+                  "event_unit_alias": {
+                    "base": "0x204000",
+                    "size": "0x00000400",
+                    "remove_offset": "0x204000",
+                    "id": 1
+                  },
+                  "dma_alias": {
+                    "base": "0x204400",
+                    "size": "0x00000400",
+                    "remove_offset": "0x204400",
+                    "id": 1
+                  },
+                  "cluster_ico": {
+                    "id": 1
+                  }
+                },
+                "vp_ports": [
+                  "dma",
+                  "dma_alias",
+                  "event_unit",
+                  "event_unit_alias",
+                  "cluster_ico",
+                  "l1",
+                  "l1_alias",
+                  "l1_ts",
+                  "l1_ts_alias",
+                  "nb_read[1]",
+                  "nb_write[1]",
+                  "read_stalls[1]",
+                  "write_stalls[1]",
+                  "stalls[0]",
+                  "input"
+                ]
+              },
               "interleaver": {
                 "vp_class": "pulp/cluster/l1_interleaver",
                 "nb_slaves": 16,
-                "nb_masters": 12,
+                "nb_masters": 13,
                 "stage_bits": 0,
                 "interleaving_bits": 2,
                 "vp_ports": [
@@ -6257,10 +6503,10 @@
                   "out_13",
                   "out_14",
                   "out_15",
-                  "in_8",
                   "in_9",
                   "in_10",
                   "in_11",
+                  "in_12",
                   "in_0",
                   "in_1",
                   "in_2",
@@ -6269,6 +6515,7 @@
                   "in_5",
                   "in_6",
                   "in_7",
+                  "in_8",
                   "ts_in_0",
                   "ts_in_1",
                   "ts_in_2",
@@ -6276,7 +6523,8 @@
                   "ts_in_4",
                   "ts_in_5",
                   "ts_in_6",
-                  "ts_in_7"
+                  "ts_in_7",
+                  "ts_in_8"
                 ]
               },
               "ext2loc": {
@@ -7986,7 +8234,7 @@
                 "archi/dma/mchan_v7.h"
               ],
               "vp_class": "pulp/mchan/mchan_v7",
-              "nb_channels": 9,
+              "nb_channels": 10,
               "core_queue_depth": 2,
               "global_queue_depth": 8,
               "is_64": false,
@@ -8005,6 +8253,7 @@
                 "event_itf_5",
                 "event_itf_6",
                 "event_itf_7",
+                "event_itf_8",
                 "irq_itf_0",
                 "irq_itf_1",
                 "irq_itf_2",
@@ -8013,12 +8262,13 @@
                 "irq_itf_5",
                 "irq_itf_6",
                 "irq_itf_7",
+                "irq_itf_8",
                 "ext_itf",
                 "loc_itf_0",
                 "loc_itf_1",
                 "loc_itf_2",
                 "loc_itf_3",
-                "in_8",
+                "in_9",
                 "in_0",
                 "in_1",
                 "in_2",
@@ -8026,7 +8276,8 @@
                 "in_4",
                 "in_5",
                 "in_6",
-                "in_7"
+                "in_7",
+                "in_8"
               ]
             },
             "cluster_ctrl": {
@@ -8038,7 +8289,7 @@
               "archi_files": [
                 "archi/cluster_ctrl/cluster_ctrl_v2.h"
               ],
-              "nb_core": 8,
+              "nb_core": 9,
               "vp_ports": [
                 "bootaddr_0",
                 "bootaddr_1",
@@ -8048,6 +8299,7 @@
                 "bootaddr_5",
                 "bootaddr_6",
                 "bootaddr_7",
+                "bootaddr_8",
                 "fetchen_0",
                 "fetchen_1",
                 "fetchen_2",
@@ -8056,6 +8308,7 @@
                 "fetchen_5",
                 "fetchen_6",
                 "fetchen_7",
+                "fetchen_8",
                 "halt_0",
                 "halt_1",
                 "halt_2",
@@ -8064,6 +8317,7 @@
                 "halt_5",
                 "halt_6",
                 "halt_7",
+                "halt_8",
                 "input",
                 "core_halt_0",
                 "core_halt_1",
@@ -8072,12 +8326,13 @@
                 "core_halt_4",
                 "core_halt_5",
                 "core_halt_6",
-                "core_halt_7"
+                "core_halt_7",
+                "core_halt_8"
               ]
             },
             "event_unit": {
               "version": 3,
-              "nb_core": 8,
+              "nb_core": 9,
               "vp_class": "pulp/event_unit/eu_v3",
               "hal_files": [
                 "hal/eu/eu_v3.h"
@@ -8436,6 +8691,7 @@
                 "irq_req_5",
                 "irq_req_6",
                 "irq_req_7",
+                "irq_req_8",
                 "input",
                 "demux_in_0",
                 "demux_in_1",
@@ -8445,6 +8701,7 @@
                 "demux_in_5",
                 "demux_in_6",
                 "demux_in_7",
+                "demux_in_8",
                 "in_event_8_pe_0",
                 "in_event_8_pe_1",
                 "in_event_8_pe_2",
@@ -8453,6 +8710,7 @@
                 "in_event_8_pe_5",
                 "in_event_8_pe_6",
                 "in_event_8_pe_7",
+                "in_event_8_pe_8",
                 "in_event_9_pe_0",
                 "in_event_9_pe_1",
                 "in_event_9_pe_2",
@@ -8461,6 +8719,7 @@
                 "in_event_9_pe_5",
                 "in_event_9_pe_6",
                 "in_event_9_pe_7",
+                "in_event_9_pe_8",
                 "in_event_22_pe_0",
                 "in_event_22_pe_1",
                 "in_event_22_pe_2",
@@ -8469,6 +8728,7 @@
                 "in_event_22_pe_5",
                 "in_event_22_pe_6",
                 "in_event_22_pe_7",
+                "in_event_22_pe_8",
                 "in_event_10_pe_0",
                 "in_event_10_pe_1",
                 "in_event_10_pe_2",
@@ -8477,6 +8737,7 @@
                 "in_event_10_pe_5",
                 "in_event_10_pe_6",
                 "in_event_10_pe_7",
+                "in_event_10_pe_8",
                 "in_event_11_pe_0",
                 "in_event_11_pe_1",
                 "in_event_11_pe_2",
@@ -8485,6 +8746,7 @@
                 "in_event_11_pe_5",
                 "in_event_11_pe_6",
                 "in_event_11_pe_7",
+                "in_event_11_pe_8",
                 "irq_ack_0",
                 "irq_ack_1",
                 "irq_ack_2",
@@ -8492,7 +8754,8 @@
                 "irq_ack_4",
                 "irq_ack_5",
                 "irq_ack_6",
-                "irq_ack_7"
+                "irq_ack_7",
+                "irq_ack_8"
               ]
             },
             "timer": {
@@ -9393,6 +9656,106 @@
               },
               "cluster_id": 0,
               "core_id": 7,
+              "fetch_enable": null,
+              "boot_addr": null,
+              "vp_ports": [
+                "halt_status",
+                "data",
+                "fetch",
+                "irq_ack",
+                "ext_counter[11]",
+                "ext_counter[12]",
+                "ext_counter[13]",
+                "ext_counter[14]",
+                "ext_counter[15]",
+                "dbg_unit",
+                "bootaddr",
+                "fetchen",
+                "halt",
+                "irq_req"
+              ]
+            },
+            "pe8": {
+              "version": "ri5cyv2",
+              "archi": "riscv",
+              "implementation": "ri5cy",
+              "gv_isa": [
+                "--pulp",
+                "--rv32m",
+                "--pulpv2",
+                "--pulp-perf-counters",
+                "--pulp-hw-loop",
+                "--itc-external-req",
+                "--fpu",
+                "--fpud",
+                "--shared-fpu"
+              ],
+              "isa": "rv32imfcXpulpv2",
+              "march": "imfcXpulpv2",
+              "compiler_args": [
+                "-mfdiv"
+              ],
+              "priv_version": 1.9,
+              "perf_counters": true,
+              "features": [
+                "misaligned",
+                "perf"
+              ],
+              "hal_files": [
+                "hal/riscv/riscv_v4.h",
+                "hal/riscv/types.h"
+              ],
+              "archi_files": [
+                "archi/riscv/priv_1_9.h",
+                "archi/riscv/builtins_v2.h",
+                "archi/riscv/builtins_v2_emu.h",
+                "archi/riscv/pcer_v1.h"
+              ],
+              "defines": [
+                "ARCHI_CORE_HAS_PULPV2",
+                "CORE_PULP_BUILTINS"
+              ],
+              "vp_class": "cpu/iss/iss",
+              "power_models": {
+                "clock_gated": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.0000016"
+                      }
+                    }
+                  }
+                },
+                "insn": {
+                  "type": "linear",
+                  "unit": "pJ",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "2.4854524"
+                      },
+                      "1.1": {
+                        "any": "1.2"
+                      }
+                    }
+                  }
+                },
+                "leakage": {
+                  "type": "linear",
+                  "unit": "W",
+                  "values": {
+                    "25": {
+                      "1.2": {
+                        "any": "0.000030"
+                      }
+                    }
+                  }
+                }
+              },
+              "cluster_id": 0,
+              "core_id": 8,
               "fetch_enable": null,
               "boot_addr": null,
               "vp_ports": [
