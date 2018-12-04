@@ -587,6 +587,10 @@ if has_cluster:
 
     soc.fll1.clock_out = soc.get(get_cluster_name(cid) + '_clock').clock_in
 
+    if tp.get_child_bool('**/apb_soc_ctrl/has_pmu_bypass'):
+      soc.cluster_reset = soc.get(get_cluster_name(cid)).reset
+      soc.apb_soc_ctrl.cluster_reset = soc.cluster_reset
+
 
 adv_dbg_unit_config = {}
 if tp.get('**/adv_dbg_unit/config') is not None:
