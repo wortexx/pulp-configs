@@ -86,8 +86,8 @@
     "plt_loader",
     "fc_itc",
     "fll",
-    "fll1",
-    "fll2",
+    "fll_periph",
+    "fll_cluster",
     "fll_ctrl",
     "apb_soc_ctrl",
     "stdout",
@@ -107,6 +107,7 @@
     "cpi0",
     "jtag0",
     "fll_soc_clock",
+    "fll_periph_clock",
     "spim0",
     "i2c0",
     "i2c1",
@@ -119,11 +120,11 @@
     ],
     [
       "self->ref_clock",
-      "fll1->ref_clock"
+      "fll_periph->ref_clock"
     ],
     [
       "self->ref_clock",
-      "fll2->ref_clock"
+      "fll_cluster->ref_clock"
     ],
     [
       "self->ref_clock",
@@ -198,12 +199,12 @@
       "fll->input"
     ],
     [
-      "apb_ico->fll1",
-      "fll1->input"
+      "apb_ico->fll_periph",
+      "fll_periph->input"
     ],
     [
-      "apb_ico->fll2",
-      "fll2->input"
+      "apb_ico->fll_cluster",
+      "fll_cluster->input"
     ],
     [
       "apb_ico->udma",
@@ -258,7 +259,11 @@
       "self->fll_soc_clock"
     ],
     [
-      "fll1->clock_out",
+      "fll_periph->clock_out",
+      "self->fll_periph_clock"
+    ],
+    [
+      "fll_cluster->clock_out",
       "cluster_clock->clock_in"
     ],
     [
@@ -632,12 +637,12 @@
         "size": "0x00000010",
         "remove_offset": "0x1A100000"
       },
-      "fll1": {
+      "fll_periph": {
         "base": "0x1A100010",
         "size": "0x00000010",
         "remove_offset": "0x1A100010"
       },
-      "fll2": {
+      "fll_cluster": {
         "base": "0x1A100020",
         "size": "0x00000010",
         "remove_offset": "0x1A100020"
@@ -676,8 +681,8 @@
     "vp_ports": [
       "stdout",
       "fll",
-      "fll1",
-      "fll2",
+      "fll_periph",
+      "fll_cluster",
       "udma",
       "soc_eu",
       "apb_soc_ctrl",
@@ -811,7 +816,7 @@
       "input"
     ]
   },
-  "fll1": {
+  "fll_periph": {
     "includes": [
       "ips/fll/fll_v1.json"
     ],
@@ -821,11 +826,12 @@
       "input"
     ]
   },
-  "fll2": {
+  "fll_cluster": {
     "includes": [
       "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
+      "clock_out",
       "ref_clock",
       "input"
     ]

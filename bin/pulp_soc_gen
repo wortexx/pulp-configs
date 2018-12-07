@@ -57,7 +57,7 @@ if has_fc_eu:
 else:
   fc_events         = tp.get('soc/peripherals/fc_itc/irq')
 l2_is_partitioned = tp.get_child_bool('soc/l2/is_partitioned')
-has_fll           = tp.get('soc/peripherals/fll') is not None
+has_fll           = tp.get('soc/peripherals/fll') is not None or tp.get('soc/peripherals/flls') is not None
 has_rom           = tp.get('soc/rom') is not None
 has_efuse         = tp.get('soc/peripherals/efuse') is not None
 has_pmu           = tp.get('soc/peripherals/pmu') is not None
@@ -272,11 +272,20 @@ if has_gpio:
   })
 
 if has_fll:
-  apb_soc_mappings.update({
-    "fll"          : get_mapping(tp.get_child_dict("soc/peripherals/fll"), True),
-    "fll1"         : get_mapping(tp.get_child_dict("soc/peripherals/fll1"), True),
-    "fll2"         : get_mapping(tp.get_child_dict("soc/peripherals/fll2"), True)
-  })
+
+  flls_config = tp.get('soc/peripherals/flls')
+
+  if flls_config is None:
+    apb_soc_mappings.update({
+      "fll"          : get_mapping(tp.get_child_dict("soc/peripherals/fll"), True),
+      "fll1"         : get_mapping(tp.get_child_dict("soc/peripherals/fll1"), True),
+      "fll2"         : get_mapping(tp.get_child_dict("soc/peripherals/fll2"), True)
+    })
+  else:
+    for fll_name, fll_config in flls_config.get_items().items():
+      apb_soc_mappings.update({
+        fll_name          : get_mapping(fll_config.get_dict(), True)
+      })
 
 if has_udma:
   apb_soc_mappings.update({
@@ -433,17 +442,35 @@ if has_fc:
     )
 
 if has_fll:
-  soc.fll = Component(
-      includes= ["ips/fll/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
-  )
 
-  soc.fll1 = Component(
-      includes= ["ips/fll/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
-  )
+  flls_config = tp.get('soc/peripherals/flls')
 
-  soc.fll2 = Component(
-      includes= ["ips/fll/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
-  )
+  if flls_config is None:
+    soc.fll = Component(
+        includes= ["ips/fll/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
+    )
+
+    soc.fll1 = Component(
+        includes= ["ips/fll/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
+    )
+
+    soc.fll2 = Component(
+        includes= ["ips/fll/fll_v%d.json" % (tp.get_child_int("soc/peripherals/fll/version"))]
+    )
+
+    soc.ref_clock = soc.fll.ref_clock
+    soc.ref_clock = soc.fll1.ref_clock
+    soc.ref_clock = soc.fll2.ref_clock
+
+  else:
+    for fll_name, fll_config in flls_config.get_items().items():
+
+      soc.add_component(fll_name, Component(
+          includes= ["ips/fll/fll_v%d.json" % (fll_config.get_child_int("version"))]
+      ))
+
+      soc.ref_clock = soc.get(fll_name).ref_clock
+
 
   soc.fll_ctrl = Component(
       version= tp.get_child_int("soc/peripherals/fll_ctrl/version"),
@@ -451,11 +478,6 @@ if has_fll:
       gv_class= "pulp.Fll_ctrl.fll_ctrl"
   )
 
-  soc.ref_clock = soc.fll.ref_clock
-  soc.ref_clock = soc.fll1.ref_clock
-  soc.ref_clock = soc.fll2.ref_clock
-
-  soc.fll.clock_out = soc.fll_soc_clock
 
 apb_soc_params = {}
 
@@ -585,8 +607,6 @@ if has_cluster:
     
     soc.get(get_cluster_name(cid) + '_clock').out = soc.get(get_cluster_name(cid)).clock
 
-    soc.fll1.clock_out = soc.get(get_cluster_name(cid) + '_clock').clock_in
-
     if tp.get_child_bool('**/apb_soc_ctrl/has_pmu_bypass'):
       soc.cluster_reset = soc.get(get_cluster_name(cid)).reset
       soc.apb_soc_ctrl.cluster_reset = soc.cluster_reset
@@ -608,9 +628,30 @@ if has_cluster:
 # APB to peripherals bindings
 soc.apb_ico.stdout = soc.stdout.input
 if has_fll:
-  soc.apb_ico.fll = soc.fll.input
-  soc.apb_ico.fll1 = soc.fll1.input
-  soc.apb_ico.fll2 = soc.fll2.input
+
+  flls_config = tp.get('soc/peripherals/flls')
+
+  if flls_config is not None:
+    for fll_name, fll_config in flls_config.get_items().items():
+      soc.apb_ico.set(fll_name, soc.get(fll_name).input)
+
+      if "soc" in fll_config.get('targets').get_dict():
+        soc.get(fll_name).clock_out = soc.fll_soc_clock
+      elif "cluster" in fll_config.get('targets').get_dict():
+        soc.get(fll_name).clock_out =soc.get(get_cluster_name(cid) + '_clock').clock_in
+      elif "periph" in fll_config.get('targets').get_dict():
+        soc.get(fll_name).clock_out = soc.fll_periph_clock
+
+
+  else:
+    soc.apb_ico.fll = soc.fll.input
+    soc.apb_ico.fll1 = soc.fll1.input
+    soc.apb_ico.fll2 = soc.fll2.input
+
+    soc.fll1.clock_out = soc.get(get_cluster_name(cid) + '_clock').clock_in
+    soc.fll.clock_out = soc.fll_soc_clock
+    soc.fll.clock_out = soc.fll_periph_clock
+
 
 if has_udma:
   soc.apb_ico.udma = soc.udma.input

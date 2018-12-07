@@ -101,10 +101,12 @@
   ],
   "vp_ports": [
     "ref_clock",
+    "cluster_reset",
     "cluster_clock",
     "cpi0",
     "jtag0",
     "fll_soc_clock",
+    "fll_periph_clock",
     "spim0",
     "spim1",
     "i2c0",
@@ -140,6 +142,10 @@
     [
       "self->ref_clock",
       "cluster->ref_clock"
+    ],
+    [
+      "self->cluster_reset",
+      "cluster->reset"
     ],
     [
       "self->cluster_clock",
@@ -274,8 +280,16 @@
       "self->fll_soc_clock"
     ],
     [
+      "fll->clock_out",
+      "self->fll_periph_clock"
+    ],
+    [
       "fll1->clock_out",
       "cluster_clock->clock_in"
+    ],
+    [
+      "apb_soc_ctrl->cluster_reset",
+      "self->cluster_reset"
     ],
     [
       "apb_soc_ctrl->bootaddr",
@@ -883,6 +897,7 @@
     "cluster_power_event": 31,
     "cluster_clock_gate_event": 35,
     "vp_ports": [
+      "cluster_reset",
       "bootaddr",
       "event",
       "cluster_power_irq",
@@ -997,6 +1012,7 @@
       "dma_irq",
       "soc",
       "clock",
+      "reset",
       "input",
       "ref_clock"
     ]

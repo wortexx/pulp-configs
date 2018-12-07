@@ -2084,6 +2084,7 @@
             "cpi0",
             "jtag0",
             "fll_soc_clock",
+            "fll_periph_clock",
             "spim0",
             "spim1",
             "i2c0",
@@ -2266,6 +2267,10 @@
             [
               "fll->clock_out",
               "self->fll_soc_clock"
+            ],
+            [
+              "fll->clock_out",
+              "self->fll_periph_clock"
             ],
             [
               "fll1->clock_out",

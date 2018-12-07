@@ -248,7 +248,8 @@
       "apb_soc_ctrl": {
         "base"         : "0x1A104000",
         "size"         : "0x00001000",
-        "has_jtag_reg" : true
+        "has_jtag_reg" : true,
+        "has_pmu_bypass" : true
       },
 
       "soc_eu": {
