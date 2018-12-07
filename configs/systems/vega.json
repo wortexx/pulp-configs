@@ -750,6 +750,7 @@
             "cpi0",
             "jtag0",
             "fll_soc_clock",
+            "fll_periph_clock",
             "spim0",
             "spim1",
             "spim2",
@@ -931,6 +932,10 @@
             [
               "fll->clock_out",
               "self->fll_soc_clock"
+            ],
+            [
+              "fll->clock_out",
+              "self->fll_periph_clock"
             ],
             [
               "fll1->clock_out",
@@ -1205,7 +1210,7 @@
                 },
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00180000"
                 }
               },
               "vp_ports": [
@@ -1242,7 +1247,7 @@
               "mappings": {
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00180000"
                 },
                 "ll_ico": {}
               },
@@ -1260,7 +1265,7 @@
               "mappings": {
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00180000"
                 },
                 "ll_ico": {}
               },
@@ -1278,7 +1283,7 @@
               "mappings": {
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00180000"
                 },
                 "ll_ico": {}
               },
@@ -1295,7 +1300,7 @@
               "mappings": {
                 "l2_shared": {
                   "base": "0x1C010000",
-                  "size": "0x00070000"
+                  "size": "0x00180000"
                 },
                 "ll_ico": {}
               },
@@ -2340,7 +2345,7 @@
             "is_partitioned": true,
             "nb_shared_banks": 4,
             "map_base": "0x1C000000",
-            "map_size": "0x00080000"
+            "map_size": "0x00190000"
           },
           "l2_priv0": {
             "size": 32768,
@@ -2362,33 +2367,33 @@
           },
           "l2_shared": {
             "nb_banks": 4,
-            "size": 458752,
+            "size": 1572864,
             "map_base": "0x1C010000",
-            "map_size": "0x00070000"
+            "map_size": "0x00180000"
           },
           "l2_shared_0": {
-            "size": 114688,
+            "size": 393216,
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
             ]
           },
           "l2_shared_1": {
-            "size": 114688,
+            "size": 393216,
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
             ]
           },
           "l2_shared_2": {
-            "size": 114688,
+            "size": 393216,
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
             ]
           },
           "l2_shared_3": {
-            "size": 114688,
+            "size": 393216,
             "vp_class": "memory/memory",
             "vp_ports": [
               "input"
@@ -4908,7 +4913,7 @@
               "mappings": {
                 "l1": {
                   "base": "0x10000000",
-                  "size": "0x00010000",
+                  "size": "0x00020000",
                   "remove_offset": "0x10000000"
                 },
                 "periph_ico": {
@@ -5815,13 +5820,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -5839,13 +5844,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -5891,13 +5896,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -5915,13 +5920,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -5967,13 +5972,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -5991,13 +5996,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -6043,13 +6048,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -6067,13 +6072,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -6119,13 +6124,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -6143,13 +6148,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -6195,13 +6200,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -6219,13 +6224,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -6271,13 +6276,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -6295,13 +6300,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -6347,13 +6352,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -6371,13 +6376,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -6423,13 +6428,13 @@
                 "mappings": {
                   "l1": {
                     "base": "0x10000000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10000000",
                     "id": 0
                   },
                   "l1_ts": {
                     "base": "0x10100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x10100000",
                     "id": 0
                   },
@@ -6447,13 +6452,13 @@
                   },
                   "l1_alias": {
                     "base": "0x0",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x0",
                     "id": 0
                   },
                   "l1_ts_alias": {
                     "base": "0x100000",
-                    "size": "0x00010000",
+                    "size": "0x00020000",
                     "remove_offset": "0x100000",
                     "id": 0
                   },
@@ -6550,7 +6555,7 @@
             },
             "l1": {
               "vp_class": null,
-              "size": 65536,
+              "size": 131072,
               "alias": true,
               "has_l1_alias": true,
               "alias_base": "0x00000000",
@@ -6659,7 +6664,7 @@
                 ]
               ],
               "bank0": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -6757,7 +6762,7 @@
                 ]
               },
               "bank1": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -6855,7 +6860,7 @@
                 ]
               },
               "bank2": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -6953,7 +6958,7 @@
                 ]
               },
               "bank3": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7051,7 +7056,7 @@
                 ]
               },
               "bank4": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7149,7 +7154,7 @@
                 ]
               },
               "bank5": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7247,7 +7252,7 @@
                 ]
               },
               "bank6": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7345,7 +7350,7 @@
                 ]
               },
               "bank7": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7443,7 +7448,7 @@
                 ]
               },
               "bank8": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7541,7 +7546,7 @@
                 ]
               },
               "bank9": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7639,7 +7644,7 @@
                 ]
               },
               "bank10": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7737,7 +7742,7 @@
                 ]
               },
               "bank11": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7835,7 +7840,7 @@
                 ]
               },
               "bank12": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -7933,7 +7938,7 @@
                 ]
               },
               "bank13": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -8031,7 +8036,7 @@
                 ]
               },
               "bank14": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {
@@ -8129,7 +8134,7 @@
                 ]
               },
               "bank15": {
-                "size": 4096,
+                "size": 8192,
                 "vp_class": "memory/memory",
                 "power_models": {
                   "idle": {

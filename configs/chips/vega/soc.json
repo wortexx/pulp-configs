@@ -110,6 +110,7 @@
     "cpi0",
     "jtag0",
     "fll_soc_clock",
+    "fll_periph_clock",
     "spim0",
     "spim1",
     "spim2",
@@ -278,6 +279,10 @@
     [
       "fll->clock_out",
       "self->fll_soc_clock"
+    ],
+    [
+      "fll->clock_out",
+      "self->fll_periph_clock"
     ],
     [
       "fll1->clock_out",
@@ -551,7 +556,7 @@
         },
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00180000"
         }
       },
       "vp_ports": [
@@ -587,7 +592,7 @@
       "mappings": {
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00180000"
         },
         "ll_ico": {}
       },
@@ -604,7 +609,7 @@
       "mappings": {
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00180000"
         },
         "ll_ico": {}
       },
@@ -621,7 +626,7 @@
       "mappings": {
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00180000"
         },
         "ll_ico": {}
       },
@@ -637,7 +642,7 @@
       "mappings": {
         "l2_shared": {
           "base": "0x1C010000",
-          "size": "0x00070000"
+          "size": "0x00180000"
         },
         "ll_ico": {}
       },
@@ -784,7 +789,7 @@
     "is_partitioned": true,
     "nb_shared_banks": 4,
     "map_base": "0x1C000000",
-    "map_size": "0x00080000"
+    "map_size": "0x00190000"
   },
   "l2_priv0": {
     "size": 32768,
@@ -806,33 +811,33 @@
   },
   "l2_shared": {
     "nb_banks": 4,
-    "size": 458752,
+    "size": 1572864,
     "map_base": "0x1C010000",
-    "map_size": "0x00070000"
+    "map_size": "0x00180000"
   },
   "l2_shared_0": {
-    "size": 114688,
+    "size": 393216,
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
     ]
   },
   "l2_shared_1": {
-    "size": 114688,
+    "size": 393216,
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
     ]
   },
   "l2_shared_2": {
-    "size": 114688,
+    "size": 393216,
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
     ]
   },
   "l2_shared_3": {
-    "size": 114688,
+    "size": 393216,
     "vp_class": "memory/memory",
     "vp_ports": [
       "input"
