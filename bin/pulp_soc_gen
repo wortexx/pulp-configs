@@ -93,6 +93,11 @@ soc = Component(
     fc_events=fc_events_dict
 )
 
+soc.periph_clock = Component(
+  vp_class="vp/clock_domain",
+  frequency=50000000
+)
+
 axi_ico_mappings = {
   "soc": get_mapping(tp.get_child_dict("soc"))
 }
@@ -632,29 +637,32 @@ if has_fll:
   flls_config = tp.get('soc/peripherals/flls')
 
   if flls_config is not None:
+    print ('CONFIG2')
     for fll_name, fll_config in flls_config.get_items().items():
       soc.apb_ico.set(fll_name, soc.get(fll_name).input)
 
       if "soc" in fll_config.get('targets').get_dict():
         soc.get(fll_name).clock_out = soc.fll_soc_clock
       elif "cluster" in fll_config.get('targets').get_dict():
-        soc.get(fll_name).clock_out =soc.get(get_cluster_name(cid) + '_clock').clock_in
+        for cid in range(0, nb_cluster):
+          soc.get(fll_name).clock_out =soc.get(get_cluster_name(cid) + '_clock').clock_in
       elif "periph" in fll_config.get('targets').get_dict():
-        soc.get(fll_name).clock_out = soc.fll_periph_clock
+        soc.get(fll_name).clock_out = soc.periph_clock.clock_in
 
 
   else:
+    print ('CONFIG')
     soc.apb_ico.fll = soc.fll.input
     soc.apb_ico.fll1 = soc.fll1.input
     soc.apb_ico.fll2 = soc.fll2.input
 
     soc.fll1.clock_out = soc.get(get_cluster_name(cid) + '_clock').clock_in
     soc.fll.clock_out = soc.fll_soc_clock
-    soc.fll.clock_out = soc.fll_periph_clock
 
 
 if has_udma:
   soc.apb_ico.udma = soc.udma.input
+  soc.periph_clock.out = soc.udma.periph_clock
 
 if has_soc_events:
   soc.apb_ico.soc_eu = soc.soc_eu.input

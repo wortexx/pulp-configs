@@ -69,6 +69,7 @@
     "evt_queue_error": 29
   },
   "vp_comps": [
+    "periph_clock",
     "axi_ico",
     "soc_ico",
     "pmu",
@@ -80,8 +81,7 @@
     "plt_loader",
     "fc_eu",
     "fll",
-    "fll1",
-    "fll2",
+    "fll_cluster",
     "fll_ctrl",
     "apb_soc_ctrl",
     "stdout",
@@ -106,7 +106,6 @@
     "cpi0",
     "jtag0",
     "fll_soc_clock",
-    "fll_periph_clock",
     "spim0",
     "spim1",
     "i2c0",
@@ -121,11 +120,7 @@
     ],
     [
       "self->ref_clock",
-      "fll1->ref_clock"
-    ],
-    [
-      "self->ref_clock",
-      "fll2->ref_clock"
+      "fll_cluster->ref_clock"
     ],
     [
       "self->ref_clock",
@@ -158,6 +153,10 @@
     [
       "self->jtag0",
       "adv_dbg_unit->jtag"
+    ],
+    [
+      "periph_clock->out",
+      "udma->periph_clock"
     ],
     [
       "axi_ico->cluster",
@@ -200,12 +199,8 @@
       "fll->input"
     ],
     [
-      "apb_ico->fll1",
-      "fll1->input"
-    ],
-    [
-      "apb_ico->fll2",
-      "fll2->input"
+      "apb_ico->fll_cluster",
+      "fll_cluster->input"
     ],
     [
       "apb_ico->udma",
@@ -280,11 +275,7 @@
       "self->fll_soc_clock"
     ],
     [
-      "fll->clock_out",
-      "self->fll_periph_clock"
-    ],
-    [
-      "fll1->clock_out",
+      "fll_cluster->clock_out",
       "cluster_clock->clock_in"
     ],
     [
@@ -384,6 +375,13 @@
       "apb_soc_ctrl->confreg_ext"
     ]
   ],
+  "periph_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out"
+    ]
+  },
   "axi_ico": {
     "includes": [
       "ips/interco/router.json"
@@ -690,12 +688,7 @@
         "size": "0x00000010",
         "remove_offset": "0x1A100000"
       },
-      "fll1": {
-        "base": "0x1A100010",
-        "size": "0x00000010",
-        "remove_offset": "0x1A100010"
-      },
-      "fll2": {
+      "fll_cluster": {
         "base": "0x1A100020",
         "size": "0x00000010",
         "remove_offset": "0x1A100020"
@@ -730,8 +723,7 @@
       "rtc",
       "stdout",
       "fll",
-      "fll1",
-      "fll2",
+      "fll_cluster",
       "udma",
       "soc_eu",
       "apb_soc_ctrl",
@@ -866,7 +858,7 @@
       "input"
     ]
   },
-  "fll1": {
+  "fll_cluster": {
     "includes": [
       "ips/fll/fll_v1.json"
     ],
@@ -876,17 +868,8 @@
       "input"
     ]
   },
-  "fll2": {
-    "includes": [
-      "ips/fll/fll_v1.json"
-    ],
-    "vp_ports": [
-      "ref_clock",
-      "input"
-    ]
-  },
   "fll_ctrl": {
-    "version": null,
+    "version": 3,
     "vp_class": "pulp/fll/fll_ctrl",
     "gv_class": "pulp.Fll_ctrl.fll_ctrl"
   },
@@ -987,6 +970,7 @@
       "uart0",
       "hyper0",
       "input",
+      "periph_clock",
       "cpi0"
     ]
   },

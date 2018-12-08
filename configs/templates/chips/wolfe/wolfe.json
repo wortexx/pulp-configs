@@ -144,22 +144,24 @@
       "base": "0x1A100000",
       "size": "0x00100000",
 
-      "fll": {
-        "version"      : 1,
-        "base"         : "0x1A100000",
-        "size"         : "0x00000010"
+      "flls": {
+        "fll": {
+          "version"      : 1,
+          "base"         : "0x1A100000",
+          "size"         : "0x00000010",
+          "targets"      : [ "soc", "periph" ]
+        },
+
+        "fll_cluster": {
+          "version"      : 1,
+          "base"         : "0x1A100020",
+          "size"         : "0x00000010",
+          "targets"      : [ "cluster" ]
+        }
       },
 
-      "fll1": {
-        "version"      : 1,
-        "base"         : "0x1A100010",
-        "size"         : "0x00000010"
-      },
-
-      "fll2": {
-        "version"      : 1,
-        "base"         : "0x1A100020",
-        "size"         : "0x00000010"
+      "fll_ctrl": {
+        "version"      : 3
       },
 
       "gpio": {
