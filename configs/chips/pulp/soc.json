@@ -69,6 +69,7 @@
     "evt_queue_error": 29
   },
   "vp_comps": [
+    "periph_clock",
     "axi_ico",
     "soc_ico",
     "apb_ico",
@@ -107,7 +108,6 @@
     "cpi0",
     "jtag0",
     "fll_soc_clock",
-    "fll_periph_clock",
     "spim0",
     "i2c0",
     "i2c1",
@@ -149,6 +149,10 @@
     [
       "self->jtag0",
       "adv_dbg_unit->jtag"
+    ],
+    [
+      "periph_clock->out",
+      "udma->periph_clock"
     ],
     [
       "axi_ico->cluster",
@@ -260,7 +264,7 @@
     ],
     [
       "fll_periph->clock_out",
-      "self->fll_periph_clock"
+      "periph_clock->clock_in"
     ],
     [
       "fll_cluster->clock_out",
@@ -331,6 +335,14 @@
       "soc_ico->debug"
     ]
   ],
+  "periph_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out",
+      "clock_in"
+    ]
+  },
   "axi_ico": {
     "includes": [
       "ips/interco/router.json"
@@ -900,6 +912,7 @@
       "i2c1",
       "uart0",
       "input",
+      "periph_clock",
       "cpi0"
     ]
   },
