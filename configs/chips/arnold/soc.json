@@ -69,6 +69,7 @@
     "evt_queue_error": 29
   },
   "vp_comps": [
+    "periph_clock",
     "axi_ico",
     "soc_ico",
     "apb_ico",
@@ -86,8 +87,8 @@
     "plt_loader",
     "fc_itc",
     "fll",
-    "fll1",
-    "fll2",
+    "fll_periph",
+    "fll_fpga",
     "fll_ctrl",
     "apb_soc_ctrl",
     "stdout",
@@ -116,11 +117,11 @@
     ],
     [
       "self->ref_clock",
-      "fll1->ref_clock"
+      "fll_periph->ref_clock"
     ],
     [
       "self->ref_clock",
-      "fll2->ref_clock"
+      "fll_fpga->ref_clock"
     ],
     [
       "self->ref_clock",
@@ -137,6 +138,10 @@
     [
       "self->jtag0",
       "adv_dbg_unit->jtag"
+    ],
+    [
+      "periph_clock->out",
+      "udma->periph_clock"
     ],
     [
       "axi_ico->soc",
@@ -183,12 +188,12 @@
       "fll->input"
     ],
     [
-      "apb_ico->fll1",
-      "fll1->input"
+      "apb_ico->fll_periph",
+      "fll_periph->input"
     ],
     [
-      "apb_ico->fll2",
-      "fll2->input"
+      "apb_ico->fll_fpga",
+      "fll_fpga->input"
     ],
     [
       "apb_ico->udma",
@@ -241,6 +246,10 @@
     [
       "fll->clock_out",
       "self->fll_soc_clock"
+    ],
+    [
+      "fll_periph->clock_out",
+      "periph_clock->clock_in"
     ],
     [
       "apb_soc_ctrl->bootaddr",
@@ -299,6 +308,14 @@
       "apb_soc_ctrl->confreg_ext"
     ]
   ],
+  "periph_clock": {
+    "vp_class": "vp/clock_domain",
+    "frequency": 50000000,
+    "vp_ports": [
+      "out",
+      "clock_in"
+    ]
+  },
   "axi_ico": {
     "includes": [
       "ips/interco/router.json"
@@ -591,12 +608,12 @@
         "size": "0x00000010",
         "remove_offset": "0x1A100000"
       },
-      "fll1": {
+      "fll_periph": {
         "base": "0x1A100010",
         "size": "0x00000010",
         "remove_offset": "0x1A100010"
       },
-      "fll2": {
+      "fll_fpga": {
         "base": "0x1A100020",
         "size": "0x00000010",
         "remove_offset": "0x1A100020"
@@ -635,8 +652,8 @@
     "vp_ports": [
       "stdout",
       "fll",
-      "fll1",
-      "fll2",
+      "fll_periph",
+      "fll_fpga",
       "udma",
       "soc_eu",
       "apb_soc_ctrl",
@@ -769,16 +786,17 @@
       "input"
     ]
   },
-  "fll1": {
+  "fll_periph": {
     "includes": [
       "ips/fll/fll_v1.json"
     ],
     "vp_ports": [
+      "clock_out",
       "ref_clock",
       "input"
     ]
   },
-  "fll2": {
+  "fll_fpga": {
     "includes": [
       "ips/fll/fll_v1.json"
     ],
@@ -857,6 +875,7 @@
       "uart0",
       "hyper0",
       "input",
+      "periph_clock",
       "cpi0"
     ]
   },

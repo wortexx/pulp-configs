@@ -637,7 +637,6 @@ if has_fll:
   flls_config = tp.get('soc/peripherals/flls')
 
   if flls_config is not None:
-    print ('CONFIG2')
     for fll_name, fll_config in flls_config.get_items().items():
       soc.apb_ico.set(fll_name, soc.get(fll_name).input)
 
