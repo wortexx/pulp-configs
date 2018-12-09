@@ -225,7 +225,7 @@
 
         "fll_cluster": {
           "version"      : 1,
-          "base"         : "0x1A100020",
+          "base"         : "0x1A100010",
           "size"         : "0x00000010",
           "targets"      : [ "cluster" ]
         }
