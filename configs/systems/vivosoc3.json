@@ -105,7 +105,7 @@
       "uart": {
         "value": "1",
         "channel": "0",
-        "baudrate": "625000"
+        "baudrate": "8333333"
       }
     }
   },
@@ -1469,6 +1469,7 @@
             "evt_queue_error": 29
           },
           "vp_comps": [
+            "periph_clock",
             "axi_ico",
             "soc_ico",
             "pmu",
@@ -1502,7 +1503,6 @@
             "cluster_clock",
             "ref_clock",
             "jtag0",
-            "fll1",
             "spim0",
             "spim1",
             "uart0",
@@ -1536,6 +1536,10 @@
             [
               "self->jtag0",
               "adv_dbg_unit->jtag"
+            ],
+            [
+              "periph_clock->out",
+              "udma->periph_clock"
             ],
             [
               "axi_ico->cluster",
@@ -1706,6 +1710,13 @@
               "soc_ico->debug"
             ]
           ],
+          "periph_clock": {
+            "vp_class": "vp/clock_domain",
+            "frequency": 50000000,
+            "vp_ports": [
+              "out"
+            ]
+          },
           "axi_ico": {
             "vp_class": "interco/router",
             "bandwidth": 4,
@@ -2845,7 +2856,8 @@
               "spim1",
               "uart0",
               "uart1",
-              "input"
+              "input",
+              "periph_clock"
             ]
           },
           "uart": {
@@ -2857,6 +2869,7 @@
           "cluster": {
             "version": 5,
             "nb_pe": 4,
+            "has_cc": null,
             "vp_class": "pulp/cluster/cluster",
             "vp_comps": [
               "cluster_ico",
@@ -6011,8 +6024,7 @@
             "vp_class": "vp/clock_domain",
             "frequency": 50000000,
             "vp_ports": [
-              "out",
-              "clock_in"
+              "out"
             ]
           },
           "adv_dbg_unit": {
