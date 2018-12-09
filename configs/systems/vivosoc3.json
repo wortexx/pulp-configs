@@ -105,7 +105,7 @@
       "uart": {
         "value": "1",
         "channel": "0",
-        "baudrate": "8333333"
+        "baudrate": "625000"
       }
     }
   },

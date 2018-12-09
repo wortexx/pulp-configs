@@ -10,14 +10,6 @@
     }
   },
 
-  "rt": {
-    "iodevs"          : {
-      "uart": {
-        "baudrate": "115200"
-      }
-    }
-  },
-
   "system_tree": {
     "debug_bridge": {
       "boot-mode": "jtag"
