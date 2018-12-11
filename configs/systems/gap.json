@@ -3771,7 +3771,7 @@
           },
           "rtc": {
             "version": 1,
-            "vp_class": "pulp/chips/gap/rtc",
+            "vp_class": "vendor/dolphin/rtc",
             "apb_irq_soc_event": 43,
             "irq_soc_event": 44,
             "calendar_time": "0x00124808",

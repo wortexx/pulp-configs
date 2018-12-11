@@ -2273,11 +2273,8 @@
               "--fpud",
               "--shared-fpu"
             ],
-            "isa": "rv32imfcXpulpv2",
-            "march": "imfcXpulpv2",
-            "compiler_args": [
-              "-mfdiv"
-            ],
+            "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+            "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
             "priv_version": 1.9,
             "perf_counters": true,
             "features": [
@@ -2340,6 +2337,7 @@
                 }
               }
             },
+            "iss_class": "iss_riscy_single_regfile",
             "cluster_id": 31,
             "core_id": 0,
             "fetch_enable": true,
@@ -3152,7 +3150,7 @@
           },
           "rtc": {
             "version": 1,
-            "vp_class": "pulp/chips/gap/rtc",
+            "vp_class": "vendor/dolphin/rtc",
             "apb_irq_soc_event": 140,
             "irq_soc_event": 141,
             "calendar_time": "0x00124808",
@@ -8838,11 +8836,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8902,6 +8897,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 0,
               "boot_addr": "0x1C000000"
@@ -8921,11 +8917,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -8985,6 +8978,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 0,
               "fetch_enable": null,
@@ -9021,11 +9015,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -9085,6 +9076,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 1,
               "fetch_enable": null,
@@ -9121,11 +9113,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -9185,6 +9174,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 2,
               "fetch_enable": null,
@@ -9221,11 +9211,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -9285,6 +9272,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 3,
               "fetch_enable": null,
@@ -9321,11 +9309,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -9385,6 +9370,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 4,
               "fetch_enable": null,
@@ -9421,11 +9407,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -9485,6 +9468,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 5,
               "fetch_enable": null,
@@ -9521,11 +9505,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -9585,6 +9566,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 6,
               "fetch_enable": null,
@@ -9621,11 +9603,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -9685,6 +9664,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 7,
               "fetch_enable": null,
@@ -9721,11 +9701,8 @@
                 "--fpud",
                 "--shared-fpu"
               ],
-              "isa": "rv32imfcXpulpv2",
-              "march": "imfcXpulpv2",
-              "compiler_args": [
-                "-mfdiv"
-              ],
+              "isa": "rv32imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
+              "march": "imfcXpulpv2Xf8Xf16XfvecXfauxXf16alt",
               "priv_version": 1.9,
               "perf_counters": true,
               "features": [
@@ -9785,6 +9762,7 @@
                   }
                 }
               },
+              "iss_class": "iss_riscy_single_regfile",
               "cluster_id": 0,
               "core_id": 8,
               "fetch_enable": null,

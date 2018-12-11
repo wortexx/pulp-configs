@@ -10,7 +10,7 @@
     "base": "0x10000000",
     "alias": "0x00000000",
     "size": "0x00400000",
-    "core": "ri5ky_v2_fpu",
+    "core": "ri5ky_v2_sfloat_single_regfile",
     "version": 5,
     "json_file": "cluster_v6",
     "nb_cluster": 1,
@@ -107,7 +107,7 @@
     "size": "0x06000000",
 
     "fc": {
-      "core"        : "ri5ky_v2_fpu_sec",
+      "core"        : "ri5ky_v2_sfloat_single_regfile_sec",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,
