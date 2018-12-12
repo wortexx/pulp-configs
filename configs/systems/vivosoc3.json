@@ -327,58 +327,58 @@
           "profiles": {
             "default": {
               "mspi0_sck": {
-                "alternate": "mspi0_sck"
+                "alternate": "gpio0"
               },
               "mspi0_csn0": {
-                "alternate": "mspi0_csn0"
+                "alternate": "gpio1"
               },
               "mspi0_sdio0": {
-                "alternate": "mspi0_sdio0"
+                "alternate": "gpio2"
               },
               "mspi0_sdio1": {
-                "alternate": "mspi0_sdio1"
+                "alternate": "gpio3"
               },
               "mspi0_sdio2": {
-                "alternate": "mspi0_sdio2"
+                "alternate": "gpio4"
               },
               "mspi0_sdio3": {
-                "alternate": "mspi0_sdio3"
+                "alternate": "gpio5"
               },
               "mspi0_csn1": {
-                "alternate": "mspi0_csn1"
+                "alternate": "gpio6"
               },
               "mspi0_csn2": {
-                "alternate": "mspi0_csn2"
+                "alternate": "gpio7"
               },
               "mspi1_sck": {
-                "alternate": "mspi1_sck"
+                "alternate": "gpio8"
               },
               "mspi1_csn0": {
-                "alternate": "mspi1_csn0"
+                "alternate": "gpio9"
               },
               "mspi1_sdio0": {
-                "alternate": "mspi1_sdio0"
+                "alternate": "gpio10"
               },
               "mspi1_sdio1": {
-                "alternate": "mspi1_sdio1"
+                "alternate": "gpio11"
               },
               "mspi1_sdio2": {
-                "alternate": "mspi1_sdio2"
+                "alternate": "gpio12"
               },
               "mspi1_sdio3": {
-                "alternate": "mspi1_sdio3"
+                "alternate": "gpio13"
               },
               "mspi1_csn1": {
-                "alternate": "mspi1_csn1"
+                "alternate": "gpio14"
               },
               "mspi1_csn2": {
-                "alternate": "mspi1_csn2"
+                "alternate": "gpio15"
               },
               "uart0_tx": {
-                "alternate": "uart0_tx"
+                "alternate": "gpio16"
               },
               "uart0_rx": {
-                "alternate": "uart0_rx"
+                "alternate": "gpio17"
               }
             }
           },
