@@ -2147,7 +2147,6 @@
             "stdout",
             "fc_tcdm",
             "gpio",
-            "rtc",
             "fc_icache",
             "timer",
             "soc_eu",
@@ -2277,14 +2276,6 @@
               "l2->input"
             ],
             [
-              "apb_ico->rtc",
-              "rtc->input"
-            ],
-            [
-              "apb_ico->rtc",
-              "self->rtc_input"
-            ],
-            [
               "apb_ico->stdout",
               "stdout->input"
             ],
@@ -2307,6 +2298,10 @@
             [
               "apb_ico->apb_soc_ctrl",
               "apb_soc_ctrl->input"
+            ],
+            [
+              "apb_ico->rtc",
+              "self->rtc_input"
             ],
             [
               "apb_ico->rom",
@@ -2804,13 +2799,13 @@
               }
             },
             "vp_ports": [
-              "rtc",
               "stdout",
               "fll",
               "fll_cluster",
               "udma",
               "soc_eu",
               "apb_soc_ctrl",
+              "rtc",
               "rom",
               "pmu",
               "efuse",
@@ -3854,17 +3849,6 @@
               "hal/gpio/gpio_v2.h"
             ]
           },
-          "rtc": {
-            "version": 1,
-            "vp_class": "vendor/dolphin/rtc",
-            "apb_irq_soc_event": 43,
-            "irq_soc_event": 44,
-            "calendar_time": "0x00124808",
-            "calendar_date": "0x00171228",
-            "vp_ports": [
-              "input"
-            ]
-          },
           "fc_icache": {
             "version": 2,
             "vp_class": "pulp/icache_ctrl/icache_ctrl_v2",
@@ -4465,6 +4449,9 @@
               "jtag",
               "confreg_soc"
             ]
+          },
+          "rtc": {
+            "version": 1
           }
         },
         "cluster": {
