@@ -140,6 +140,8 @@ system.system_tree.board.ref_clock_clock.out = system.system_tree.board.ref_cloc
 
 system.system_tree.board.ref_clock.clock_sync = system.system_tree.board.chip.ref_clock
 
+system.system_tree.board.ref_clock_clock.out = system.system_tree.board.chip.ref_clock_engine
+
 
 
 if args.chip == 'wolfe':

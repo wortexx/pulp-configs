@@ -216,11 +216,6 @@ if has_udma:
     }
   )
 
-if has_pmu:
-  soc.pmu = Component(
-    includes=["pmu_v%d.json" % tp.get_child_str('soc/peripherals/pmu/version')]
-  )
-
 soc.soc_ico.debug                  = soc.soc_ico.ll_ico.input
 soc.soc_ico.axi_slave              = soc.soc_ico.ll_ico.input
 soc.soc_ico.hb_ico.out_0           = soc.soc_ico.l2_shared_0
@@ -345,6 +340,11 @@ if has_rom:
     "rom"       : get_mapping(tp.get_child_dict("soc/rom"), True),
   })
 
+if has_rtc:
+  apb_soc_mappings.update({
+    "rtc"       : get_mapping(tp.get_child_dict("soc/peripherals/rtc"), True),
+  })
+  
 
 soc.apb_ico = Component(
     includes= [ "ips/interco/router.json" ],
@@ -511,11 +511,6 @@ if has_gpio:
     includes= ["ips/gpio/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")]
   )
 
-if has_pmu:
-  soc.pmu = Component(
-      includes= ["ips/pmu/pmu_v%d.json" % tp.get_child_int("soc/peripherals/pmu/version")]
-  )
-
 for name, config in tp.get("soc/peripherals").get_items().items():
   file = config.get_child_str("file")
   if file is not None:
@@ -595,25 +590,7 @@ if has_fc:
 
 if has_cluster:
   for cid in range(0, nb_cluster):
-    soc.add_component(
-      get_cluster_name(cid),
-      Component(
-        includes=["chips/%s/cluster_%d.json" % (chip, cid)]
-      )
-    )
-
-    soc.add_component(
-      get_cluster_name(cid) + '_clock',
-      Component(
-        vp_class="vp/clock_domain",
-        frequency=50000000
-      )
-    )
-    
-    soc.get(get_cluster_name(cid) + '_clock').out = soc.get(get_cluster_name(cid)).clock
-
     if tp.get_child_bool('**/apb_soc_ctrl/has_pmu_bypass'):
-      soc.cluster_reset = soc.get(get_cluster_name(cid)).reset
       soc.apb_soc_ctrl.cluster_reset = soc.cluster_reset
 
 
@@ -625,10 +602,6 @@ soc.adv_dbg_unit = Component(
     includes=["ips/adv_dbg_unit/adv_dbg_unit.json"],
     **adv_dbg_unit_config
 )
-
-if has_cluster:
-  for cid in range(0, nb_cluster):
-    soc.cluster_clock = soc.get(get_cluster_name(cid)).clock
 
 # APB to peripherals bindings
 soc.apb_ico.stdout = soc.stdout.input
@@ -644,7 +617,7 @@ if has_fll:
         soc.get(fll_name).clock_out = soc.fll_soc_clock
       elif "cluster" in fll_config.get('targets').get_dict():
         for cid in range(0, nb_cluster):
-          soc.get(fll_name).clock_out =soc.get(get_cluster_name(cid) + '_clock').clock_in
+          soc.get(fll_name).clock_out = soc.new_itf(get_cluster_name(cid) + '_fll')
       elif "periph" in fll_config.get('targets').get_dict():
         soc.get(fll_name).clock_out = soc.periph_clock.clock_in
 
@@ -667,6 +640,12 @@ if has_soc_events:
   soc.apb_ico.soc_eu = soc.soc_eu.input
   
 soc.apb_ico.apb_soc_ctrl = soc.apb_soc_ctrl.input
+
+if has_rtc:
+  soc.wakeup_rtc = soc.apb_soc_ctrl.wakeup_rtc
+  soc.apb_soc_ctrl.wakeup_out = soc.wakeup_out
+  soc.apb_soc_ctrl.wakeup_seq = soc.wakeup_seq
+
 if has_fc:
   soc.ref_clock = soc.timer.ref_clock
 
@@ -711,6 +690,11 @@ if l2_is_partitioned:
 else:
   soc.soc_ico.l2 = soc.l2.input
 
+soc.rtc_event_in = soc.soc_eu.event_in
+
+if has_rtc:
+  soc.apb_ico.rtc = soc.rtc_input
+
 # APB SOC
 if has_fc:
   soc.apb_soc_ctrl.bootaddr = soc.fc.bootaddr
@@ -724,18 +708,13 @@ if has_pmu and has_fc:
     soc.apb_soc_ctrl.cluster_power_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_pok'))
     soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_cg_ok'))
 
-# RTC
-if has_rtc:
-  soc.rtc.event = soc.soc_eu.event_in
-  soc.ref_clock = soc.rtc.ref_clock
-
 # ROM
 if has_rom:
   soc.apb_ico.rom = soc.rom.input
 
 # PMU
 if has_pmu:
-  soc.apb_ico.pmu = soc.pmu.input
+  soc.apb_ico.pmu = soc.pmu_input
 
 # EFUSE
 if has_efuse:
@@ -754,7 +733,7 @@ if has_fc:
 if has_cluster:
   for cid in range(0, nb_cluster):
     cluster_name = get_cluster_name(cid)
-    soc.axi_ico.set(cluster_name, soc.get(cluster_name).input)
+    soc.axi_ico.set(cluster_name, soc.new_itf(cluster_name + '_input'))
 soc.axi_ico.soc = soc.soc_ico.axi_slave
 
 if has_ddr:
@@ -769,16 +748,13 @@ if has_fc:
 
 # Cluster
 if has_cluster:
-  for cid in range(0, nb_cluster):
-    cluster_name = get_cluster_name(cid)
-    if has_fc:
-      if has_fc_ico:
-        soc.get(cluster_name).dma_irq = soc.fc_eu.in_event_8_pe_0
-      else:
-        soc.get(cluster_name).dma_irq = soc.fc_itc.in_event_8
-    soc.get(cluster_name).soc = soc.axi_ico.input
+  if has_fc:
+    if has_fc_ico:
+      soc.dma_irq = soc.fc_eu.in_event_8_pe_0
+    else:
+      soc.dma_irq = soc.fc_itc.in_event_8
+  soc.soc_input = soc.axi_ico.input
 
-    soc.ref_clock = soc.get(cluster_name).ref_clock
 
 # Timer
 if has_fc:
@@ -846,8 +822,7 @@ if tp.get('soc/job_fifo') is not None:
     }
     soc.axi_ico.ext = soc.host_injector.input
 
-    for cid in range(0, nb_cluster):
-      soc.job_fifo.irq = soc.get(get_cluster_name(cid)).job_fifo_irq
+    soc.job_fifo.irq = soc.job_fifo_irq
 
 if chip == 'wolfe':
   soc.bootsel = soc.apb_soc_ctrl.bootsel

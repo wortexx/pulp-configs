@@ -72,7 +72,6 @@
     "periph_clock",
     "axi_ico",
     "soc_ico",
-    "pmu",
     "apb_ico",
     "fc_ico",
     "fc",
@@ -87,7 +86,6 @@
     "stdout",
     "fc_tcdm",
     "gpio",
-    "rtc",
     "fc_icache",
     "timer",
     "soc_eu",
@@ -95,17 +93,24 @@
     "efuse",
     "uart",
     "fc_debug",
-    "cluster",
-    "cluster_clock",
     "adv_dbg_unit"
   ],
   "vp_ports": [
     "ref_clock",
-    "cluster_reset",
-    "cluster_clock",
+    "wakeup_rtc",
+    "rtc_event_in",
+    "dma_irq",
+    "soc_input",
     "cpi0",
     "jtag0",
+    "cluster_reset",
     "fll_soc_clock",
+    "cluster_fll",
+    "wakeup_out",
+    "wakeup_seq",
+    "rtc_input",
+    "pmu_input",
+    "cluster_input",
     "spim0",
     "spim1",
     "i2c0",
@@ -131,20 +136,20 @@
       "soc_eu->ref_clock"
     ],
     [
-      "self->ref_clock",
-      "rtc->ref_clock"
+      "self->wakeup_rtc",
+      "apb_soc_ctrl->wakeup_rtc"
     ],
     [
-      "self->ref_clock",
-      "cluster->ref_clock"
+      "self->rtc_event_in",
+      "soc_eu->event_in"
     ],
     [
-      "self->cluster_reset",
-      "cluster->reset"
+      "self->dma_irq",
+      "fc_eu->in_event_8_pe_0"
     ],
     [
-      "self->cluster_clock",
-      "cluster->clock"
+      "self->soc_input",
+      "axi_ico->input"
     ],
     [
       "self->cpi0",
@@ -160,7 +165,7 @@
     ],
     [
       "axi_ico->cluster",
-      "cluster->input"
+      "self->cluster_input"
     ],
     [
       "axi_ico->soc",
@@ -187,10 +192,6 @@
       "l2->input"
     ],
     [
-      "apb_ico->rtc",
-      "rtc->input"
-    ],
-    [
       "apb_ico->stdout",
       "stdout->input"
     ],
@@ -215,12 +216,16 @@
       "apb_soc_ctrl->input"
     ],
     [
+      "apb_ico->rtc",
+      "self->rtc_input"
+    ],
+    [
       "apb_ico->rom",
       "rom->input"
     ],
     [
       "apb_ico->pmu",
-      "pmu->input"
+      "self->pmu_input"
     ],
     [
       "apb_ico->efuse",
@@ -276,11 +281,19 @@
     ],
     [
       "fll_cluster->clock_out",
-      "cluster_clock->clock_in"
+      "self->cluster_fll"
     ],
     [
       "apb_soc_ctrl->cluster_reset",
       "self->cluster_reset"
+    ],
+    [
+      "apb_soc_ctrl->wakeup_out",
+      "self->wakeup_out"
+    ],
+    [
+      "apb_soc_ctrl->wakeup_seq",
+      "self->wakeup_seq"
     ],
     [
       "apb_soc_ctrl->bootaddr",
@@ -301,10 +314,6 @@
     [
       "apb_soc_ctrl->confreg_soc",
       "adv_dbg_unit->confreg_soc"
-    ],
-    [
-      "rtc->event",
-      "soc_eu->event_in"
     ],
     [
       "timer->irq_itf_0",
@@ -353,18 +362,6 @@
     [
       "udma->hyper0",
       "self->hyper0"
-    ],
-    [
-      "cluster->dma_irq",
-      "fc_eu->in_event_8_pe_0"
-    ],
-    [
-      "cluster->soc",
-      "axi_ico->input"
-    ],
-    [
-      "cluster_clock->out",
-      "cluster->clock"
     ],
     [
       "adv_dbg_unit->io",
@@ -650,14 +647,6 @@
       ]
     }
   },
-  "pmu": {
-    "includes": [
-      "ips/pmu/pmu_v1.json"
-    ],
-    "vp_ports": [
-      "input"
-    ]
-  },
   "apb_ico": {
     "includes": [
       "ips/interco/router.json"
@@ -720,13 +709,13 @@
       }
     },
     "vp_ports": [
-      "rtc",
       "stdout",
       "fll",
       "fll_cluster",
       "udma",
       "soc_eu",
       "apb_soc_ctrl",
+      "rtc",
       "rom",
       "pmu",
       "efuse",
@@ -881,12 +870,15 @@
     "cluster_clock_gate_event": 35,
     "vp_ports": [
       "cluster_reset",
+      "wakeup_out",
+      "wakeup_seq",
       "bootaddr",
       "event",
       "cluster_power_irq",
       "cluster_clock_gate_irq",
       "confreg_soc",
       "input",
+      "wakeup_rtc",
       "confreg_ext"
     ]
   },
@@ -908,20 +900,6 @@
   "gpio": {
     "includes": [
       "ips/gpio/gpio_v2.json"
-    ]
-  },
-  "rtc": {
-    "includes": [
-      "ips/vendors/dolphin/rtc.json"
-    ],
-    "apb_irq_soc_event": 43,
-    "irq_soc_event": 44,
-    "calendar_time": "0x00124808",
-    "calendar_date": "0x00171228",
-    "vp_ports": [
-      "event",
-      "input",
-      "ref_clock"
     ]
   },
   "fc_icache": {
@@ -987,27 +965,6 @@
   },
   "fc_debug": {
     "version": null
-  },
-  "cluster": {
-    "includes": [
-      "chips/gap/cluster_0.json"
-    ],
-    "vp_ports": [
-      "dma_irq",
-      "soc",
-      "clock",
-      "reset",
-      "input",
-      "ref_clock"
-    ]
-  },
-  "cluster_clock": {
-    "vp_class": "vp/clock_domain",
-    "frequency": 50000000,
-    "vp_ports": [
-      "out",
-      "clock_in"
-    ]
   },
   "adv_dbg_unit": {
     "includes": [

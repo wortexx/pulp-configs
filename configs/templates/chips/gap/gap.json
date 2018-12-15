@@ -267,7 +267,6 @@
       },
 
       "rtc": {
-        "file"         : "ips/vendors/dolphin/rtc.json",
         "base"         : "0x1A108000",
         "size"         : "0x00001000",
         "config": {

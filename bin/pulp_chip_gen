@@ -44,11 +44,22 @@ padframe_conf         = None
 if padframe is not None:
   padframe_conf = js.import_config_from_file(tp.get_child_str('padframe/content'), find=True)
 chip_family           = tp.get_child_str('chip_family')
+chip_name              = tp.get_child_str('chip')
+has_pmu           = tp.get('soc/peripherals/pmu') is not None
+has_rtc           = tp.get('soc/peripherals/rtc') is not None
 has_udma          = tp.get('soc/peripherals/udma') is not None
+has_cluster       = tp.get('cluster') is not None
+nb_cluster        = tp.get_child_int('cluster/nb_cluster')
 has_ddr = tp.get('ddr') is not None
 if chip_family is None:
   chip_family = args.chip
 
+
+def get_cluster_name(cid):
+  if cid == 0:
+    return 'cluster'
+  else:
+    return 'cluster_%d' % (cid)
 
 
 chip = Component(
@@ -83,10 +94,65 @@ chip.soc_clock = Component(
 )
 
 
-
 chip.soc = Component(
   includes= [ soc_file ]
 )
+
+if has_cluster:
+  for cid in range(0, nb_cluster):
+    cluster_name = get_cluster_name(cid)
+
+    chip.add_component(
+      get_cluster_name(cid),
+      Component(
+        includes=["chips/%s/cluster_%d.json" % (chip_name, cid)]
+      )
+    )
+
+    chip.add_component(
+      get_cluster_name(cid) + '_clock',
+      Component(
+        vp_class="vp/clock_domain",
+        frequency=50000000
+      )
+    )
+    
+    chip.get(get_cluster_name(cid) + '_clock').out = chip.get(get_cluster_name(cid)).clock
+
+    chip.soc.cluster_reset = chip.get(get_cluster_name(cid)).reset
+    chip.soc.set(get_cluster_name(cid) + '_fll', chip.get(get_cluster_name(cid) + '_clock').clock_in)
+
+    chip.soc.set(get_cluster_name(cid) + '_input', chip.get(get_cluster_name(cid)).input)
+
+    chip.get(cluster_name).dma_irq = chip.soc.dma_irq
+
+    chip.get(cluster_name).soc = chip.soc.soc_input
+
+    chip.ref_clock = chip.get(cluster_name).ref_clock
+
+# RTC
+if has_rtc:
+  chip.rtc = Component(
+    includes=["ips/vendors/dolphin/rtc.json"],
+    **tp.get('soc/peripherals/rtc').get('config').get_dict()
+  )
+  chip.rtc.irq = chip.soc.wakeup_rtc
+  chip.rtc.event = chip.soc.rtc_event_in
+  chip.ref_clock = chip.rtc.ref_clock
+  chip.soc.rtc_input = chip.rtc.input
+  chip.soc_clock.out = chip.rtc.clock
+
+
+if has_pmu:
+  chip.pmu = Component(
+    includes=["ips/pmu/pmu_v%d.json" % tp.get_child_str('soc/peripherals/pmu/version')]
+  )
+  chip.soc.pmu_input = chip.pmu.input
+  chip.pmu.icu0_reset = chip.soc.reset
+  chip.soc_clock.out = chip.pmu.clock
+  chip.soc.wakeup_out = chip.pmu.wakeup
+  chip.soc.wakeup_seq = chip.pmu.wakeup_seq
+  chip.ref_clock_engine = chip.pmu.ref_clock
 
 
 if padframe is not None:
@@ -138,3 +204,7 @@ if args.output is not None:
   with open(args.output, 'w') as file:
     file.write(config)
     file.write('\n')
+
+if tp.get('soc/job_fifo') is not None:
+    for cid in range(0, nb_cluster):
+      chip.soc.job_fifo_irq = chip.get(get_cluster_name(cid)).job_fifo_irq
