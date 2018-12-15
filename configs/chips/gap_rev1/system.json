@@ -32,6 +32,10 @@
           "ref_clock->clock"
         ],
         [
+          "ref_clock_clock->out",
+          "chip->ref_clock_engine"
+        ],
+        [
           "ref_clock->clock_sync",
           "chip->ref_clock"
         ]
@@ -42,7 +46,8 @@
         ],
         "vp_ports": [
           "reset",
-          "ref_clock"
+          "ref_clock",
+          "ref_clock_engine"
         ]
       },
       "dpi_clock": {
