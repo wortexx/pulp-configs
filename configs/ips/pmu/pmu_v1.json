@@ -77,82 +77,6 @@
       }
     },
 
-    "sequences": {
-      "type": "custom",
-      "soc_active_nv": {
-        "type": "constant",
-        "value": "0x01",
-        "id": 0,
-        "commands": [
-          [ "4", "0", "0x06", "CLUSTER EXT NV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x00", "SOC     ON  NV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
-      },
-      "soc_active_lv": {
-        "type": "constant",
-        "value": "0x02",
-        "id": 1,
-        "commands": [
-          [ "4", "0", "0x07", "CLUSTER EXT LV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x01", "SOC     ON  LV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
-      },
-      "soc_cluster_active_nv": {
-        "type": "constant",
-        "value": "0x04",
-        "id": 2,
-        "commands": [
-          [ "4", "0", "0x00", "CLUSTER ON  NV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x00", "SOC     ON  NV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
-      },
-      "soc_cluster_active_lv": {
-        "type": "constant",
-        "value": "0x08",
-        "id": 3,
-        "commands": [
-          [ "4", "0", "0x01", "CLUSTER ON  LV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x01", "SOC     ON  LV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
-      },
-      "deep_sleep_all_off": {
-        "type": "constant",
-        "value": "0x10",
-        "id": 4,
-        "commands": [
-          [ "4", "0", "0x09", "CLUSTER EXT OFF"],
-          [ "3", "0", "0x09", "SOC     EXT OFF"],
-          [ "5", "0", "0x00", "IO0     EXT N/A"],
-          [ "2", "0", "0x00", "SAFE    RET RV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
-      },
-      "deep_sleep_retentive": {
-        "type": "constant",
-        "value": "0x20",
-        "id": 5,
-        "commands": [
-          [ "4", "0", "0x09", "CLUSTER EXT OFF"],
-          [ "3", "0", "0x05", "SOC     RET OFF"],
-          [ "5", "0", "0x00", "IO0     EXT N/A"],
-          [ "2", "0", "0x00", "SAFE    RET RV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
-      }
-    },
-
     "dlc_pctrl": {
       "desc": "PICL control register",
       "help": "The DLC_PCTRL register is the control register to issue transaction on PICL bus",
@@ -797,22 +721,6 @@
           }
         }
       }
-    },
-
-    "icu0": {
-      "type": "group",
-      "offset": "0x02"
-    },
-
-    "icu1": {
-      "type": "group",
-      "offset": "0x03"
-    },
-
-    "dmu0": {
-      "type": "group",
-      "offset": "0x04"
     }
-
   }
 }

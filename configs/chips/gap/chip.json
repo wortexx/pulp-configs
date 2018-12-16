@@ -349,7 +349,7 @@
   },
   "pmu": {
     "includes": [
-      "ips/pmu/pmu_v1.json"
+      "templates/chips/gap/pmu.json"
     ],
     "vp_ports": [
       "icu0_reset",

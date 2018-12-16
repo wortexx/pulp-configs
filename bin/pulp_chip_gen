@@ -144,16 +144,22 @@ if has_rtc:
 
 
 if has_pmu:
-  chip.pmu = Component(
-    includes=["ips/pmu/pmu_v%d.json" % tp.get_child_str('soc/peripherals/pmu/version')]
-  )
+  pmu_content = tp.get_child_str('soc/peripherals/pmu/content')
+
+  if pmu_content is not None:
+    chip.pmu = Component(
+      includes=[ pmu_content ]
+    )
+  else:
+    chip.pmu = Component(
+      includes=["ips/pmu/pmu_v%d.json" % tp.get_child_str('soc/peripherals/pmu/version')]
+    )
   chip.soc.pmu_input = chip.pmu.input
   chip.pmu.icu0_reset = chip.soc.reset
   chip.soc_clock.out = chip.pmu.clock
   chip.soc.wakeup_out = chip.pmu.wakeup
   chip.soc.wakeup_seq = chip.pmu.wakeup_seq
   chip.ref_clock_engine = chip.pmu.ref_clock
-
 
 if padframe is not None:
   chip.soc_clock.out = chip.padframe.clock
