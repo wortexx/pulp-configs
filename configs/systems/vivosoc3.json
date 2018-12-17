@@ -325,7 +325,8 @@
           "default_profile": "default",
           "vp_class": "pulp/padframe/padframe_v1",
           "profiles": {
-            "default": {
+            "default": {},
+            "default_periph": {
               "mspi0_sck": {
                 "alternate": "mspi0_sck"
               },

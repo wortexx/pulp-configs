@@ -9,6 +9,8 @@
 
   "profiles": {
     "default": {
+    },
+    "default_periph": {
       "mspi0_sck"  : { "alternate": "mspi0_sck"   },
       "mspi0_csn0" : { "alternate": "mspi0_csn0"  },
       "mspi0_sdio0": { "alternate": "mspi0_sdio0" },
