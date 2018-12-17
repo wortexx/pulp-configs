@@ -11,7 +11,7 @@
         "offset": "0x70",
         "content": {
           "dbg1": {
-            "bit": 14
+            "bit": 16
           }
         }
       }

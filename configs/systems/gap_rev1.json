@@ -3693,7 +3693,7 @@
                   "offset": "0x70",
                   "content": {
                     "dbg1": {
-                      "bit": 14
+                      "bit": 16
                     }
                   }
                 }
@@ -4431,6 +4431,7 @@
             "xtalCheck_delta": "0.1",
             "xtalCheck_min": "3",
             "xtalCheck_max": "10",
+            "values": [],
             "vp_ports": [
               "input"
             ]
@@ -10086,231 +10087,6 @@
                 "value": "0x3"
               }
             },
-            "sequences": {
-              "type": "custom",
-              "soc_active_nv": {
-                "type": "constant",
-                "value": "0x01",
-                "id": 0,
-                "commands": [
-                  [
-                    "4",
-                    "0",
-                    "0x06",
-                    "CLUSTER EXT NV"
-                  ],
-                  [
-                    "2",
-                    "0",
-                    "0x00",
-                    "SAFE    ON  NV"
-                  ],
-                  [
-                    "5",
-                    "0",
-                    "0x00",
-                    "IO0     ON  N/A"
-                  ],
-                  [
-                    "3",
-                    "0",
-                    "0x00",
-                    "SOC     ON  NV"
-                  ],
-                  [
-                    "1",
-                    "0",
-                    "0xc0",
-                    "Unmask IRQ 0-5"
-                  ]
-                ]
-              },
-              "soc_active_lv": {
-                "type": "constant",
-                "value": "0x02",
-                "id": 1,
-                "commands": [
-                  [
-                    "4",
-                    "0",
-                    "0x07",
-                    "CLUSTER EXT LV"
-                  ],
-                  [
-                    "2",
-                    "0",
-                    "0x00",
-                    "SAFE    ON  NV"
-                  ],
-                  [
-                    "5",
-                    "0",
-                    "0x00",
-                    "IO0     ON  N/A"
-                  ],
-                  [
-                    "3",
-                    "0",
-                    "0x01",
-                    "SOC     ON  LV"
-                  ],
-                  [
-                    "1",
-                    "0",
-                    "0xc0",
-                    "Unmask IRQ 0-5"
-                  ]
-                ]
-              },
-              "soc_cluster_active_nv": {
-                "type": "constant",
-                "value": "0x04",
-                "id": 2,
-                "commands": [
-                  [
-                    "4",
-                    "0",
-                    "0x00",
-                    "CLUSTER ON  NV"
-                  ],
-                  [
-                    "2",
-                    "0",
-                    "0x00",
-                    "SAFE    ON  NV"
-                  ],
-                  [
-                    "5",
-                    "0",
-                    "0x00",
-                    "IO0     ON  N/A"
-                  ],
-                  [
-                    "3",
-                    "0",
-                    "0x00",
-                    "SOC     ON  NV"
-                  ],
-                  [
-                    "1",
-                    "0",
-                    "0xc0",
-                    "Unmask IRQ 0-5"
-                  ]
-                ]
-              },
-              "soc_cluster_active_lv": {
-                "type": "constant",
-                "value": "0x08",
-                "id": 3,
-                "commands": [
-                  [
-                    "4",
-                    "0",
-                    "0x01",
-                    "CLUSTER ON  LV"
-                  ],
-                  [
-                    "2",
-                    "0",
-                    "0x00",
-                    "SAFE    ON  NV"
-                  ],
-                  [
-                    "5",
-                    "0",
-                    "0x00",
-                    "IO0     ON  N/A"
-                  ],
-                  [
-                    "3",
-                    "0",
-                    "0x01",
-                    "SOC     ON  LV"
-                  ],
-                  [
-                    "1",
-                    "0",
-                    "0xc0",
-                    "Unmask IRQ 0-5"
-                  ]
-                ]
-              },
-              "deep_sleep_all_off": {
-                "type": "constant",
-                "value": "0x10",
-                "id": 4,
-                "commands": [
-                  [
-                    "4",
-                    "0",
-                    "0x09",
-                    "CLUSTER EXT OFF"
-                  ],
-                  [
-                    "3",
-                    "0",
-                    "0x09",
-                    "SOC     EXT OFF"
-                  ],
-                  [
-                    "5",
-                    "0",
-                    "0x00",
-                    "IO0     EXT N/A"
-                  ],
-                  [
-                    "2",
-                    "0",
-                    "0x00",
-                    "SAFE    RET RV"
-                  ],
-                  [
-                    "1",
-                    "0",
-                    "0xc0",
-                    "Unmask IRQ 0-5"
-                  ]
-                ]
-              },
-              "deep_sleep_retentive": {
-                "type": "constant",
-                "value": "0x20",
-                "id": 5,
-                "commands": [
-                  [
-                    "4",
-                    "0",
-                    "0x09",
-                    "CLUSTER EXT OFF"
-                  ],
-                  [
-                    "3",
-                    "0",
-                    "0x05",
-                    "SOC     RET OFF"
-                  ],
-                  [
-                    "5",
-                    "0",
-                    "0x00",
-                    "IO0     EXT N/A"
-                  ],
-                  [
-                    "2",
-                    "0",
-                    "0x00",
-                    "SAFE    RET RV"
-                  ],
-                  [
-                    "1",
-                    "0",
-                    "0xc0",
-                    "Unmask IRQ 0-5"
-                  ]
-                ]
-              }
-            },
             "dlc_pctrl": {
               "desc": "PICL control register",
               "help": "The DLC_PCTRL register is the control register to issue transaction on PICL bus",
@@ -10953,6 +10729,226 @@
                 }
               }
             },
+            "sequences": {
+              "type": "custom",
+              "boot": {
+                "type": "constant",
+                "value": "0x01",
+                "id": -1,
+                "commands": [
+                  [
+                    "2",
+                    "0",
+                    "0x00",
+                    "SOC active NV"
+                  ],
+                  [
+                    "3",
+                    "0",
+                    "0x02",
+                    "Cluster deep sleep"
+                  ],
+                  [
+                    "0",
+                    "0",
+                    "0xFF",
+                    "Disable IRQ 0-7"
+                  ],
+                  [
+                    "0",
+                    "1",
+                    "0xC0",
+                    "Enable IRQ 0-5"
+                  ]
+                ]
+              },
+              "soc_active_nv": {
+                "type": "constant",
+                "value": "0x01",
+                "id": 0,
+                "commands": [
+                  [
+                    "2",
+                    "0",
+                    "0x00",
+                    "SOC active NV"
+                  ],
+                  [
+                    "3",
+                    "0",
+                    "0x02",
+                    "Cluster deep sleep"
+                  ],
+                  [
+                    "0",
+                    "0",
+                    "0xFF",
+                    "Disable IRQ 0-7"
+                  ],
+                  [
+                    "0",
+                    "1",
+                    "0xC0",
+                    "Enable IRQ 0-5"
+                  ]
+                ]
+              },
+              "soc_active_lv": {
+                "type": "constant",
+                "value": "0x01",
+                "id": 1,
+                "commands": [
+                  [
+                    "2",
+                    "0",
+                    "0x01",
+                    "SOC active LV"
+                  ],
+                  [
+                    "3",
+                    "0",
+                    "0x02",
+                    "Cluster deep sleep"
+                  ],
+                  [
+                    "0",
+                    "0",
+                    "0xFF",
+                    "Disable IRQ 0-7"
+                  ],
+                  [
+                    "0",
+                    "1",
+                    "0xC0",
+                    "Enable IRQ 0-5"
+                  ]
+                ]
+              },
+              "soc_cluster_active_nv": {
+                "type": "constant",
+                "value": "0x01",
+                "id": 2,
+                "commands": [
+                  [
+                    "2",
+                    "0",
+                    "0x00",
+                    "SOC active NV"
+                  ],
+                  [
+                    "3",
+                    "0",
+                    "0x00",
+                    "Cluster active NV"
+                  ],
+                  [
+                    "0",
+                    "0",
+                    "0xFF",
+                    "Disable IRQ 0-7"
+                  ],
+                  [
+                    "0",
+                    "1",
+                    "0xC0",
+                    "Enable IRQ 0-5"
+                  ]
+                ]
+              },
+              "soc_cluster_active_lv": {
+                "type": "constant",
+                "value": "0x01",
+                "id": 3,
+                "commands": [
+                  [
+                    "2",
+                    "0",
+                    "0x01",
+                    "SOC active LV"
+                  ],
+                  [
+                    "3",
+                    "0",
+                    "0x01",
+                    "Cluster active LV"
+                  ],
+                  [
+                    "0",
+                    "0",
+                    "0xFF",
+                    "Disable IRQ 0-7"
+                  ],
+                  [
+                    "0",
+                    "1",
+                    "0xC0",
+                    "Enable IRQ 0-5"
+                  ]
+                ]
+              },
+              "deep_sleep": {
+                "type": "constant",
+                "value": "0x01",
+                "id": 4,
+                "commands": [
+                  [
+                    "3",
+                    "0",
+                    "0x02",
+                    "Cluster deep sleep"
+                  ],
+                  [
+                    "2",
+                    "0",
+                    "0x02",
+                    "SOC deep sleep"
+                  ],
+                  [
+                    "0",
+                    "0",
+                    "0x00",
+                    "Enable IRQ 0-7"
+                  ],
+                  [
+                    "0",
+                    "1",
+                    "0xFF",
+                    "Disable IRQ 0-7"
+                  ]
+                ]
+              },
+              "deep_sleep_retentive": {
+                "type": "constant",
+                "value": "0x01",
+                "id": 5,
+                "commands": [
+                  [
+                    "3",
+                    "0",
+                    "0x02",
+                    "Cluster deep sleep"
+                  ],
+                  [
+                    "2",
+                    "0",
+                    "0x03",
+                    "SOC retentive"
+                  ],
+                  [
+                    "0",
+                    "0",
+                    "0x00",
+                    "Enable IRQ 0-7"
+                  ],
+                  [
+                    "0",
+                    "1",
+                    "0xFF",
+                    "Disable IRQ 0-7"
+                  ]
+                ]
+              }
+            },
             "icu0": {
               "type": "group",
               "offset": "0x02"
@@ -10966,6 +10962,58 @@
               "offset": "0x04"
             }
           },
+          "nb_interrupts": 16,
+          "nb_icu": 2,
+          "icu_states": [
+            [
+              3,
+              0,
+              4
+            ],
+            [
+              3,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              3,
+              0,
+              4
+            ],
+            [
+              3,
+              0,
+              2
+            ]
+          ],
+          "icrs": [
+            0,
+            0,
+            1,
+            1,
+            2,
+            2,
+            3,
+            3,
+            4,
+            5,
+            0,
+            1,
+            2,
+            3,
+            0,
+            0
+          ],
           "vp_ports": [
             "icu0_reset",
             "input",

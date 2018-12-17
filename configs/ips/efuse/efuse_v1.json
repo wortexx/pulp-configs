@@ -14,6 +14,6 @@
   "xtal_check": false,
   "xtalCheck_delta": "0.1",
   "xtalCheck_min": "3",
-  "xtalCheck_max": "10"
-
+  "xtalCheck_max": "10",
+  "values": []
 }

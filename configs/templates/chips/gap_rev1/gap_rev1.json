@@ -261,6 +261,7 @@
       },
 
       "pmu": {
+        "content"      : "templates/chips/gap_rev1/pmu.json",
         "version"      : 1,
         "base"         : "0x1A107000",
         "size"         : "0x00000800"
