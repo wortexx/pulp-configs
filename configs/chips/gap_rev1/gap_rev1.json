@@ -1,9 +1,12 @@
 {
-  "chip": "gap",
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
+  "chip": "gap_rev1",
   "chip_family": "gap",
-    
+  
   "padframe": {
-    "content": "templates/chips/gap/padframe.json"
+    "content": "chips/gap_rev1/padframe.json"
   },
 
   "cluster": {
@@ -242,7 +245,7 @@
       },
 
       "udma": {
-        "content"      : "templates/chips/gap/udma.json",
+        "content"      : "chips/gap_rev1/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
@@ -261,7 +264,7 @@
       },
 
       "pmu": {
-        "content"      : "templates/chips/gap/pmu.json",
+        "content"      : "chips/gap_rev1/pmu.json",
         "version"      : 1,
         "base"         : "0x1A107000",
         "size"         : "0x00000800"

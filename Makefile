@@ -63,14 +63,15 @@ gen.all:
 	./bin/plpconf_new --input=chips/pulpissimo-zeroriscy/pulpissimo-zeroriscy.json --output=configs/systems/pulpissimo-zeroriscy.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/pulpissimo-microriscy/pulpissimo-microriscy.json --output=configs/systems/pulpissimo-microriscy.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/pulpissimo-riscy/pulpissimo-riscy.json --output=configs/systems/pulpissimo-riscy.json --usecase=usecases/jtag-cam-spi.json
+	./bin/plpconf_new --input=chips/arnold/arnold.json --output=configs/systems/arnold.json --usecase=usecases/jtag-cam-spi.json
+	./bin/plpconf_new --input=chips/gap/gap.json --output=configs/systems/gap.json --usecase=usecases/jtag-cam-spi.json
+	./bin/plpconf_new --input=chips/gap_rev1/gap_rev1.json --output=configs/systems/gap_rev1.json --usecase=usecases/jtag-cam-spi.json
+	./bin/plpconf_new --input=chips/wolfe/wolfe.json --output=configs/systems/wolfe.json --usecase=usecases/jtag-cam-spi.json
 
 gen.usecases:
 	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --spiflash --cam --output=configs/usecases/jtag-cam-spi.json
 	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --cam --output=configs/usecases/jtag-cam.json
 	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --output=configs/usecases/jtag.json
-
-gen.arnold:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/arnold/arnold.json --output-dir=$(CURDIR)/configs/chips/arnold --output=configs/systems/arnold.json --usecase=usecases/jtag-cam-spi.json
 
 gen.pulpissimo.zeroriscy:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-zeroriscy/pulpissimo-zeroriscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-zeroriscy --output=configs/systems/pulpissimo-zeroriscy.json --usecase=usecases/jtag-cam.json
@@ -80,9 +81,6 @@ gen.pulpissimo.microriscy:
 
 gen.pulpissimo.riscy:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-riscy/pulpissimo-riscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-riscy --output=configs/systems/pulpissimo-riscy.json --usecase=usecases/jtag-cam.json
-
-gen.wolfe:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/wolfe/wolfe.json --output-dir=$(CURDIR)/configs/chips/wolfe --output=configs/systems/wolfe.json --usecase=usecases/jtag-cam-spi.json
 
 gen.usoc_v1:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/usoc_v1/usoc_v1.json --output-dir=$(CURDIR)/configs/chips/usoc_v1 --output=configs/systems/usoc_v1.json --usecase=usecases/jtag.json
@@ -107,12 +105,6 @@ gen.oprecompkw-dram:
 
 gen.vega:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/vega/vega.json --output-dir=$(CURDIR)/configs/chips/vega --output=configs/systems/vega.json --usecase=usecases/jtag-cam-spi.json
-
-gen.gap:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap/gap.json --output-dir=$(CURDIR)/configs/chips/gap --output=configs/systems/gap.json --usecase=usecases/jtag-cam-spi.json
-
-gen.gap_rev1:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/gap_rev1/gap_rev1.json --output-dir=$(CURDIR)/configs/chips/gap_rev1 --output=configs/systems/gap_rev1.json --usecase=usecases/jtag-cam-spi.json
 
 gen.vivosoc3:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/vivosoc3/vivosoc3.json --output-dir=$(CURDIR)/configs/chips/vivosoc3 --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json

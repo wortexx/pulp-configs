@@ -1,8 +1,11 @@
 {
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
   "chip": "arnold",
 
   "padframe": {
-    "content": "templates/chips/arnold/padframe.json"
+    "content": "chips/arnold/padframe.json"
   },
 
   "soc": {
@@ -97,7 +100,7 @@
       },
 
       "udma": {
-        "content"      : "templates/chips/arnold/udma.json",
+        "content"      : "chips/arnold/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },

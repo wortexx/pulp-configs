@@ -629,6 +629,8 @@ def get_config(tp):
 
   if has_rtc:
     soc.wakeup_rtc = soc.apb_soc_ctrl.wakeup_rtc
+
+  if has_pmu:
     soc.apb_soc_ctrl.wakeup_out = soc.wakeup_out
     soc.apb_soc_ctrl.wakeup_seq = soc.wakeup_seq
 

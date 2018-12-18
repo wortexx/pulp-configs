@@ -447,6 +447,10 @@
               "soc_eu->event_in"
             ],
             [
+              "apb_soc_ctrl->confreg_soc",
+              "adv_dbg_unit->confreg_soc"
+            ],
+            [
               "timer->irq_itf_0",
               "fc_itc->in_event_10"
             ],
@@ -489,6 +493,10 @@
             [
               "adv_dbg_unit->io",
               "soc_ico->debug"
+            ],
+            [
+              "adv_dbg_unit->confreg_ext",
+              "apb_soc_ctrl->confreg_ext"
             ]
           ],
           "periph_clock": {
@@ -846,7 +854,7 @@
           },
           "fc": {
             "includes": [
-              "ips/riscv/ri5ky_v2_fpu.json"
+              "ips/riscv/ri5ky_v2_fpu_1_10.json"
             ],
             "cluster_id": 31,
             "core_id": 0,
@@ -985,7 +993,9 @@
             "vp_ports": [
               "bootaddr",
               "event",
-              "input"
+              "confreg_soc",
+              "input",
+              "confreg_ext"
             ]
           },
           "stdout": {
@@ -1056,9 +1066,12 @@
             "includes": [
               "ips/adv_dbg_unit/adv_dbg_unit.json"
             ],
+            "confreg_length": 9,
             "vp_ports": [
               "io",
-              "jtag"
+              "confreg_ext",
+              "jtag",
+              "confreg_soc"
             ]
           }
         }
