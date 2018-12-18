@@ -58,6 +58,7 @@ clean:
 
 gen.all:
 	./bin/plpconf_new --input=chips/pulp/pulp.json --output=configs/systems/pulp.json --usecase=usecases/jtag-cam-spi.json
+	./bin/plpconf_new --input=chips/pulpissimo_v2/pulpissimo_v2.json --output=configs/systems/pulpissimo_v2.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/pulpissimo/pulpissimo.json --output=configs/systems/pulpissimo.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/pulpissimo-zeroriscy/pulpissimo-zeroriscy.json --output=configs/systems/pulpissimo-zeroriscy.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/pulpissimo-microriscy/pulpissimo-microriscy.json --output=configs/systems/pulpissimo-microriscy.json --usecase=usecases/jtag-cam-spi.json
