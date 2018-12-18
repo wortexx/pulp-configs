@@ -68,7 +68,7 @@ gen.all:
 	./bin/plpconf_new --input=chips/gap_rev1/gap_rev1.json --output=configs/systems/gap_rev1.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/wolfe/wolfe.json --output=configs/systems/wolfe.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/vega/vega.json --output=configs/systems/vega.json --usecase=usecases/jtag-cam-spi.json
-
+	./bin/plpconf_new --input=chips/vivosoc3/vivosoc3.json --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
 
 gen.usecases:
 	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --spiflash --cam --output=configs/usecases/jtag-cam-spi.json
@@ -104,9 +104,6 @@ gen.oprecompkw_sa:
 
 gen.oprecompkw-dram:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw-dram/oprecompkw-dram.json --output-dir=$(CURDIR)/configs/chips/oprecompkw-dram --output=configs/systems/oprecompkw-dram.json
-
-gen.vivosoc3:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/vivosoc3/vivosoc3.json --output-dir=$(CURDIR)/configs/chips/vivosoc3 --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
 
 gen.bigpulp-z-7045:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-z-7045/bigpulp-z-7045.json --output-dir=$(CURDIR)/configs/chips/bigpulp-z-7045 --output=configs/systems/bigpulp-z-7045.json --usecase=usecases/jtag.json

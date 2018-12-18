@@ -1,8 +1,11 @@
 {
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
   "chip": "vivosoc3",
     
   "padframe": {
-    "content": "templates/chips/vivosoc3/padframe.json"
+    "content": "chips/vivosoc3/padframe.json"
   },
 
   "cluster": {
@@ -151,7 +154,7 @@
       },
 
       "udma": {
-        "content"      : "templates/chips/vivosoc3/udma.json",
+        "content"      : "chips/vivosoc3/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
