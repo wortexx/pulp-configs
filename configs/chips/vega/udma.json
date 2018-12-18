@@ -52,7 +52,8 @@
     "version"      : 2,
     "nb_channels"  : 1,
     "ids"          : [6],
-    "offsets"      : ["0x300"]
+    "offsets"      : ["0x300"],
+    "is_master"    : true
   },
 
   "hyper": {

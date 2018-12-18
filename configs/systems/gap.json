@@ -1312,7 +1312,7 @@
           },
           "rtc": {
             "includes": [
-              "../../ips/rtc/rtc.json"
+              "ips/rtc/rtc.json"
             ]
           }
         },

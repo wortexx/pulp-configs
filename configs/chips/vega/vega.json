@@ -1,9 +1,12 @@
 {
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
   "chip": "vega",
   "chip_family": "vega",
     
   "padframe": {
-    "content": "templates/chips/vega/padframe.json"
+    "content": "chips/vega/padframe.json"
   },
 
   "cluster": {
@@ -187,14 +190,16 @@
       },
 
       "udma": {
-        "content"      : "templates/chips/vega/udma.json",
+        "content"      : "chips/vega/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
 
       "apb_soc_ctrl": {
         "base"         : "0x1A104000",
-        "size"         : "0x00001000"
+        "size"         : "0x00001000",
+        "has_jtag_reg" : true,
+        "has_pmu_bypass" : true
       },
 
       "soc_eu": {
@@ -204,13 +209,13 @@
       },
 
       "pmu": {
+        "content"      : "chips/vega/pmu.json",
         "version"      : 3,
         "base"         : "0x1A107000",
         "size"         : "0x00000800"
       },
 
       "rtc": {
-        "file"         : "ips/vendors/dolphin/rtc.json",
         "base"         : "0x1A108000",
         "size"         : "0x00001000",
         "config": {
