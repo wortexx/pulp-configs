@@ -1,8 +1,11 @@
 {
-  "chip": "pulpissimo",
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
 
+  "chip": "pulpissimo",
+    
   "padframe": {
-    "content": "templates/chips/pulpissimo/padframe.json"
+    "content": "chips/pulpissimo-riscy/padframe.json"
   },
 
   "soc": {
@@ -11,11 +14,11 @@
     "size": "0x06000000",
 
     "fc": {
-      "core"        : "ri5ky_v2_fpu",
+      "core"        : "ri5ky_v2",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,
-      "boot_addr"   : "0x1A000000"
+      "boot_addr"   : "0x1C008000"
     },
 
     "rom": {
@@ -84,7 +87,7 @@
       },
 
       "udma": {
-        "content"      : "templates/chips/pulpissimo/udma.json",
+        "content"      : "chips/pulpissimo-riscy/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
@@ -153,10 +156,6 @@
         "version"      : 1,
         "base"         : "0x1A110000",
         "size"         : "0x00008000"
-      },
-
-      "hwme": {
-        "version"      : 1
       }
 
     }

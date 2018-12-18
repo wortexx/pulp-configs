@@ -1,17 +1,20 @@
 {
-  "chip": "pulpissimo",
-    
-  "padframe": {
-    "content": "templates/chips/pulpissimo-microriscy/padframe.json"
-  },
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
 
+  "chip": "pulpissimo",
+ 
+  "padframe": {
+    "content": "chips/pulpissimo-zeroriscy/padframe.json"
+  },
+   
   "soc": {
     
     "base": "0x1A000000",
     "size": "0x06000000",
 
     "fc": {
-      "core"        : "microriscy",
+      "core"        : "zeroriscy",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,
@@ -57,22 +60,20 @@
       "base": "0x1A100000",
       "size": "0x00100000",
 
-      "fll": {
-        "version"      : 1,
-        "base"         : "0x1A100000",
-        "size"         : "0x00000010"
-      },
+      "flls": {
+        "fll": {
+          "version"      : 1,
+          "base"         : "0x1A100000",
+          "size"         : "0x00000010",
+          "targets"      : [ "soc" ]
+        },
 
-      "fll1": {
-        "version"      : 1,
-        "base"         : "0x1A100010",
-        "size"         : "0x00000010"
-      },
-
-      "fll2": {
-        "version"      : 1,
-        "base"         : "0x1A100020",
-        "size"         : "0x00000010"
+        "fll_periph": {
+          "version"      : 1,
+          "base"         : "0x1A100010",
+          "size"         : "0x00000010",
+          "targets"      : [ "periph" ]
+        }
       },
 
       "fll_ctrl": {
@@ -86,7 +87,7 @@
       },
 
       "udma": {
-        "content"      : "templates/chips/pulpissimo-microriscy/udma.json",
+        "content"      : "chips/pulpissimo-zeroriscy/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
