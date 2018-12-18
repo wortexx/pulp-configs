@@ -17,6 +17,8 @@
 
 import generators.v1.system_gen as system_gen
 from generators.v1.comp_gen import *
+import collections
+import json_tools as js
 
 
 
@@ -24,18 +26,14 @@ def get_config(tp, usecases=[]):
 
   chip              = tp.get_child_str('chip')
 
-  includes = [
-    "defaults.json",
-    "chips/%s/defaults.json" % (chip)
-  ]
+  config = js.import_config({'includes': [ "defaults.json" ] })
 
-  includes += usecases
-
-  system = Config(
+  config.merge(Config(
     config=system_gen.get_config(tp),
-    includes=includes
-  )
+    includes=usecases
+  ).get_js_config())
+
+  config.merge(js.import_config({'includes2': [ "chips/%s/defaults.json" % (chip) ] }))
 
 
-
-  return system.get_js_config()
+  return config

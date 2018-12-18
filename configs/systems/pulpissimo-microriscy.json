@@ -1,7 +1,6 @@
 {
   "includes": [
     "defaults.json",
-    "chips/pulpissimo/defaults.json",
     "usecases/jtag-cam-spi.json"
   ],
   "system_tree": {
@@ -18,7 +17,11 @@
       "stop_addr": "0x1A110000",
       "stop_value": "0x00010000",
       "set_pc_addr": "0x1A112000",
-      "commands": "reset stop load ioloop reqloop start wait"
+      "commands": "reset stop load ioloop reqloop start wait",
+      "adv_dbg_unit": {
+        "retry_count": 10,
+        "check_errors": true
+      }
     },
     "board": {
       "vp_class": "pulp/board",
@@ -1055,5 +1058,17 @@
         ]
       }
     }
+  },
+  "runner": {
+    "boot_from_flash": true,
+    "boot-mode": "rom"
+  },
+  "loader": {
+    "boot": {
+      "mode": "rom"
+    }
+  },
+  "vsim": {
+    "boot-mode": "jtag"
   }
 }

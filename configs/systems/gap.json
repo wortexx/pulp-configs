@@ -1,7 +1,6 @@
 {
   "includes": [
     "defaults.json",
-    "chips/gap/defaults.json",
     "usecases/jtag-cam-spi.json"
   ],
   "system_tree": {
@@ -12,7 +11,9 @@
     "vp_comps": [
       "board"
     ],
-    "debug_bridge": {},
+    "debug_bridge": {
+      "boot-mode": "jtag"
+    },
     "board": {
       "vp_class": "pulp/board",
       "vp_comps": [
@@ -73,13 +74,16 @@
         "boot_from_rom": false,
         "vp_class": "pulp/chip",
         "hal_files": [
-          "hal/chips/gap/pulp.h"
+          "hal/chips/gap/pulp.h",
+          "hal/chips/gap/pulp.h",
+          "hal/chips/gap/efuse.h"
         ],
         "archi_files": [
           "archi/chips/gap/pulp.h",
           "archi/chips/gap/memory_map.h",
           "archi/chips/gap/properties.h",
-          "archi/chips/gap/apb_soc.h"
+          "archi/chips/gap/apb_soc.h",
+          "archi/chips/gap/padframe.h"
         ],
         "vp_comps": [
           "padframe",
@@ -1304,6 +1308,11 @@
               "confreg_ext",
               "jtag",
               "confreg_soc"
+            ]
+          },
+          "rtc": {
+            "includes": [
+              "../../ips/rtc/rtc.json"
             ]
           }
         },
@@ -4491,6 +4500,15 @@
           "clock"
         ]
       }
+    }
+  },
+  "runner": {
+    "boot_from_flash": true,
+    "boot-mode": "rom"
+  },
+  "loader": {
+    "boot": {
+      "mode": "rom"
     }
   }
 }
