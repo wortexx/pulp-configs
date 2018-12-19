@@ -792,7 +792,7 @@ def get_config(tp):
 
   if tp.get('soc/job_fifo') is not None:
       soc.job_fifo = Component(
-          includes= ["job_fifo.json"]
+          includes= ["chips/oprecompkw_sa/job_fifo.json"]
       )
       soc.job_fifo_injector = Component(
           includes= ["tools/vp/injector.json"]

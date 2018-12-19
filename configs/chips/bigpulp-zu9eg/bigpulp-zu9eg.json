@@ -1,9 +1,12 @@
 {
-  "chip": "bigpulp",
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
+  "chip": "bigpulp-zu9eg",
   "chip_family": "bigpulp",
-    
+
   "padframe": {
-    "content": "templates/chips/bigpulp/padframe.json"
+    "content": "chips/bigpulp-zu9eg/padframe.json"
   },
 
   "cluster0": {
@@ -18,7 +21,7 @@
     "size": "0x00400000",
     "core": "ri5ky_v2",
     "version": 5,
-    "nb_cluster": 1,
+    "nb_cluster": 2,
     "nb_pe": 8,
 
     "pe": {
@@ -106,7 +109,7 @@
 
     "l2": {
       "base": "0x1C000000",
-      "size": "0x00080000",
+      "size": "0x00040000",
       "is_partitioned": false,
 
       "shared": {

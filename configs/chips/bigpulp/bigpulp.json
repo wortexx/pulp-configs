@@ -1,6 +1,13 @@
 {
-  "chip": "bigpulp-juno",
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
+  "chip": "bigpulp",
   "chip_family": "bigpulp",
+    
+  "padframe": {
+    "content": "chips/bigpulp/padframe.json"
+  },
 
   "cluster0": {
     "pe0": {
@@ -14,7 +21,7 @@
     "size": "0x00400000",
     "core": "ri5ky_v2",
     "version": 5,
-    "nb_cluster": 4,
+    "nb_cluster": 1,
     "nb_pe": 8,
 
     "pe": {

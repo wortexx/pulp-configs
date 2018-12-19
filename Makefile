@@ -70,6 +70,14 @@ gen.all:
 	./bin/plpconf_new --input=chips/vega/vega.json --output=configs/systems/vega.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/vivosoc3/vivosoc3.json --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
 	./bin/plpconf_new --input=chips/multino/multino.json --output=configs/systems/multino.json --usecase=usecases/jtag-nouart.json
+	./bin/plpconf_new --input=chips/bigpulp-standalone/bigpulp.json --output=configs/systems/bigpulp-standalone.json --usecase=usecases/jtag-nouart.json
+	./bin/plpconf_new --input=chips/bigpulp/bigpulp.json --output=configs/systems/bigpulp.json --usecase=usecases/jtag-nouart.json
+	./bin/plpconf_new --input=chips/bigpulp-juno/bigpulp-juno.json --output=configs/systems/bigpulp-juno.json --usecase=usecases/jtag-nouart.json
+	./bin/plpconf_new --input=chips/bigpulp-z-7045/bigpulp-z-7045.json --output=configs/systems/bigpulp-z-7045.json --usecase=usecases/jtag-nouart.json
+	./bin/plpconf_new --input=chips/bigpulp-zu9eg/bigpulp-zu9eg.json --output=configs/systems/bigpulp-zu9eg.json --usecase=usecases/jtag-nouart.json
+	./bin/plpconf_new --input=chips/hero-z-7045/hero-z-7045.json --output=configs/systems/hero-z-7045.json
+	./bin/plpconf_new --input=chips/oprecompkw_sa/oprecompkw_sa.json --output=configs/systems/oprecompkw_sa.json --usecase=usecases/jtag-nouart.json
+
 
 gen.usecases:
 	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --spiflash --cam --output=configs/usecases/jtag-cam-spi.json --uart
@@ -101,26 +109,8 @@ gen.oprecompkw_sfloat_sa:
 gen.oprecompkw_sfloat_sa_dual_regfile:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sfloat_sa_dual_regfile/oprecompkw_sfloat_sa_dual_regfile.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sfloat_sa_dual_regfile --output=configs/systems/oprecompkw_sfloat_sa_dual_regfile.json --usecase=usecases/jtag.json
 
-gen.oprecompkw_sa:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sa/oprecompkw_sa.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sa --output=configs/systems/oprecompkw_sa.json --usecase=usecases/jtag.json
-
 gen.oprecompkw-dram:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw-dram/oprecompkw-dram.json --output-dir=$(CURDIR)/configs/chips/oprecompkw-dram --output=configs/systems/oprecompkw-dram.json
-
-gen.bigpulp-z-7045:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-z-7045/bigpulp-z-7045.json --output-dir=$(CURDIR)/configs/chips/bigpulp-z-7045 --output=configs/systems/bigpulp-z-7045.json --usecase=usecases/jtag.json
-
-gen.bigpulp-zu9eg:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-zu9eg/bigpulp-zu9eg.json --output-dir=$(CURDIR)/configs/chips/bigpulp-zu9eg --output=configs/systems/bigpulp-zu9eg.json --usecase=usecases/jtag.json
-
-gen.bigpulp-juno:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-juno/bigpulp-juno.json --output-dir=$(CURDIR)/configs/chips/bigpulp-juno --output=configs/systems/bigpulp-juno.json --usecase=usecases/jtag.json
-
-gen.bigpulp:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp/bigpulp.json --output-dir=$(CURDIR)/configs/chips/bigpulp --output=configs/systems/bigpulp.json --usecase=usecases/jtag.json
-
-gen.bigpulp-standalone:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/bigpulp-standalone/bigpulp.json --output-dir=$(CURDIR)/configs/chips/bigpulp-standalone --output=configs/systems/bigpulp-standalone.json --usecase=usecases/jtag.json
 
 gen.fulmine:
 	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=fulmine    --output=configs/systems/fulmine.json

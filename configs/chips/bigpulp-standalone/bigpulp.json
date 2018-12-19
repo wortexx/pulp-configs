@@ -1,24 +1,29 @@
 {
-  "chip": "oprecompkw_sa",
-  "chip_family": "oprecompkw",
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
+  "chip": "bigpulp-standalone",
+  "chip_family": "bigpulp",
     
   "padframe": {
-    "content": "templates/chips/oprecompkw_sa/padframe.json"
+    "content": "chips/bigpulp-standalone/padframe.json"
   },
 
-  "ddr": {
-    "size"  : "0x10000000"
+  "cluster0": {
+    "pe0": {
+      "boot_addr": "0x1c008000"
+    }
   },
-
+  
   "cluster": {
     "base": "0x10000000",
-    "alias": "0x00000000",
+    "alias": "0x1B000000",
     "size": "0x00400000",
     "core": "ri5ky_v2",
     "version": 5,
-    "json_file": "cluster_v5_fpu",
     "nb_cluster": 1,
     "nb_pe": 8,
+
     "pe": {
       "irq": [
         null       , null       , null         , null,
@@ -27,14 +32,14 @@
         "acc_0"    , "acc_1"    , "acc_2"      , "acc_3",
         "eu_bar"   , "eu_mutex" , "eu_dispatch", null,
         null       , null       , "dma_ext"    , null,
-        "job_fifo" , null       , null         , null,
+        null       , null       , null         , null,
         "mpu_error", null       , "soc_event"  , "soc_fifo"
       ]
     },
 
     "l1": {
       "base": "0x10000000",
-      "size": "0x00010000",
+      "size": "0x00040000",
       "banking_factor": 2
     },
 
@@ -44,7 +49,7 @@
       "size": "0x00200000",
 
       "alias": {
-        "base": "0x00200000",
+        "base": "0x1B200000",
         "size": "0x00200000"
       },
 
@@ -71,8 +76,7 @@
       "dma": {
         "version": 6,
         "base": "0x10201800",
-        "size": "0x00000400",
-        "is_64": true
+        "size": "0x00000400"
       },
 
       "dbg_unit": {
@@ -100,33 +104,19 @@
 
   "soc": {
 
-    "job_fifo": {
-
-    },
-
     "base": "0x1A000000",
     "size": "0x06000000",
-
-    "ddr": {
-      "base"  : "0x800000000000",
-      "size"  : "0x100000000000"
-    },
-
-    "rom": {
-      "version": 2,
-      "base": "0x1A000000",
-      "size": "0x00002000"
-    },
 
     "l2": {
       "base": "0x1C000000",
       "size": "0x00080000",
+      "is_partitioned": false,
 
       "shared": {
-        "nb_banks"     : 4,
+        "nb_banks"          : 4,
         "interleaving_bits" : 2,
-        "base"         : "0x1C000000",
-        "size"         : "0x00080000"
+        "base"              : "0x1C000000",
+        "size"              : "0x00080000"
       }
     },
 
@@ -135,8 +125,14 @@
       "base": "0x1A100000",
       "size": "0x00100000",
 
+      "uart": {
+        "version"      : 0,
+        "base"         : "0x1A102000",
+        "size"         : "0x00001000"
+      },
+
       "apb_soc_ctrl": {
-        "base"         : "0x1A104000",
+        "base"         : "0x1A103000",
         "size"         : "0x00001000"
       },
 
@@ -147,47 +143,5 @@
       }
 
     }
-  },
-  "soc_events": {
-    "soc_evt_spim0_rx"        : 0,
-    "soc_evt_spim0_tx"        : 1,
-    "soc_evt_spim1_rx"        : 2,
-    "soc_evt_spim1_tx"        : 3,
-    "soc_evt_hyper0_rx"       : 4,
-    "soc_evt_hyper0_tx"       : 5,
-    "soc_evt_uart0_rx"        : 6,
-    "soc_evt_uart0_tx"        : 7,
-    "soc_evt_i2c0_rx"         : 8,
-    "soc_evt_i2c0_tx"         : 9,
-    "soc_evt_i2c1_rx"         : 10,
-    "soc_evt_i2c1_tx"         : 11,
-    "soc_evt_i2s_ch0"         : 12,
-    "soc_evt_i2s_ch1"         : 13,
-    "soc_evt_cam0"            : 14,
-    "soc_evt_spim0_eot"       : 22,
-    "soc_evt_l2l2_eot"        : 23,
-    "soc_evt_uart_eot"        : 25,
-    "soc_evt_i2c0_extra"      : 26,
-    "soc_evt_i2c1_extra"      : 27,
-    "soc_evt_i2s_extra"       : 28,
-    "soc_evt_cam0_eot"        : 29,
-    "soc_evt_cluster_pok"     : 31,
-    "soc_evt_cluster_not_busy": 34,
-    "soc_evt_cluster_cg_ok"   : 35,
-    "soc_evt_picl_ok"         : 36,
-    "soc_evt_scu_ok"          : 37,
-    "soc_evt_adv_timer0"      : 38,
-    "soc_evt_adv_timer1"      : 39,
-    "soc_evt_adv_timer2"      : 40,
-    "soc_evt_adv_timer3"      : 41,
-    "soc_evt_gpio"            : 42,
-    "soc_evt_rtc_apb"         : 43,
-    "soc_evt_rtc"             : 44,
-    "soc_evt_ref_clock"       : 56,
-
-    "soc_evt_sw_first"        : 48,
-    "soc_evt_sw_nb"           : 8,
-
-    "soc_evt_pmu0"            : 31
   }
 }
