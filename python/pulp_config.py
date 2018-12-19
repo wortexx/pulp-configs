@@ -93,11 +93,11 @@ def get_configs(config_str=None, interpret=True):
     if config.find('@') != -1:
       config_name, config = config.split('@')
 
-    for item in shlex.split(config_str.replace(':', ' ')):
+    for item in shlex.split(config.replace(':', ' ')):
 
       if item.find('config_file') != -1:
         key, file = item.split('=')
-        config_tree = get_config(file, config_str, interpret=interpret)
+        config_tree = get_config(file, item, interpret=interpret)
         result.append(config_tree)
 
       else:
