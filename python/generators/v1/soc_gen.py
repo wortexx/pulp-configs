@@ -93,10 +93,6 @@ def get_config(tp):
       cluster_name = get_cluster_name(cid)
       base = tp.get_child_int("cluster/base")
       size = tp.get_child_int("cluster/size")
-      print (tp.get("cluster/base").dump_to_string())
-      print (type(base))
-      print (type(size))
-      print (type(cid))
       axi_ico_mappings.update({
         cluster_name: {
           "base": "0x%x" % (base + size * cid),
@@ -613,7 +609,6 @@ def get_config(tp):
 
 
     else:
-      print ('CONFIG')
       soc.apb_ico.fll = soc.fll.input
       soc.apb_ico.fll1 = soc.fll1.input
       soc.apb_ico.fll2 = soc.fll2.input
