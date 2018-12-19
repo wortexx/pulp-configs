@@ -14,7 +14,7 @@
   "defines"       : [ "CORE_PULP_BUILTINS"],
   "power_models": {
     "includes": [
-      "../../power_models/core/riscy.json"
+      "power_models/core/riscy.json"
     ]
   }
 }

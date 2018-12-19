@@ -3,20 +3,9 @@
 
   "platform": "gvsoc",
 
-  "pulp_compiler": {
-    "default": "gcc",
-    "gcc"    : {},
-    "llvm"   : {}
-  },
+  "pulp_compiler": "gcc",
 
-  "pulp_rt_version": {
-    "default" : "bench",
-    "release" : {},
-    "bench"   : {},
-    "profile0": {},
-    "profile1": {},
-    "debug"   : {}
-  },
+  "pulp_rt_version": "bench",
 
   "pulp_omp_version": {
     "default" : "libgomp",

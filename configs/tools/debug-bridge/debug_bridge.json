@@ -3,8 +3,8 @@
     "type": "jtag-proxy",
     "tap": 0,
     "includes": [
-      "cable_jtag-proxy.json",
-      "cable_ftdi.json"
+      "tools/debug-bridge/cable_jtag-proxy.json",
+      "tools/debug-bridge/cable_ftdi.json"
     ],
     "active": false,
     "autorun": false,

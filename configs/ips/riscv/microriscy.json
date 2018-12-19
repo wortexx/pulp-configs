@@ -15,7 +15,7 @@
   "defines"       : [ "CORE_NO_MUL"],
   "power_models": {
     "includes": [
-      "../../power_models/core/riscy.json"
+      "power_models/core/riscy.json"
     ]
   }
 }
