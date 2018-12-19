@@ -1,4 +1,7 @@
 {
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
   "chip": "usoc_v1",
   "chip_family": "usoc_v1",
 
@@ -55,7 +58,7 @@
       },
 
       "udma": {
-        "content"      : "templates/chips/usoc_v1/udma.json",
+        "content"      : "chips/usoc_v1/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },

@@ -1,4 +1,7 @@
 {
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
   "chip": "oprecompkw_sfloat",
   "chip_family": "oprecompkw",
     

@@ -1,11 +1,10 @@
 {
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
   "chip": "oprecompkw_sfloat_sa",
   "chip_family": "oprecompkw",
     
-  "padframe": {
-    "content": "templates/chips/oprecompkw_sfloat_sa_dual_regfile/padframe.json"
-  },
-
   "ddr": {
     "size"  : "0x10000000"
   },
@@ -14,7 +13,7 @@
     "base": "0x10000000",
     "alias": "0x00000000",
     "size": "0x00400000",
-    "core": "ri5ky_v2_sfloat",
+    "core": "ri5ky_v2_sfloat_single_regfile",
     "version": 5,
     "json_file": "cluster_v5_fpu",
     "nb_cluster": 1,

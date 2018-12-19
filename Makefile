@@ -77,6 +77,11 @@ gen.all:
 	./bin/plpconf_new --input=chips/bigpulp-zu9eg/bigpulp-zu9eg.json --output=configs/systems/bigpulp-zu9eg.json --usecase=usecases/jtag-nouart.json
 	./bin/plpconf_new --input=chips/hero-z-7045/hero-z-7045.json --output=configs/systems/hero-z-7045.json
 	./bin/plpconf_new --input=chips/oprecompkw_sa/oprecompkw_sa.json --output=configs/systems/oprecompkw_sa.json --usecase=usecases/jtag-nouart.json
+	./bin/plpconf_new --input=chips/oprecompkw/oprecompkw.json --output=configs/systems/oprecompkw.json
+	./bin/plpconf_new --input=chips/oprecompkw_sfloat/oprecompkw_sfloat.json --output=configs/systems/oprecompkw_sfloat.json
+	./bin/plpconf_new --input=chips/oprecompkw_sfloat_sa/oprecompkw_sfloat_sa.json --output=configs/systems/oprecompkw_sfloat_sa.json
+	./bin/plpconf_new --input=chips/oprecompkw_sfloat_sa_dual_regfile/oprecompkw_sfloat_sa_dual_regfile.json --output=configs/systems/oprecompkw_sfloat_sa_dual_regfile.json
+	./bin/plpconf_new --input=chips/usoc_v1/usoc_v1.json --output=configs/systems/usoc_v1.json --usecase=usecases/jtag.json
 
 
 gen.usecases:
@@ -85,58 +90,7 @@ gen.usecases:
 	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --output=configs/usecases/jtag.json --uart
 	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --output=configs/usecases/jtag-nouart.json
 
-gen.pulpissimo.zeroriscy:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-zeroriscy/pulpissimo-zeroriscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-zeroriscy --output=configs/systems/pulpissimo-zeroriscy.json --usecase=usecases/jtag-cam.json
-
-gen.pulpissimo.microriscy:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-microriscy/pulpissimo-microriscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-microriscy --output=configs/systems/pulpissimo-microriscy.json --usecase=usecases/jtag-cam.json
-
-gen.pulpissimo.riscy:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-riscy/pulpissimo-riscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-riscy --output=configs/systems/pulpissimo-riscy.json --usecase=usecases/jtag-cam.json
-
-gen.usoc_v1:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/usoc_v1/usoc_v1.json --output-dir=$(CURDIR)/configs/chips/usoc_v1 --output=configs/systems/usoc_v1.json --usecase=usecases/jtag.json
-
-gen.oprecompkw:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw/oprecompkw.json --output-dir=$(CURDIR)/configs/chips/oprecompkw --output=configs/systems/oprecompkw.json
-
-gen.oprecompkw_sfloat:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sfloat/oprecompkw_sfloat.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sfloat --output=configs/systems/oprecompkw_sfloat.json
-
-gen.oprecompkw_sfloat_sa:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sfloat_sa/oprecompkw_sfloat_sa.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sfloat_sa --output=configs/systems/oprecompkw_sfloat_sa.json --usecase=usecases/jtag.json
-
-gen.oprecompkw_sfloat_sa_dual_regfile:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw_sfloat_sa_dual_regfile/oprecompkw_sfloat_sa_dual_regfile.json --output-dir=$(CURDIR)/configs/chips/oprecompkw_sfloat_sa_dual_regfile --output=configs/systems/oprecompkw_sfloat_sa_dual_regfile.json --usecase=usecases/jtag.json
-
-gen.oprecompkw-dram:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/oprecompkw-dram/oprecompkw-dram.json --output-dir=$(CURDIR)/configs/chips/oprecompkw-dram --output=configs/systems/oprecompkw-dram.json
-
-gen.fulmine:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=fulmine    --output=configs/systems/fulmine.json
-
-gen.hero-z-7045:
-	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/hero-z-7045/hero-z-7045.json --output-dir=$(CURDIR)/configs/chips/hero-z-7045 --output=configs/systems/hero-z-7045.json
-
-gen.honey:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=honey      --output=configs/systems/honey.json
-
-gen.neuraghe:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=neuraghe   --output=configs/systems/neuraghe.json
-
-gen.quentin:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=quentin    --output=configs/systems/quentin.json
-
-gen.vivosoc2_1:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc2_1 --output=configs/systems/vivosoc2_1.json
-
-gen.vivosoc2:
-	./bin/pulp_top_gen --configs=$(CURDIR)/configs --system=vivosoc2   --output=configs/systems/vivosoc2.json
-
-gen: gen.usecases gen.pulp gen.pulpissimo gen.pulpissimo.zeroriscy gen.pulpissimo.microriscy \
-  gen.pulpissimo.riscy gen.wolfe gen.oprecompkw gen.vega gen.gap gen.vivosoc3 gen.bigpulp-z-7045 gen.bigpulp \
-  gen.fulmine gen.hero-z-7045 gen.honey gen.multino gen.neuraghe \
-  gen.quentin gen.vivosoc2_1 gen.vivosoc2 gen.gap_rev1 gen.usoc_v1
+gen: gen.usecases gen.all
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
