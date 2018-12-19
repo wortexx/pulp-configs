@@ -14,10 +14,6 @@
   },
 
   "groups": {
-    "uart0": {
-      "type": "uart",
-      "is_master": true
-    },
     "jtag0": {
       "type": "jtag",
       "is_slave": true

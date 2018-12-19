@@ -201,7 +201,6 @@
         "soc": {
           "vp_ports": [
             "ref_clock",
-            "rtc_event_in",
             "cpi0",
             "jtag0",
             "fll_soc_clock",
@@ -326,10 +325,6 @@
             [
               "self->ref_clock",
               "soc_eu->ref_clock"
-            ],
-            [
-              "self->rtc_event_in",
-              "soc_eu->event_in"
             ],
             [
               "self->cpi0",

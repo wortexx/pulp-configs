@@ -69,11 +69,13 @@ gen.all:
 	./bin/plpconf_new --input=chips/wolfe/wolfe.json --output=configs/systems/wolfe.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/vega/vega.json --output=configs/systems/vega.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/vivosoc3/vivosoc3.json --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
+	./bin/plpconf_new --input=chips/multino/multino.json --output=configs/systems/multino.json --usecase=usecases/jtag-nouart.json
 
 gen.usecases:
-	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --spiflash --cam --output=configs/usecases/jtag-cam-spi.json
-	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --cam --output=configs/usecases/jtag-cam.json
-	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --output=configs/usecases/jtag.json
+	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --spiflash --cam --output=configs/usecases/jtag-cam-spi.json --uart
+	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --cam --output=configs/usecases/jtag-cam.json --uart
+	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --output=configs/usecases/jtag.json --uart
+	./bin/pulp_usecase_gen --configs=$(CURDIR)/configs --output=configs/usecases/jtag-nouart.json
 
 gen.pulpissimo.zeroriscy:
 	./bin/pulp_config_gen --configs=$(CURDIR)/configs --template=templates/chips/pulpissimo-zeroriscy/pulpissimo-zeroriscy.json --output-dir=$(CURDIR)/configs/chips/pulpissimo-zeroriscy --output=configs/systems/pulpissimo-zeroriscy.json --usecase=usecases/jtag-cam.json

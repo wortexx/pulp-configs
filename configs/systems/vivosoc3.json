@@ -176,10 +176,6 @@
             "soc->clock"
           ],
           [
-            "soc->cluster_fll",
-            "cluster_clock->clock_in"
-          ],
-          [
             "soc->cluster_input",
             "cluster->input"
           ],
@@ -206,10 +202,6 @@
           [
             "soc->hyper0",
             "padframe->hyper0"
-          ],
-          [
-            "soc->fll_soc_clock",
-            "soc_clock->clock_in"
           ],
           [
             "cluster->dma_irq",
@@ -258,14 +250,12 @@
           "vp_class": "vp/clock_domain",
           "frequency": 50000000,
           "vp_ports": [
-            "out",
-            "clock_in"
+            "out"
           ]
         },
         "soc": {
           "vp_ports": [
             "ref_clock",
-            "rtc_event_in",
             "dma_irq",
             "soc_input",
             "jtag0",
@@ -383,10 +373,6 @@
             [
               "self->ref_clock",
               "soc_eu->ref_clock"
-            ],
-            [
-              "self->rtc_event_in",
-              "soc_eu->event_in"
             ],
             [
               "self->dma_irq",
@@ -2849,8 +2835,7 @@
           "vp_class": "vp/clock_domain",
           "frequency": 50000000,
           "vp_ports": [
-            "out",
-            "clock_in"
+            "out"
           ]
         },
         "pmu": {

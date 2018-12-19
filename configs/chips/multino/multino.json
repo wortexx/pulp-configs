@@ -1,8 +1,11 @@
 {
+  "config_type": "generator",
+  "generator": "generators/v1/config_gen",
+
   "chip": "multino",
 
   "padframe": {
-    "content": "templates/chips/multino/padframe.json"
+    "content": "chips/multino/padframe.json"
   },
 
   "cluster0": {

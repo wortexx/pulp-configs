@@ -227,7 +227,6 @@
         "soc": {
           "vp_ports": [
             "ref_clock",
-            "rtc_event_in",
             "dma_irq",
             "soc_input",
             "cpi0",
@@ -361,10 +360,6 @@
             [
               "self->ref_clock",
               "soc_eu->ref_clock"
-            ],
-            [
-              "self->rtc_event_in",
-              "soc_eu->event_in"
             ],
             [
               "self->dma_irq",

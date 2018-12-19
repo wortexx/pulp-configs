@@ -32,7 +32,9 @@ def get_config(tp):
   has_rtc           = tp.get('soc/peripherals/rtc') is not None
   has_udma          = tp.get('soc/peripherals/udma') is not None
   has_cluster       = tp.get('cluster') is not None
+  has_fc            = tp.get('soc/fc') is not None
   nb_cluster        = tp.get_child_int('cluster/nb_cluster')
+  has_fll           = tp.get('soc/peripherals/fll') is not None or tp.get('soc/peripherals/flls') is not None
   has_ddr = tp.get('ddr') is not None
   if chip_family is None:
     chip_family = chip_name
@@ -104,11 +106,13 @@ def get_config(tp):
 
       if tp.get_child_bool('**/apb_soc_ctrl/has_pmu_bypass'):
         chip.soc.cluster_reset = chip.get(get_cluster_name(cid)).reset
-      chip.soc.set(get_cluster_name(cid) + '_fll', chip.get(get_cluster_name(cid) + '_clock').clock_in)
+      if has_fll:
+        chip.soc.set(get_cluster_name(cid) + '_fll', chip.get(get_cluster_name(cid) + '_clock').clock_in)
 
       chip.soc.set(get_cluster_name(cid) + '_input', chip.get(get_cluster_name(cid)).input)
 
-      chip.get(cluster_name).dma_irq = chip.soc.dma_irq
+      if has_fc:
+        chip.get(cluster_name).dma_irq = chip.soc.dma_irq
 
       chip.get(cluster_name).soc = chip.soc.soc_input
 
@@ -122,7 +126,8 @@ def get_config(tp):
     )
     chip.rtc.irq = chip.soc.wakeup_rtc
     chip.rtc.event = chip.soc.rtc_event_in
-    chip.ref_clock = chip.rtc.ref_clock
+    if has_fc:
+      chip.ref_clock = chip.rtc.ref_clock
     chip.soc.rtc_input = chip.rtc.input
     chip.soc_clock.out = chip.rtc.clock
 
@@ -148,7 +153,8 @@ def get_config(tp):
 
   if padframe is not None:
     chip.soc_clock.out = chip.padframe.clock
-    chip.padframe.ref_clock = chip.soc.ref_clock
+    if has_fc:
+      chip.padframe.ref_clock = chip.soc.ref_clock
 
     if padframe_conf is not None:
       groups_conf = padframe_conf.get('groups')
@@ -182,7 +188,8 @@ def get_config(tp):
     
   chip.soc_clock.out = chip.soc.clock
 
-  chip.soc.fll_soc_clock = chip.soc_clock.clock_in
+  if has_fll:
+    chip.soc.fll_soc_clock = chip.soc_clock.clock_in
 
   if has_ddr:
 

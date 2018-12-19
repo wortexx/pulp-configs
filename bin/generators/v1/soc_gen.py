@@ -678,7 +678,8 @@ def get_config(tp):
   else:
     soc.soc_ico.l2 = soc.l2.input
 
-  soc.rtc_event_in = soc.soc_eu.event_in
+  if has_rtc:
+    soc.rtc_event_in = soc.soc_eu.event_in
 
   if has_rtc:
     soc.apb_ico.rtc = soc.rtc_input
