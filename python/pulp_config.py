@@ -24,8 +24,8 @@ import shlex
 
 class Pulp_config(js.config_object):
 
-    def __init__(self, name, config_dict):
-        super(Pulp_config, self).__init__(config_dict)
+    def __init__(self, name, config_dict, interpret=False):
+        super(Pulp_config, self).__init__(config_dict, interpret=interpret)
 
         self.name = name
 
@@ -49,17 +49,17 @@ class Pulp_config(js.config_object):
         return ":".join(result)
 
 
-def get_config_from_string(name, config_string, **kwargs):
+def get_config_from_string(name, config_string, interpret=False, **kwargs):
 
-    return create_config(name, js.import_config(config_string))
+    return create_config(name, js.import_config(config_string), interpret=interpret)
 
-def create_config(name, config, **kwargs):
+def create_config(name, config, interpret=False, **kwargs):
 
     type_config = config.get_child_str("config_type")
 
     if type_config is None:
 
-        return Pulp_config(name, config.get_dict())
+        return Pulp_config(name, config.get_dict(), interpret=interpret)
 
     else:
 
@@ -70,7 +70,7 @@ def create_config(name, config, **kwargs):
             file, path, descr = imp.find_module(generator, None)
             module = imp.load_module(generator, file, path, descr)
 
-            return Pulp_config(name, module.get_config(config, **kwargs).get_dict())
+            return Pulp_config(name, module.get_config(config, **kwargs).get_dict(), interpret=interpret)
 
         else:
 
@@ -80,7 +80,7 @@ def get_config(file, name="", interpret=False, **kwargs):
 
     config = js.import_config_from_file(file, find=True, interpret=interpret)
 
-    return create_config(name, config, **kwargs)
+    return create_config(name, config, interpret=interpret, **kwargs)
 
 
 
