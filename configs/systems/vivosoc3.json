@@ -48,10 +48,6 @@
           "ref_clock->clock"
         ],
         [
-          "ref_clock_clock->out",
-          "chip->ref_clock_engine"
-        ],
-        [
           "ref_clock->clock_sync",
           "chip->ref_clock"
         ]
@@ -59,7 +55,6 @@
       "chip": {
         "vp_ports": [
           "ref_clock",
-          "ref_clock_engine",
           "jtag0",
           "cpi0",
           "spim0_cs0_data",
@@ -91,8 +86,7 @@
           "soc_clock",
           "soc",
           "cluster",
-          "cluster_clock",
-          "pmu"
+          "cluster_clock"
         ],
         "vp_bindings": [
           [
@@ -102,10 +96,6 @@
           [
             "self->ref_clock",
             "cluster->ref_clock"
-          ],
-          [
-            "self->ref_clock_engine",
-            "pmu->ref_clock"
           ],
           [
             "self->jtag0",
@@ -165,10 +155,6 @@
           ],
           [
             "soc_clock->out",
-            "pmu->clock"
-          ],
-          [
-            "soc_clock->out",
             "padframe->clock"
           ],
           [
@@ -178,18 +164,6 @@
           [
             "soc->cluster_input",
             "cluster->input"
-          ],
-          [
-            "soc->pmu_input",
-            "pmu->input"
-          ],
-          [
-            "soc->wakeup_out",
-            "pmu->wakeup"
-          ],
-          [
-            "soc->wakeup_seq",
-            "pmu->wakeup_seq"
           ],
           [
             "soc->spim0",
@@ -214,10 +188,6 @@
           [
             "cluster_clock->out",
             "cluster->clock"
-          ],
-          [
-            "pmu->icu0_reset",
-            "soc->reset"
           ]
         ],
         "padframe": {
@@ -259,9 +229,6 @@
             "dma_irq",
             "soc_input",
             "jtag0",
-            "wakeup_out",
-            "wakeup_seq",
-            "pmu_input",
             "cluster_input",
             "spim0",
             "spim1",
@@ -463,10 +430,6 @@
               "rom->input"
             ],
             [
-              "apb_ico->pmu",
-              "self->pmu_input"
-            ],
-            [
               "fc->fetch",
               "soc_ico->fc_fetch"
             ],
@@ -487,28 +450,12 @@
               "fc->irq_req"
             ],
             [
-              "apb_soc_ctrl->wakeup_out",
-              "self->wakeup_out"
-            ],
-            [
-              "apb_soc_ctrl->wakeup_seq",
-              "self->wakeup_seq"
-            ],
-            [
               "apb_soc_ctrl->bootaddr",
               "fc->bootaddr"
             ],
             [
               "apb_soc_ctrl->event",
               "soc_eu->event_in"
-            ],
-            [
-              "apb_soc_ctrl->cluster_power_irq",
-              "fc_itc->in_event_22"
-            ],
-            [
-              "apb_soc_ctrl->cluster_clock_gate_irq",
-              "fc_itc->in_event_23"
             ],
             [
               "timer->irq_itf_0",
@@ -888,11 +835,6 @@
                 "size": "0x00008000",
                 "remove_offset": "0x1A110000"
               },
-              "pmu": {
-                "base": "0x1A107000",
-                "size": "0x00000800",
-                "remove_offset": "0x1A107000"
-              },
               "rom": {
                 "base": "0x1A000000",
                 "size": "0x00002000",
@@ -908,7 +850,6 @@
               "fc_timer",
               "fc_dbg_unit",
               "rom",
-              "pmu",
               "input"
             ]
           },
@@ -1018,8 +959,6 @@
               "irq_req",
               "in_event_14",
               "input",
-              "in_event_22",
-              "in_event_23",
               "irq_ack",
               "in_event_8",
               "in_event_10",
@@ -1031,15 +970,9 @@
             "includes": [
               "chips/vivosoc3/apb_soc.json"
             ],
-            "cluster_power_event": 31,
-            "cluster_clock_gate_event": 35,
             "vp_ports": [
-              "wakeup_out",
-              "wakeup_seq",
               "bootaddr",
               "event",
-              "cluster_power_irq",
-              "cluster_clock_gate_irq",
               "input"
             ]
           },
@@ -2836,19 +2769,6 @@
           "frequency": 50000000,
           "vp_ports": [
             "out"
-          ]
-        },
-        "pmu": {
-          "includes": [
-            "ips/pmu/pmu_v2.json"
-          ],
-          "vp_ports": [
-            "icu0_reset",
-            "input",
-            "clock",
-            "wakeup",
-            "wakeup_seq",
-            "ref_clock"
           ]
         }
       },
