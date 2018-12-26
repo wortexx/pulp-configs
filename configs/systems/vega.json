@@ -492,6 +492,10 @@
               "apb_soc_ctrl->wakeup_rtc"
             ],
             [
+              "self->wakeup_rtc",
+              "fc_itc->in_event_16"
+            ],
+            [
               "self->rtc_event_in",
               "soc_eu->event_in"
             ],
@@ -1232,6 +1236,7 @@
             ],
             "vp_ports": [
               "irq_req",
+              "in_event_16",
               "in_event_14",
               "input",
               "in_event_22",

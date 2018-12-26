@@ -29,7 +29,7 @@ def get_config(tp):
   chip_family           = tp.get_child_str('chip_family')
   chip_name              = tp.get_child_str('chip')
   has_pmu           = tp.get('soc/peripherals/pmu') is not None
-  has_rtc           = tp.get('soc/peripherals/rtc') is not None
+  has_rtc           = tp.get('soc/peripherals/rtc') is not None or tp.get('soc/rtc') is not None
   has_udma          = tp.get('soc/peripherals/udma') is not None
   has_cluster       = tp.get('cluster') is not None
   has_fc            = tp.get('soc/fc') is not None
@@ -120,10 +120,17 @@ def get_config(tp):
 
   # RTC
   if has_rtc:
-    chip.rtc = Component(
-      includes=["ips/vendors/dolphin/rtc.json"],
-      **tp.get('soc/peripherals/rtc').get('config').get_dict()
-    )
+    rtc_version = tp.get_child_int('**/rtc/version')
+    if rtc_version == 1 or rtc_version is None:
+      chip.rtc = Component(
+        includes=["ips/vendors/dolphin/rtc.json"],
+        **tp.get('soc/peripherals/rtc').get('config').get_dict()
+      )
+    else:
+      chip.rtc = Component(
+        includes=["ips/rtc/rtc_v%d.json" % rtc_version]
+      )
+
     chip.rtc.irq = chip.soc.wakeup_rtc
     chip.rtc.event = chip.soc.rtc_event_in
     if has_fc:

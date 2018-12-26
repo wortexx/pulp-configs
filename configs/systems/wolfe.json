@@ -94,6 +94,7 @@
           "soc",
           "cluster",
           "cluster_clock",
+          "rtc",
           "pmu"
         ],
         "vp_bindings": [
@@ -104,6 +105,10 @@
           [
             "self->ref_clock",
             "cluster->ref_clock"
+          ],
+          [
+            "self->ref_clock",
+            "rtc->ref_clock"
           ],
           [
             "self->ref_clock_engine",
@@ -183,6 +188,10 @@
           ],
           [
             "soc_clock->out",
+            "rtc->clock"
+          ],
+          [
+            "soc_clock->out",
             "pmu->clock"
           ],
           [
@@ -204,6 +213,10 @@
           [
             "soc->cluster_input",
             "cluster->input"
+          ],
+          [
+            "soc->rtc_input",
+            "rtc->input"
           ],
           [
             "soc->pmu_input",
@@ -254,6 +267,14 @@
             "cluster->clock"
           ],
           [
+            "rtc->irq",
+            "soc->wakeup_rtc"
+          ],
+          [
+            "rtc->event",
+            "soc->rtc_event_in"
+          ],
+          [
             "pmu->icu0_reset",
             "soc->reset"
           ]
@@ -301,6 +322,8 @@
         "soc": {
           "vp_ports": [
             "ref_clock",
+            "wakeup_rtc",
+            "rtc_event_in",
             "dma_irq",
             "soc_input",
             "cpi0",
@@ -311,6 +334,7 @@
             "cluster_fll",
             "wakeup_out",
             "wakeup_seq",
+            "rtc_input",
             "pmu_input",
             "cluster_input",
             "spim0",
@@ -435,6 +459,18 @@
             [
               "self->ref_clock",
               "soc_eu->ref_clock"
+            ],
+            [
+              "self->wakeup_rtc",
+              "apb_soc_ctrl->wakeup_rtc"
+            ],
+            [
+              "self->wakeup_rtc",
+              "fc_itc->in_event_16"
+            ],
+            [
+              "self->rtc_event_in",
+              "soc_eu->event_in"
             ],
             [
               "self->dma_irq",
@@ -583,6 +619,10 @@
             [
               "apb_soc_ctrl->wakeup_seq",
               "self->wakeup_seq"
+            ],
+            [
+              "apb_soc_ctrl->rtc",
+              "self->rtc_input"
             ],
             [
               "apb_soc_ctrl->bootaddr",
@@ -1130,6 +1170,7 @@
             ],
             "vp_ports": [
               "irq_req",
+              "in_event_16",
               "in_event_14",
               "input",
               "in_event_22",
@@ -1176,12 +1217,14 @@
               "cluster_reset",
               "wakeup_out",
               "wakeup_seq",
+              "rtc",
               "bootaddr",
               "event",
               "cluster_power_irq",
               "cluster_clock_gate_irq",
               "confreg_soc",
               "input",
+              "wakeup_rtc",
               "confreg_ext",
               "bootsel"
             ]
@@ -4364,6 +4407,18 @@
           "vp_ports": [
             "out",
             "clock_in"
+          ]
+        },
+        "rtc": {
+          "includes": [
+            "ips/rtc/rtc_v2.json"
+          ],
+          "vp_ports": [
+            "irq",
+            "event",
+            "ref_clock",
+            "input",
+            "clock"
           ]
         },
         "pmu": {

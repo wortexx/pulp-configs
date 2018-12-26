@@ -29,7 +29,8 @@ def get_config(tp):
   has_fc_eu         = tp.get('soc/fc_ico/peripherals/fc_eu') is not None
   has_fc_tcdm       = tp.get('soc/fc_ico/peripherals/fc_tcdm') is not None
   has_ddr           = tp.get('soc/ddr') is not None
-  has_rtc           = tp.get('soc/peripherals/rtc') is not None
+  has_rtc           = tp.get('soc/peripherals/rtc') is not None or tp.get('soc/rtc') is not None
+  rtc_version       = tp.get_child_int('soc/rtc/version')
   has_udma          = tp.get('soc/peripherals/udma') is not None
   udma_conf         = None
   if has_udma:
@@ -326,7 +327,7 @@ def get_config(tp):
       "rom"       : get_mapping(tp.get_child_dict("soc/rom"), True),
     })
 
-  if has_rtc:
+  if tp.get_child_dict("soc/peripherals/rtc") is not None:
     apb_soc_mappings.update({
       "rtc"       : get_mapping(tp.get_child_dict("soc/peripherals/rtc"), True),
     })
@@ -628,6 +629,8 @@ def get_config(tp):
 
   if has_rtc:
     soc.wakeup_rtc = soc.apb_soc_ctrl.wakeup_rtc
+    if not has_fc_ico:
+      soc.wakeup_rtc = soc.fc_itc.in_event_16
 
   if has_pmu:
     soc.apb_soc_ctrl.wakeup_out = soc.wakeup_out
@@ -681,7 +684,10 @@ def get_config(tp):
     soc.rtc_event_in = soc.soc_eu.event_in
 
   if has_rtc:
-    soc.apb_ico.rtc = soc.rtc_input
+    if rtc_version is not None and rtc_version >= 2:
+      soc.apb_soc_ctrl.rtc = soc.rtc_input
+    else:
+      soc.apb_ico.rtc = soc.rtc_input
 
   # APB SOC
   if has_fc:
