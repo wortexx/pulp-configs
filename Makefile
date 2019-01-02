@@ -23,6 +23,9 @@ RELEASE_TYPE ?= Debug
 # propagate verbose for debugging
 VERBOSE ?= 0
 
+export INSTALL_DIR
+export BUILD_DIR
+
 ifndef CMAKE
 HAS_CMAKE3 = $(shell which cmake3)
 ifeq '$(HAS_CMAKE3)' ''
@@ -43,6 +46,9 @@ $(info #### Installing to $(INSTALL_DIR))
 # $(info #### Installing target files to $(TARGET_INSTALL_DIR))
 
 MAKEFILE_DIR = $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
+
+all_scons:
+	scons -Q
 
 all: install
 
