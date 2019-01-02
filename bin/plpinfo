@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 
-import plptools as plp
-
 import argparse
 import os
 import imp
 import pulp_config as plpconf
-import plptree
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 parser = argparse.ArgumentParser(description='Run a testset')
 
@@ -68,11 +75,14 @@ def get(configs):
     if not args.silent: print ('Property: %s' % prop)
     for config in configs:
       value = config.get(full_prop)
-      if value == None: value = ''
-      if args.silent:
-        print (value.get_dict())
+      if value == None:
+        value = ''
       else:
-        print ('  Config: %s: %s' % (config.get_name(), value.get_dict()))
+        value = value.get_dict()
+      if args.silent:
+        print (value)
+      else:
+        print ('  Config: %s: %s' % (config.get_name(), value))
   return 0
 
 def mkgen(configs):
@@ -125,12 +135,8 @@ def handleCommands(configSet, log=None):
 
       if commands.get(cmd)[1](configSet) != 0:
         print ()
-        print (plp.bcolors.FAIL + 'FATAL ERROR: the command \'%s\' has failed' % (cmd) + plp.bcolors.ENDC)
+        print (bcolors.FAIL + 'FATAL ERROR: the command \'%s\' has failed' % (cmd) + bcolors.ENDC)
         exit(1)
-
-configs = []
-for config in plpconf.get_configs_from_env():
-  configs.append(plptree.get_config_tree_from_dict(config.get_dict()))
 
 configs = plpconf.get_configs_from_env()
 
