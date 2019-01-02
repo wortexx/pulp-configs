@@ -298,7 +298,7 @@
 
     "wiu": {
       "type": "group",
-      "offset": "0x00",
+      "offset": "0x01",
 
       "content": {
         "wiu_ispmr_0": {

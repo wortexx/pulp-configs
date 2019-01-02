@@ -26,24 +26,24 @@
       "type": "custom",
       "boot": {
         "type": "constant",
-        "value": "0x01",
+        "value": "-1",
         "id": -1,
         "commands": [
           [ "2", "0", "0x00", "SOC active NV"],
           [ "3", "0", "0x02", "Cluster deep sleep"],
-          [ "0", "0", "0xFF", "Disable IRQ 0-7"],
-          [ "0", "1", "0xC0", "Enable IRQ 0-5"]
+          [ "1", "0", "0xFF", "Disable IRQ 0-7"],
+          [ "1", "1", "0xC0", "Enable IRQ 0-5"]
         ]
       },
       "soc_active_nv": {
         "type": "constant",
-        "value": "0x01",
+        "value": "0x00",
         "id": 0,
         "commands": [
           [ "2", "0", "0x00", "SOC active NV"],
           [ "3", "0", "0x02", "Cluster deep sleep"],
-          [ "0", "0", "0xFF", "Disable IRQ 0-7"],
-          [ "0", "1", "0xC0", "Enable IRQ 0-5"]
+          [ "1", "0", "0xFF", "Disable IRQ 0-7"],
+          [ "1", "1", "0xC0", "Enable IRQ 0-5"]
         ]
       },
       "soc_active_lv": {
@@ -53,52 +53,52 @@
         "commands": [
           [ "2", "0", "0x01", "SOC active LV"],
           [ "3", "0", "0x02", "Cluster deep sleep"],
-          [ "0", "0", "0xFF", "Disable IRQ 0-7"],
-          [ "0", "1", "0xC0", "Enable IRQ 0-5"]
+          [ "1", "0", "0xFF", "Disable IRQ 0-7"],
+          [ "1", "1", "0xC0", "Enable IRQ 0-5"]
         ]
       },
       "soc_cluster_active_nv": {
         "type": "constant",
-        "value": "0x01",
+        "value": "0x02",
         "id": 2,
         "commands": [
           [ "2", "0", "0x00", "SOC active NV"],
           [ "3", "0", "0x00", "Cluster active NV"],
-          [ "0", "0", "0xFF", "Disable IRQ 0-7"],
-          [ "0", "1", "0xC0", "Enable IRQ 0-5"]
+          [ "1", "0", "0xFF", "Disable IRQ 0-7"],
+          [ "1", "1", "0xC0", "Enable IRQ 0-5"]
         ]
       },
       "soc_cluster_active_lv": {
         "type": "constant",
-        "value": "0x01",
+        "value": "0x03",
         "id": 3,
         "commands": [
           [ "2", "0", "0x01", "SOC active LV"],
           [ "3", "0", "0x01", "Cluster active LV"],
-          [ "0", "0", "0xFF", "Disable IRQ 0-7"],
-          [ "0", "1", "0xC0", "Enable IRQ 0-5"]
+          [ "1", "0", "0xFF", "Disable IRQ 0-7"],
+          [ "1", "1", "0xC0", "Enable IRQ 0-5"]
         ]
       },
       "deep_sleep": {
         "type": "constant",
-        "value": "0x01",
+        "value": "0x04",
         "id": 4,
         "commands": [
           [ "3", "0", "0x02", "Cluster deep sleep"],
           [ "2", "0", "0x02", "SOC deep sleep"],
-          [ "0", "0", "0x00", "Enable IRQ 0-7"],
-          [ "0", "1", "0xFF", "Disable IRQ 0-7"]
+          [ "1", "0", "0x00", "Enable IRQ 0-7"],
+          [ "1", "1", "0xFF", "Disable IRQ 0-7"]
         ]
       },
       "deep_sleep_retentive": {
         "type": "constant",
-        "value": "0x01",
+        "value": "0x05",
         "id": 5,
         "commands": [
           [ "3", "0", "0x02", "Cluster deep sleep"],
           [ "2", "0", "0x03", "SOC retentive"],
-          [ "0", "0", "0x00", "Enable IRQ 0-7"],
-          [ "0", "1", "0xFF", "Disable IRQ 0-7"]
+          [ "1", "0", "0x00", "Enable IRQ 0-7"],
+          [ "1", "1", "0xFF", "Disable IRQ 0-7"]
         ]
       }
     },

@@ -498,6 +498,18 @@ def get_config(tp):
       includes= ["ips/gpio/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")]
     )
 
+    soc.apb_ico.gpio = soc.gpio.input
+
+    nb_gpio = tp.get_child_int("soc/peripherals/gpio/nb_gpio")
+    if nb_gpio is None:
+      nb_gpio = 32
+
+    for i in range(0, nb_gpio):
+      soc.set('gpio%d' % i, soc.gpio.new_itf('gpio%d' % i))
+      if has_pmu:
+        soc.set('gpio%d' % i, soc.apb_soc_ctrl.new_itf('wakeup_gpio%d' % i))
+
+
   for name, config in tp.get("soc/peripherals").get_items().items():
     file = config.get_child_str("file")
     if file is not None:
@@ -635,6 +647,7 @@ def get_config(tp):
   if has_pmu:
     soc.apb_soc_ctrl.wakeup_out = soc.wakeup_out
     soc.apb_soc_ctrl.wakeup_seq = soc.wakeup_seq
+
 
   if has_fc:
     soc.ref_clock = soc.timer.ref_clock

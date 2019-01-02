@@ -227,6 +227,38 @@
         "soc": {
           "vp_ports": [
             "ref_clock",
+            "gpio0",
+            "gpio1",
+            "gpio2",
+            "gpio3",
+            "gpio4",
+            "gpio5",
+            "gpio6",
+            "gpio7",
+            "gpio8",
+            "gpio9",
+            "gpio10",
+            "gpio11",
+            "gpio12",
+            "gpio13",
+            "gpio14",
+            "gpio15",
+            "gpio16",
+            "gpio17",
+            "gpio18",
+            "gpio19",
+            "gpio20",
+            "gpio21",
+            "gpio22",
+            "gpio23",
+            "gpio24",
+            "gpio25",
+            "gpio26",
+            "gpio27",
+            "gpio28",
+            "gpio29",
+            "gpio30",
+            "gpio31",
             "dma_irq",
             "soc_input",
             "cpi0",
@@ -362,6 +394,134 @@
               "soc_eu->ref_clock"
             ],
             [
+              "self->gpio0",
+              "gpio->gpio0"
+            ],
+            [
+              "self->gpio1",
+              "gpio->gpio1"
+            ],
+            [
+              "self->gpio2",
+              "gpio->gpio2"
+            ],
+            [
+              "self->gpio3",
+              "gpio->gpio3"
+            ],
+            [
+              "self->gpio4",
+              "gpio->gpio4"
+            ],
+            [
+              "self->gpio5",
+              "gpio->gpio5"
+            ],
+            [
+              "self->gpio6",
+              "gpio->gpio6"
+            ],
+            [
+              "self->gpio7",
+              "gpio->gpio7"
+            ],
+            [
+              "self->gpio8",
+              "gpio->gpio8"
+            ],
+            [
+              "self->gpio9",
+              "gpio->gpio9"
+            ],
+            [
+              "self->gpio10",
+              "gpio->gpio10"
+            ],
+            [
+              "self->gpio11",
+              "gpio->gpio11"
+            ],
+            [
+              "self->gpio12",
+              "gpio->gpio12"
+            ],
+            [
+              "self->gpio13",
+              "gpio->gpio13"
+            ],
+            [
+              "self->gpio14",
+              "gpio->gpio14"
+            ],
+            [
+              "self->gpio15",
+              "gpio->gpio15"
+            ],
+            [
+              "self->gpio16",
+              "gpio->gpio16"
+            ],
+            [
+              "self->gpio17",
+              "gpio->gpio17"
+            ],
+            [
+              "self->gpio18",
+              "gpio->gpio18"
+            ],
+            [
+              "self->gpio19",
+              "gpio->gpio19"
+            ],
+            [
+              "self->gpio20",
+              "gpio->gpio20"
+            ],
+            [
+              "self->gpio21",
+              "gpio->gpio21"
+            ],
+            [
+              "self->gpio22",
+              "gpio->gpio22"
+            ],
+            [
+              "self->gpio23",
+              "gpio->gpio23"
+            ],
+            [
+              "self->gpio24",
+              "gpio->gpio24"
+            ],
+            [
+              "self->gpio25",
+              "gpio->gpio25"
+            ],
+            [
+              "self->gpio26",
+              "gpio->gpio26"
+            ],
+            [
+              "self->gpio27",
+              "gpio->gpio27"
+            ],
+            [
+              "self->gpio28",
+              "gpio->gpio28"
+            ],
+            [
+              "self->gpio29",
+              "gpio->gpio29"
+            ],
+            [
+              "self->gpio30",
+              "gpio->gpio30"
+            ],
+            [
+              "self->gpio31",
+              "gpio->gpio31"
+            ],
+            [
               "self->dma_irq",
               "fc_itc->in_event_8"
             ],
@@ -420,6 +580,10 @@
             [
               "soc_ico->l2_priv1",
               "l2_priv1->input"
+            ],
+            [
+              "apb_ico->gpio",
+              "gpio->input"
             ],
             [
               "apb_ico->stdout",
@@ -906,6 +1070,7 @@
               }
             },
             "vp_ports": [
+              "gpio",
               "stdout",
               "fll",
               "fll_periph",
@@ -1089,6 +1254,41 @@
           "gpio": {
             "includes": [
               "ips/gpio/gpio_v2.json"
+            ],
+            "vp_ports": [
+              "input",
+              "gpio0",
+              "gpio1",
+              "gpio2",
+              "gpio3",
+              "gpio4",
+              "gpio5",
+              "gpio6",
+              "gpio7",
+              "gpio8",
+              "gpio9",
+              "gpio10",
+              "gpio11",
+              "gpio12",
+              "gpio13",
+              "gpio14",
+              "gpio15",
+              "gpio16",
+              "gpio17",
+              "gpio18",
+              "gpio19",
+              "gpio20",
+              "gpio21",
+              "gpio22",
+              "gpio23",
+              "gpio24",
+              "gpio25",
+              "gpio26",
+              "gpio27",
+              "gpio28",
+              "gpio29",
+              "gpio30",
+              "gpio31"
             ]
           },
           "timer": {

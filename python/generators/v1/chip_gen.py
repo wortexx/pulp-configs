@@ -167,14 +167,18 @@ def get_config(tp):
       groups_conf = padframe_conf.get('groups')
       if groups_conf is not None:
         for name, group in groups_conf.get_items().items():
+          pad_type = group.get_child_str('type')
           nb_cs = group.get_child_int('nb_cs')
           is_master = group.get_child_bool('is_master')
           is_slave = group.get_child_bool('is_slave')
 
-          if is_master:
-            chip.soc.set(name, chip.padframe.new_itf(name))
-          if is_slave:
-            chip.padframe.set(name, chip.soc.new_itf(name))
+          if pad_type == 'gpio':
+              chip.padframe.set(name + '_pad', chip.soc.new_itf(name))
+          else:
+            if is_master:
+              chip.soc.set(name, chip.padframe.new_itf(name))
+            if is_slave:
+              chip.padframe.set(name, chip.soc.new_itf(name))
 
           if nb_cs is not None:
             for cs in range(0, nb_cs):
@@ -191,6 +195,7 @@ def get_config(tp):
               chip.padframe.set(name + '_pad', chip.new_itf(name))
             if is_slave:
               chip.set(name, chip.padframe.new_itf(name + '_pad'))
+
 
     
   chip.soc_clock.out = chip.soc.clock

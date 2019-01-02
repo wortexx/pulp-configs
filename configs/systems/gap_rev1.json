@@ -66,7 +66,8 @@
           "hyper0_cs0_data",
           "hyper0_cs0",
           "hyper0_cs1_data",
-          "hyper0_cs1"
+          "hyper0_cs1",
+          "gpio0"
         ],
         "name": "gap_rev1",
         "pulp_chip_family": "gap",
@@ -192,6 +193,14 @@
             "self->hyper0_cs1"
           ],
           [
+            "padframe->gpio0_pad",
+            "soc->gpio0"
+          ],
+          [
+            "padframe->gpio0_pad",
+            "self->gpio0"
+          ],
+          [
             "soc_clock->out",
             "rtc->clock"
           ],
@@ -311,6 +320,7 @@
             "hyper0_cs0_pad",
             "hyper0_cs1_data_pad",
             "hyper0_cs1_pad",
+            "gpio0_pad",
             "ref_clock_pad",
             "clock",
             "spim0",
@@ -334,6 +344,38 @@
         "soc": {
           "vp_ports": [
             "ref_clock",
+            "gpio0",
+            "gpio1",
+            "gpio2",
+            "gpio3",
+            "gpio4",
+            "gpio5",
+            "gpio6",
+            "gpio7",
+            "gpio8",
+            "gpio9",
+            "gpio10",
+            "gpio11",
+            "gpio12",
+            "gpio13",
+            "gpio14",
+            "gpio15",
+            "gpio16",
+            "gpio17",
+            "gpio18",
+            "gpio19",
+            "gpio20",
+            "gpio21",
+            "gpio22",
+            "gpio23",
+            "gpio24",
+            "gpio25",
+            "gpio26",
+            "gpio27",
+            "gpio28",
+            "gpio29",
+            "gpio30",
+            "gpio31",
             "wakeup_rtc",
             "rtc_event_in",
             "dma_irq",
@@ -469,6 +511,262 @@
               "soc_eu->ref_clock"
             ],
             [
+              "self->gpio0",
+              "gpio->gpio0"
+            ],
+            [
+              "self->gpio0",
+              "apb_soc_ctrl->wakeup_gpio0"
+            ],
+            [
+              "self->gpio1",
+              "gpio->gpio1"
+            ],
+            [
+              "self->gpio1",
+              "apb_soc_ctrl->wakeup_gpio1"
+            ],
+            [
+              "self->gpio2",
+              "gpio->gpio2"
+            ],
+            [
+              "self->gpio2",
+              "apb_soc_ctrl->wakeup_gpio2"
+            ],
+            [
+              "self->gpio3",
+              "gpio->gpio3"
+            ],
+            [
+              "self->gpio3",
+              "apb_soc_ctrl->wakeup_gpio3"
+            ],
+            [
+              "self->gpio4",
+              "gpio->gpio4"
+            ],
+            [
+              "self->gpio4",
+              "apb_soc_ctrl->wakeup_gpio4"
+            ],
+            [
+              "self->gpio5",
+              "gpio->gpio5"
+            ],
+            [
+              "self->gpio5",
+              "apb_soc_ctrl->wakeup_gpio5"
+            ],
+            [
+              "self->gpio6",
+              "gpio->gpio6"
+            ],
+            [
+              "self->gpio6",
+              "apb_soc_ctrl->wakeup_gpio6"
+            ],
+            [
+              "self->gpio7",
+              "gpio->gpio7"
+            ],
+            [
+              "self->gpio7",
+              "apb_soc_ctrl->wakeup_gpio7"
+            ],
+            [
+              "self->gpio8",
+              "gpio->gpio8"
+            ],
+            [
+              "self->gpio8",
+              "apb_soc_ctrl->wakeup_gpio8"
+            ],
+            [
+              "self->gpio9",
+              "gpio->gpio9"
+            ],
+            [
+              "self->gpio9",
+              "apb_soc_ctrl->wakeup_gpio9"
+            ],
+            [
+              "self->gpio10",
+              "gpio->gpio10"
+            ],
+            [
+              "self->gpio10",
+              "apb_soc_ctrl->wakeup_gpio10"
+            ],
+            [
+              "self->gpio11",
+              "gpio->gpio11"
+            ],
+            [
+              "self->gpio11",
+              "apb_soc_ctrl->wakeup_gpio11"
+            ],
+            [
+              "self->gpio12",
+              "gpio->gpio12"
+            ],
+            [
+              "self->gpio12",
+              "apb_soc_ctrl->wakeup_gpio12"
+            ],
+            [
+              "self->gpio13",
+              "gpio->gpio13"
+            ],
+            [
+              "self->gpio13",
+              "apb_soc_ctrl->wakeup_gpio13"
+            ],
+            [
+              "self->gpio14",
+              "gpio->gpio14"
+            ],
+            [
+              "self->gpio14",
+              "apb_soc_ctrl->wakeup_gpio14"
+            ],
+            [
+              "self->gpio15",
+              "gpio->gpio15"
+            ],
+            [
+              "self->gpio15",
+              "apb_soc_ctrl->wakeup_gpio15"
+            ],
+            [
+              "self->gpio16",
+              "gpio->gpio16"
+            ],
+            [
+              "self->gpio16",
+              "apb_soc_ctrl->wakeup_gpio16"
+            ],
+            [
+              "self->gpio17",
+              "gpio->gpio17"
+            ],
+            [
+              "self->gpio17",
+              "apb_soc_ctrl->wakeup_gpio17"
+            ],
+            [
+              "self->gpio18",
+              "gpio->gpio18"
+            ],
+            [
+              "self->gpio18",
+              "apb_soc_ctrl->wakeup_gpio18"
+            ],
+            [
+              "self->gpio19",
+              "gpio->gpio19"
+            ],
+            [
+              "self->gpio19",
+              "apb_soc_ctrl->wakeup_gpio19"
+            ],
+            [
+              "self->gpio20",
+              "gpio->gpio20"
+            ],
+            [
+              "self->gpio20",
+              "apb_soc_ctrl->wakeup_gpio20"
+            ],
+            [
+              "self->gpio21",
+              "gpio->gpio21"
+            ],
+            [
+              "self->gpio21",
+              "apb_soc_ctrl->wakeup_gpio21"
+            ],
+            [
+              "self->gpio22",
+              "gpio->gpio22"
+            ],
+            [
+              "self->gpio22",
+              "apb_soc_ctrl->wakeup_gpio22"
+            ],
+            [
+              "self->gpio23",
+              "gpio->gpio23"
+            ],
+            [
+              "self->gpio23",
+              "apb_soc_ctrl->wakeup_gpio23"
+            ],
+            [
+              "self->gpio24",
+              "gpio->gpio24"
+            ],
+            [
+              "self->gpio24",
+              "apb_soc_ctrl->wakeup_gpio24"
+            ],
+            [
+              "self->gpio25",
+              "gpio->gpio25"
+            ],
+            [
+              "self->gpio25",
+              "apb_soc_ctrl->wakeup_gpio25"
+            ],
+            [
+              "self->gpio26",
+              "gpio->gpio26"
+            ],
+            [
+              "self->gpio26",
+              "apb_soc_ctrl->wakeup_gpio26"
+            ],
+            [
+              "self->gpio27",
+              "gpio->gpio27"
+            ],
+            [
+              "self->gpio27",
+              "apb_soc_ctrl->wakeup_gpio27"
+            ],
+            [
+              "self->gpio28",
+              "gpio->gpio28"
+            ],
+            [
+              "self->gpio28",
+              "apb_soc_ctrl->wakeup_gpio28"
+            ],
+            [
+              "self->gpio29",
+              "gpio->gpio29"
+            ],
+            [
+              "self->gpio29",
+              "apb_soc_ctrl->wakeup_gpio29"
+            ],
+            [
+              "self->gpio30",
+              "gpio->gpio30"
+            ],
+            [
+              "self->gpio30",
+              "apb_soc_ctrl->wakeup_gpio30"
+            ],
+            [
+              "self->gpio31",
+              "gpio->gpio31"
+            ],
+            [
+              "self->gpio31",
+              "apb_soc_ctrl->wakeup_gpio31"
+            ],
+            [
               "self->wakeup_rtc",
               "apb_soc_ctrl->wakeup_rtc"
             ],
@@ -523,6 +821,10 @@
             [
               "soc_ico->l2",
               "l2->input"
+            ],
+            [
+              "apb_ico->gpio",
+              "gpio->input"
             ],
             [
               "apb_ico->stdout",
@@ -1042,6 +1344,7 @@
               }
             },
             "vp_ports": [
+              "gpio",
               "stdout",
               "fll",
               "fll_cluster",
@@ -1210,6 +1513,38 @@
               "cluster_power_irq",
               "cluster_clock_gate_irq",
               "confreg_soc",
+              "wakeup_gpio0",
+              "wakeup_gpio1",
+              "wakeup_gpio2",
+              "wakeup_gpio3",
+              "wakeup_gpio4",
+              "wakeup_gpio5",
+              "wakeup_gpio6",
+              "wakeup_gpio7",
+              "wakeup_gpio8",
+              "wakeup_gpio9",
+              "wakeup_gpio10",
+              "wakeup_gpio11",
+              "wakeup_gpio12",
+              "wakeup_gpio13",
+              "wakeup_gpio14",
+              "wakeup_gpio15",
+              "wakeup_gpio16",
+              "wakeup_gpio17",
+              "wakeup_gpio18",
+              "wakeup_gpio19",
+              "wakeup_gpio20",
+              "wakeup_gpio21",
+              "wakeup_gpio22",
+              "wakeup_gpio23",
+              "wakeup_gpio24",
+              "wakeup_gpio25",
+              "wakeup_gpio26",
+              "wakeup_gpio27",
+              "wakeup_gpio28",
+              "wakeup_gpio29",
+              "wakeup_gpio30",
+              "wakeup_gpio31",
               "input",
               "wakeup_rtc",
               "confreg_ext"
@@ -1233,6 +1568,41 @@
           "gpio": {
             "includes": [
               "ips/gpio/gpio_v2.json"
+            ],
+            "vp_ports": [
+              "input",
+              "gpio0",
+              "gpio1",
+              "gpio2",
+              "gpio3",
+              "gpio4",
+              "gpio5",
+              "gpio6",
+              "gpio7",
+              "gpio8",
+              "gpio9",
+              "gpio10",
+              "gpio11",
+              "gpio12",
+              "gpio13",
+              "gpio14",
+              "gpio15",
+              "gpio16",
+              "gpio17",
+              "gpio18",
+              "gpio19",
+              "gpio20",
+              "gpio21",
+              "gpio22",
+              "gpio23",
+              "gpio24",
+              "gpio25",
+              "gpio26",
+              "gpio27",
+              "gpio28",
+              "gpio29",
+              "gpio30",
+              "gpio31"
             ]
           },
           "fc_icache": {

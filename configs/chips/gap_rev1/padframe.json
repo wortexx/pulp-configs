@@ -101,7 +101,11 @@
     "timer1": {},
     "timer2": {},
     "timer3": {},
-    "xtal": {}
+    "xtal": {},
+    "gpio0": {
+      "type": "gpio",
+      "is_master": true
+    }
   },
 
 
