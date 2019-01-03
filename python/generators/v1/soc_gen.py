@@ -17,6 +17,7 @@
 
 from generators.v1.comp_gen import *
 import math
+import collections
 
 def get_config(tp):
 
@@ -410,12 +411,18 @@ def get_config(tp):
     )
 
   if has_rom:
+    rom_config_dict = collections.OrderedDict()
+    rom_config = tp.get('soc/rom/config')
+    if rom_config is not None:
+      rom_config_dict = rom_config.get_dict()
+
     soc.rom = Component(
         includes  = ["ips/rom/rom_v%d.json" % tp.get_child_int("soc/rom/version")],
         size      = tp.get_child_int("soc/rom/size"),
         map_base= tp.get_child_str("soc/rom/base"),
         map_size= tp.get_child_str("soc/rom/size"),
-        vp_class  = "memory/memory"
+        vp_class  = "memory/memory",
+        **rom_config_dict
     )
 
   soc.plt_loader = Component(

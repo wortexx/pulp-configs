@@ -1443,6 +1443,7 @@
             "map_base": "0x1A000000",
             "map_size": "0x00002000",
             "vp_class": "memory/memory",
+            "stimuli": "os.path.join(os.environ('PULP_SDK_HOME'), 'install', 'ws', 'python', 'pulp', 'chips', 'gap_rev1', 'rom.bin')",
             "vp_ports": [
               "input"
             ]
