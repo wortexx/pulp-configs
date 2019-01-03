@@ -120,7 +120,7 @@
       "base": "0x1A000000",
       "size": "0x00002000",
       "config": {
-        "stimuli": "os.path.join(os.environ('PULP_SDK_HOME'), 'install', 'ws', 'python', 'pulp', 'chips', 'gap_rev1', 'rom.bin')"
+        "stim_file": "os.path.join(os.environ.get('PULP_SDK_HOME'), 'install', 'ws', 'python', 'pulp', 'chips', 'gap_rev1', 'rom.bin')"
       }
     },
 
