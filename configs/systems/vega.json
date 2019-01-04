@@ -1511,6 +1511,7 @@
             "map_base": "0x1A000000",
             "map_size": "0x00002000",
             "vp_class": "memory/memory",
+            "stim_file": "os.path.join(os.environ.get('PULP_SDK_HOME'), 'install', 'ws', 'python', 'pulp', 'chips', 'vega', 'rom.bin')",
             "vp_ports": [
               "input"
             ]
