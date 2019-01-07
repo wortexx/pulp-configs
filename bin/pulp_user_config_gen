@@ -66,9 +66,6 @@ for name, group in tp.get_items().items():
 
       if dev_type == "hyper":
 
-
-        print ('OK')
-
         system.system_tree.board.add_component(name, Component(
             includes=[
                 "periph/hyper.json"
