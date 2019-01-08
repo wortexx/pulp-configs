@@ -75,6 +75,7 @@ gen.all:
 	./bin/plpconf_new --input=chips/wolfe/wolfe.json --output=configs/systems/wolfe.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/vega/vega.json --output=configs/systems/vega.json --usecase=usecases/jtag-cam-spi.json
 	./bin/plpconf_new --input=chips/vivosoc3/vivosoc3.json --output=configs/systems/vivosoc3.json --usecase=usecases/jtag.json
+	./bin/plpconf_new --input=chips/vivosoc3_5/vivosoc3_5.json --output=configs/systems/vivosoc3_5.json --usecase=usecases/jtag.json
 	./bin/plpconf_new --input=chips/multino/multino.json --output=configs/systems/multino.json --usecase=usecases/jtag-nouart.json
 	./bin/plpconf_new --input=chips/bigpulp-standalone/bigpulp.json --output=configs/systems/bigpulp-standalone.json --usecase=usecases/jtag-nouart.json
 	./bin/plpconf_new --input=chips/bigpulp/bigpulp.json --output=configs/systems/bigpulp.json --usecase=usecases/jtag-nouart.json
