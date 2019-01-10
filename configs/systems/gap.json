@@ -868,7 +868,7 @@
             ],
             [
               "fc_ico->fc_eu_alias",
-              "fc_eu->input"
+              "fc_eu->demux_in_0"
             ],
             [
               "fc_ico->fc_eu",
@@ -1463,6 +1463,7 @@
             "vp_ports": [
               "irq_req_0",
               "in_event_14_pe_0",
+              "demux_in_0",
               "input",
               "in_event_22_pe_0",
               "in_event_23_pe_0",

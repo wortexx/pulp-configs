@@ -672,7 +672,7 @@ def get_config(tp):
       soc.soc_ico.fc = soc.fc_ico.input
       soc.soc_ico.ll_ico.fc_ico_alias = soc.soc_ico.fc_alias
       soc.soc_ico.fc_alias = soc.fc_ico.input
-      soc.fc_ico.fc_eu_alias = soc.fc_eu.input
+      soc.fc_ico.fc_eu_alias = soc.fc_eu.demux_in_0
       soc.fc_ico.fc_eu = soc.fc_eu.input
       soc.fc_ico.fc_timer = soc.timer.input
       if has_fc_icache:
