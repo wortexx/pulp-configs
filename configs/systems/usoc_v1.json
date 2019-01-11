@@ -116,6 +116,7 @@
             "gpio29",
             "gpio30",
             "gpio31",
+            "event",
             "ref_clock",
             "jtag0",
             "spim0",
@@ -346,6 +347,10 @@
             [
               "self->gpio31",
               "gpio->gpio31"
+            ],
+            [
+              "self->event",
+              "soc_eu->event_in"
             ],
             [
               "self->ref_clock",
@@ -1000,9 +1005,9 @@
             "vp_ports": [
               "ref_clock_event",
               "fc_event_itf",
+              "event_in",
               "input",
-              "ref_clock",
-              "event_in"
+              "ref_clock"
             ]
           },
           "udma": {

@@ -259,6 +259,7 @@
             "gpio29",
             "gpio30",
             "gpio31",
+            "event",
             "dma_irq",
             "soc_input",
             "cpi0",
@@ -520,6 +521,10 @@
             [
               "self->gpio31",
               "gpio->gpio31"
+            ],
+            [
+              "self->event",
+              "soc_eu->event_in"
             ],
             [
               "self->dma_irq",
@@ -1310,9 +1315,9 @@
             "vp_ports": [
               "ref_clock_event",
               "fc_event_itf",
+              "event_in",
               "input",
-              "ref_clock",
-              "event_in"
+              "ref_clock"
             ]
           },
           "udma": {

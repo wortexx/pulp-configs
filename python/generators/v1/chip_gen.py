@@ -152,6 +152,7 @@ def get_config(tp):
       )
     chip.soc.pmu_input = chip.pmu.input
     chip.pmu.icu0_reset = chip.soc.reset
+    chip.pmu.event = chip.soc.event
     chip.soc_clock.out = chip.pmu.clock
     chip.soc.wakeup_out = chip.pmu.wakeup
     chip.soc.wakeup_seq = chip.pmu.wakeup_seq

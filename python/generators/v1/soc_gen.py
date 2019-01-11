@@ -642,6 +642,7 @@ def get_config(tp):
     soc.periph_clock.out = soc.udma.periph_clock
 
   if has_soc_events:
+    soc.event = soc.soc_eu.event_in
     soc.apb_ico.soc_eu = soc.soc_eu.input
     
   soc.apb_ico.apb_soc_ctrl = soc.apb_soc_ctrl.input

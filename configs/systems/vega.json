@@ -291,6 +291,10 @@
           [
             "pmu->icu0_reset",
             "soc->reset"
+          ],
+          [
+            "pmu->event",
+            "soc->event"
           ]
         ],
         "padframe": {
@@ -373,6 +377,7 @@
             "gpio29",
             "gpio30",
             "gpio31",
+            "event",
             "wakeup_rtc",
             "rtc_event_in",
             "dma_irq",
@@ -774,6 +779,10 @@
             [
               "self->gpio31",
               "apb_soc_ctrl->wakeup_gpio31"
+            ],
+            [
+              "self->event",
+              "soc_eu->event_in"
             ],
             [
               "self->wakeup_rtc",
@@ -1696,9 +1705,9 @@
             "vp_ports": [
               "ref_clock_event",
               "fc_event_itf",
+              "event_in",
               "input",
-              "ref_clock",
-              "event_in"
+              "ref_clock"
             ]
           },
           "udma": {
@@ -5190,6 +5199,7 @@
           ],
           "vp_ports": [
             "icu0_reset",
+            "event",
             "input",
             "clock",
             "wakeup",
