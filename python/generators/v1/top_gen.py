@@ -30,7 +30,9 @@ def get_config(tp, usecases=[]):
 
   config.merge(Config(
     config=system_gen.get_config(tp),
-    includes=usecases
+    properties=OrderedDict([
+      ('includes', usecases)
+    ])
   ).get_js_config())
 
   config.merge(js.import_config({'includes2': [ "chips/%s/defaults.json" % (chip) ] }))

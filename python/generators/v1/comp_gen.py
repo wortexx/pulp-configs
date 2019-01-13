@@ -39,7 +39,7 @@ class Interface(object):
 
 class Component(object):
 
-    def __init__(self, **kwargs):
+    def __init__(self, properties=None):
         self.__dict__['is_empty'] = False
         self.__dict__['is_tb_comp'] = False
 
@@ -47,8 +47,8 @@ class Component(object):
         self.__dict__['_Component__master_itfs'] = OrderedDict()
         self.__dict__['_Component__slave_itfs'] = OrderedDict()
 
-        if len(kwargs) != 0:
-            self.__dict__['_Component__properties'] = kwargs.copy()
+        if properties is not None:
+            self.__dict__['_Component__properties'] = properties
 
     def get_master_itfs(self):
         return self.__dict__['_Component__master_itfs']
@@ -263,9 +263,9 @@ class Component(object):
 
 class Config(Component):
 
-    def __init__(self, config, **kwargs):
+    def __init__(self, config, properties=None):
 
-        super(Config, self).__init__(**kwargs)
+        super(Config, self).__init__(properties=properties)
         self.__dict__['config'] = config
 
     def gen(self):
@@ -278,14 +278,14 @@ class Config(Component):
 
 
 class Tb_Component(Component):
-    def __init__(self, **kwargs):
-        super(Tb_Component, self).__init__(**kwargs)
+    def __init__(self):
+        super(Tb_Component, self).__init__()
 
         self.__dict__['is_tb_comp'] = True
 
 class Empty_Component(Component):
-    def __init__(self, **kwargs):
-        super(Empty_Component, self).__init__(**kwargs)
+    def __init__(self, properties=None):
+        super(Empty_Component, self).__init__(properties=properties)
 
         self.__dict__['is_empty'] = True
 

@@ -58,10 +58,10 @@ def get_config(tp):
   )
 
 
-  system.system_tree = Empty_Component(
-      includes=[ "pulp_system_common.json" ],
-      vp_class= "pulp/system"
-  )
+  system.system_tree = Empty_Component(OrderedDict([
+      ('includes', [ "pulp_system_common.json" ]),
+      ('vp_class', "pulp/system")
+  ]))
 
   system.system_tree.debug_bridge = Empty_Component(
   )
@@ -85,41 +85,41 @@ def get_config(tp):
 
 
 
-  system.system_tree.board = Component(
-      vp_class= "pulp/board"
-  )
+  system.system_tree.board = Component(OrderedDict([
+      ('vp_class', "pulp/board")
+  ]))
 
 
   system.system_tree.board.chip = Config(
       config=chip_gen.get_config(tp)
   )
 
-  system.system_tree.board.dpi_clock = Component(
-      vp_class= "vp/clock_domain",
-      frequency= 50000000
-  )
+  system.system_tree.board.dpi_clock = Component(OrderedDict([
+      ('vp_class', "vp/clock_domain"),
+      ('frequency', 50000000)
+  ]))
 
   system.system_tree.board.pulp_chip = Component(
   )
   system.system_tree.board.pulp_chip.set_property(chip, {})
 
 
-  system.system_tree.board.dpi = Component(
-      includes= [ "periph/dpi_wrapper.json" ]
-  )
+  system.system_tree.board.dpi = Component(OrderedDict([
+      ('includes', [ "periph/dpi_wrapper.json" ])
+  ]))
 
   system.system_tree.board.dpi_clock.out = system.system_tree.board.dpi.clock
   system.system_tree.board.dpi.chip_reset = system.system_tree.board.chip.reset
 
 
-  system.system_tree.board.ref_clock_clock = Component(
-  vp_class="vp/clock_domain",
-  frequency=65536
-  )
+  system.system_tree.board.ref_clock_clock = Component(OrderedDict([
+  ('vp_class', "vp/clock_domain"),
+  ('frequency', 65536)
+  ]))
 
-  system.system_tree.board.ref_clock = Component(
-    includes= [ "ips/misc/clock.json" ]
-  )
+  system.system_tree.board.ref_clock = Component(OrderedDict([
+    ('includes', [ "ips/misc/clock.json" ])
+  ]))
 
   system.system_tree.board.ref_clock_clock.out = system.system_tree.board.ref_clock.clock
 
@@ -131,10 +131,10 @@ def get_config(tp):
 
 
   if chip == 'wolfe':
-    system.system_tree.board.bootsel = Component(
-      vp_class= "board/switch",
-      value="0"
-    )
+    system.system_tree.board.bootsel = Component(OrderedDict([
+      ('vp_class', "board/switch"),
+      ('value', "0")
+    ]))
 
     system.system_tree.board.bootsel.out = system.system_tree.board.chip.bootsel
 
@@ -144,15 +144,15 @@ def get_config(tp):
 
   if has_ddr:
 
-    system.system_tree.board.ddr_clock = Component(
-      vp_class="vp/clock_domain",
-      frequency=tp.get_child_str("ddr/frequency")
-    )
+    system.system_tree.board.ddr_clock = Component(OrderedDict([
+      ('vp_class', "vp/clock_domain"),
+      ('frequency', tp.get_child_str("ddr/frequency"))
+    ]))
 
-    system.system_tree.board.ddr = Component(
-        includes= [ "ips/memory/ddr.json" ],
-        size= tp.get_child_str("ddr/size")
-    )
+    system.system_tree.board.ddr = Component(OrderedDict([
+        ('includes', [ "ips/memory/ddr.json" ]),
+        ('size', tp.get_child_str("ddr/size"))
+    ]))
 
     system.system_tree.board.chip.ddr = system.system_tree.board.ddr.input
     system.system_tree.board.ddr_clock.out = system.system_tree.board.ddr.clock

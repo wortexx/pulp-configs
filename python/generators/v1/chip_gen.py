@@ -47,36 +47,36 @@ def get_config(tp):
       return 'cluster_%d' % (cid)
 
 
-  chip = Component(
-    name=chip_name,
+  chip = Component(properties=OrderedDict([
+    ('name', chip_name),
 
-    pulp_chip_family=chip_family,
-    pulp_chip_version=0,
-    boot_from_rom=False,
-    vp_class="pulp/chip",
+    ('pulp_chip_family', chip_family),
+    ('pulp_chip_version', 0),
+    ('boot_from_rom', False),
+    ('vp_class', "pulp/chip"),
 
-    hal_files= [ "hal/chips/%s/pulp.h" % chip_family.replace('-', '_')],
-    archi_files= [ "archi/chips/%s/pulp.h" % chip_family, "archi/chips/%s/memory_map.h" % chip_family, "archi/chips/%s/properties.h" % chip_family, "archi/chips/%s/apb_soc.h" % chip_family ],
-  )
+    ('hal_files', [ "hal/chips/%s/pulp.h" % chip_family.replace('-', '_')]),
+    ('archi_files', [ "archi/chips/%s/pulp.h" % chip_family, "archi/chips/%s/memory_map.h" % chip_family, "archi/chips/%s/properties.h" % chip_family, "archi/chips/%s/apb_soc.h" % chip_family ]),
+  ]))
 
 
   if padframe is not None:
     content = tp.get_child_str('padframe/content')
     if content is not None:
-      chip.padframe = Component(
-          includes= [ content ]
-      )
+      chip.padframe = Component(properties=OrderedDict([
+          ('includes', [ content ])
+      ]))
     else:
-      chip.padframe = Component(
-        includes= [ "%s" % padframe ]
-      )
+      chip.padframe = Component(properties=OrderedDict([
+        ('includes', [ "%s" % padframe ])
+      ]))
 
     chip.ref_clock = chip.padframe.ref_clock_pad
 
-  chip.soc_clock = Component(
-    vp_class="vp/clock_domain",
-    frequency=50000000
-  )
+  chip.soc_clock = Component(properties=OrderedDict([
+    ('vp_class', "vp/clock_domain"),
+    ('frequency', 50000000)
+  ]))
 
 
   chip.soc = Config(
@@ -96,10 +96,10 @@ def get_config(tp):
 
       chip.add_component(
         get_cluster_name(cid) + '_clock',
-        Component(
-          vp_class="vp/clock_domain",
-          frequency=50000000
-        )
+        Component(properties=OrderedDict([
+          ('vp_class', "vp/clock_domain"),
+          ('frequency', 50000000)
+        ]))
       )
       
       chip.get(get_cluster_name(cid) + '_clock').out = chip.get(get_cluster_name(cid)).clock
@@ -122,14 +122,15 @@ def get_config(tp):
   if has_rtc:
     rtc_version = tp.get_child_int('**/rtc/version')
     if rtc_version == 1 or rtc_version is None:
-      chip.rtc = Component(
-        includes=["ips/vendors/dolphin/rtc.json"],
-        **tp.get('soc/peripherals/rtc').get('config').get_dict()
-      )
+      properties = properties=OrderedDict([
+        ('includes', ["ips/vendors/dolphin/rtc.json"])
+      ])
+      properties.update(tp.get('soc/peripherals/rtc').get('config').get_dict())
+      chip.rtc = Component(properties=properties)
     else:
-      chip.rtc = Component(
-        includes=["ips/rtc/rtc_v%d.json" % rtc_version]
-      )
+      chip.rtc = Component(OrderedDict([
+        ('includes', ["ips/rtc/rtc_v%d.json" % rtc_version])
+      ]))
 
     chip.rtc.irq = chip.soc.wakeup_rtc
     chip.rtc.event = chip.soc.rtc_event_in
@@ -143,13 +144,13 @@ def get_config(tp):
     pmu_content = tp.get_child_str('soc/peripherals/pmu/content')
 
     if pmu_content is not None:
-      chip.pmu = Component(
-        includes=[ pmu_content ]
-      )
+      chip.pmu = Component(OrderedDict([
+        ('includes', [ pmu_content ])
+      ]))
     else:
-      chip.pmu = Component(
-        includes=["ips/pmu/pmu_v%d.json" % tp.get_child_str('soc/peripherals/pmu/version')]
-      )
+      chip.pmu = Component(OrderedDict([
+        ('includes', ["ips/pmu/pmu_v%d.json" % tp.get_child_str('soc/peripherals/pmu/version')])
+      ]))
     chip.soc.pmu_input = chip.pmu.input
     chip.pmu.icu0_reset = chip.soc.reset
     chip.pmu.event = chip.soc.event

@@ -47,72 +47,75 @@ def get_config(tp, cluster_id):
 
 
 
-  cluster = Component(
-    version=cluster_version,
-    nb_pe=nb_pe,
-    has_cc=has_cc,
-    vp_class="pulp/cluster/cluster"
-  )
+  cluster = Component(properties=OrderedDict([
+    ('version', cluster_version),
+    ('nb_pe', nb_pe),
+    ('has_cc', has_cc),
+    ('vp_class', "pulp/cluster/cluster")
+  ]))
 
 
-  axi_ico_mappings = {
-    "soc": get_mapping(tp.get_child_dict("soc"))
-  }
+  axi_ico_mappings = OrderedDict([
+    ("soc", get_mapping(tp.get_child_dict("soc")))
+  ])
 
-  cluster.cluster_ico = Component(
-      includes=["ips/interco/router.json"],
-      latency=2,
-      mappings={
-        "l1": get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True),
-        "periph_ico": get_mapping_area(tp.get_child_dict("cluster/peripherals"), cluster_size, cluster_id),
-        "periph_ico_alias": get_mapping(tp.get_child_dict("cluster/peripherals/alias"), add_offset=get_area_int('%d' % ((tp.get_child_int("cluster/peripherals/base") - tp.get_child_int("cluster/peripherals/alias/base"))), cluster_size, cluster_id)),
-        "error": OrderedDict({ "base": get_area('%d' % tp.get_child_int("cluster/base"), cluster_size, cluster_id), "size": '0x%x' % cluster_size}),
-        "soc": {}
-      }
-  )
+  cluster.cluster_ico = Component(properties=OrderedDict([
+    ('includes', ["ips/interco/router.json"]),
+    ('latency', 2),
+    ('mappings', OrderedDict([
+      ("l1", get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True)),
+      ("periph_ico", get_mapping_area(tp.get_child_dict("cluster/peripherals"), cluster_size, cluster_id)),
+      ("periph_ico_alias", get_mapping(tp.get_child_dict("cluster/peripherals/alias"), add_offset=get_area_int('%d' % ((tp.get_child_int("cluster/peripherals/base") - tp.get_child_int("cluster/peripherals/alias/base"))), cluster_size, cluster_id))),
+      ("error", OrderedDict([
+        ("base", get_area('%d' % tp.get_child_int("cluster/base"), cluster_size, cluster_id)),
+        ("size", '0x%x' % cluster_size)
+      ])),
+      ("soc", OrderedDict())
+    ]))
+  ]))
 
   demux_eu_mapping = tp.get_child_dict("cluster/demux_peripherals/event_unit")
   demux_eu_mapping['base'] = '0x%x' % (int(demux_eu_mapping['base'], 0) - tp.get_child_int("cluster/demux_peripherals/base"))
-  cluster.demux_periph_ico = Component(
-      includes=["ips/interco/router.json"],
-      mappings={
-        "demux_event_unit": get_mapping(demux_eu_mapping),
-      }
-  )
+  cluster.demux_periph_ico = Component(properties=OrderedDict([
+      ('includes', ["ips/interco/router.json"]),
+      ('mappings', OrderedDict([
+        ("demux_event_unit", get_mapping(demux_eu_mapping)),
+      ]))
+  ]))
 
-  periph_ico_mappings = {}
+  periph_ico_mappings = OrderedDict()
 
   for i in range(0, nb_pe):
     size = tp.get_child_int("cluster/peripherals/dbg_unit/size")
     base = tp.get_child_int("cluster/peripherals/dbg_unit/base") + cluster_id*cluster_size + size * i
-    periph_ico_mappings['dbg_unit_%d' % i] = {
-      "base": '0x%x' % base,
-      "size": '0x%x' % size,
-      "remove_offset": '0x%x' % base
-    }
+    periph_ico_mappings['dbg_unit_%d' % i] = OrderedDict([
+      ("base", '0x%x' % base),
+      ("size", '0x%x' % size),
+      ("remove_offset", '0x%x' % base)
+    ])
 
-  periph_ico_mappings.update({
-    "cluster_ctrl": get_mapping_area(tp.get_child_dict("cluster/peripherals/cluster_ctrl"), cluster_size, cluster_id, True),
-    "timer": get_mapping_area(tp.get_child_dict("cluster/peripherals/timer"), cluster_size, cluster_id, True),
-    "event_unit": get_mapping_area(tp.get_child_dict("cluster/peripherals/event_unit"), cluster_size, cluster_id, True),
-    "icache_ctrl": get_mapping_area(tp.get_child_dict("cluster/peripherals/icache_ctrl"), cluster_size, cluster_id, True),
-    "dma": get_mapping_area(tp.get_child_dict("cluster/peripherals/dma"), cluster_size, cluster_id, True),
-    "cluster_ico": {}
-  })
+  periph_ico_mappings.update(OrderedDict([
+    ("cluster_ctrl", get_mapping_area(tp.get_child_dict("cluster/peripherals/cluster_ctrl"), cluster_size, cluster_id, True)),
+    ("timer", get_mapping_area(tp.get_child_dict("cluster/peripherals/timer"), cluster_size, cluster_id, True)),
+    ("event_unit", get_mapping_area(tp.get_child_dict("cluster/peripherals/event_unit"), cluster_size, cluster_id, True)),
+    ("icache_ctrl", get_mapping_area(tp.get_child_dict("cluster/peripherals/icache_ctrl"), cluster_size, cluster_id, True)),
+    ("dma", get_mapping_area(tp.get_child_dict("cluster/peripherals/dma"), cluster_size, cluster_id, True)),
+    ("cluster_ico", OrderedDict())
+  ]))
 
   if has_hwce:
-    periph_ico_mappings.update({
-      "hwce": get_mapping_area(tp.get_child_dict("cluster/peripherals/hwce"), cluster_size, cluster_id, True)
-    })
+    periph_ico_mappings.update(OrderedDict([
+      ("hwce", get_mapping_area(tp.get_child_dict("cluster/peripherals/hwce"), cluster_size, cluster_id, True))
+    ]))
 
-  cluster.periph_ico = Component(
-      includes=["ips/interco/router.json"],
-      mappings=periph_ico_mappings
-  )
+  cluster.periph_ico = Component(properties=OrderedDict([
+    ('includes', ["ips/interco/router.json"]),
+    ('mappings', periph_ico_mappings)
+  ]))
 
-  cluster.l1_ico = Component(  
-    vp_class=None,
-  )
+  cluster.l1_ico = Component(properties=OrderedDict([
+    ('vp_class', None),
+  ]))
 
   for i in range(0, nb_pe):
     l1_mapping = get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True)
@@ -151,119 +154,119 @@ def get_config(tp, cluster_id):
 
     cluster.l1_ico.add_component(
       'pe%d_ico' % i,
-      Component(
-        includes=["ips/interco/router.json"],
-        mappings={
-          "l1": l1_mapping,
-          "l1_ts": l1_ts_mapping,
-          "event_unit": eu_mapping,
-          "dma": dma_mapping,
-          "l1_alias": l1_alias_mapping,
-          "l1_ts_alias": l1_ts_alias_mapping,
-          "event_unit_alias": eu_alias_mapping,
-          "dma_alias": dma_alias_mapping,
-          "cluster_ico": { "id": 1 }
-        }
-      )
+      Component(properties=OrderedDict([
+        ('includes', ["ips/interco/router.json"]),
+        ('mappings', OrderedDict([
+          ("l1", l1_mapping),
+          ("l1_ts", l1_ts_mapping),
+          ("event_unit", eu_mapping),
+          ("dma", dma_mapping),
+          ("l1_alias", l1_alias_mapping),
+          ("l1_ts_alias", l1_ts_alias_mapping),
+          ("event_unit_alias", eu_alias_mapping),
+          ("dma_alias", dma_alias_mapping),
+          ("cluster_ico", { "id": 1 })
+        ]))
+      ]))
     )
 
 
-  cluster.l1_ico.interleaver = Component(
-    includes=["ips/interco/l1_interleaver.json"],
-    nb_slaves= nb_l1_banks,
-    nb_masters= nb_pe + 4,
-    interleaving_bits= 2
-  )
+  cluster.l1_ico.interleaver = Component(properties=OrderedDict([
+    ('includes', ["ips/interco/l1_interleaver.json"]),
+    ('nb_slaves', nb_l1_banks),
+    ('nb_masters', nb_pe + 4),
+    ('interleaving_bits', 2)
+  ]))
 
-  cluster.l1_ico.ext2loc = Component(
-    includes=["ips/interco/converter.json"],
-    output_width=4,
-    output_align=4
-  )
+  cluster.l1_ico.ext2loc = Component(properties=OrderedDict([
+    ('includes', ["ips/interco/converter.json"]),
+    ('output_width', 4),
+    ('output_align', 4)
+  ]))
 
-  cluster.l1 = Component(
-    vp_class= None,
-    size=tp.get_child_int("cluster/l1/size"),
-    alias=True,
-    has_l1_alias=True,
-    alias_base=tp.get_child_str("cluster/alias"),
-    map_base=tp.get_child_str("cluster/l1/base"),
-    nb_banks=nb_l1_banks,
-  )
+  cluster.l1 = Component(properties=OrderedDict([
+    ('vp_class', None),
+    ('size', tp.get_child_int("cluster/l1/size")),
+    ('alias', True),
+    ('has_l1_alias', True),
+    ('alias_base', tp.get_child_str("cluster/alias")),
+    ('map_base', tp.get_child_str("cluster/l1/base")),
+    ('nb_banks', nb_l1_banks),
+  ]))
 
   for i in range(0, nb_l1_banks):
     cluster.l1.add_component(
       'bank%d' % i,
-      Component(
-        size=l1_bank_size,
-        vp_class="memory/memory",
-        power_models={"includes": ["power_models/l1/l1.json"] },
-        power_trigger= True if i == 0 else False
-      )
+      Component(properties=OrderedDict([
+        ('size', l1_bank_size),
+        ('vp_class', "memory/memory"),
+        ('power_models', {"includes": ["power_models/l1/l1.json"] }),
+        ('power_trigger', True if i == 0 else False)
+      ]))
     )
 
-  cluster.icache = Empty_Component(
-    version=1,
-    size=4096,
-    line_size=16,
-    banking_factor=4,
-    ports=8,
-    ways=1,
-    enabled=True
-  )
+  cluster.icache = Empty_Component(properties=OrderedDict([
+    ('version', 1),
+    ('size', 4096),
+    ('line_size', 16),
+    ('banking_factor', 4),
+    ('ports', 8),
+    ('ways', 1),
+    ('enabled', True)
+  ]))
 
-  cluster.dma = Component(
-    includes=["ips/mchan/mchan_v%d.json" % tp.get_child_int('cluster/peripherals/dma/version')],
-    nb_channels=nb_pe+1,
-    is_64=tp.get_child_bool('cluster/peripherals/dma/is_64') == True
-  )
+  cluster.dma = Component(properties=OrderedDict([
+    ('includes', ["ips/mchan/mchan_v%d.json" % tp.get_child_int('cluster/peripherals/dma/version')]),
+    ('nb_channels', nb_pe+1),
+    ('is_64', tp.get_child_bool('cluster/peripherals/dma/is_64') == True)
+  ]))
 
-  cluster.cluster_ctrl = Component(
-    includes=["ips/cluster_ctrl/cluster_ctrl_v2.json"],
-    nb_core=nb_pe
-  )
+  cluster.cluster_ctrl = Component(properties=OrderedDict([
+    ('includes', ["ips/cluster_ctrl/cluster_ctrl_v2.json"]),
+    ('nb_core', nb_pe)
+  ]))
 
-  cluster.event_unit = Component(
-    includes=["ips/event_unit/eu_v3.json"],
-    nb_core=nb_pe
-  )
+  cluster.event_unit = Component(properties=OrderedDict([
+    ('includes', ["ips/event_unit/eu_v3.json"]),
+    ('nb_core', nb_pe)
+  ]))
 
-  cluster.timer = Component(
-    includes=["ips/timer/timer_v2.json"]
-  )
+  cluster.timer = Component(properties=OrderedDict([
+    ('includes', ["ips/timer/timer_v2.json"])
+  ]))
 
   if has_hwce:
-    cluster.hwce = Component(
-      includes=["ips/hwce/hwce_v%d.json" % tp.get_child_int('cluster/peripherals/hwce/version')]
-    )
+    cluster.hwce = Component(properties=OrderedDict([
+      ('includes', ["ips/hwce/hwce_v%d.json" % tp.get_child_int('cluster/peripherals/hwce/version')])
+    ]))
 
-  cluster.icache_ctrl = Component(
-    includes=["ips/icache_ctrl/icache_ctrl_v2.json"]
-  )
+  cluster.icache_ctrl = Component(properties=OrderedDict([
+    ('includes', ["ips/icache_ctrl/icache_ctrl_v2.json"])
+  ]))
 
-  cluster.pe = Empty_Component(
-  )
+  cluster.pe = Empty_Component(properties=OrderedDict(
+  ))
 
   for i in range(0, nb_pe):
     cluster.add_component(
       'pe%d' % i,
-      Component(
-        includes=["ips/riscv/%s.json" % cluster_core],
-        cluster_id=cluster_id,
-        core_id=i,
-        fetch_enable=tp.get_child_bool("cluster%d/pe%d/fetch_enable" % (cluster_id, i)),
-        boot_addr=tp.get_child_str("cluster%d/pe%d/boot_addr" % (cluster_id, i))
-      )
+      Component(properties=OrderedDict([
+        ('includes', ["ips/riscv/%s.json" % cluster_core]),
+        ('cluster_id', cluster_id),
+        ('core_id', i),
+        ('fetch_enable', tp.get_child_bool("cluster%d/pe%d/fetch_enable" % (cluster_id, i))),
+        ('boot_addr', tp.get_child_str("cluster%d/pe%d/boot_addr" % (cluster_id, i)))
+      ]))
     )
 
     cluster.add_component(
       'pe',
-      Empty_Component(
-        includes=["ips/riscv/%s.json" % cluster_core],
-        cluster_id=cluster_id,
-        core_id=0,
-        boot_addr="0x1C000000"
-      )
+      Empty_Component(properties=OrderedDict([
+        ('includes', ["ips/riscv/%s.json" % cluster_core]),
+        ('cluster_id', cluster_id),
+        ('core_id', 0),
+        ('boot_addr', "0x1C000000")
+      ]))
     )
 
 
