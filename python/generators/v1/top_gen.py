@@ -22,17 +22,14 @@ import json_tools as js
 
 
 
-def get_config(tp, usecases=[]):
+def get_config(tp):
 
   chip              = tp.get_child_str('chip')
 
   config = js.import_config({'includes': [ "defaults.json" ] })
 
   config.merge(Config(
-    config=system_gen.get_config(tp),
-    properties=OrderedDict([
-      ('includes', usecases)
-    ])
+    config=system_gen.get_config(tp)
   ).get_js_config())
 
   config.merge(js.import_config({'includes2': [ "chips/%s/defaults.json" % (chip) ] }))

@@ -38,7 +38,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-config = plpconf.get_config(args.input, usecases=args.usecases)
+config = plpconf.get_config(args.input, interpret=True)
 
 with open(args.output, 'w') as file:
     file.write(config.dump_to_string())

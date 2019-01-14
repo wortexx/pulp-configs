@@ -11,6 +11,10 @@
   "chip": "bigpulp-juno",
   "chip_family": "bigpulp",
 
+  "padframe": {
+    "content": "chips/bigpulp-juno/padframe.json"
+  },
+
   "cluster0": {
     "pe0": {
       "boot_addr": "0x1c008000"

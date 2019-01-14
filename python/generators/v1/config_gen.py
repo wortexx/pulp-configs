@@ -19,6 +19,6 @@ import generators.v1.top_gen as top_gen
 
 
 
-def get_config(tp, usecases=[]):
+def get_config(tp):
 
-    return top_gen.get_config(tp, usecases)
+    return top_gen.get_config(tp)
