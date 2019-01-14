@@ -156,16 +156,17 @@ def get_config(tp):
     system.system_tree.board.ddr_clock.out = system.system_tree.board.ddr.clock
 
 
-  for device_name, device in tp.get('**/devices').items.items():
+  if tp.get('**/devices') is not None:
+    for device_name, device in tp.get('**/devices').items.items():
 
-    generator = device.get_child_str('generator')
-    if generator is None:
-      raise Exception('No generator specified for device (name: %s)' % device_name)
+      generator = device.get_child_str('generator')
+      if generator is None:
+        raise Exception('No generator specified for device (name: %s)' % device_name)
 
-    file, path, descr = imp.find_module(generator, None)
-    module = imp.load_module(generator, file, path, descr)
+      file, path, descr = imp.find_module(generator, None)
+      module = imp.load_module(generator, file, path, descr)
 
-    module.gen_config(tp, system, device)
+      module.gen_config(tp, system, device)
 
 
 
