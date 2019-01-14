@@ -42,7 +42,9 @@ def get_config(tp, cluster_id):
   #else:
   #  alias = "0x00000000"
 
-  nb_l1_banks = 1<<int(math.log2(nb_pe * l1_banking_factor))
+
+
+  nb_l1_banks = 1<<int(math.log(nb_pe * l1_banking_factor, 2.0))
   l1_bank_size = int(tp.get_child_int('cluster/l1/size') / nb_l1_banks)
 
 
