@@ -832,4 +832,4 @@ def get_config(tp):
     soc.bootsel = soc.apb_soc_ctrl.bootsel
 
 
-  return soc.get_js_config()
+  return soc

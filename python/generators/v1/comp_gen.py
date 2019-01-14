@@ -278,10 +278,20 @@ class Config(Component):
 
 
 class Tb_Component(Component):
-    def __init__(self):
-        super(Tb_Component, self).__init__()
+    def __init__(self, properties=None, config=None):
+        super(Tb_Component, self).__init__(properties=properties)
 
         self.__dict__['is_tb_comp'] = True
+        self.__dict__['config'] = config
+
+    def gen(self):
+
+        result = Component.gen(self)
+        config = self.__dict__.get('config')
+        if config is not None:
+            result.update(config.get_dict())
+
+        return result
 
 class Empty_Component(Component):
     def __init__(self, properties=None):

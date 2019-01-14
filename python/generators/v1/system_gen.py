@@ -17,6 +17,7 @@
 
 import generators.v1.chip_gen as chip_gen
 from generators.v1.comp_gen import *
+import imp
 
 
 
@@ -90,9 +91,7 @@ def get_config(tp):
   ]))
 
 
-  system.system_tree.board.chip = Config(
-      config=chip_gen.get_config(tp)
-  )
+  system.system_tree.board.chip = chip_gen.get_config(tp)
 
   system.system_tree.board.dpi_clock = Component(OrderedDict([
       ('vp_class', "vp/clock_domain"),
@@ -129,7 +128,6 @@ def get_config(tp):
     system.system_tree.board.ref_clock_clock.out = system.system_tree.board.chip.ref_clock_engine
 
 
-
   if chip == 'wolfe':
     system.system_tree.board.bootsel = Component(OrderedDict([
       ('vp_class', "board/switch"),
@@ -156,6 +154,18 @@ def get_config(tp):
 
     system.system_tree.board.chip.ddr = system.system_tree.board.ddr.input
     system.system_tree.board.ddr_clock.out = system.system_tree.board.ddr.clock
+
+
+  for device_name, device in tp.get('**/devices').items.items():
+
+    generator = device.get_child_str('generator')
+    if generator is None:
+      raise Exception('No generator specified for device (name: %s)' % device_name)
+
+    file, path, descr = imp.find_module(generator, None)
+    module = imp.load_module(generator, file, path, descr)
+
+    module.gen_config(tp, system, device)
 
 
 

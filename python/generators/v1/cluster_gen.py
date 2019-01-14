@@ -419,4 +419,4 @@ def get_config(tp, cluster_id):
 
 
 
-  return cluster.get_js_config()
+  return cluster

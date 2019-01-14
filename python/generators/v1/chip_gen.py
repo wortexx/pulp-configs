@@ -79,9 +79,7 @@ def get_config(tp):
   ]))
 
 
-  chip.soc = Config(
-    config= soc.get_config(tp)
-  )
+  chip.soc = soc.get_config(tp)
 
   if has_cluster:
     for cid in range(0, nb_cluster):
@@ -89,9 +87,7 @@ def get_config(tp):
 
       chip.add_component(
         get_cluster_name(cid),
-        Config(
-          config=cluster.get_config(tp, cid)
-        )
+        cluster.get_config(tp, cid)
       )
 
       chip.add_component(
@@ -212,4 +208,4 @@ def get_config(tp):
 
   config = chip.get_json_config()
 
-  return chip.get_js_config()
+  return chip

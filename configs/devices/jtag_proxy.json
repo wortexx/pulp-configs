@@ -1,0 +1,11 @@
+{
+  "generator": "generators/v1/devices/jtag_proxy_gen",
+
+  "config": {
+    "type": "dpi",
+    "active": false,
+    "module": "jtag_proxy.so",
+    "verbose": false,
+    "port": 37539
+  }
+}
