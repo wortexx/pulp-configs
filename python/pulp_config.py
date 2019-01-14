@@ -20,6 +20,8 @@ import json_tools as js
 import imp
 import os
 import shlex
+import configparser
+import collections
 
 
 class Pulp_config(js.config_object):
@@ -76,9 +78,22 @@ def create_config(name, config, interpret=False, **kwargs):
 
             raise Exception('Unknown config type: ' + type_config)
 
-def get_config(file, name="", interpret=False, **kwargs):
+def get_config(file, name="", ini_config=None, interpret=False, **kwargs):
 
     config = js.import_config_from_file(file, find=True, interpret=interpret)
+
+    if ini_config is not None:
+      parser = configparser.SafeConfigParser(dict_type=collections.OrderedDict)
+      paths = parser.read(ini_config)
+      if len(paths) == 0:
+          raise Exception("Didn't manage to open file: %s" % (ini_config))
+          
+      for section in parser.sections():
+        for item in parser.items(section):
+          print (section)
+          print (item)
+
+
 
     return create_config(name, config, interpret=interpret, **kwargs)
 
