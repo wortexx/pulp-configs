@@ -20,7 +20,7 @@
   },
 
 
-  "chip": "gap_rev1",
+  "chip": "gap",
   "chip_family": "gap",
     
   "padframe": {

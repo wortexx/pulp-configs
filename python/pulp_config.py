@@ -84,7 +84,14 @@ def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[
       name, file = file.split('@')
 
     if file is not None and file.find('config_file') != -1:
-      dummy, file = file.split('=')
+      dummy, file = file.split('=', 1)
+
+    opts = []
+
+    if file.find(':'):
+      opts = file.split(':')[1:]
+      file = file.split(':')[0]
+
 
     config = js.import_config_from_file(file, find=True, interpret=interpret)
 
@@ -105,7 +112,7 @@ def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[
 
     result = create_config(name, config, interpret=interpret, **kwargs)
 
-    for config_opt in config_opts:
+    for config_opt in config_opts + opts:
         key, value = config_opt.split('=')
         result.user_set(key, value)
 
