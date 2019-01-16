@@ -13,11 +13,6 @@
         "includes": ["devices/uart_tb.json"],
         "interface": "uart0"
       },
-      "camera": {
-        "includes": ["devices/camera.json"],
-        "interface": "cpi0",
-        "ctrl_interface": "i2c1"
-      },
       "jtag_proxy": {
         "includes": ["devices/jtag_proxy.json"]
       }
