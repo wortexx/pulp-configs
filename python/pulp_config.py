@@ -20,7 +20,7 @@ import json_tools as js
 import imp
 import os
 import shlex
-#import configparser
+import configparser
 import collections
 
 
@@ -78,29 +78,44 @@ def create_config(name, config, interpret=False, **kwargs):
 
             raise Exception('Unknown config type: ' + type_config)
 
-def get_config(file, name="", ini_config=None, interpret=False, **kwargs):
+def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[], interpret=False, **kwargs):
+
+    if file is not None and file.find('@') != -1:
+      name, file = file.split('@')
+
+    if file is not None and file.find('config_file') != -1:
+      dummy, file = file.split('=')
 
     config = js.import_config_from_file(file, find=True, interpret=interpret)
 
-    if ini_config is not None:
-      parser = configparser.SafeConfigParser(dict_type=collections.OrderedDict)
+    for ini_config in ini_configs:
+      parser = configparser.SafeConfigParser(ini_configs_dict, dict_type=collections.OrderedDict)
+      parser.optionxform = str
       paths = parser.read(ini_config)
       if len(paths) == 0:
           raise Exception("Didn't manage to open file: %s" % (ini_config))
           
+      user_config = collections.OrderedDict()
       for section in parser.sections():
         for item in parser.items(section):
-          print (section)
-          print (item)
+          path = ('%s.%s' % (section, item[0])).split('.')
+          config.set_from_list(path, item[1])
+
+      config = js.import_config(config.get_dict(),  interpret=interpret)
+
+    result = create_config(name, config, interpret=interpret, **kwargs)
+
+    for config_opt in config_opts:
+        key, value = config_opt.split('=')
+        result.user_set(key, value)
+
+    return result
 
 
 
-    return create_config(name, config, interpret=interpret, **kwargs)
 
 
-
-
-def get_configs(config_str=None, interpret=True):
+def get_configs(config_str=None, ini_configs=[], ini_configs_dict={}, interpret=True):
   result = []
 
   for config in shlex.split(config_str.replace(';', ' ')):
@@ -114,7 +129,7 @@ def get_configs(config_str=None, interpret=True):
 
       if item.find('config_file') != -1:
         key, file = item.split('=')
-        config_tree = get_config(file, full_config, interpret=interpret)
+        config_tree = get_config(file, full_config, ini_configs=ini_configs, ini_configs_dict=ini_configs_dict, interpret=interpret)
         result.append(config_tree)
 
       else:

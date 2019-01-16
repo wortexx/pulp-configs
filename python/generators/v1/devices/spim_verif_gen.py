@@ -24,11 +24,20 @@ import json_tools as js
 def gen_config(name, system_config, system, device_config, usecases=[]):
 
   itf = device_config.get_str('interface')
+  cs = device_config.get_str('cs')
 
   system.system_tree.board.add_component(name, Tb_Component(
     config=device_config.get('config')
   ))
 
-  system.system_tree.board.chip.set(itf, system.system_tree.board.get(name).uart)
-  system.system_tree.board.chip.padframe.set(itf + '_pad', system.system_tree.board.chip.new_itf(itf))
-  system.system_tree.board.chip.set(itf, system.system_tree.board.dpi.new_itf(itf))
+  gpios = device_config.get('gpio')
+  if gpios is not None:
+    for gpio in gpios.get_dict():
+      system.system_tree.board.chip.set(gpio, system.system_tree.board.dpi.new_itf(gpio))
+      system.system_tree.board.chip.set(gpio, system.system_tree.board.get(name).new_itf(gpio))
+
+
+  system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.dpi.new_itf(itf + '_cs' + str(cs) + '_data'))
+  system.system_tree.board.chip.set(itf + '_cs' + str(cs), system.system_tree.board.dpi.new_itf(itf + '_cs' + str(cs)))
+
+  system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.get(name).input)

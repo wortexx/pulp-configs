@@ -21,22 +21,22 @@ import json_tools as js
 
 
 
-def gen_config(system_config, system, device_config, usecases=[]):
+def gen_config(name, system_config, system, device_config, usecases=[]):
 
   itf = device_config.get_str('interface')
   cs = device_config.get_str('cs')
 
-  system.system_tree.board.spiflash = Config(
+  system.system_tree.board.add_component(name, Config(
     config=device_config.get('config')
-  )
+  ))
 
-  system.system_tree.board.spiflash_clock = Component(properties=OrderedDict(
+  system.system_tree.board.add_component(name + '_clock', Component(properties=OrderedDict(
       vp_class= "vp/clock_domain",
       frequency= 50000000
-  ))
+  )))
 
   itf_name = '%s_cs%s' % (itf, cs)
 
-  system.system_tree.board.chip.set(itf_name, system.system_tree.board.spiflash.cs)
-  system.system_tree.board.chip.set(itf_name + '_data', system.system_tree.board.spiflash.input)
-  system.system_tree.board.spiflash_clock.out = system.system_tree.board.spiflash.clock
+  system.system_tree.board.chip.set(itf_name, system.system_tree.board.get(name).cs)
+  system.system_tree.board.chip.set(itf_name + '_data', system.system_tree.board.get(name).input)
+  system.system_tree.board.get(name + '_clock').out = system.system_tree.board.get(name).clock

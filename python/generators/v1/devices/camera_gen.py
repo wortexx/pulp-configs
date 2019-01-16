@@ -21,17 +21,17 @@ import json_tools as js
 
 
 
-def gen_config(system_config, system, device_config, usecases=[]):
+def gen_config(name, system_config, system, device_config, usecases=[]):
 
   itf = device_config.get_str('interface')
   ctrl_itf = device_config.get_str('ctrl_interface')
 
-  system.system_tree.board.camera = Tb_Component(
+  system.system_tree.board.add_component(name, Tb_Component(
     config=device_config.get('config')
-  )
+  ))
 
-  system.system_tree.board.camera.cpi = system.system_tree.board.chip.new_itf(itf)
+  system.system_tree.board.get(name).cpi = system.system_tree.board.chip.new_itf(itf)
   system.system_tree.board.dpi.set(itf, system.system_tree.board.chip.new_itf(itf + '_pad'))
   system.system_tree.board.chip.set(itf + '_pad', system.system_tree.board.chip.padframe.new_itf(itf + '_pad'))
-  system.system_tree.board.chip.set(ctrl_itf, system.system_tree.board.camera.i2c)
+  system.system_tree.board.chip.set(ctrl_itf, system.system_tree.board.get(name).i2c)
   system.system_tree.board.chip.set(ctrl_itf, system.system_tree.board.dpi.new_itf(ctrl_itf))

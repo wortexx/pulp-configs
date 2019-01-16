@@ -2,9 +2,11 @@
   "config_type": "generator",
   "generator": "generators/v1/config_gen",
 
-  "devices": {
-    "jtag_proxy": {
-      "includes": ["devices/jtag_proxy.json"]
+  "board": {
+    "devices": {
+      "jtag_proxy": {
+        "includes": ["devices/jtag_proxy.json"]
+      }
     }
   },
 

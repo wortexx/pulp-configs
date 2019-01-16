@@ -24,11 +24,18 @@ import json_tools as js
 def gen_config(name, system_config, system, device_config, usecases=[]):
 
   itf = device_config.get_str('interface')
+  cs = device_config.get_str('cs')
 
-  system.system_tree.board.add_component(name, Tb_Component(
+  system.system_tree.board.add_component(name, Config(
     config=device_config.get('config')
   ))
 
-  system.system_tree.board.chip.set(itf, system.system_tree.board.get(name).uart)
-  system.system_tree.board.chip.padframe.set(itf + '_pad', system.system_tree.board.chip.new_itf(itf))
-  system.system_tree.board.chip.set(itf, system.system_tree.board.dpi.new_itf(itf))
+  system.system_tree.board.add_component(name + '_clock', Component(properties=OrderedDict(
+      vp_class= "vp/clock_domain",
+      frequency= 50000000
+  )))
+
+  system.system_tree.board.get(name + '_clock').out = system.system_tree.board.get(name).clock
+
+  system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.get(name).input)
+  system.system_tree.board.chip.set(itf + '_cs' + str(cs), system.system_tree.board.get(name).cs)

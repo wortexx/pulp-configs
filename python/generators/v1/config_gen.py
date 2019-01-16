@@ -21,4 +21,10 @@ import generators.v1.top_gen as top_gen
 
 def get_config(tp):
 
-    return top_gen.get_config(tp)
+    result = top_gen.get_config(tp)
+
+    config = tp.get('config')
+    if config is not None:
+      result.merge(config)
+
+    return result

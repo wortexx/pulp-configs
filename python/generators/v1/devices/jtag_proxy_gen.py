@@ -21,14 +21,14 @@ import json_tools as js
 
 
 
-def gen_config(system_config, system, device_config, usecases=[]):
+def gen_config(name, system_config, system, device_config, usecases=[]):
 
-  system.system_tree.board.jtag_proxy = Tb_Component(
+  system.system_tree.board.add_component(name, Tb_Component(
       config=device_config.get('config')
-  )
+  ))
 
-  system.system_tree.board.chip.jtag0 = system.system_tree.board.jtag_proxy.jtag
-  system.system_tree.board.chip.ctrl = system.system_tree.board.jtag_proxy.ctrl
+  system.system_tree.board.chip.jtag0 = system.system_tree.board.get(name).jtag
+  system.system_tree.board.chip.ctrl = system.system_tree.board.get(name).ctrl
 
   system.system_tree.board.dpi.jtag0 = system.system_tree.board.chip.jtag0_pad
   system.system_tree.board.chip.jtag0_pad = system.system_tree.board.chip.padframe.jtag0_pad

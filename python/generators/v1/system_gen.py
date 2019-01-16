@@ -166,7 +166,7 @@ def get_config(tp):
       file, path, descr = imp.find_module(generator, None)
       module = imp.load_module(generator, file, path, descr)
 
-      module.gen_config(tp, system, device)
+      module.gen_config(device_name, tp, system, device)
 
 
 

@@ -36,9 +36,14 @@ parser.add_argument(
     help="Specify additional configuration item"
 )
 
+parser.add_argument(
+    "--config-user", dest="configs_user", action="append", default=[],
+    help="Specify additional user configuration"
+)
+
 args = parser.parse_args()
 
-config = plpconf.get_config(args.input, interpret=True)
+config = plpconf.get_config(args.input, ini_configs=args.configs_user, interpret=True)
 
 with open(args.output, 'w') as file:
     file.write(config.dump_to_string())

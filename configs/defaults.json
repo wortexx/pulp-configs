@@ -34,6 +34,7 @@
     "help": {
       "py-stack": "Display the full python stack in case an exception is caught"
     },
+    "binaries": [],
     "verbose": false,
     "boot-mode": "jtag",
     "use_tb_comps": false,
