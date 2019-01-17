@@ -1,4 +1,9 @@
 {
+  "name": "UART_tb",
+  "doc_rst": "devices/uart_tb.rst",
+  "description": "UART model, can be used to dump uart TX to file or terminal",
+  "platforms": [ "gvsoc", "rtl" ],
+
   "generator": "generators/v1/devices/uart_tb_gen",
   "interface": "uart0",
 

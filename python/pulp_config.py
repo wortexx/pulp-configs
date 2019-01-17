@@ -78,7 +78,16 @@ def create_config(name, config, interpret=False, **kwargs):
 
             raise Exception('Unknown config type: ' + type_config)
 
-def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[], interpret=False, **kwargs):
+def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[], properties=[], interpret=False, **kwargs):
+
+    template_properties = []
+    config_properties = config_opts
+
+    for prop in properties:
+      if prop.find('config/') == 0:
+        config_properties.append(prop.split('config/')[1])
+      else:
+        template_properties.append(prop)
 
     if file is not None and file.find('@') != -1:
       name, file = file.split('@')
@@ -107,6 +116,10 @@ def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[
         for item in parser.items(section):
           path = ('%s.%s' % (section, item[0])).split('.')
           config.set_from_list(path, item[1])
+
+      for prop in template_properties:
+        for key, value in prop.split('='):
+          config.user_set(key, value)
 
       config = js.import_config(config.get_dict(),  interpret=interpret)
 

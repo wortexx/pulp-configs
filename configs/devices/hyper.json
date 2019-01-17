@@ -1,4 +1,9 @@
 {
+  "name": "Hyperchip",
+  "doc_rst": "devices/hyper.rst",
+  "description": "Hyperflash/Hyperram model",
+  "platforms": [ "gvsoc" ],
+
   "generator": "generators/v1/devices/hyper_gen",
   "interface": "hyper0",
 

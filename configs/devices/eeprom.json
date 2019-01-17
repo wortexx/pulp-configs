@@ -1,4 +1,9 @@
 {
+  "name": "EEPROM",
+  "doc_rst": "devices/eeprom.rst",
+  "description": "EEPROM model",
+  "platforms": [ "gvsoc" ],
+
   "generator": "generators/v1/devices/eeprom_gen",
   "interface": "i2c0",
 
