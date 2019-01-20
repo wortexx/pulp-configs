@@ -24,6 +24,7 @@
       }
     },
     "debug_bridge": {
+      "target_jtag_sync": true,
       "boot-mode": "jtag"
     }
   }

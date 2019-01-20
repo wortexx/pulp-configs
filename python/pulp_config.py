@@ -126,7 +126,7 @@ def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[
     result = create_config(name, config, interpret=interpret, **kwargs)
 
     for config_opt in config_opts + opts:
-        key, value = config_opt.split('=')
+        key, value = config_opt.split('=', 1)
         result.user_set(key, value)
 
     return result
