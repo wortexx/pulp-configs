@@ -12,6 +12,7 @@
   "hal_files"     : [ "hal/riscv/riscv_v4.h", "hal/riscv/types.h" ],
   "archi_files"   : [ "archi/riscv/priv_1_9.h", "archi/riscv/builtins_v2.h", "archi/riscv/builtins_v2_emu.h", "archi/riscv/pcer_v1.h" ],
   "defines"       : [ "ARCHI_CORE_HAS_PULPV2",  "CORE_PULP_BUILTINS" ],
+  "debug_binaries": [],
   "vp_class": "cpu/iss/iss",
   "power_models": {
     "includes": [

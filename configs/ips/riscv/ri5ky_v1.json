@@ -8,5 +8,6 @@
   "features"      : [ ],
   "hal_files"     : [ "hal/riscv/riscv_v3.h" ],
   "archi_files"   : [ "archi/riscv/builtins_v2_emu.h"  ],
+  "debug_binaries": [],
   "defines"       : [ "ARCHI_CORE_HAS_PULPV1",  "CORE_PULP_BUILTINS" ]
 }
