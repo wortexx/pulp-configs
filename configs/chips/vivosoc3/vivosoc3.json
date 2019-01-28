@@ -2,6 +2,18 @@
   "config_type": "generator",
   "generator": "generators/v1/config_gen",
 
+  "board": {
+    "devices": {
+      "uart": {
+        "includes": ["devices/uart_tb.json"],
+        "interface": "uart0"
+      },
+      "jtag_proxy": {
+        "includes": ["devices/jtag_proxy.json"]
+      }
+    }
+  },
+
   "chip": "vivosoc3",
   "chip_family": "vivosoc3",
     
