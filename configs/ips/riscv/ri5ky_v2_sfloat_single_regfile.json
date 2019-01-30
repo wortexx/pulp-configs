@@ -1,5 +1,6 @@
 {
   "version"       : "ri5cyv2",
+  "bootaddr_offset": "0x80",
   "archi"         : "riscv",
   "implementation": "ri5cy",
   "gv_isa"        : ["--pulp", "--rv32m", "--pulpv2", "--pulp-perf-counters", "--pulp-hw-loop", "--itc-external-req", "--fpu", "--fpud", "--shared-fpu"],
