@@ -10,5 +10,6 @@
   "features"      : [ "misaligned", "perf"],
   "hal_files"     : [ "hal/riscv_v4.h", "hal/riscv_builtins.h", "hal/builtins_v2.h", "hal/builtins_v2_emu.h", "hal/types.h" ],
   "defines"       : [ "ARCHI_CORE_HAS_PULPV2",  "CORE_PULP_BUILTINS" ],
+  "bootaddr_offset": "0x80",
   "debug_binaries": []
 }
