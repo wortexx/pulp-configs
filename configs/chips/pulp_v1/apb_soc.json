@@ -1,7 +1,7 @@
 {
   "version": 3,
 
-  "vp_class":  "pulp/chips/pulpissimo_v2/apb_soc",
+  "vp_class":  "pulp/chips/pulp_v1/apb_soc",
   
   "hal_files" : [ "hal/apb_soc/apb_soc_v3.h" ],
 

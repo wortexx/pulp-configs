@@ -19,10 +19,10 @@
     }
   },
 
-  "chip": "pulpissimo_v2",
+  "chip": "pulpissimo_v1",
 
   "padframe": {
-    "content": "chips/pulpissimo_v2/padframe.json"
+    "content": "chips/pulpissimo_v1/padframe.json"
   },
 
   "soc": {
@@ -31,17 +31,11 @@
     "size": "0x06000000",
 
     "fc": {
-      "core"        : "ri5ky_v2_fpu_1_10",
+      "core"        : "ri5ky_v2_fpu",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,
       "boot_addr"   : "0x1A000000"
-    },
-
-    "adv_dbg_unit": {
-      "config": {
-        "confreg_length": 9
-      }
     },
 
     "rom": {
@@ -110,15 +104,14 @@
       },
 
       "udma": {
-        "content"      : "chips/pulpissimo_v2/udma.json",
+        "content"      : "chips/pulpissimo_v1/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
 
       "apb_soc_ctrl": {
         "base"         : "0x1A104000",
-        "size"         : "0x00001000",
-        "has_jtag_reg" : true
+        "size"         : "0x00001000"
       },
 
       "soc_eu": {

@@ -19,17 +19,17 @@
     }
   },
 
-  "chip": "pulp",
+  "chip": "pulp_v1",
   
   "padframe": {
-    "content": "chips/pulp/padframe.json"
+    "content": "chips/pulp_v1/padframe.json"
   },
 
   "cluster": {
     "base": "0x10000000",
     "alias": "0x00000000",
     "size": "0x00400000",
-    "core": "ri5ky_v2_1_10",
+    "core": "ri5ky_v2",
     "version": 5,
     "json_file": "cluster_v5_fpu",
     "nb_cluster": 1,
@@ -119,7 +119,7 @@
     "size": "0x06000000",
 
     "fc": {
-      "core"        : "ri5ky_v2_fpu_1_10",
+      "core"        : "ri5ky_v2_fpu",
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,
@@ -209,15 +209,14 @@
       },
 
       "udma": {
-        "content"      : "chips/pulp/udma.json",
+        "content"      : "chips/pulp_v1/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
 
       "apb_soc_ctrl": {
         "base"         : "0x1A104000",
-        "size"         : "0x00001000",
-        "has_jtag_reg" : true
+        "size"         : "0x00001000"
       },
 
       "soc_eu": {
