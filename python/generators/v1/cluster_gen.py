@@ -201,6 +201,7 @@ def get_config(tp, cluster_id):
       'bank%d' % i,
       Component(properties=OrderedDict([
         ('size', l1_bank_size),
+        ('width_bits', 2),
         ('vp_class', "memory/memory"),
         ('power_models', {"includes": ["power_models/l1/l1.json"] }),
         ('power_trigger', True if i == 0 else False)
