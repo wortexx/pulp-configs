@@ -42,6 +42,7 @@ def get_config(tp, cluster_id):
   #else:
   #  alias = "0x00000000"
 
+  core_conf = js.import_config_from_file("ips/riscv/%s.json" % cluster_core, find=True)
 
 
   nb_l1_banks = 1<<int(math.log(nb_pe * l1_banking_factor, 2.0))
@@ -382,20 +383,24 @@ def get_config(tp, cluster_id):
 
   cluster.l1_ico.ext2loc_itf = cluster.l1_ico.ext2loc.input
 
-  for i in range(0, nb_pe):
-    cluster.l1_ico.set('ext_counter_%d[11]'%(i), cluster.l1_ico.get('pe%d_ico'%i).new_itf('nb_read[1]'))
+  first_external_pcer = core_conf.get_int('first_external_pcer')
+  if first_external_pcer is None:
+    first_external_pcer = 11
 
   for i in range(0, nb_pe):
-    cluster.l1_ico.set('ext_counter_%d[12]'%(i), cluster.l1_ico.get('pe%d_ico'%i).new_itf('nb_write[1]'))
+    cluster.l1_ico.set('ext_counter_%d[%d]'%(i, first_external_pcer + 0), cluster.l1_ico.get('pe%d_ico'%i).new_itf('nb_read[1]'))
+
+  for i in range(0, nb_pe):
+    cluster.l1_ico.set('ext_counter_%d[%d]'%(i, first_external_pcer + 1), cluster.l1_ico.get('pe%d_ico'%i).new_itf('nb_write[1]'))
     
   for i in range(0, nb_pe):
-    cluster.l1_ico.set('ext_counter_%d[13]'%(i), cluster.l1_ico.get('pe%d_ico'%i).new_itf('read_stalls[1]'))
+    cluster.l1_ico.set('ext_counter_%d[%d]'%(i, first_external_pcer + 2), cluster.l1_ico.get('pe%d_ico'%i).new_itf('read_stalls[1]'))
     
   for i in range(0, nb_pe):
-    cluster.l1_ico.set('ext_counter_%d[14]'%(i), cluster.l1_ico.get('pe%d_ico'%i).new_itf('write_stalls[1]'))
+    cluster.l1_ico.set('ext_counter_%d[%d]'%(i, first_external_pcer + 3), cluster.l1_ico.get('pe%d_ico'%i).new_itf('write_stalls[1]'))
     
   for i in range(0, nb_pe):
-    cluster.l1_ico.set('ext_counter_%d[15]'%(i), cluster.l1_ico.get('pe%d_ico'%i).new_itf('stalls[0]'))
+    cluster.l1_ico.set('ext_counter_%d[%d]'%(i, first_external_pcer + 4), cluster.l1_ico.get('pe%d_ico'%i).new_itf('stalls[0]'))
 
   for i in range(0, nb_pe):
     cluster.l1_ico.set('data_pe_%d'%i, cluster.l1_ico.get('pe%d_ico'%i).input)
