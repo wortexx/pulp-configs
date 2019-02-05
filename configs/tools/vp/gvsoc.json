@@ -14,10 +14,12 @@
         "all": "Activate all VCD traces.",
         "gtkw": "Generate script for Gtkwave."
       },
+      "format": "fst",
       "active": false,
       "all": true,
       "gtkw": false,
-      "files": [ ]
+      "files": [ ],
+      "gtkw": false
     }
   }
 
