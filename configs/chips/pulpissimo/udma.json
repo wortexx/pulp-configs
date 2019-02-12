@@ -1,13 +1,11 @@
 {
-  "includes": [ "ips/udma/udma_v2.json"],
+  "includes": [ "ips/udma/udma_v3.json"],
 
-  "vp_impl": "pulp.udma.udma_v2_pulpissimo_impl",
-
-  "vp_impl": "pulp.udma.udma_v2_pulpissimo_impl",
+  "vp_impl": "pulp.udma.udma_v3_pulpissimo_impl",
 
   "nb_periphs": 7,
 
-  "interfaces" : ["memcpy", "spim", "i2c", "i2s", "uart", "cpi"],
+  "interfaces" : ["spim", "i2c", "i2s", "uart", "cpi"],
 
   "properties": {
     "l2_read_fifo_size": 8
@@ -16,16 +14,16 @@
   "archi_files": [
     "archi/udma/cpi/udma_cpi_v1.h",
     "archi/udma/i2c/udma_i2c_v2.h",
-    "archi/udma/i2s/udma_i2s_v1.h",
-    "archi/udma/spim/udma_spim_v2.h",
+    "archi/udma/i2s/udma_i2s_v2.h",
+    "archi/udma/spim/udma_spim_v3.h",
     "archi/udma/uart/udma_uart_v1.h"
   ],
 
   "hal_files": [
     "hal/udma/cpi/udma_cpi_v1.h",
     "hal/udma/i2c/udma_i2c_v2.h",
-    "hal/udma/i2s/udma_i2s_v1.h",
-    "hal/udma/spim/udma_spim_v2.h",
+    "hal/udma/i2s/udma_i2s_v2.h",
+    "hal/udma/spim/udma_spim_v3.h",
     "hal/udma/uart/udma_uart_v1.h"
   ],
 
@@ -38,31 +36,31 @@
   },
 
   "spim": {
-    "version"      : 2,
+    "version"      : 3,
     "nb_channels"  : 1,
     "ids"          : [1],
     "offsets"      : ["0x80"],
     "is_master"    : true,
-    "eot_events"   : [ 23 ]
-  },
-
-  "memcpy": {
-    "version"      : 1,
-    "nb_channels"  : 1,
-    "ids"          : [2],
-    "offsets"      : ["0x100"]
+    "eot_events"   : [ 7 ]
   },
 
   "i2c": {
     "version"      : 2,
     "nb_channels"  : 2,
-    "ids"          : [3, 4],
-    "offsets"      : ["0x180", "0x200"],
+    "ids"          : [2, 3],
+    "offsets"      : ["0x100", "0x180"],
     "is_master"    : true
   },
 
+  "sdio": {
+    "version"      : 0,
+    "nb_channels"  : 1,
+    "ids"          : [4],
+    "offsets"      : ["0x200"]
+  },
+
   "i2s": {
-    "version"      : 1,
+    "version"      : 2,
     "nb_channels"  : 1,
     "ids"          : [5],
     "offsets"      : ["0x280"]

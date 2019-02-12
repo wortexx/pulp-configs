@@ -122,7 +122,7 @@
       },
 
       "soc_eu": {
-        "version"      : 1,
+        "version"      : 2,
         "base"         : "0x1A106000",
         "size"         : "0x00001000"
       },
