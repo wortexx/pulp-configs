@@ -339,6 +339,9 @@ def get_config(tp, cluster_id):
     cluster.event_unit.set('irq_req_%d' % i, cluster.get('pe%d' % i).irq_req)
 
   for i in range(0, nb_pe):
+    cluster.event_unit.set('clock_%d' % i, cluster.get('pe%d' % i).clock)
+
+  for i in range(0, nb_pe):
     cluster.get('pe%d' % i).irq_ack = cluster.event_unit.new_itf('irq_ack_%d' % i)
 
     for j in range(11, 16):

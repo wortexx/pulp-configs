@@ -747,6 +747,7 @@ def get_config(tp):
   if has_fc:
     if has_fc_ico:
       soc.fc_eu.irq_req_0 = soc.fc.irq_req
+      soc.fc_eu.clock_0 = soc.fc.clock
     else:
       soc.fc_itc.irq_req = soc.fc.irq_req
 

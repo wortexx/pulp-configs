@@ -19,6 +19,7 @@
       "all": true,
       "gtkw": false,
       "files": [ ],
+      "traces": {},
       "gtkw": false
     }
   }
