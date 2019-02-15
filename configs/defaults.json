@@ -78,6 +78,7 @@
     "openmp-rt"      : "pulp-rt",
     "iodev"          : "default",
     "user-sections"  : [],
+    "cflags"         : [],
     "iodevs"          : {
       "default": {
         "value":   "0"
