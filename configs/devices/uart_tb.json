@@ -11,7 +11,7 @@
     "type": "dpi",
     "module": "uart.so",
     "verbose": false,
-    "baudrate": 625000,
+    "baudrate": 115200,
     "loopback": false,
     "stdout": true,
     "tx_file": "tx_uart.log"
