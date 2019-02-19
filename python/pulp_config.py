@@ -26,12 +26,15 @@ import collections
 
 class Pulp_config(js.config_object):
 
-    def __init__(self, name, config_dict, interpret=False):
+    def __init__(self, name, config_dict, interpret=False, config_name=None):
         super(Pulp_config, self).__init__(config_dict, interpret=interpret)
 
         self.name = name
+        self.config_name = config_name
 
     def get_name(self):
+        if self.config_name is not None:
+          return 'config_tag=%s' % self.config_name
         return self.name
 
     def __str__(self): return self.get_config_name()
@@ -42,6 +45,9 @@ class Pulp_config(js.config_object):
         else:
             return self.name.split('@')[0]
 
+    def get_config_tag(self):
+      return self.config_name
+
     def get_name_from_items(self, items):
         result = []
         for item in items:
@@ -51,17 +57,21 @@ class Pulp_config(js.config_object):
         return ":".join(result)
 
 
+def get_config_from_tag(name):
+  config_path = '%s@config_file=chips/%s/%s.json' % (name, name, name)
+  return get_config(config_path, interpret=True, config_name=name)
+
 def get_config_from_string(name, config_string, interpret=False, **kwargs):
 
     return create_config(name, js.import_config(config_string), interpret=interpret)
 
-def create_config(name, config, interpret=False, **kwargs):
+def create_config(name, config, config_name=None, interpret=False, **kwargs):
 
     type_config = config.get_child_str("config_type")
 
     if type_config is None:
 
-        return Pulp_config(name, config.get_dict(), interpret=interpret)
+        return Pulp_config(name, config.get_dict(), interpret=interpret, config_name=config_name)
 
     else:
 
@@ -72,13 +82,13 @@ def create_config(name, config, interpret=False, **kwargs):
             file, path, descr = imp.find_module(generator, None)
             module = imp.load_module(generator, file, path, descr)
 
-            return Pulp_config(name, module.get_config(config, **kwargs).get_dict(), interpret=interpret)
+            return Pulp_config(name, module.get_config(config, **kwargs).get_dict(), interpret=interpret, config_name=config_name)
 
         else:
 
             raise Exception('Unknown config type: ' + type_config)
 
-def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[], properties=[], interpret=False, **kwargs):
+def get_config(file, name="", config_name=None, ini_configs=[], ini_configs_dict={}, config_opts=[], properties=[], interpret=False, **kwargs):
 
     template_properties = []
     config_properties = config_opts
@@ -123,7 +133,7 @@ def get_config(file, name="", ini_configs=[], ini_configs_dict={}, config_opts=[
 
       config = js.import_config(config.get_dict(),  interpret=interpret)
 
-    result = create_config(name, config, interpret=interpret, **kwargs)
+    result = create_config(name, config, interpret=interpret, config_name=config_name, **kwargs)
 
     for config_opt in config_opts + opts:
         key, value = config_opt.split('=', 1)
@@ -159,9 +169,11 @@ def get_configs(config_str=None, ini_configs=[], ini_configs_dict={}, interpret=
   return result
 
 def get_configs_from_env(path=None, interpret=True):
-  config_str = os.environ.get('PULP_CURRENT_CONFIG')
+  config_str = os.environ.get('PULP_CURRENT_CONFIGS')
   if config_str is None:
-    config_str = os.environ.get('PULP_CONFIGS')
+    config_str = os.environ.get('PULP_CURRENT_CONFIG')
+    if config_str is None:
+      config_str = os.environ.get('PULP_CONFIGS')
 
   if config_str is None:
     raise Exception("Configurations must e given either through PULP_CURRENT_CONFIG or PULP_CONFIGS")
