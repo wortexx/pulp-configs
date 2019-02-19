@@ -103,6 +103,10 @@ def get_config(tp, cluster_id):
     ("event_unit", get_mapping_area(tp.get_child_dict("cluster/peripherals/event_unit"), cluster_size, cluster_id, True)),
     ("icache_ctrl", get_mapping_area(tp.get_child_dict("cluster/peripherals/icache_ctrl"), cluster_size, cluster_id, True)),
     ("dma", get_mapping_area(tp.get_child_dict("cluster/peripherals/dma"), cluster_size, cluster_id, True)),
+    ("error", OrderedDict([
+      ("base", get_area('%d' % tp.get_child_int("cluster/peripherals/base"), cluster_size, cluster_id)),
+      ("size", '0x%x' % tp.get_child_int("cluster/peripherals/base"))
+    ])),
     ("cluster_ico", OrderedDict())
   ]))
 
@@ -337,6 +341,9 @@ def get_config(tp, cluster_id):
 
   for i in range(0, nb_pe):
     cluster.event_unit.set('irq_req_%d' % i, cluster.get('pe%d' % i).irq_req)
+
+  for i in range(0, nb_pe):
+    cluster.event_unit.set('clock_%d' % i, cluster.get('pe%d' % i).clock)
 
   for i in range(0, nb_pe):
     cluster.get('pe%d' % i).irq_ack = cluster.event_unit.new_itf('irq_ack_%d' % i)

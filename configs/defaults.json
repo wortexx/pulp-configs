@@ -78,6 +78,7 @@
     "openmp-rt"      : "pulp-rt",
     "iodev"          : "default",
     "user-sections"  : [],
+    "cflags"         : [],
     "iodevs"          : {
       "default": {
         "value":   "0"
@@ -85,7 +86,7 @@
       "uart": {
         "value":   "1",
         "channel": "0",
-        "baudrate": "625000"
+        "baudrate": "115200"
       }
     }
   },

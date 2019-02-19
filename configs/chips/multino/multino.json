@@ -29,7 +29,7 @@
     "core": "ri5ky_v2",
     "version": 5,
     "nb_cluster": 2,
-    "nb_pe": 4,
+    "nb_pe": 2,
 
     "pe": {
       "irq": [

@@ -19,6 +19,8 @@
       "all": true,
       "gtkw": false,
       "files": [ ],
+      "traces": {},
+      "tags" : [ "overview" ],
       "gtkw": false
     }
   }
