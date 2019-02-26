@@ -27,7 +27,9 @@
     "gui": false,
     "simchecker": false,
     "args": [],
-    "tcl_args": []
+    "tcl_args": [],
+    "vsim_runner_class": "runner/rtl/vsim_runner",
+    "xcelium_runner_class": "runner/rtl/xcelium_runner"
   },
 
   "runner": {
@@ -45,7 +47,7 @@
     "flash_type": "spi",
     "flash_slm_file": "slm_files/flash_stim.slm",
     "rtl_simulator": "vsim",
-    "simulator": null,
+    "simulator": "vsim",
     "aes_key": "12345678275689075642768987654345",
     "aes_iv": "0987654323456789"
 
