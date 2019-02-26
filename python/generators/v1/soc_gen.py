@@ -363,7 +363,8 @@ def get_config(tp):
         ('is_partitioned', True),
         ('nb_shared_banks', tp.get_child_int("soc/l2/shared/nb_banks")),
         ('map_base', tp.get_child_str("soc/l2/base")),
-        ('map_size', tp.get_child_str("soc/l2/size"))
+        ('map_size', tp.get_child_str("soc/l2/size")),
+        ('size', tp.get_child_str("soc/l2/size"))
     ]))
 
     soc.l2_priv0 = Component(properties=OrderedDict([
