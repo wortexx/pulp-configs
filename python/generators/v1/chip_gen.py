@@ -208,4 +208,7 @@ def get_config(tp):
 
   config = chip.get_json_config()
 
+  if tp.get('soc/job_fifo') is not None:
+      chip.soc.job_fifo_irq = chip.cluster.job_fifo_irq
+
   return chip
