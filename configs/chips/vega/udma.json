@@ -57,7 +57,7 @@
   },
 
   "hyper": {
-    "version"      : 1,
+    "version"      : 2,
     "nb_channels"  : 1,
     "ids"          : [7],
     "offsets"      : ["0x380"],
