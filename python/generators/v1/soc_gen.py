@@ -780,12 +780,17 @@ def get_config(tp):
       nb_channels = itf_conf.get_child_str('nb_channels')
       is_master = itf_conf.get_child_bool('is_master')
       is_slave = itf_conf.get_child_bool('is_slave')
+      is_dual = itf_conf.get_child_bool('is_dual')
       for channel in range(0, nb_channels):
         itf_name = itf.get() + str(channel)
         if is_master:
           soc.udma.set(itf_name, soc.new_itf(itf_name))
         if is_slave:
-          soc.set(itf_name, soc.udma.new_itf(itf_name))
+          if is_dual:
+            soc.set(itf.get() + str(channel*2), soc.udma.new_itf(itf.get() + str(channel*2)))
+            soc.set(itf.get() + str(channel*2+1), soc.udma.new_itf(itf.get() + str(channel*2+1)))
+          else:
+            soc.set(itf_name, soc.udma.new_itf(itf_name))
 
 
   # Soc EU

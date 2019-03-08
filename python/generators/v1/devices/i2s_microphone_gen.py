@@ -29,5 +29,6 @@ def gen_config(name, system_config, system, device_config, usecases=[]):
     config=device_config.get('config')
   ))
 
-  system.system_tree.board.chip.set(itf, system.system_tree.board.dpi.new_itf(itf))
-  system.system_tree.board.chip.set(itf, system.system_tree.board.get(name).i2s)
+  system.system_tree.board.get(name).i2s = system.system_tree.board.chip.new_itf(itf)
+  system.system_tree.board.dpi.set(itf, system.system_tree.board.chip.new_itf(itf + '_pad'))
+  system.system_tree.board.chip.set(itf + '_pad', system.system_tree.board.chip.padframe.new_itf(itf + '_pad'))

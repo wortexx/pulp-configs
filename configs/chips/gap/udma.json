@@ -82,7 +82,9 @@
     "version"      : 1,
     "nb_channels"  : 1,
     "ids"          : [8],
-    "offsets"      : ["0x400"]
+    "offsets"      : ["0x400"],
+    "is_slave"     : true,
+    "is_dual"      : true
   },
 
   "cpi": {
