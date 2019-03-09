@@ -574,9 +574,13 @@ def get_config(tp):
     ]))
 
   if has_efuse:
-    soc.efuse = Component(properties=OrderedDict([
+    efuse_conf = tp.get('soc/peripherals/efuse')
+    config = OrderedDict([
         ('includes', ["ips/efuse/efuse_v%d.json" % tp.get_child_int("soc/peripherals/efuse/version")])
-    ]))
+    ])
+    if efuse_conf.get('config') is not None:
+      config.update(efuse_conf.get('config').get_dict())
+    soc.efuse = Component(properties=config)
 
   soc.uart = Component(properties=OrderedDict([
       ('version', 1)

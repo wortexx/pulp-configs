@@ -249,7 +249,10 @@
       "efuse": {
         "version"      : 1,
         "base"         : "0x1A10F000",
-        "size"         : "0x00001000"
+        "size"         : "0x00001000",
+        "config": {
+          "format": "binary"
+        }
       },
 
       "fc_itc": {
