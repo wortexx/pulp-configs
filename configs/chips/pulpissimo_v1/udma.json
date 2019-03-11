@@ -65,7 +65,9 @@
     "version"      : 1,
     "nb_channels"  : 1,
     "ids"          : [5],
-    "offsets"      : ["0x280"]
+    "offsets"      : ["0x280"],
+    "is_slave"     : true,
+    "is_dual"      : true
   },
 
   "cpi": {
