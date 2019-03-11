@@ -105,6 +105,14 @@
     "gpio0": {
       "type": "gpio",
       "is_master": true
+    },
+    "i2s0": {
+      "type": "i2s",
+      "is_slave": true
+    },
+    "i2s1": {
+      "type": "i2s",
+      "is_slave": true
     }
   },
 
