@@ -47,8 +47,14 @@
       "type": "i2c",
       "is_master": true
     },
-    "i2s0": {},
-    "i2s1": {},
+    "i2s0": {
+      "type": "i2s",
+      "is_slave": true
+    },
+    "i2s1": {
+      "type": "i2s",
+      "is_slave": true
+    },
     "spis": {},
     "cpi0": {
       "type": "cpi",

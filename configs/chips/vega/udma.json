@@ -75,7 +75,9 @@
     "includes"     : [ "ips/udma/i2s/udma_i2s_v2.json" ],
     "nb_channels"  : 1,
     "ids"          : [10],
-    "offsets"      : ["0x500"]
+    "offsets"      : ["0x500"],
+    "is_slave"     : true,
+    "is_dual"      : true
   },
 
   "cpi": {
