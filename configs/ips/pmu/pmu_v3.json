@@ -6,79 +6,70 @@
 
   "regmap": {
 
-    "sequences": {
+    "icu_state": {
       "type": "custom",
-      "soc_active_nv": {
+
+      "icu_supply_ext": {
         "type": "constant",
-        "value": "0x01",
-        "id": 0,
-        "commands": [
-          [ "4", "0", "0x06", "CLUSTER EXT NV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x00", "SOC     ON  NV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
+        "value": "0x0"
       },
-      "soc_active_lv": {
+      "icu_supply_ret": {
         "type": "constant",
-        "value": "0x02",
-        "id": 1,
-        "commands": [
-          [ "4", "0", "0x07", "CLUSTER EXT LV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x01", "SOC     ON  LV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
+        "value": "0x1"
       },
-      "soc_cluster_active_nv": {
+      "icu_supply_ckoff": {
         "type": "constant",
-        "value": "0x04",
-        "id": 2,
-        "commands": [
-          [ "4", "0", "0x00", "CLUSTER ON  NV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x00", "SOC     ON  NV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
+        "value": "0x2"
       },
-      "soc_cluster_active_lv": {
+      "icu_supply_on": {
         "type": "constant",
-        "value": "0x08",
-        "id": 3,
-        "commands": [
-          [ "4", "0", "0x01", "CLUSTER ON  LV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x01", "SOC     ON  LV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
+        "value": "0x3"
       },
-      "deep_sleep_all_off": {
+
+      "icu_regu_none": {
         "type": "constant",
-        "value": "0x10",
-        "id": 4,
-        "commands": [
-          [ "4", "0", "0x09", "CLUSTER EXT OFF"],
-          [ "3", "0", "0x09", "SOC     EXT OFF"],
-          [ "5", "0", "0x00", "IO0     EXT N/A"],
-          [ "2", "0", "0x00", "SAFE    RET RV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
+        "value": "0x7"
       },
-      "deep_sleep_retentive": {
+      "icu_regu_off": {
         "type": "constant",
-        "value": "0x20",
-        "id": 5,
-        "commands": [
-          [ "4", "0", "0x09", "CLUSTER EXT OFF"],
-          [ "3", "0", "0x05", "SOC     RET OFF"],
-          [ "5", "0", "0x00", "IO0     EXT N/A"],
-          [ "2", "0", "0x00", "SAFE    RET RV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
-        ]
+        "value": "0x0"
+      },
+      "icu_regu_rv": {
+        "type": "constant",
+        "value": "0x1"
+      },
+      "icu_regu_lv": {
+        "type": "constant",
+        "value": "0x2"
+      },
+      "icu_regu_mv": {
+        "type": "constant",
+        "value": "0x3"
+      },
+      "icu_regu_nv": {
+        "type": "constant",
+        "value": "0x4"
+      },
+
+      "icu_clk_fnone": {
+        "type": "constant",
+        "value": "0x7"
+      },
+      "icu_clk_foff": {
+        "type": "constant",
+        "value": "0x0"
+      },
+      "icu_clk_lf": {
+        "type": "constant",
+        "value": "0x1"
+      },
+      "icu_clk_mf": {
+        "type": "constant",
+        "value": "0x2"
+      },
+      "icu_clk_nf": {
+        "type": "constant",
+        "value": "0x3"
       }
     },
 
@@ -654,34 +645,83 @@
       }
     },
 
-    "icu0": {
-      "type": "group",
-      "offset": "0x02"
-    },
-
-    "icu1": {
-      "type": "group",
-      "offset": "0x03"
-    },
-
-    "icu2": {
-      "type": "group",
-      "offset": "0x04"
-    },
-
-    "icu3": {
-      "type": "group",
-      "offset": "0x05"
-    },
-
-    "dmu0": {
-      "type": "group",
-      "offset": "0x06"
-    },
-
-    "dmu1": {
-      "type": "group",
-      "offset": "0x07"
+    "icu": {
+      "type": "template",
+      "icu_ctrl": {
+        "desc": "ICU control register",
+        "help": "ICU_CR is used to send a change-mode request to the ICU.",
+        "type": "register",
+        "offset": "0x00",
+        "width" : 8,
+        "reset": "0x00",
+        "content": {
+          "icu_ctrl": {
+            "bit": 0,
+            "width": 4,
+            "access": "R/W",
+            "name": "ICU change mode request",
+            "desc": "When a new mode corresponding to one of sixteen mode of the island mode table of the ICU is written as mode transition sequence is started to reach the written mode."
+          }
+        }
+      },
+      "icu_mode": {
+        "desc": "ICU mode register",
+        "help": "ICU_MR indicates if the current mode of the ICU is a defined mode of the table 2.5 on page 22. If yes, it returns the value of the mode.",
+        "type": "register",
+        "offset": "0x01",
+        "width" : 8,
+        "reset": "0x1f",
+        "content": {
+          "icu_mode": {
+            "bit": 0,
+            "width": 4,
+            "access": "R",
+            "name": "ICU mode",
+            "desc": "Returns the current mode of the ICU when icu_mode_defined is low."
+          },
+          "icu_mode_defined": {
+            "bit": 4,
+            "width": 1,
+            "access": "R",
+            "name": "ICU mode defined",
+            "desc": "When high, indicates that the current mode of the ICU is not defined in the mode table of the ICU When low, the value of the current mode is given by the icu_mode bits"
+          }
+        }
+      },
+      "island_mode": {
+        "desc": "Island mode register",
+        "help": "ICU_ISMR returns the current mode of the Island.",
+        "type": "register",
+        "offset": "0x02",
+        "width" : 8,
+        "reset": "0x00",
+        "content": {
+          "isl_mode": {
+            "bit": 0,
+            "width": 2,
+            "access": "R",
+            "name": "Island mode",
+            "desc": "Mode of the island."
+          }
+        }
+      },
+      "dmu_mode": {
+        "desc": "DMU mode register 0",
+        "help": "ICU_DMR returns the current mode of the DMU.",
+        "type": "register",
+        "offset": "0x03",
+        "width" : 8,
+        "reset": "0x00",
+        "content": {
+          "isl_mode": {
+            "bit": 0,
+            "width": 2,
+            "access": "R",
+            "name": "DMU mode",
+            "desc": "Mode of the DMU 0."
+          }
+        }
+      }
     }
 
   }
