@@ -756,6 +756,12 @@ def get_config(tp):
     else:
       soc.fc_itc.irq_req = soc.fc.irq_req
 
+  # PMU
+  if has_fc:
+    if not has_fc_ico:
+      soc.scu_ok = soc.fc_itc.in_event_25
+      soc.picl_ok = soc.fc_itc.in_event_24
+
   # Cluster
   if has_cluster:
     if has_fc:

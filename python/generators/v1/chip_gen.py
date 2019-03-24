@@ -149,7 +149,12 @@ def get_config(tp):
       ]))
     chip.soc.pmu_input = chip.pmu.input
     chip.pmu.icu0_reset = chip.soc.reset
+    if not tp.get_child_bool('**/apb_soc_ctrl/has_pmu_bypass'):
+      chip.pmu.icu6_reset = chip.get(get_cluster_name(cid)).reset
     chip.pmu.event = chip.soc.event
+    if tp.get_child_int('soc/peripherals/pmu/version') >= 3:
+      chip.pmu.scu_ok = chip.soc.scu_ok
+      chip.pmu.picl_ok = chip.soc.picl_ok
     chip.soc_clock.out = chip.pmu.clock
     chip.soc.wakeup_out = chip.pmu.wakeup
     chip.soc.wakeup_seq = chip.pmu.wakeup_seq

@@ -5,7 +5,7 @@
 
   "nb_interrupts": 16,
 
-  "nb_icu": 2,
+  "nb_icu": 12,
 
   "icu_states": [
     [3, 0, 4],
@@ -17,7 +17,7 @@
   ],
 
   "icrs": [
-    0, 0, 1, 1, 2, 2, 3, 3, 4, 5, 0, 1, 2, 3, 0, 0
+    0, 1, 2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ],
 
   "regmap": {
@@ -40,11 +40,7 @@
         "value": "0x01",
         "id": 0,
         "commands": [
-          [ "4", "0", "0x06", "CLUSTER EXT NV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x00", "SOC     ON  NV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
+          [ "8", "0", "0x06", "CLUSTER EXT NV"]
         ]
       },
       "soc_active_lv": {
@@ -64,11 +60,7 @@
         "value": "0x04",
         "id": 2,
         "commands": [
-          [ "4", "0", "0x00", "CLUSTER ON  NV"],
-          [ "2", "0", "0x00", "SAFE    ON  NV"],
-          [ "5", "0", "0x00", "IO0     ON  N/A"],
-          [ "3", "0", "0x00", "SOC     ON  NV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
+          [ "8", "0", "0x00", "CLUSTER ON  NV"]
         ]
       },
       "soc_cluster_active_lv": {
