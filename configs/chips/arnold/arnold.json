@@ -35,7 +35,7 @@
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,
-      "boot_addr"   : "0x1A000000"
+      "boot_addr"   : "0x1A000080"
     },
 
     "adv_dbg_unit": {
