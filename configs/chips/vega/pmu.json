@@ -17,7 +17,7 @@
   ],
 
   "icrs": [
-    0, 1, 2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
   ],
 
   "regmap": {
@@ -40,7 +40,8 @@
         "value": "0x01",
         "id": 0,
         "commands": [
-          [ "8", "0", "0x06", "CLUSTER EXT NV"]
+          [ "8", "0", "0x06", "CLUSTER EXT NV"],
+          [ "7", "0", "0x00", "SOC     EXT NV"]
         ]
       },
       "soc_active_lv": {
@@ -80,11 +81,8 @@
         "value": "0x10",
         "id": 4,
         "commands": [
-          [ "4", "0", "0x09", "CLUSTER EXT OFF"],
-          [ "3", "0", "0x09", "SOC     EXT OFF"],
-          [ "5", "0", "0x00", "IO0     EXT N/A"],
-          [ "2", "0", "0x00", "SAFE    RET RV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
+          [ "8", "0", "0x09", "CLUSTER EXT OFF"],
+          [ "7", "0", "0x09", "SOC     EXT OFF"]
         ]
       },
       "deep_sleep_retentive": {
@@ -92,11 +90,70 @@
         "value": "0x20",
         "id": 5,
         "commands": [
-          [ "4", "0", "0x09", "CLUSTER EXT OFF"],
-          [ "3", "0", "0x05", "SOC     RET OFF"],
-          [ "5", "0", "0x00", "IO0     EXT N/A"],
-          [ "2", "0", "0x00", "SAFE    RET RV"],
-          [ "1", "0", "0xc0", "Unmask IRQ 0-5"]
+          [ "8", "0", "0x09", "CLUSTER EXT OFF"],
+          [ "7", "0", "0x09", "SOC     EXT OFF"]
+        ]
+      },
+      "deep_sleep_smart_wakeup": {
+        "type": "constant",
+        "value": "0x10",
+        "id": 6,
+        "commands": [
+          [ "8", "0", "0x09", "CLUSTER EXT OFF"],
+          [ "7", "0", "0x09", "SOC     EXT OFF"]
+        ]
+      },
+      "deep_sleep_retentive_smart_wakeup": {
+        "type": "constant",
+        "value": "0x20",
+        "id": 7,
+        "commands": [
+          [ "8", "0", "0x09", "CLUSTER EXT OFF"],
+          [ "7", "0", "0x09", "SOC     EXT OFF"]
+        ]
+      },
+      "mram_off": {
+        "type": "constant",
+        "value": "0x1000",
+        "id": 8,
+        "commands": [
+        ]
+      },
+      "mram_on": {
+        "type": "constant",
+        "value": "0x1000",
+        "id": 9,
+        "commands": [
+        ]
+      },
+      "csi_off": {
+        "type": "constant",
+        "value": "0x1000",
+        "id": 10,
+        "commands": [
+        ]
+      },
+      "csi_on": {
+        "type": "constant",
+        "value": "0x1000",
+        "id": 11,
+        "commands": [
+        ]
+      },
+      "cluster_off": {
+        "type": "constant",
+        "value": "0x1000",
+        "id": 12,
+        "commands": [
+          [ "8", "0", "0x06", "CLUSTER OFF  NV"]
+        ]
+      },
+      "cluster_on": {
+        "type": "constant",
+        "value": "0x2000",
+        "id": 13,
+        "commands": [
+          [ "8", "0", "0x00", "CLUSTER ON  NV"]
         ]
       }
     },

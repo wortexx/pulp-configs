@@ -148,9 +148,12 @@ def get_config(tp):
         ('includes', ["ips/pmu/pmu_v%d.json" % tp.get_child_str('soc/peripherals/pmu/version')])
       ]))
     chip.soc.pmu_input = chip.pmu.input
-    chip.pmu.icu0_reset = chip.soc.reset
     if not tp.get_child_bool('**/apb_soc_ctrl/has_pmu_bypass'):
       chip.pmu.icu6_reset = chip.get(get_cluster_name(cid)).reset
+      chip.pmu.icu5_reset = chip.soc.reset
+    else:
+      chip.pmu.icu0_reset = chip.soc.reset
+
     chip.pmu.event = chip.soc.event
     if tp.get_child_int('soc/peripherals/pmu/version') >= 3:
       chip.pmu.scu_ok = chip.soc.scu_ok
