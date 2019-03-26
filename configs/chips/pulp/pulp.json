@@ -123,7 +123,7 @@
       "cluster_id"  : 31,
       "core_id"     : 0,
       "fetch_enable": true,
-      "boot_addr"   : "0x1A000000",
+      "boot_addr"   : "0x1A000080",
       "irq": [
         "sw_event_0" , "sw_event_1"      , "sw_event_2" , "sw_event_3",
         "sw_event_4" , "sw_event_5"      , "sw_event_6" , "sw_event_7",
