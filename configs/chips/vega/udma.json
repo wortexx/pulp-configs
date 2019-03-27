@@ -42,21 +42,13 @@
 
   "uart": {
     "version"      : 1,
-    "nb_channels"  : 2,
-    "ids"          : [4, 5],
-    "offsets"      : ["0x200", "0x280"],
+    "nb_channels"  : 3,
+    "ids"          : [4, 5, 6],
+    "offsets"      : ["0x200", "0x280", "0x300"],
     "is_master"    : true
   },
 
   "i2c": {
-    "version"      : 2,
-    "nb_channels"  : 1,
-    "ids"          : [6],
-    "offsets"      : ["0x300"],
-    "is_master"    : true
-  },
-
-  "hyper": {
     "version"      : 2,
     "nb_channels"  : 1,
     "ids"          : [7],
@@ -64,18 +56,26 @@
     "is_master"    : true
   },
 
+  "hyper": {
+    "version"      : 2,
+    "nb_channels"  : 1,
+    "ids"          : [8],
+    "offsets"      : ["0x400"],
+    "is_master"    : true
+  },
+
   "sdio": {
     "version"      : 0,
     "nb_channels"  : 1,
-    "ids"          : [9],
-    "offsets"      : ["0x480"]
+    "ids"          : [10],
+    "offsets"      : ["0x500"]
   },
 
   "i2s": {
     "includes"     : [ "ips/udma/i2s/udma_i2s_v2.json" ],
     "nb_channels"  : 1,
-    "ids"          : [10],
-    "offsets"      : ["0x500"],
+    "ids"          : [11],
+    "offsets"      : ["0x580"],
     "is_slave"     : true,
     "is_dual"      : true
   },
@@ -83,8 +83,8 @@
   "cpi": {
     "version"      : 1,
     "nb_channels"  : 1,
-    "ids"          : [11],
-    "offsets"      : ["0x580"],
+    "ids"          : [12],
+    "offsets"      : ["0x600"],
     "is_slave"     : true
   }
 }
