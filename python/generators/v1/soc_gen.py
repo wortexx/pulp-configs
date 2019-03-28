@@ -50,7 +50,7 @@ def get_config(tp):
   has_efuse         = tp.get('soc/peripherals/efuse') is not None
   has_pmu           = tp.get('soc/peripherals/pmu') is not None
   has_hwme          = tp.get('soc/peripherals/hwme') is not None
-  has_fc_icache     = tp.get('soc/fc_ico/peripherals/fc_icache') is not None
+  has_fc_icache     = tp.get('**/peripherals/fc_icache') is not None
 
 
   if fc_events is not None:
@@ -277,9 +277,14 @@ def get_config(tp):
     })
 
   if has_fc_icache:
-    fc_ico_mappings.update({
-      "fc_icache"       : get_mapping(tp.get_child_dict("soc/fc_ico/peripherals/fc_icache"), True)
-    })
+    if has_fc_ico:
+      fc_ico_mappings.update({
+        "fc_icache"       : get_mapping(tp.get_child_dict("**/peripherals/fc_icache"), True)
+      })
+    else:
+      apb_soc_mappings.update({
+        "fc_icache"       : get_mapping(tp.get_child_dict("**/peripherals/fc_icache"), True)
+      })
 
   if has_fc:
     if has_fc_ico:
@@ -528,7 +533,7 @@ def get_config(tp):
 
   if has_fc_icache:
     soc.fc_icache = Component(properties=OrderedDict([
-        ('includes', ["ips/icache_ctrl/icache_ctrl_v%d.json" % tp.get_child_int("soc/fc_ico/peripherals/fc_icache/version")])
+        ('includes', ["ips/icache_ctrl/icache_ctrl_v%d.json" % tp.get_child_int("**/fc_icache/version")])
     ]))
 
   if has_fc:
@@ -677,6 +682,8 @@ def get_config(tp):
       soc.apb_ico.fc_itc = soc.fc_itc.input
       soc.apb_ico.fc_timer = soc.timer.input
       soc.apb_ico.fc_dbg_unit = soc.fc.dbg_unit
+      if has_fc_icache:
+        soc.apb_ico.fc_icache = soc.fc_icache.input
 
   if has_fc_tcdm:
     soc.fc_ico.fc_tcdm = soc.fc_tcdm.input
