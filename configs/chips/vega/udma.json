@@ -3,7 +3,7 @@
 
   "vp_impl": "pulp.udma.udma_v3_vega_impl",
 
-  "nb_periphs": 12,
+  "nb_periphs": 15,
 
   "properties": {
     "l2_read_fifo_size": 8
@@ -86,5 +86,12 @@
     "ids"          : [12],
     "offsets"      : ["0x600"],
     "is_slave"     : true
+  },
+
+  "mram": {
+    "version"      : 1,
+    "nb_channels"  : 1,
+    "ids"          : [14],
+    "offsets"      : ["0x700"]
   }
 }
