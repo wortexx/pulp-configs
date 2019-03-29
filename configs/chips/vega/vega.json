@@ -240,7 +240,7 @@
 
       "rtc": {
         "base"         : "0x1A108000",
-        "size"         : "0x00001000",
+        "size"         : "0x00000800",
         "config": {
           "apb_irq_soc_event": 140,
           "irq_soc_event"    : 141,
@@ -300,6 +300,12 @@
         "version"      : 2,
         "base"         : "0x1A10B000",
         "size"         : "0x00001000"
+      },
+
+      "fc_icache": {
+        "version"      : 2,
+        "base"         : "0x1A108800",
+        "size"         : "0x00000800"
       },
 
       "stdout": {
