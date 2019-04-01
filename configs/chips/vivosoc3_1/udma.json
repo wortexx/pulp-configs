@@ -13,13 +13,13 @@
 
   "archi_files": [
     "archi/udma/i2c/udma_i2c_v2.h",
-    "archi/udma/spim/udma_spim_v2.h",
+    "archi/udma/spim/udma_spim_v3.h",
     "archi/udma/uart/udma_uart_v1.h"
   ],
 
   "hal_files": [
     "hal/udma/i2c/udma_i2c_v2.h",
-    "hal/udma/spim/udma_spim_v2.h",
+    "hal/udma/spim/udma_spim_v3.h",
     "hal/udma/uart/udma_uart_v1.h"
   ],
 
