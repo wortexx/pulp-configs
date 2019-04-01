@@ -1,6 +1,6 @@
 {
   "name": "lcd_ili9341",
-  "doc_rst": "devices/ili9341.rst",
+  "doc_rst": "devices/lcd_ili9341.rst",
   "description": "LCD model",
   "platforms": [ "gvsoc", "rtl" ],
 
