@@ -23,6 +23,7 @@ def get_files(directory, include=None, exclude=None):
 
 files = []
 files += get_files('configs', include='.*\.json$')
+files += get_files('configs', include='.*\.rst$')
 files += get_files('python', include='.*\.py$')
 files += get_files('bin', exclude='__pycache__')
 
