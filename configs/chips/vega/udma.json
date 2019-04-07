@@ -9,7 +9,7 @@
     "l2_read_fifo_size": 8
   },
 
-  "interfaces" : ["spim", "i2c", "i2s", "uart", "cpi", "hyper"],
+  "interfaces" : ["spim", "i2c", "i2s", "uart", "cpi", "hyper", "mram"],
 
   "archi_files": [
     "archi/udma/cpi/udma_cpi_v1.h",

@@ -147,6 +147,13 @@
       }
     },
 
+    "mram": {
+      "version": 1,
+      "config": {
+        "size": "0x00100000"
+      }
+    },
+
     "l2": {
       "base": "0x1C000000",
       "size": "0x00190000",
@@ -357,7 +364,7 @@
     "soc_evt_gpio"            : 42,
     "soc_evt_rtc_apb"         : 43,
     "soc_evt_rtc"             : 44,
-    "soc_evt_ref_clock"       : 56,
+    "soc_evt_ref_clock"       : 168,
 
     "soc_evt_sw_first"        : 48,
     "soc_evt_sw_nb"           : 8,

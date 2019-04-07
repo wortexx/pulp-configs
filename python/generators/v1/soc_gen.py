@@ -47,6 +47,7 @@ def get_config(tp):
   l2_is_partitioned = tp.get_child_bool('soc/l2/is_partitioned')
   has_fll           = tp.get('soc/peripherals/fll') is not None or tp.get('soc/peripherals/flls') is not None
   has_rom           = tp.get('soc/rom') is not None
+  has_mram          = tp.get('soc/mram') is not None
   has_efuse         = tp.get('soc/peripherals/efuse') is not None
   has_pmu           = tp.get('soc/peripherals/pmu') is not None
   has_hwme          = tp.get('soc/peripherals/hwme') is not None
@@ -567,6 +568,19 @@ def get_config(tp):
       soc.udma = Component(properties=OrderedDict([
           ('includes', ["chips/%s/udma.json" % chip])
       ]))
+
+    if has_mram:      
+      mram_config_dict = collections.OrderedDict([
+        ('includes', ["ips/mram/mram.json"])
+      ])
+      mram_config = tp.get('soc/mram/config')
+      if mram_config is not None:
+        mram_config_dict.update(mram_config.get_dict())
+
+      soc.mram = Component(properties=mram_config_dict)
+
+      soc.udma.mram0 = soc.mram.input
+
 
   if has_spi_master:
     soc.spi_master = Component(properties=OrderedDict([
