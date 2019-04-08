@@ -128,13 +128,14 @@ def get_config(tp):
     system.system_tree.board.ref_clock_clock.out = system.system_tree.board.chip.ref_clock_engine
 
 
-  if chip == 'wolfe':
+  if chip == 'wolfe' or chip == 'vega':
     system.system_tree.board.bootsel = Component(OrderedDict([
       ('vp_class', "board/switch"),
       ('value', "0")
     ]))
 
     system.system_tree.board.bootsel.out = system.system_tree.board.chip.bootsel
+    system.system_tree.board.dpi.chip_config = system.system_tree.board.bootsel.input
 
 
 

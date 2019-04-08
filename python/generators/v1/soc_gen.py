@@ -866,7 +866,7 @@ def get_config(tp):
 
       soc.job_fifo.irq = soc.job_fifo_irq
 
-  if chip == 'wolfe':
+  if chip == 'wolfe' or chip == 'vega':
     soc.bootsel = soc.apb_soc_ctrl.bootsel
 
 

@@ -203,6 +203,9 @@ def get_config(tp):
               chip.set(name, chip.padframe.new_itf(name + '_pad'))
 
 
+  if chip_name == 'wolfe' or chip_name == 'vega':
+    chip.bootsel = chip.soc.bootsel
+
     
   chip.soc_clock.out = chip.soc.clock
 
