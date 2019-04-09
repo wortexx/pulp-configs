@@ -1,6 +1,12 @@
 {
+  "name": "i2s_mic",
+  "doc_rst": "devices/i2s_microphone.rst",
+  "description": "I2S microphones",
+
   "generator": "generators/v1/devices/i2s_microphone_gen",
   "interface": "i2s0",
+
+  "platforms": [ "gvsoc", "rtl" ],
 
   "config": {
     "type": "dpi",

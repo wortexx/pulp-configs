@@ -6,9 +6,9 @@ This model supports the following parameters
 =================== ==================================================== ================= ==================
 Name                Description                                          Default value     Optional/Mandatory
 =================== ==================================================== ================= ==================
-interface           Interface where the device is connected.             
-ctrl_interface      Control Interface where the device is connected.             spim0             Optional
-cs                  Chip select where the device is connected.           0                 Optional
+interface           Interface where the device is connected.             spim0             Mandatory
+ctrl_interface      Control Interface where the device is connected.     gpio0             Mandatory
+cs                  Chip select where the device is connected.           0                 Mandatory
 =================== ==================================================== ================= ==================
 
 Here is an example: ::
