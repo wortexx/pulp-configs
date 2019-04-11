@@ -18,7 +18,10 @@
 
   "system_tree": {
     "debug_bridge": {
-      "boot-mode": "jtag"
+      "boot-mode": "jtag",
+      "cable": {
+        "tap": 1
+      }
     },
     "board": {
       "chip": {
