@@ -348,7 +348,11 @@ def get_config(tp, cluster_id):
   for i in range(0, nb_pe):
     cluster.get('pe%d' % i).irq_ack = cluster.event_unit.new_itf('irq_ack_%d' % i)
 
-    for j in range(11, 16):
+    first_ext_counter = core_conf.get_int('first_ext_counter')
+    if first_ext_counter is None:
+      first_ext_counter = 11
+
+    for j in range(first_ext_counter, first_ext_counter+5):
       cluster.get('pe%d' % i).set('ext_counter[%d]' % j, cluster.l1_ico.new_itf('ext_counter_%d[%d]' % (i, j)))
 
   cluster.periph_ico.cluster_ico = cluster.cluster_ico.input
