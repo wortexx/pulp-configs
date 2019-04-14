@@ -134,6 +134,12 @@
       }
     },
 
+    "pulp_tap": {
+      "config": "ips/debug/pulp_tap.json"
+    },
+
+    "taps": [ "pulp_tap" ],
+
     "rtc": {
       "version": 2
     },

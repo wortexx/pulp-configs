@@ -52,6 +52,7 @@ def get_config(tp):
   has_pmu           = tp.get('soc/peripherals/pmu') is not None
   has_hwme          = tp.get('soc/peripherals/hwme') is not None
   has_fc_icache     = tp.get('**/peripherals/fc_icache') is not None
+  taps_conf         = tp.get('soc/taps')
 
 
   if fc_events is not None:
@@ -616,11 +617,34 @@ def get_config(tp):
         soc.apb_soc_ctrl.cluster_reset = soc.cluster_reset
 
 
-  adv_dbg_unit_config = properties=OrderedDict([('includes', ["ips/adv_dbg_unit/adv_dbg_unit.json"])])
-  if tp.get('**/adv_dbg_unit/config') is not None:
-    adv_dbg_unit_config.update(tp.get('**/adv_dbg_unit/config').get_dict())
+  if taps_conf is None:
+    adv_dbg_unit_config = properties=OrderedDict([('includes', ["ips/adv_dbg_unit/adv_dbg_unit.json"])])
+    if tp.get('**/adv_dbg_unit/config') is not None:
+      adv_dbg_unit_config.update(tp.get('**/adv_dbg_unit/config').get_dict())
 
-  soc.adv_dbg_unit = Component(properties=adv_dbg_unit_config)
+    soc.adv_dbg_unit = Component(properties=adv_dbg_unit_config)
+  else:
+
+    taps = []
+
+    for tap_name in taps_conf.get_dict():
+
+      tap_template = tp.get('soc').get(tap_name)
+      tap_config = js.import_config_from_file(tap_template.get_str('config'), find=True)
+
+      tap = Component(
+        properties=OrderedDict([('includes', [tap_template.get_str('config')])]),
+        template=tap_template,
+        config=tap_config
+      )
+
+      soc.add_component(tap_name, tap)
+
+      taps.append(tap)
+
+
+
+
 
   # APB to peripherals bindings
   soc.apb_ico.stdout = soc.stdout.input
@@ -831,13 +855,20 @@ def get_config(tp):
     else:
       soc.soc_eu.fc_event_itf = soc.fc_itc.soc_event
 
-  # Adv Dbg Unit
-  soc.adv_dbg_unit.io = soc.soc_ico.debug
-  soc.jtag0 = soc.adv_dbg_unit.jtag
+  if taps_conf is not None:
+    soc.jtag0 = taps[0].jtag_in
+    taps[-1].jtag_out = soc.jtag0_out
+    for index in range(1, len(taps)):
+      taps[index -1].jtag_out = taps[index].jtag_in
 
-  if tp.get_child_bool('**/apb_soc_ctrl/has_jtag_reg'):
-    soc.apb_soc_ctrl.confreg_soc = soc.adv_dbg_unit.confreg_soc
-    soc.adv_dbg_unit.confreg_ext = soc.apb_soc_ctrl.confreg_ext
+    for tap in taps:
+      if tap.get_config().get_bool('has_io_port'):
+        tap.io = soc.soc_ico.debug
+      if tp.get_child_bool('**/apb_soc_ctrl/has_jtag_reg'):
+        if tap.get_config().get_bool('has_confreg'):
+          soc.apb_soc_ctrl.confreg_soc = tap.confreg_soc
+          tap.confreg_ext = soc.apb_soc_ctrl.confreg_ext
+
 
   # Loader
   soc.plt_loader.out = soc.soc_ico.debug

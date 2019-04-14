@@ -25,7 +25,8 @@
     },
     "jtag0": {
       "type": "jtag",
-      "is_slave": true
+      "is_slave": true,
+      "is_dual": true
     },
     "cpi0": {
       "type": "cpi",

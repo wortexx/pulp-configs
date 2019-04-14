@@ -147,6 +147,16 @@
       }
     },
 
+    "pulp_tap": {
+      "config": "ips/debug/pulp_tap.json"
+    },
+
+    "riscv_tap": {
+      "config": "ips/debug/riscv_dtm.json"
+    },
+
+    "taps": [ "pulp_tap", "riscv_tap" ],
+
     "mram": {
       "version": 1,
       "config": {

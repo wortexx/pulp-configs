@@ -142,6 +142,12 @@
       "size": "0x00002000"
     },
 
+    "pulp_tap": {
+      "config": "ips/debug/pulp_tap.json"
+    },
+
+    "taps": [ "pulp_tap" ],
+
     "l2": {
       "base": "0x1C000000",
       "size": "0x00080000",

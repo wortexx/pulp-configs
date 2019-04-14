@@ -177,14 +177,19 @@ def get_config(tp):
           nb_cs = group.get_child_int('nb_cs')
           is_master = group.get_child_bool('is_master')
           is_slave = group.get_child_bool('is_slave')
+          is_dual = group.get_child_bool('is_dual')
 
           if pad_type == 'gpio':
               chip.padframe.set(name + '_pad', chip.soc.new_itf(name))
           else:
             if is_master:
               chip.soc.set(name, chip.padframe.new_itf(name))
+              if is_dual:
+                chip.padframe.set(name + '_in', chip.soc.new_itf(name + '_in'))
             if is_slave:
               chip.padframe.set(name, chip.soc.new_itf(name))
+              if is_dual:
+                chip.soc.set(name + '_out', chip.padframe.new_itf(name + '_out'))
 
           if nb_cs is not None:
             for cs in range(0, nb_cs):

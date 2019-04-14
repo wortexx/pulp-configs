@@ -39,7 +39,7 @@ class Interface(object):
 
 class Component(object):
 
-    def __init__(self, properties=None):
+    def __init__(self, properties=None, config=None, template=None):
         self.__dict__['is_empty'] = False
         self.__dict__['is_tb_comp'] = False
 
@@ -50,11 +50,23 @@ class Component(object):
         if properties is not None:
             self.__dict__['_Component__properties'] = properties
 
+        if config is not None:
+            self.__dict__['_Component__config'] = config
+
+        if template is not None:
+            self.__dict__['_Component__template'] = template
+
     def get_master_itfs(self):
         return self.__dict__['_Component__master_itfs']
 
     def get_slave_itfs(self):
         return self.__dict__['_Component__slave_itfs']
+
+    def get_config(self):
+        return self.__dict__['_Component__config']
+
+    def get_template(self):
+        return self.__dict__['_Component__template']
 
     def set_name(self, name):
         self.__dict__['_Component__name'] = name

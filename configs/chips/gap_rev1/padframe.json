@@ -90,7 +90,8 @@
     "reset": {},
     "jtag0": {
       "type": "jtag",
-      "is_slave": true
+      "is_slave": true,
+      "is_dual": true
     },
     "hyper0": {
       "type": "hyper",
