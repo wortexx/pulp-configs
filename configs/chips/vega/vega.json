@@ -148,11 +148,16 @@
     },
 
     "pulp_tap": {
-      "config": "ips/debug/pulp_tap.json"
+      "config": {
+        "includes": ["ips/debug/pulp_tap.json"]
+      }
     },
 
     "riscv_tap": {
-      "config": "ips/debug/riscv_dtm.json"
+      "riscv_debug": true,
+      "config": {
+        "includes": ["ips/debug/riscv_dtm.json"]
+      }
     },
 
     "taps": [ "pulp_tap", "riscv_tap" ],
@@ -332,10 +337,20 @@
       },
 
       "fc_dbg_unit": {
-        "version"      : 1,
-        "base"         : "0x1A110000",
-        "size"         : "0x00008000"
+        "version"      : 3,
+        "base"         : "0x1A190000",
+        "size"         : "0x00000800"
+      },
+
+      "debug_rom": {
+        "version": 2,
+        "base": "0x1A190800",
+        "size": "0x00000800",
+        "config": {
+          "stim_file": "os.path.join(os.environ.get('INSTALL_DIR'), 'python', 'pulp', 'chips', 'vega', 'debug_rom.bin')"
+        }
       }
+
 
     }
   },

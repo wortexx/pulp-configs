@@ -606,9 +606,9 @@ def get_config(tp):
       ('version', 1)
   ]))
 
-  if has_fc:
+  if has_fc and tp.get_child_int("**/fc_dbg_unit/version") <= 1:
     soc.fc_debug = Component(properties=OrderedDict([
-        ('version', tp.get_child_int("soc/peripherals/fc_dbg_unit/version"))
+        ('version', tp.get_child_int("**/fc_dbg_unit/version"))
     ]))
 
   if has_cluster:
@@ -618,7 +618,7 @@ def get_config(tp):
 
 
   if taps_conf is None:
-    adv_dbg_unit_config = properties=OrderedDict([('includes', ["ips/adv_dbg_unit/adv_dbg_unit.json"])])
+    adv_dbg_unit_config = OrderedDict([('includes', ["ips/adv_dbg_unit/adv_dbg_unit.json"])])
     if tp.get('**/adv_dbg_unit/config') is not None:
       adv_dbg_unit_config.update(tp.get('**/adv_dbg_unit/config').get_dict())
 
@@ -630,18 +630,46 @@ def get_config(tp):
     for tap_name in taps_conf.get_dict():
 
       tap_template = tp.get('soc').get(tap_name)
-      tap_config = js.import_config_from_file(tap_template.get_str('config'), find=True)
+      tap_config = tap_template.get('config').get_dict()
 
       tap = Component(
-        properties=OrderedDict([('includes', [tap_template.get_str('config')])]),
+        properties=tap_template.get('config').get_dict(),
         template=tap_template,
-        config=tap_config
+        config=tap_template.get('config')
       )
 
       soc.add_component(tap_name, tap)
 
       taps.append(tap)
 
+      if tap_template.get_bool('riscv_debug'):
+
+        debug_rom_config_dict = collections.OrderedDict([
+          ('includes', ["ips/rom/rom_v%d.json" % tp.get_child_int("**/debug_rom/version")]),
+          ('size', tp.get_child_int("**/debug_rom/size")),
+          ('map_base', tp.get_child_str("**/debug_rom/base")),
+          ('map_size', tp.get_child_str("**/debug_rom/size")),
+          ('vp_class', "memory/memory")
+        ])
+        rom_config = tp.get('**/debug_rom/config')
+        if rom_config is not None:
+          debug_rom_config_dict.update(rom_config.get_dict())
+
+        soc.debug_rom = Component(properties=debug_rom_config_dict)
+
+        soc.apb_ico.get_property('mappings')['debug_rom'] = get_mapping(tp.get_child_dict("**/debug_rom"), True)
+        soc.apb_ico.get_property('mappings')['debug_rom'] = get_mapping(tp.get_child_dict("**/debug_rom"), True)
+
+        soc.apb_ico.debug_rom = soc.debug_rom.input
+        soc.apb_ico.fc_dbg_unit = tap.input 
+
+
+        tap.set_property('harts', [])
+
+        if has_fc:
+          hart_id = (tp.get_int('soc/fc/cluster_id') << 5) | (tp.get_int('soc/fc/core_id'))
+          tap.get_property('harts').append([hart_id, 'fc'])
+          tap.fc = soc.fc.halt
 
 
 
@@ -719,7 +747,8 @@ def get_config(tp):
     else:
       soc.apb_ico.fc_itc = soc.fc_itc.input
       soc.apb_ico.fc_timer = soc.timer.input
-      soc.apb_ico.fc_dbg_unit = soc.fc.dbg_unit
+      if has_fc and tp.get_child_int("soc/peripherals/fc_dbg_unit/version") <= 1:
+        soc.apb_ico.fc_dbg_unit = soc.fc.dbg_unit
       if has_fc_icache:
         soc.apb_ico.fc_icache = soc.fc_icache.input
 

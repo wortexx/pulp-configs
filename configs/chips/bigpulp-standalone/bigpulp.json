@@ -129,7 +129,9 @@
     },
 
     "pulp_tap": {
-      "config": "ips/debug/pulp_tap.json"
+      "config": {
+        "includes": [ "ips/debug/pulp_tap.json" ]
+      }
     },
 
     "taps": [ "pulp_tap" ],
