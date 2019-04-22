@@ -15,6 +15,7 @@
   "defines"       : [ "ARCHI_CORE_HAS_PULPV2",  "CORE_PULP_BUILTINS", "ARCHI_CORE_HAS_1_10" ],
   "vp_class": "cpu/iss/iss",
   "first_external_pcer": 12,
+  "riscv_dbg_unit": true,
   "debug_binaries": [],
   "debug_handler" : "0x1a190800",
   "power_models": {
