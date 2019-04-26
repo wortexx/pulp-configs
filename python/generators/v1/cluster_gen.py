@@ -285,6 +285,8 @@ def get_config(tp, cluster_id):
   cluster.cluster_ico.periph_ico = cluster.periph_ico.input
   cluster.cluster_ico.periph_ico_alias = cluster.periph_ico.input
   cluster.periph_ico.icache_ctrl = cluster.icache_ctrl.input
+  if has_hwce:
+    cluster.periph_ico.hwce = cluster.hwce.input
   cluster.periph_ico.event_unit = cluster.event_unit.input
   cluster.periph_ico.cluster_ctrl = cluster.cluster_ctrl.input
   cluster.periph_ico.timer = cluster.timer.input

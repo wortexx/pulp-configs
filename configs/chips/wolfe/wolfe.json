@@ -13,6 +13,10 @@
         "includes": ["devices/uart_tb.json"],
         "interface": "uart0"
       },
+      "hyper": {
+        "includes": ["devices/hyper.json"],
+        "cs": 0
+      },
       "jtag_proxy": {
         "includes": ["devices/jtag_proxy.json"]
       }
