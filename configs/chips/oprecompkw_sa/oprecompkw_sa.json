@@ -25,7 +25,7 @@
     "base": "0x10000000",
     "alias": "0x00000000",
     "size": "0x00400000",
-    "core": "ri5ky_v2",
+    "core": "ri5ky_v2_sfloat_single_regfile",
     "version": 5,
     "json_file": "cluster_v5_fpu",
     "nb_cluster": 1,
