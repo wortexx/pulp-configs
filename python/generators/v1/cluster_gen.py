@@ -42,6 +42,9 @@ def get_config(tp, cluster_id):
   #else:
   #  alias = "0x00000000"
 
+  if has_hwce:
+    hwce_irq         = tp.get('cluster/pe/irq').get_dict().index('acc_0')
+
   core_conf = js.import_config_from_file("ips/riscv/%s.json" % cluster_core, find=True)
 
 
@@ -177,11 +180,14 @@ def get_config(tp, cluster_id):
       ]))
     )
 
+  l1_interleaver_nb_masters = nb_pe + 4
+  if has_hwce:
+    l1_interleaver_nb_masters += 4
 
   cluster.l1_ico.interleaver = Component(properties=OrderedDict([
     ('includes', ["ips/interco/l1_interleaver.json"]),
     ('nb_slaves', nb_l1_banks),
-    ('nb_masters', nb_pe + 4),
+    ('nb_masters', l1_interleaver_nb_masters),
     ('interleaving_bits', 2)
   ]))
 
@@ -293,6 +299,10 @@ def get_config(tp, cluster_id):
   cluster.ref_clock = cluster.timer.ref_clock
   cluster.periph_ico.dma = cluster.dma.new_itf("in_%d" % nb_pe)
 
+  if has_hwce:
+    for i in range(0, nb_pe):
+      cluster.hwce.irq = cluster.event_unit.new_itf('in_event_%d_pe_%d' % (hwce_irq, i))
+
   for i in range(0, nb_pe):
     cluster.periph_ico.set('dbg_unit_%d' % i, cluster.get('pe%d' % i).dbg_unit)
 
@@ -371,10 +381,13 @@ def get_config(tp, cluster_id):
   for i in range(0, 4):
     cluster.dma.set('loc_itf_%d' % i, cluster.l1_ico.new_itf('dma_in_%d' % i))
    
-
-
   for i in range(0, 4):
     cluster.l1_ico.set('dma_in_%d' % i, cluster.l1_ico.interleaver.new_itf('in_%d' % (nb_pe + i)))
+
+  if has_hwce:
+    for i in range(0, 4):
+      cluster.hwce.set('out_%d' % i, cluster.l1_ico.new_itf('hwce_in_%d' % i))
+      cluster.l1_ico.set('hwce_in_%d' % i, cluster.l1_ico.interleaver.new_itf('in_%d' % (nb_pe + 4 + i)))
 
   for i in range(0, nb_pe):
     cluster.l1_ico.get('pe%d_ico' % i).dma = cluster.l1_ico.new_itf('dma_%d'%i)
