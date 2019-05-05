@@ -196,8 +196,6 @@
             "evt_timer1"          : 11,
 
             "evt_clkref"          : 14,
-            "evt_gpio"            : 15,
-            "evt_rtc"             : 16,
 
             "evt_adv_timer0"      : 17,
             "evt_adv_timer1"      : 18,

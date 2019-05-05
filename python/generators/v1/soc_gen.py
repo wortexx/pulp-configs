@@ -505,7 +505,8 @@ def get_config(tp):
 
   if has_gpio:
     soc.gpio = Component(properties=OrderedDict([
-      ('includes', ["ips/gpio/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")])
+      ('includes', ["ips/gpio/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")]),
+      ('soc_event', tp.get('soc_events').get_int('soc_evt_gpio'))
     ]))
 
     soc.apb_ico.gpio = soc.gpio.input
@@ -518,7 +519,6 @@ def get_config(tp):
       soc.set('gpio%d' % i, soc.gpio.new_itf('gpio%d' % i))
       if has_pmu:
         soc.set('gpio%d' % i, soc.apb_soc_ctrl.new_itf('wakeup_gpio%d' % i))
-
 
   for name, config in tp.get("soc/peripherals").get_items().items():
     file = config.get_child_str("file")
@@ -605,6 +605,12 @@ def get_config(tp):
   soc.uart = Component(properties=OrderedDict([
       ('version', 1)
   ]))
+
+  if has_gpio:
+    soc.gpio.event = soc.soc_eu.event_in
+    fc_irq = fc_events.get_child_int('evt_gpio')
+    if fc_irq is not None:
+      soc.gpio.irq = soc.fc_itc.new_itf('in_event_%d' % (fc_irq))
 
   if has_fc and tp.get_child_int("**/fc_dbg_unit/version") <= 1:
     soc.fc_debug = Component(properties=OrderedDict([

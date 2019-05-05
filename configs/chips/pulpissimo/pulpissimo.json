@@ -115,7 +115,7 @@
       },
 
       "gpio": {
-        "version"      : 2,
+        "version"      : 3,
         "base"         : "0x1A101000",
         "size"         : "0x00001000"
       },

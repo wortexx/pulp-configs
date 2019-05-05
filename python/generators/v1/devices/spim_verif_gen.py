@@ -32,7 +32,7 @@ def gen_config(name, system_config, system, device_config, usecases=[]):
 
   gpios = device_config.get('gpio')
   if gpios is not None:
-    for gpio in gpios.get_dict():
+    for key, gpio in gpios.get_dict().items():
       system.system_tree.board.chip.set(gpio, system.system_tree.board.dpi.new_itf(gpio))
       system.system_tree.board.chip.set(gpio, system.system_tree.board.get(name).new_itf(gpio))
 
