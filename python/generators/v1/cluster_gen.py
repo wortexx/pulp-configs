@@ -65,11 +65,16 @@ def get_config(tp, cluster_id):
     ("soc", get_mapping(tp.get_child_dict("soc")))
   ])
 
+  l1_ts_mapping = get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True)
+  l1_ts_mapping['base'] = '0x%x' % (int(l1_ts_mapping['base'], 0) + (1<<20))
+  l1_ts_mapping['remove_offset'] = l1_ts_mapping['base']
+
   cluster.cluster_ico = Component(properties=OrderedDict([
     ('includes', ["ips/interco/router.json"]),
     ('latency', 2),
     ('mappings', OrderedDict([
       ("l1", get_mapping_area(tp.get_child_dict("cluster/l1"), cluster_size, cluster_id, True)),
+      ("l1_ts", l1_ts_mapping),
       ("periph_ico", get_mapping_area(tp.get_child_dict("cluster/peripherals"), cluster_size, cluster_id)),
       ("periph_ico_alias", get_mapping(tp.get_child_dict("cluster/peripherals/alias"), add_offset=get_area_int('%d' % ((tp.get_child_int("cluster/peripherals/base") - tp.get_child_int("cluster/peripherals/alias/base"))), cluster_size, cluster_id))),
       ("error", OrderedDict([
@@ -197,6 +202,12 @@ def get_config(tp, cluster_id):
     ('output_align', 4)
   ]))
 
+  cluster.l1_ico.ext2loc_ts = Component(properties=OrderedDict([
+    ('includes', ["ips/interco/converter.json"]),
+    ('output_width', 4),
+    ('output_align', 4)
+  ]))
+
   cluster.l1 = Component(properties=OrderedDict([
     ('vp_class', None),
     ('size', tp.get_child_int("cluster/l1/size")),
@@ -288,6 +299,7 @@ def get_config(tp, cluster_id):
   cluster.cluster_ico.soc = cluster.soc
   cluster.input = cluster.cluster_ico.input
   cluster.cluster_ico.l1 = cluster.l1_ico.ext2loc_itf
+  cluster.cluster_ico.l1_ts = cluster.l1_ico.ext2loc_ts_itf
   cluster.cluster_ico.periph_ico = cluster.periph_ico.input
   cluster.cluster_ico.periph_ico_alias = cluster.periph_ico.input
   cluster.periph_ico.icache_ctrl = cluster.icache_ctrl.input
@@ -408,6 +420,7 @@ def get_config(tp, cluster_id):
     cluster.l1_ico.interleaver.set('out_%d'%i, cluster.l1_ico.new_itf('out_%d'%i))
 
   cluster.l1_ico.ext2loc_itf = cluster.l1_ico.ext2loc.input
+  cluster.l1_ico.ext2loc_ts_itf = cluster.l1_ico.ext2loc_ts.input
 
   first_external_pcer = core_conf.get_int('first_external_pcer')
   if first_external_pcer is None:
@@ -445,6 +458,7 @@ def get_config(tp, cluster_id):
 
 
   cluster.l1_ico.ext2loc.out = cluster.l1_ico.interleaver.new_itf('in_%d'%nb_pe)
+  cluster.l1_ico.ext2loc_ts.out = cluster.l1_ico.interleaver.new_itf('ts_in_%d'%nb_pe)
 
 
   if job_fifo_irq is not None:
