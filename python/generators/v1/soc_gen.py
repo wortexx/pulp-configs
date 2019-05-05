@@ -504,10 +504,13 @@ def get_config(tp):
 
 
   if has_gpio:
-    soc.gpio = Component(properties=OrderedDict([
-      ('includes', ["ips/gpio/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")]),
-      ('soc_event', tp.get('soc_events').get_int('soc_evt_gpio'))
-    ]))
+    gpio_config = OrderedDict([
+      ('includes', ["ips/gpio/gpio_v%d.json" % tp.get_child_int("soc/peripherals/gpio/version")])
+    ])
+    if tp.get('soc_events') is not None:
+      gpio_config['soc_event'] = tp.get('soc_events').get_int('soc_evt_gpio')
+
+    soc.gpio = Component(properties=gpio_config)
 
     soc.apb_ico.gpio = soc.gpio.input
 
@@ -607,10 +610,12 @@ def get_config(tp):
   ]))
 
   if has_gpio:
-    soc.gpio.event = soc.soc_eu.event_in
-    fc_irq = fc_events.get_child_int('evt_gpio')
-    if fc_irq is not None:
-      soc.gpio.irq = soc.fc_itc.new_itf('in_event_%d' % (fc_irq))
+    if has_soc_events:
+      soc.gpio.event = soc.soc_eu.event_in
+    if has_fc:
+      fc_irq = fc_events.get_child_int('evt_gpio')
+      if fc_irq is not None:
+        soc.gpio.irq = soc.fc_itc.new_itf('in_event_%d' % (fc_irq))
 
   if has_fc and tp.get_child_int("**/fc_dbg_unit/version") <= 1:
     soc.fc_debug = Component(properties=OrderedDict([
