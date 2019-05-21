@@ -728,6 +728,15 @@ def get_config(tp):
     if not has_fc_ico:
       soc.wakeup_rtc = soc.fc_itc.in_event_16
 
+    rtc_irq = fc_events.get_child_int('evt_rtc')
+    rtc_apb_irq = fc_events.get_child_int('evt_rtc_apb')
+
+    if rtc_irq is not None:
+      soc.wakeup_rtc = soc.fc_itc.new_itf('in_event_%d' % (rtc_irq))
+
+    if rtc_apb_irq is not None:
+      soc.rtc_apb_irq = soc.fc_itc.new_itf('in_event_%d' % (rtc_apb_irq))
+
   if has_pmu:
     soc.apb_soc_ctrl.wakeup_out = soc.wakeup_out
     soc.apb_soc_ctrl.wakeup_seq = soc.wakeup_seq
@@ -799,8 +808,9 @@ def get_config(tp):
       soc.apb_soc_ctrl.cluster_power_irq = soc.fc_eu.new_itf('in_event_%d_pe_0' % fc_events.get_child_int('evt_cluster_pok'))
       soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_eu.new_itf('in_event_%d_pe_0' % fc_events.get_child_int('evt_cluster_cg_ok'))
     else:
-      soc.apb_soc_ctrl.cluster_power_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_pok'))
-      soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_cg_ok'))
+      if fc_events.get_child_int('evt_cluster_pok') is not None:
+        soc.apb_soc_ctrl.cluster_power_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_pok'))
+        soc.apb_soc_ctrl.cluster_clock_gate_irq = soc.fc_itc.new_itf('in_event_%d' % fc_events.get_child_int('evt_cluster_cg_ok'))
 
   # ROM
   if has_rom:

@@ -123,6 +123,7 @@ def get_config(tp):
       ])
       properties.update(tp.get('soc/peripherals/rtc').get('config').get_dict())
       chip.rtc = Component(properties=properties)
+      chip.rtc.apb_irq = chip.soc.rtc_apb_irq
     else:
       chip.rtc = Component(OrderedDict([
         ('includes', ["ips/rtc/rtc_v%d.json" % rtc_version])

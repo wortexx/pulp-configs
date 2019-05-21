@@ -309,9 +309,9 @@
           "evt_adv_timer2"      : 19,
           "evt_adv_timer3"      : 20,
 
-          "evt_cluster_not_busy": 21,
-          "evt_cluster_pok"     : 22,
-          "evt_cluster_cg_ok"   : 23,
+          "evt_rtc_apb"         : 21,
+          "evt_rtc"             : 22,
+
           "evt_picl_ok"         : 24,
           "evt_scu_ok"          : 25,
 
