@@ -61,7 +61,8 @@
     "nb_channels"  : 1,
     "ids"          : [8],
     "offsets"      : ["0x400"],
-    "is_master"    : true
+    "is_master"    : true,
+    "eot_events"   : [ 34 ]
   },
 
   "sdio": {
