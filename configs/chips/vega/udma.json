@@ -62,7 +62,7 @@
     "ids"          : [8],
     "offsets"      : ["0x400"],
     "is_master"    : true,
-    "eot_events"   : [ 34 ]
+    "eot_events"   : [ 35 ]
   },
 
   "sdio": {
