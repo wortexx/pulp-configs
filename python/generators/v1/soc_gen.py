@@ -520,8 +520,14 @@ def get_config(tp):
 
     for i in range(0, nb_gpio):
       soc.set('gpio%d' % i, soc.gpio.new_itf('gpio%d' % i))
-      if has_pmu:
+      if has_pmu and tp.get_int('soc/peripherals/pmu/version') < 3:
         soc.set('gpio%d' % i, soc.apb_soc_ctrl.new_itf('wakeup_gpio%d' % i))
+
+    if has_pmu:
+      if tp.get_int('soc/peripherals/pmu/version') == 3:
+        soc.set('gpio64', soc.apb_soc_ctrl.new_itf('wakeup_gpio0'))
+
+
 
   for name, config in tp.get("soc/peripherals").get_items().items():
     file = config.get_child_str("file")
