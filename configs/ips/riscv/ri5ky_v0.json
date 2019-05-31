@@ -9,5 +9,6 @@
   "hal_files"     : [ "hal/riscv/riscv_v3.h" ],
   "archi_files"   : [ "archi/riscv/priv_1_7.h", "archi/riscv/builtins_v2_emu.h", "archi/riscv/pcer_v1.h" ],
   "debug_binaries": [],
-  "defines"       : [ "ARCHI_CORE_HAS_PULPV1",  "CORE_PULP_BUILTINS" ]
+  "defines"       : [ "ARCHI_CORE_HAS_PULPV1",  "CORE_PULP_BUILTINS" ],
+  "iss_class": "iss_riscy"
 }

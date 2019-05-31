@@ -6,5 +6,6 @@
   "gv_isa"   : ["--pulpv2", "--pulp", "--rv32m", "--gap8", "--itc-external-req"],
   "isa"           : "rv32imcXgap8",
   "debug_binaries": [],
-  "march"         : "imcXgap8"
+  "march"         : "imcXgap8",
+  "iss_class": "iss_riscy"
 }

@@ -15,5 +15,6 @@
   "bootaddr_offset": "0x80",
   "debug_binaries": [],
   "fetch_enable"     : false,
-  "boot_addr" : "0x00000000"
+  "boot_addr" : "0x00000000",
+  "iss_class": "iss_riscy"
 }

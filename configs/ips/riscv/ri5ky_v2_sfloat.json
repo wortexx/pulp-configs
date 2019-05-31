@@ -18,5 +18,6 @@
     "includes": [
       "power_models/core/riscy.json"
     ]
-  }
+  },
+  "iss_class": "iss_riscy"
 }
