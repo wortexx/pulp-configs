@@ -3,6 +3,7 @@
   "generator": "generators/v1/config_gen",
 
   "board": {
+    "name": "gap",
     "devices": {
       "spiflash": {
         "includes": ["devices/spiflash.json"],

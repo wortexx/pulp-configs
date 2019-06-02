@@ -1,0 +1,7 @@
+{
+  "includes": [ "chips/gap/gap.json" ],
+
+  "board": {
+    "name": "gapuino"
+  }
+}

@@ -85,10 +85,16 @@ def get_config(tp):
       system.system_tree.debug_bridge.set_property('commands', debug_bridge_commands)
 
 
+  board_name = tp.get_child_str('**/board/name')
+  if board_name is None:
+    board_name = chip
+
 
   system.system_tree.board = Component(OrderedDict([
-      ('vp_class', "pulp/board")
+      ('vp_class', "pulp/board"),
+      ('name', board_name)
   ]))
+
 
 
   system.system_tree.board.chip = chip_gen.get_config(tp)
