@@ -58,13 +58,22 @@ def get_config(tp):
   system = Component(
   )
 
-
   system.system_tree = Empty_Component(OrderedDict([
       ('includes', [ "pulp_system_common.json" ]),
       ('vp_class', "pulp/system")
   ]))
 
-  system.system_tree.debug_bridge = Empty_Component(
+  debug_bridge_dict = OrderedDict([
+      ('includes', ["tools/debug-bridge/debug_bridge.json"])
+  ])
+
+  debug_bridge_config = tp.get('**/debug_bridge/config')
+
+  if debug_bridge_config is not None:
+    debug_bridge_dict.update(debug_bridge_config.get_dict())
+
+  system.system_tree.debug_bridge = Component(
+    properties=debug_bridge_dict
   )
 
   if start_addr is not None:
