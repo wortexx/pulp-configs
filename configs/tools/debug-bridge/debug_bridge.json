@@ -8,7 +8,10 @@
     ],
     "active": false,
     "autorun": false,
-    "access_timeout_us": 1000000
+    "access_timeout_us": 1000000,
+    "system_reset_gpio": 9,
+    "jtag_reset_gpio": 8,
+    "reverse_reset": false
   },
 
   "adv_dbg_unit": {
