@@ -3,5 +3,16 @@
 
   "board": {
     "name": "gapuino"
+  },
+
+  "debug_bridge": {
+    "config": {
+      "cable": {
+        "system_reset_gpio": 4,
+        "jtag_reset_gpio": 6,
+        "reverse_reset": true
+      }
+    }
   }
+
 }

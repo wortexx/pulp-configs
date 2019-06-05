@@ -3,5 +3,15 @@
 
   "board": {
     "name": "gapoc_a"
+  },
+
+  "debug_bridge": {
+    "config": {
+      "cable": {
+        "system_reset_gpio": 9,
+        "jtag_reset_gpio": 8,
+        "reverse_reset": false
+      }
+    }
   }
 }
