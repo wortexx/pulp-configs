@@ -167,7 +167,7 @@
         "CMD_SIZE": {
           "bit": 16,
           "width": 5,
-          "desc": "Size in bits of the command to send. The value written here is num bits – 1."
+          "desc": "Size in bits of the command to send. The value written here is num bits - 1."
         },
         "QPI": {
           "bit": 27,
@@ -188,7 +188,7 @@
         "CMD_SIZE": {
           "bit": 16,
           "width": 5,
-          "desc": "Size in bits of the address to send. The value written here is num bits – 1."
+          "desc": "Size in bits of the address to send. The value written here is num bits - 1."
         },
         "QPI": {
           "bit": 27,
@@ -241,7 +241,7 @@
         "DATA_SIZE": {
           "bit": 0,
           "width": 16,
-          "desc": "Number of bits to send (Max 64Kbits). The value written here is num bits – 1."
+          "desc": "Number of bits to send (Max 64Kbits). The value written here is num bits - 1."
         },
         "BYTE_ALIGN": {
           "bit": 26,
@@ -267,7 +267,7 @@
         "DATA_SIZE": {
           "bit": 0,
           "width": 16,
-          "desc": "Number of bits to receive (Max 64Kbits). The value written here is num bits – 1."
+          "desc": "Number of bits to receive (Max 64Kbits). The value written here is num bits - 1."
         },
         "BYTE_ALIGN": {
           "bit": 26,
@@ -341,7 +341,7 @@
         "STATUS_SIZE": {
           "bit": 16,
           "width": 4,
-          "desc": "Size in bits of the word to read. The value written here is num bits – 1."
+          "desc": "Size in bits of the word to read. The value written here is num bits - 1."
         },
         "CHECK_TYPE": {
           "bit": 24,
@@ -372,7 +372,7 @@
         "DATA_SIZE": {
           "bit": 0,
           "width": 16,
-          "desc": "Number of bits to send (Max 64Kbits). The value written here is num bits – 1."
+          "desc": "Number of bits to send (Max 64Kbits). The value written here is num bits - 1."
         },
         "BYTE_ALIGN": {
           "bit": 26,

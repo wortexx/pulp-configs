@@ -80,7 +80,7 @@
           "bit": 0,
           "width": 4,
           "access": "R/W",
-          "name": "FLL loop gain setting (default: 2^−8 = 1/256).",
+          "name": "FLL loop gain setting (default: 2^-8 = 1/256).",
           "desc": "When using normal mode, this defines the gain applied to the difference between the specified multiplication factor and the actual one, before it is provided to the loop filter."
         },
         "deassert_cycles": {
