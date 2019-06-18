@@ -32,6 +32,11 @@ def get_config(tp):
     config=system_gen.get_config(tp)
   ).get_js_config())
 
+  top_config = tp.get('config')
+
+  if top_config is not None:
+    config.merge(top_config)
+
   config.merge(js.import_config({'includes2': [ "chips/%s/defaults.json" % (chip) ] }))
 
 
