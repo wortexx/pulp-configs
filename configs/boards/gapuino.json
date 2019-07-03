@@ -2,7 +2,13 @@
   "includes": [ "chips/gap/gap.json" ],
 
   "board": {
-    "name": "gapuino"
+    "name": "gapuino",
+    "devices": {
+      "hyper": {
+        "include" : "devices/hyper.json",
+        "cs": 0
+      }
+    }
   },
 
   "debug_bridge": {
