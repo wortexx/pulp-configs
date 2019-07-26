@@ -1,0 +1,18 @@
+{
+  "includes": [ "chips/gap/gap.json" ],
+
+  "board": {
+    "name": "ai_deck"
+  },
+
+  "debug_bridge": {
+    "config": {
+      "cable": {
+        "system_reset_gpio": 4,
+        "jtag_reset_gpio": 6,
+        "reverse_reset": true
+      }
+    }
+  }
+
+}
