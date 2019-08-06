@@ -238,7 +238,13 @@
         "fc_icache": {
           "version"      : 2,
           "base"         : "0x1B201400",
-          "size"         : "0x00001400"
+          "size"         : "0x00001400",
+          "config": {
+            "nb_ports" : 1,
+            "nb_sets_bits": 4,
+            "nb_ways_bits": 2,
+            "line_size_bits": 4
+          }
         },
 
         "fc_dbg_unit": {

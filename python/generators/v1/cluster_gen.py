@@ -268,6 +268,17 @@ def get_config(tp, cluster_id):
   cluster.icache_ctrl = Component(properties=OrderedDict([
     ('includes', ["ips/icache_ctrl/icache_ctrl_v2.json"])
   ]))
+  cluster.icache = Component(properties=OrderedDict([
+      ('includes', ["ips/cache/cache.json"]),
+      ('nb_ports', nb_pe)
+  ]))
+
+  cluster.icache_ctrl.enable = cluster.icache.enable
+  cluster.icache_ctrl.flush = cluster.icache.flush
+  cluster.icache_ctrl.flush_line = cluster.icache.flush_line
+  cluster.icache_ctrl.flush_line_addr = cluster.icache.flush_line_addr
+
+  cluster.icache.refill = cluster.cluster_ico.input
 
   cluster.pe = Empty_Component(properties=OrderedDict(
   ))
@@ -334,7 +345,7 @@ def get_config(tp, cluster_id):
     cluster.get('pe%d' % i).data = cluster.l1_ico.new_itf('data_pe_%d' % i)
 
   for i in range(0, nb_pe):
-    cluster.get('pe%d' % i).fetch = cluster.cluster_ico.input
+    cluster.get('pe%d' % i).fetch = cluster.icache.new_itf('input_%d' % i)
 
   for i in range(0, nb_pe):
     cluster.l1_ico.set('event_unit_%d' % i, cluster.event_unit.new_itf('demux_in_%d' % i))

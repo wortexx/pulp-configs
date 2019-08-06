@@ -152,8 +152,11 @@ def get_config(tp):
       ("l2_shared", get_mapping(tp.get_child_dict("soc/l2/shared"))),
     ]))
   else:
+    mapping = get_mapping(tp.get_child_dict("soc/l2"), True)
+    if has_fc_ico:
+      mapping['latency'] = 8
     ll_ico_mappings.update({
-      "l2"         : get_mapping(tp.get_child_dict("soc/l2"), True),
+      "l2"         : mapping,
     })
 
   soc.soc_ico.ll_ico = Component(properties=OrderedDict([
@@ -169,8 +172,14 @@ def get_config(tp):
   ]))
 
   if has_fc:
+
+    latency = 0
+    if has_fc_ico:
+      latency = 5
+
     soc.soc_ico.fc_fetch_ico = Component(properties=OrderedDict([
       ('includes', [ "ips/interco/router.json" ]),
+      ('latency', latency),
       ('mappings', OrderedDict([
         ("l2_shared", get_mapping(tp.get_child_dict("soc/l2/shared"))),
         ("ll_ico", OrderedDict())
@@ -339,6 +348,7 @@ def get_config(tp):
 
   soc.apb_ico = Component(properties=OrderedDict([
       ('includes', [ "ips/interco/router.json" ]),
+      ('latency', 8),
       ('mappings', apb_soc_mappings)
   ]))
 
@@ -543,9 +553,17 @@ def get_config(tp):
 
 
   if has_fc_icache:
-    soc.fc_icache = Component(properties=OrderedDict([
+    soc.fc_icache_ctrl = Component(properties=OrderedDict([
         ('includes', ["ips/icache_ctrl/icache_ctrl_v%d.json" % tp.get_child_int("**/fc_icache/version")])
     ]))
+    soc.fc_icache = Component(properties=OrderedDict([
+        ('includes', ["ips/cache/cache.json"])
+    ]))
+
+    soc.fc_icache_ctrl.enable = soc.fc_icache.enable
+    soc.fc_icache_ctrl.flush = soc.fc_icache.flush
+    soc.fc_icache_ctrl.flush_line = soc.fc_icache.flush_line
+    soc.fc_icache_ctrl.flush_line_addr = soc.fc_icache.flush_line_addr
 
   if has_fc:
     if has_fc_ico:
@@ -768,7 +786,7 @@ def get_config(tp):
       soc.fc_ico.fc_eu = soc.fc_eu.input
       soc.fc_ico.fc_timer = soc.timer.input
       if has_fc_icache:
-        soc.fc_ico.fc_icache = soc.fc_icache.input
+        soc.fc_ico.fc_icache = soc.fc_icache_ctrl.input
       soc.fc_ico.fc_dbg_unit = soc.fc.dbg_unit
     else:
       soc.apb_ico.fc_itc = soc.fc_itc.input
@@ -776,7 +794,7 @@ def get_config(tp):
       if has_fc and tp.get_child_int("soc/peripherals/fc_dbg_unit/version") <= 1:
         soc.apb_ico.fc_dbg_unit = soc.fc.dbg_unit
       if has_fc_icache:
-        soc.apb_ico.fc_icache = soc.fc_icache.input
+        soc.apb_ico.fc_icache = soc.fc_icache_ctrl.input
 
   if has_fc_tcdm:
     soc.fc_ico.fc_tcdm = soc.fc_tcdm.input
@@ -832,7 +850,11 @@ def get_config(tp):
 
   # FC
   if has_fc:
-    soc.fc.fetch = soc.soc_ico.fc_fetch
+    if has_fc_icache:
+      soc.fc.fetch = soc.fc_icache.input_0
+      soc.fc_icache.refill = soc.soc_ico.fc_fetch
+    else:
+      soc.fc.fetch = soc.soc_ico.fc_fetch
     soc.fc.data = soc.soc_ico.fc_data
     if has_fc_ico:
       soc.fc.irq_ack = soc.fc_eu.irq_ack_0

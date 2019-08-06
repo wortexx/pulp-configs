@@ -209,14 +209,14 @@
           "version"      : 1,
           "base"         : "0x1A100000",
           "size"         : "0x00000010",
-          "targets"      : [ "soc" ]
+          "targets"      : [ "periph" ]
         },
 
         "fll_periph": {
           "version"      : 1,
           "base"         : "0x1A100010",
           "size"         : "0x00000010",
-          "targets"      : [ "periph" ]
+          "targets"      : [ "soc" ]
         },
 
         "fll_cluster": {
