@@ -1,0 +1,9 @@
+{
+  "includes": [ "chips/pulpissimo/pulpissimo.json" ],
+
+  "soc": {
+    "fc": {
+      "core"        : "ibex"
+    }
+  }
+}
