@@ -1,6 +1,12 @@
 {
   "runner": {
-    "boot-mode": "jtag"
+    "boot_from_flash": false,
+    "boot-mode": "jtag",
+    "flash_type": "nand",
+    "flash_slm_file": "slm_files/flash_stim_nand.slm",
+    "flash_raw_file": "raw_files/flash_stim.raw",
+    "flash_binDescr_file": "raw_files/bin_descr.raw",
+    "flash_sysDescr_file": "raw_files/sys_descr.raw"
   },
   
   "loader": {
