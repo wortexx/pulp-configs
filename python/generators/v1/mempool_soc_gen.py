@@ -666,7 +666,7 @@ def get_config(tp):
         tap.set_property('harts', [])
 
         if has_fc:
-          hart_id = (tp.get_int('soc/fc/cluster_id') << 5) | (tp.get_int('soc/fc/core_id'))
+          hart_id = (tp.get_int('soc/fc/cluster_id') << 16) | (tp.get_int('soc/fc/core_id'))
           tap.get_property('harts').append([hart_id, 'fc'])
           tap.fc = soc.fc.halt
 
