@@ -76,6 +76,7 @@ gen.all:
 	./bin/plpconf_new --input=chips/vega/vega.json --output=configs/systems/vega.json
 	./bin/plpconf_new --input=chips/vivosoc3/vivosoc3.json --output=configs/systems/vivosoc3.json
 	./bin/plpconf_new --input=chips/vivosoc3_5/vivosoc3_5.json --output=configs/systems/vivosoc3_5.json
+	./bin/plpconf_new --input=chips/mempool/mempool.json --output=configs/systems/mempool.json
 	./bin/plpconf_new --input=chips/multino/multino.json --output=configs/systems/multino.json
 	./bin/plpconf_new --input=chips/bigpulp-standalone/bigpulp.json --output=configs/systems/bigpulp-standalone.json
 	./bin/plpconf_new --input=chips/bigpulp/bigpulp.json --output=configs/systems/bigpulp.json

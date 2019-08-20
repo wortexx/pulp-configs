@@ -44,7 +44,7 @@ set_pc_addr = None
 set_pc_offset = None
 debug_bridge_commands = None
 
-if args.chip in ['pulpissimo', 'pulp', 'pulpissimo_v1', 'pulp_v1']:
+if args.chip in ['pulpissimo', 'pulp', 'pulpissimo_v1', 'pulp_v1', 'mempool']:
     start_addr = '0x%X' % (tp.get_child_int("soc/peripherals/fc_dbg_unit/base") + 0x0000)
     start_value = '0'
     stop_addr = '0x%X' % (tp.get_child_int("soc/peripherals/fc_dbg_unit/base") + 0x0000)
