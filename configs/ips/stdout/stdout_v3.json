@@ -7,6 +7,6 @@
 
   "max_cluster": 33,
 
-  "max_core_per_cluster": 16
+  "max_core_per_cluster": 1024
 
 }
