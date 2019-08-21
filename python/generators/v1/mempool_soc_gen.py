@@ -478,6 +478,8 @@ def get_config(tp):
     apb_soc_params['cluster_power_event'] = tp.get_child_int('soc_events/soc_evt_cluster_pok')
     apb_soc_params['cluster_clock_gate_event'] = tp.get_child_int('soc_events/soc_evt_cluster_cg_ok')
 
+  apb_soc_params['nb_cores_per_cluster'] = tp.get_child_int('cluster/nb_pe');
+
   soc.apb_soc_ctrl = Component(properties=apb_soc_params)
 
   soc.stdout = Component(properties=OrderedDict([
