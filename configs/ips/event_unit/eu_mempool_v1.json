@@ -1,0 +1,27 @@
+{
+  "version": "mempool_v1",
+  "nb_core": 0,
+  "vp_class": "pulp/event_unit/eu_mempool_v1",
+  "hal_files" : [ "hal/eu/eu_mempool_v1.h" ],
+  "archi_files" : [ "archi/eu/eu_mempool_v1.h" ],
+  "properties": {
+    "dispatch": {
+      "size": 8
+    },
+    "mutex": {
+      "nb_mutexes": 1
+    },
+    "barriers": {
+      "nb_barriers": 8
+    },
+    "soc_event": {
+      "nb_fifo_events": 8,
+      "fifo_event": 27
+    },
+    "events": {
+      "barrier" : 16,
+      "mutex"   : 17,
+      "dispatch": 18
+    }
+  }
+}

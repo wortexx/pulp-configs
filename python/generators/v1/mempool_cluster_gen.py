@@ -21,6 +21,7 @@ import math
 def get_config(tp, cluster_id):
 
   cluster_id        = cluster_id
+  chip_name         = tp.get_child_str("chip")
   cluster_size      = tp.get_child_int("cluster/size")
   nb_pe             = tp.get_child_int('cluster/nb_pe')
   l1_banking_factor = tp.get_child_int('cluster/l1/banking_factor')
@@ -243,8 +244,13 @@ def get_config(tp, cluster_id):
     ('nb_core', nb_pe)
   ]))
 
+  if chip_name == 'mempool':
+    event_unit_file = "ips/event_unit/eu_mempool_v1.json"
+  else:
+    event_unit_file = "ips/event_unit/eu_v3.json"
+
   cluster.event_unit = Component(properties=OrderedDict([
-    ('includes', ["ips/event_unit/eu_v3.json"]),
+    ('includes', [event_unit_file]),
     ('nb_core', nb_pe)
   ]))
 
