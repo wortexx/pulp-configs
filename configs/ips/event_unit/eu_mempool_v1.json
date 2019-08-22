@@ -9,10 +9,10 @@
       "size": 8
     },
     "mutex": {
-      "nb_mutexes": 1
+      "nb_mutexes": 32
     },
     "barriers": {
-      "nb_barriers": 8
+      "nb_barriers": 16
     },
     "soc_event": {
       "nb_fifo_events": 8,

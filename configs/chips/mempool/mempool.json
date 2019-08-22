@@ -74,11 +74,6 @@
         "size": "0x00000400"
       },
 
-      "event_unit": {
-        "base": "0x10201000",
-        "size": "0x00003000"
-      },
-
       "icache_ctrl": {
         "base": "0x10200800",
         "size": "0x00000400"
@@ -91,8 +86,13 @@
       },
 
       "dbg_unit": {
-        "base": "0x10300000",
-        "size"  : "0x00008000"
+        "base": "0x10201000",
+        "size": "0x00000080"
+      },
+
+      "event_unit": {
+        "base": "0x10209000",
+        "size": "0x00015000"
       },
 
       "cluster_ico": {}
@@ -100,15 +100,15 @@
 
     "demux_peripherals":
     {
-      "base": "0x10204000",
+      "base": "0x10220000",
 
-      "event_unit": {
-        "base": "0x10204000",
+      "dma": {
+        "base": "0x10220000",
         "size": "0x00000400"
       },
-      "dma": {
-        "base": "0x10204400",
-        "size": "0x00000400"
+      "event_unit": {
+        "base": "0x10220400",
+        "size": "0x00000600"
       }
     }
   },
