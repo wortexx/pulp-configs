@@ -33,7 +33,7 @@
     "version": 5,
     "json_file": "cluster_v5_fpu",
     "nb_cluster": 1,
-    "nb_pe": 8,
+    "nb_pe": 256,
 
     "pe": {
       "irq": [
