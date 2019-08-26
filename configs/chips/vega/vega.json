@@ -13,6 +13,11 @@
         "includes": ["devices/hyper.json"],
         "cs": 0
       },
+      "camera": {
+        "include": "devices/camera.json",
+        "interface": "cpi0",
+        "ctrl_interface": "i2c1"
+      },
       "uart": {
         "includes": ["devices/uart_tb.json"],
         "interface": "uart0"
