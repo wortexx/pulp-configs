@@ -27,7 +27,10 @@ def gen_config(name, system_config, system, device_config, usecases=[]):
   ctrl_itf = device_config.get_str('ctrl_interface')
 
   system.system_tree.board.add_component(name, Tb_Component(
-    config=device_config.get('config')
+    config=device_config.get('config'),
+    properties=OrderedDict([
+      ('name', name)
+    ])
   ))
 
   system.system_tree.board.get(name).cpi = system.system_tree.board.chip.new_itf(itf)

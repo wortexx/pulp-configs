@@ -28,7 +28,10 @@ def gen_config(name, system_config, system, device_config, usecases=[]):
   cs = device_config.get_str('cs')
 
   system.system_tree.board.add_component(name, Tb_Component(
-    config=device_config.get('config')
+    config=device_config.get('config'),
+    properties=OrderedDict([
+      ('name', name)
+    ])
   ))
 
   system.system_tree.board.chip.set(itf + '_cs' + str(cs) + '_data', system.system_tree.board.dpi.new_itf(itf + '_cs' + str(cs) + '_data'))
