@@ -54,6 +54,7 @@ def get_config(tp):
   has_fc_icache     = tp.get('**/peripherals/fc_icache') is not None
   taps_conf         = tp.get('soc/taps')
 
+  comps = {}
 
   if fc_events is not None:
     fc_events_dict = fc_events.get_dict()
@@ -597,6 +598,8 @@ def get_config(tp):
           ('includes', ["chips/%s/udma.json" % chip])
       ]))
 
+    comps['udma'] = soc.udma
+
     if has_mram:      
       mram_config_dict = collections.OrderedDict([
         ('includes', ["ips/mram/mram.json"])
@@ -914,8 +917,10 @@ def get_config(tp):
       is_master = itf_conf.get_child_bool('is_master')
       is_slave = itf_conf.get_child_bool('is_slave')
       is_dual = itf_conf.get_child_bool('is_dual')
+      has_irq = itf_conf.get_child_bool('has_irq')
       for channel in range(0, nb_channels):
         itf_name = itf.get() + str(channel)
+
         if is_master:
           soc.udma.set(itf_name, soc.new_itf(itf_name))
         if is_slave:
@@ -946,6 +951,14 @@ def get_config(tp):
         if tap.get_config().get_bool('has_confreg'):
           soc.apb_soc_ctrl.confreg_soc = tap.confreg_soc
           tap.confreg_ext = soc.apb_soc_ctrl.confreg_ext
+
+  # Interrupts
+  if has_fc_eu:
+    for name, irq in fc_events_dict.items():
+      if len(name.split('.')) == 2:
+        comp_name, itf_name = name.split('.')
+        comps[comp_name].set(itf_name, soc.fc_eu.new_itf('in_event_%d_pe_0' % irq))
+
 
 
   # Loader

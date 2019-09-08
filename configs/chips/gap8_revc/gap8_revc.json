@@ -229,7 +229,8 @@
             "evt_scu_ok"          : 25,
 
             "evt_soc_evt"         : 26,
-            "evt_queue_error"     : 29
+            "evt_queue_error"     : 29,
+            "udma.hyper0_rx_irq"  : 30
           }
         },
 
