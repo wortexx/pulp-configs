@@ -11,7 +11,7 @@
       "camera": {
         "include": "devices/camera.json",
         "interface": "cpi0",
-        "ctrl_interface": "i2c1"
+        "ctrl_interface": "i2c0"
       }
     }
   },
