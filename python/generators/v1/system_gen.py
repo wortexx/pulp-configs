@@ -63,6 +63,8 @@ def get_config(tp):
       ('vp_class', "pulp/system")
   ]))
 
+
+
   debug_bridge_dict = OrderedDict([
       ('includes', ["tools/debug-bridge/debug_bridge.json"])
   ])
@@ -75,6 +77,23 @@ def get_config(tp):
   system.system_tree.debug_bridge = Component(
     properties=debug_bridge_dict
   )
+
+
+
+  runner_dict = OrderedDict([
+      ('includes', ["tools/runner/runner.json"])
+  ])
+
+  runner_config = tp.get('**/runner/config')
+
+  if runner_config is not None:
+    runner_dict.update(runner_config.get_dict())
+
+  system.runner = Component(
+    properties=runner_dict
+  )
+
+
 
   if start_addr is not None:
       system.system_tree.debug_bridge.set_property('start_addr', start_addr)

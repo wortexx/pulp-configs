@@ -23,6 +23,14 @@
     }
   },
 
+  "runner": {
+    "config": {
+      "boot-mode": "rom_hyper",
+      "flash_type": "hyper",
+      "default_profile": "hyper"
+    }
+  },
+
   "debug_bridge": {
     "config": {
       "cable": {
