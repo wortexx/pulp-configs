@@ -23,6 +23,12 @@
     }
   },
 
+  "rt": {
+    "config": {
+      "bsp": true
+    }
+  },
+
   "debug_bridge": {
     "config": {
       "cable": {

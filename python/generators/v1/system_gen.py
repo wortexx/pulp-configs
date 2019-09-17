@@ -95,6 +95,21 @@ def get_config(tp):
 
 
 
+  rt_dict = OrderedDict([
+      ('includes', ["tools/rt/rt.json"])
+  ])
+
+  rt_config = tp.get('**/rt/config')
+
+  if rt_config is not None:
+    rt_dict.update(rt_config.get_dict())
+
+  system.rt = Component(
+    properties=rt_dict
+  )
+
+
+
   if start_addr is not None:
       system.system_tree.debug_bridge.set_property('start_addr', start_addr)
       system.system_tree.debug_bridge.set_property('start_value', start_value)

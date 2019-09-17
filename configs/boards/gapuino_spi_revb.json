@@ -29,6 +29,12 @@
     }
   },
 
+  "rt": {
+    "config": {
+      "bsp": true
+    }
+  },
+
   "runner": {
     "config": {
       "boot-mode": "rom_spim",
