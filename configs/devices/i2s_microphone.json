@@ -18,6 +18,7 @@
     "toggle_channel": false,
     "stim_left": null,
     "stim_right": null,
-    "frequency": 0
+    "frequency": 0,
+    "chain_size": 1
   }
 }

@@ -29,10 +29,8 @@
         "value": "0x01",
         "id": -1,
         "commands": [
-          [ "2", "0", "0x00", "SOC active NV"],
-          [ "3", "0", "0x02", "Cluster deep sleep"],
-          [ "0", "0", "0xFF", "Disable IRQ 0-7"],
-          [ "0", "1", "0xC0", "Enable IRQ 0-5"]
+          [ "7", "0", "0x00", "SOC     EXT NV"],
+          [ "8", "0", "0x09", "CLUSTER EXT OFF"]
         ]
       },
       "soc_active_nv": {
