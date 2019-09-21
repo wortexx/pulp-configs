@@ -26,7 +26,10 @@ def gen_config(name, system_config, system, device_config, usecases=[]):
   itf = device_config.get_str('interface')
 
   system.system_tree.board.add_component(name, Tb_Component(
-    config=device_config.get('config')
+    config=device_config.get('config'),
+    properties=OrderedDict([
+      ('name', name)
+    ])
   ))
 
   system.system_tree.board.get(name).i2s = system.system_tree.board.chip.new_itf(itf)

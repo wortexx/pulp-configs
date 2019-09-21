@@ -3,7 +3,7 @@
 
   "vp_impl": "pulp.udma.udma_v3_gap9_impl",
 
-  "nb_periphs": 15,
+  "nb_periphs": 18,
 
   "properties": {
     "l2_read_fifo_size": 8
@@ -16,7 +16,6 @@
     "archi/udma/csi2/udma_csi2_v1.h",
     "archi/udma/hyper/udma_hyper_v1.h",
     "archi/udma/i2c/udma_i2c_v2.h",
-    "archi/udma/i2s/udma_i2s_v2.h",
     "archi/udma/spim/udma_spim_v3.h",
     "archi/udma/uart/udma_uart_v1.h"
   ],
@@ -26,7 +25,6 @@
     "hal/udma/csi2/udma_csi2_v1.h",
     "hal/udma/hyper/udma_hyper_v1.h",
     "hal/udma/i2c/udma_i2c_v2.h",
-    "hal/udma/i2s/udma_i2s_v2.h",
     "hal/udma/spim/udma_spim_v3.h",
     "hal/udma/uart/udma_uart_v1.h"
   ],
@@ -73,26 +71,28 @@
   },
 
   "i2s": {
-    "includes"     : [ "ips/udma/i2s/udma_i2s_v2.json" ],
+    "version"      : 3,
     "nb_channels"  : 1,
     "ids"          : [11],
     "offsets"      : ["0x580"],
+    "size"         : "0x280",
     "is_slave"     : true,
-    "is_dual"      : true
+    "is_dual"      : true,
+    "tdm_channels" : 8
   },
 
   "cpi": {
     "version"      : 1,
     "nb_channels"  : 1,
-    "ids"          : [12],
-    "offsets"      : ["0x600"],
+    "ids"          : [16],
+    "offsets"      : ["0x900"],
     "is_slave"     : true
   },
 
   "mram": {
     "version"      : 1,
     "nb_channels"  : 1,
-    "ids"          : [14],
-    "offsets"      : ["0x700"]
+    "ids"          : [17],
+    "offsets"      : ["0x980"]
   }
 }
