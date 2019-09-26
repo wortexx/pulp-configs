@@ -16,7 +16,7 @@
 #
 
 from generators.v1.comp_gen import *
-import generators.v1.soc_gen as soc
+import generators.v1.mempool_soc_gen as soc
 import generators.v1.cluster_gen as cluster
 import math
 
