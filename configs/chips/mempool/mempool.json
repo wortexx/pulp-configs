@@ -49,6 +49,7 @@
     },
 
     "l1": {
+      "vp_class": "memory/memory_atomic",
       "base": "0x10000000",
       "size": "0x00100000",
       "banking_factor": 2
@@ -154,6 +155,7 @@
       "base": "0x1C000000",
       "size": "0x00080000",
       "is_partitioned": true,
+      "vp_class": "memory/memory_atomic",
 
       "priv0": {
         "base"         : "0x1C000000",
