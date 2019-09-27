@@ -46,6 +46,10 @@ def get_config(tp, cluster_id):
 
   nb_l1_banks = 1<<int(math.log(nb_pe * l1_banking_factor, 2.0))
   l1_bank_size = int(tp.get_child_int('cluster/l1/size') / nb_l1_banks)
+  l1_memory_type = tp.get_child_str('cluster/l1/vp_class')
+
+  if l1_memory_type is None:
+    l1_memory_type = "memory/memory"
 
   cluster = Component(properties=OrderedDict([
     ('version', cluster_version),
@@ -217,7 +221,7 @@ def get_config(tp, cluster_id):
       Component(properties=OrderedDict([
         ('size', l1_bank_size),
         ('width_bits', 2),
-        ('vp_class', "memory/memory"),
+        ('vp_class', l1_memory_type),
         ('power_models', {"includes": ["power_models/l1/l1.json"] }),
         ('power_trigger', True if i == 0 else False)
       ]))
