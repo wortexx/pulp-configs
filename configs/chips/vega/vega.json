@@ -27,6 +27,12 @@
       }
     }
   },
+ 
+  "rt": {
+    "config": {
+      "bsp": true
+    }
+  },
 
   "chip": "vega",
   "chip_family": "vega",

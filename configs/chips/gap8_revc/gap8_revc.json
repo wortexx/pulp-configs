@@ -38,6 +38,12 @@
       }
     }
   },
+ 
+  "rt": {
+    "config": {
+      "bsp": true
+    }
+  },
 
 
   "chip": "gap8_revc",

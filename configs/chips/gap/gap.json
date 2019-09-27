@@ -29,6 +29,12 @@
       }
     }
   },
+ 
+  "rt": {
+    "config": {
+      "bsp": true
+    }
+  },
 
 
   "chip": "gap",

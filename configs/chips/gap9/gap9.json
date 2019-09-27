@@ -31,6 +31,12 @@
   "chip": "gap9",
   "chip_family": "gap9",
     
+  "rt": {
+    "config": {
+      "bsp": true
+    }
+  },
+
   "padframe": {
     "content": "chips/gap9/padframe.json"
   },

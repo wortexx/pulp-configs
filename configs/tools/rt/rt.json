@@ -22,7 +22,7 @@
   "iodev"          : "default",
   "user-sections"  : [],
   "cflags"         : [],
-  "bsp": true,
+  "bsp": false,
   "iodevs"          : {
     "default": {
       "value":   "0"

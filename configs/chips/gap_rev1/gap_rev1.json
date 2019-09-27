@@ -38,7 +38,12 @@
       }
     }
   },
-
+ 
+  "rt": {
+    "config": {
+      "bsp": true
+    }
+  },
 
   "chip": "gap_rev1",
   "chip_family": "gap",

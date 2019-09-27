@@ -222,6 +222,7 @@
 
     }
   },
+
   "soc_events": {
     "soc_evt_spim0_rx"        : 0,
     "soc_evt_spim0_tx"        : 1,
