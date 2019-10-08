@@ -15,7 +15,7 @@
     },
 
     "flash": {
-      "size": "0x00800000",
+      "size": "0x04000000",
       "fs": {
         "files": [],
         "encrypt": false,
