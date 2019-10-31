@@ -20,7 +20,7 @@
   },
 
   "chip": "mempool",
-  
+
   "padframe": {
     "content": "chips/mempool/padframe.json"
   },
@@ -129,7 +129,7 @@
         "sw_event_0" , "sw_event_1"      , "sw_event_2" , "sw_event_3",
         "sw_event_4" , "sw_event_5"      , "sw_event_6" , "sw_event_7",
         null         , null              , "timer_0"    , "timer_1",
-        null         , null              , "clkref"     , "gpio", 
+        null         , null              , "clkref"     , "gpio",
         "rtc"        , "adv_timer_0"     , "adv_timer1" , "evt_adv_timer_2",
         "adv_timer_3", "cluster_not_busy", "cluster_pok", "cluster_cg_ok",
         "picl_ok"    , "scu_ok"          , "soc_evt"    , null,
@@ -153,7 +153,7 @@
 
     "l2": {
       "base": "0x1C000000",
-      "size": "0x00080000",
+      "size": "0x08000000",
       "is_partitioned": true,
       "vp_class": "memory/memory_atomic",
 
