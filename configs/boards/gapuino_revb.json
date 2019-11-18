@@ -37,6 +37,12 @@
     }
   },
 
+  "openocd": {
+    "config": {
+      "board": "target/gap8revb.tcl"
+    }
+  },
+
   "debug_bridge": {
     "config": {
       "cable": {
