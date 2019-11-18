@@ -176,7 +176,7 @@
         "nb_banks"          : 4,
         "interleaving_bits" : 2,
         "base"              : "0x1C010000",
-        "size"              : "0x00070000"
+        "size"              : "0x07000000"
       }
     },
 
