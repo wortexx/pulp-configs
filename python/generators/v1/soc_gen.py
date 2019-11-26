@@ -725,7 +725,7 @@ def get_config(tp):
             soc.get(fll_name).clock_out = soc.new_itf(get_cluster_name(cid) + '_fll')
 
         if "periph" in fll_config.get('targets').get_dict():
-          if "soc" in fll_config.get('targets').get_dict():
+          if "soc" not in fll_config.get('targets').get_dict():
             soc.periph_clock = Component(properties=OrderedDict([
               ('vp_class', "vp/clock_domain"),
               ('frequency', 50000000)
@@ -733,9 +733,6 @@ def get_config(tp):
             soc.get(fll_name).clock_out = soc.periph_clock.clock_in
             if has_udma:
               soc.periph_clock.out = soc.udma.periph_clock
-          else:
-            if has_udma:
-              soc.clock = soc.udma.periph_clock
 
 
 
