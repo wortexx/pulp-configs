@@ -42,11 +42,11 @@
     }
   },
 
-  "chip": "wolfe",
+  "chip": "wolfe_16",
   "chip_family": "wolfe",
     
   "padframe": {
-    "content": "chips/wolfe/padframe.json"
+    "content": "chips/wolfe_16/padframe.json"
   },
 
   "cluster": {
@@ -238,7 +238,7 @@
       },
 
       "udma": {
-        "content"      : "chips/wolfe/udma.json",
+        "content"      : "chips/wolfe_16/udma.json",
         "base"         : "0x1A102000",
         "size"         : "0x00002000"
       },
@@ -257,7 +257,7 @@
       },
 
       "pmu": {
-        "content"      : "chips/wolfe/pmu.json",
+        "content"      : "chips/wolfe_16/pmu.json",
         "version"      : 2,
         "base"         : "0x1A107000",
         "size"         : "0x00000800"
