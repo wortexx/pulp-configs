@@ -6,3 +6,4 @@ __pycache__/
 install/
 gmon.out
 .sconsign.dblite
+*.pyc
