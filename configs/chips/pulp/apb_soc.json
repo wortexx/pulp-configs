@@ -2,7 +2,7 @@
   "version": 3,
 
   "vp_class":  "pulp/chips/pulp/apb_soc",
-  
+
   "hal_files" : [ "hal/apb_soc/apb_soc_v3.h" ],
 
   "regmap": {
@@ -91,7 +91,7 @@
       "offset": "0x7C"
     },
     "corestatus": {
-      "offset": "0xA0"
+      "offset": "0x80"
     },
     "cs_ro": {
       "offset": "0xC0"

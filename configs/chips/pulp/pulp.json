@@ -25,14 +25,14 @@
   },
 
   "chip": "pulp",
-  
+
   "padframe": {
     "content": "chips/pulp/padframe.json"
   },
 
   "cluster": {
     "base": "0x10000000",
-    "alias": "0x00000000",
+    "alias": "0x1B000000",
     "size": "0x00400000",
     "core": "ri5ky_v2_6_sfloat_single_regfile",
     "version": 5,
@@ -73,7 +73,7 @@
       "size": "0x00200000",
 
       "alias": {
-        "base": "0x00200000",
+        "base": "0x1B200000",
         "size": "0x00200000"
       },
 
@@ -127,7 +127,7 @@
   },
 
   "soc": {
-    
+
     "base": "0x1A000000",
     "size": "0x06000000",
 
@@ -141,7 +141,7 @@
         "sw_event_0" , "sw_event_1"      , "sw_event_2" , "sw_event_3",
         "sw_event_4" , "sw_event_5"      , "sw_event_6" , "sw_event_7",
         null         , null              , "timer_0"    , "timer_1",
-        null         , null              , "clkref"     , "gpio", 
+        null         , null              , "clkref"     , "gpio",
         "rtc"        , "adv_timer_0"     , "adv_timer1" , "evt_adv_timer_2",
         "adv_timer_3", "cluster_not_busy", "cluster_pok", "cluster_cg_ok",
         "picl_ok"    , "scu_ok"          , "soc_evt"    , null,
@@ -254,7 +254,7 @@
       },
 
       "apb_soc_ctrl": {
-        "base"         : "0x1A104000",
+        "base"         : "0x1A103000",
         "size"         : "0x00001000",
         "has_jtag_reg" : true
       },
@@ -310,7 +310,7 @@
 
       "stdout": {
         "version"      : 3,
-        "base"         : "0x1A10F000",
+        "base"         : "0x1A104000",
         "size"         : "0x00001000"
       },
 
