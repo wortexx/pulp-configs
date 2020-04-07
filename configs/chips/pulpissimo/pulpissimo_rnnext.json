@@ -3,7 +3,7 @@
 
   "soc": {
     "fc": {
-      "core"        : "ri5ky_v2_fpu_1_10_rnnext"
+      "core"        : "ri5ky_v2_6_sfloat_single_regfile_rnnext"
     }
   }
 }

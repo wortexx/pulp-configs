@@ -8,6 +8,7 @@
   },
 
   "cluster": {
-    "core": "ri5ky_v2_6_sfloat_single_regfile_rnnext"
+    "core": "ri5ky_v2_6_sfloat_single_regfile_rnnext",
+    "nb_pe": 16
   }
 }
