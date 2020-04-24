@@ -5,7 +5,7 @@
   "board": {
     "devices": {
       "spiflash": {
-        "includes": ["devices/spiflash.json"],
+        "includes": ["devices/spiflash_s26ks512.json"],
         "interface": "spim0",
         "cs": 0
       },
@@ -52,6 +52,14 @@
       "base": "0x10000000",
       "size": "0x00008000",
       "banking_factor": 2
+    },
+
+    "icache": {
+      "config": {
+        "nb_sets_bits": 6,
+        "nb_ways_bits": 2,
+        "line_size_bits": 4
+      }
     },
 
     "peripherals": {
@@ -165,6 +173,26 @@
       "base": "0x1A100000",
       "size": "0x00100000",
 
+      "flls": {
+        "fll": {
+          "version"      : 1,
+          "base"         : "0x1A100000",
+          "size"         : "0x00000010",
+          "targets"      : [ "soc", "periph" ]
+        },
+
+        "fll_cluster": {
+          "version"      : 1,
+          "base"         : "0x1A100010",
+          "size"         : "0x00000010",
+          "targets"      : [ "cluster" ]
+        }
+      },
+
+      "fll_ctrl": {
+        "version"      : 3
+      },
+
       "gpio": {
         "version"      : 2,
         "base"         : "0x1A101000",
@@ -184,15 +212,15 @@
       },
 
       "soc_eu": {
-        "version"      : 3,
+        "version"      : 1,
         "base"         : "0x1A106000",
         "size"         : "0x00001000"
       },
 
       "fc_itc": {
         "version"      : 1,
-        "base"         : "0x1A109000",
-        "size"         : "0x00001000",
+        "base"         : "0x1A109800",
+        "size"         : "0x00000800",
         "irq": {
           "evt_sw_event0"       : 0,
           "evt_sw_event2"       : 2,
