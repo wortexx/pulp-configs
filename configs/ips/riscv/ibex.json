@@ -12,7 +12,7 @@
   "features"      : [ "misaligned", "perf"],
   "hal_files"     : [ "hal/riscv/riscv_v5.h", "hal/riscv/types.h" ],
   "archi_files"   : [ "archi/riscv/priv_1_10.h", "archi/riscv/builtins_v2.h", "archi/riscv/builtins_v2_emu.h", "archi/riscv/pcer_v2.h" ],
-  "defines"  : [ "ARCHI_CORE_HAS_CPLX", "ARCHI_CORE_HAS_1_10", "RV_ISA_RV32", "PLP_NO_PERF_COUNTERS", "ARCHI_CORE_RISCV_ITC" ],
+  "defines"  : [ "ARCHI_CORE_HAS_CPLX", "ARCHI_CORE_HAS_1_10", "RV_ISA_RV32", "PLP_NO_PERF_COUNTERS"],
   "debug_binaries": [],
   "vp_class": "cpu/iss/iss",
   "first_external_pcer": 12,
