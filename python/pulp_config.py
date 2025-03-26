@@ -17,18 +17,17 @@
 
 
 import json_tools as js
-import imp
+import importlib
 import os
 import shlex
 import configparser
 import collections
 
-
 class Pulp_config(js.config_object):
 
     def __init__(self, name, config_dict, interpret=False, config_name=None):
         super(Pulp_config, self).__init__(config_dict, interpret=interpret)
-
+        
         self.name = name
         self.config_name = config_name
 
@@ -79,8 +78,13 @@ def create_config(name, config, config_name=None, interpret=False, **kwargs):
             
             generator = config.get_child_str("generator")
 
-            file, path, descr = imp.find_module(generator, None)
-            module = imp.load_module(generator, file, path, descr)
+            file_path = os.path.join(os.path.dirname(__file__), generator + '.py')
+            spec = importlib.util.spec_from_file_location(generator, file_path)
+            
+            if spec is None:
+                raise ImportError(f"Module {generator} not found")
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
 
             return Pulp_config(name, module.get_config(config, **kwargs).get_dict(), interpret=interpret, config_name=config_name)
 

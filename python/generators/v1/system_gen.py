@@ -17,7 +17,8 @@
 
 import generators.v1.chip_gen as chip_gen
 from generators.v1.comp_gen import *
-import imp
+import importlib
+import os
 
 
 
@@ -228,8 +229,14 @@ def get_config(tp):
       if generator is None:
         raise Exception('No generator specified for device (name: %s)' % device_name)
 
-      file, path, descr = imp.find_module(generator, None)
-      module = imp.load_module(generator, file, path, descr)
+      # todo find a better way to load the device generator module
+      file_path = os.path.join(os.path.dirname(__file__),"../../", generator + '.py')
+      spec = importlib.util.spec_from_file_location(generator, file_path)
+
+      if spec is None:
+          raise Exception(f"Module {generator} not found")
+      module = importlib.util.module_from_spec(spec)
+      spec.loader.exec_module(module)
 
       module.gen_config(device_name, tp, system, device)
 
